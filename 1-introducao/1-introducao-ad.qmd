@@ -1,0 +1,212 @@
+---
+title: "Análise de dados"
+subtitle: "1. Introdução à análise de dados"
+format:
+    revealjs:
+        slide-number: true
+        chalkboard: true
+        footer: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+        incremental: true
+        theme: [../custom.scss]
+---
+
+# Por que estudar análise de dados?
+
+## Tendências de busca
+
+![Fonte: [Google Trends](https://trends.google.com/trends/explore?date=today%205-y&q=data%20science,software%20engineering,software%20development)](figs/data_science_trends.png){width=100%}
+
+## Dados $\to$ Informação $\to$ Conhecimento $\to$ Sabedoria
+
+![Fonte: [The Application of Visual Analytics to Financial Stability Monitoring](https://www.researchgate.net/publication/272242493_The_Application_of_Visual_Analytics_to_Financial_Stability_Monitoring)](figs/data_information_knowledge_wisdom.jpg){width=100%}
+
+## Conhecimento é poder!
+
+![](figs/knowledge_is_power.gif)
+
+## Quem tem interesse?
+
+- Empresas querem insights para melhorar seus negócios
+
+- Cidadãos querem mais transparência de dados e informação
+
+- Governos querem mecanismos para melhorar fiscalização
+
+
+## O que é análise e ciência de dados?
+
+- Como toda área nova, não há definições muito claras
+
+- Algumas definições relacionadas da [Gartner](https://www.gartner.com/it-glossary):
+
+    - **Business Inteligence (BI):** *Aplicações, ferramentas e melhores práticas que permitem o acesso e a análise de informações para melhorar e otimizar decisões e desempenho.*
+
+    - **Analytics**: *Processo de analizar informações de um domínio particular. Ou a aplicação de BI para uma área específica.*
+
+    - **Big data**: *Grande volume, velocidade e/ou variedade de dados que exigem processamento eficiente e inovador de informações permitindo insights, decisões e automação de processos.*
+
+    - **Cientista de dados**: *Extrai insights de dados. Requer habilidades analíticas para detectar padrões.*
+
+
+## Ciência de dados
+
+:::: {.columns}
+::: {.column}
+
+- Incorpora elementos de:
+
+    - Exploratory Data Analysis (EDA) e Visualização de dados;
+    - Machine Learning e Estatística;
+    - Computação de Alto Desempenho
+
+- Habilidades necessárias:
+
+    - Ciência da Computação
+    - Matemática e Estatística
+    - Expertise nos domínios da aplicação
+:::
+::: {.column}
+![Fonte: [Steven Skiena - Lecture 1: Introduction to Data Science](http://www3.cs.stonybrook.edu/~skiena/data-manual/lectures/pdf/L1.pdf)](figs/data_science_vd.png){width=100%}
+:::
+::::
+
+## Por que ciência de dados agora?
+
+<!-- :::: {.columns}
+::: {.column width="45%"} -->
+- Novas tecnologias para processar dados em larga escala
+    - Redes sociais, IoT, Cloud Computing, Big Data, Machine Learning
+
+- Sucesso de análise de dados em empresas serviu de modelo
+    - Google, Facebook, Amazon, Microsoft
+
+<!-- :::
+::: {.column width="55%"} -->
+![](figs/data_volume_growth.jpg)
+<!-- :::
+:::: -->
+
+## Apreciando dados
+
+- Cientistas da computação geralmente não apreciam dados
+
+    - Só é algo que eles carregam nos programas
+    - Geralmente usam dados aleatórios para testar programas
+    - Conjuntos de dados interessantes são recursos `raros`, que requerem trabalho duro e imaginação para obtê-los
+
+
+##
+
+:::: {.columns}
+
+::: {.column}
+### Cientista real {.text-center}
+::: {.fragment}
+- Se esforça para entender a bagunça do mundo real
+- Nada é completamente verdadeiro ou falso
+- Direcionados a dados
+- Obsessão por descobrir
+- Utiliza dados com erros
+:::
+:::
+
+::: {.column}
+### Cientista da computação {.text-center}
+::: {.fragment}
+- Constroe seu próprio mundo virtual organizado
+- Tudo é completamente verdadeiro ou falso
+- Direcionado a algoritmos
+- Obsessão por inventar
+- Utiliza dados corretos
+:::
+:::
+::::
+
+::: {.fragment .emph .text-center }
+Cientistas de dados devem pensar como cientistas reais!
+:::
+
+## Ciência tradicional x ciência de dados
+
+- **Ciência tradicional**: formulação de hipóteses e obtenção de dados específicos para confirmá-las ou negá-las.
+
+- **Ciência de dados**: geração de dados em larga escala para realizar novas descobertas ao analisá-los.
+
+- Duas formas importantes de pensar:
+    - Dado um problema, quais dados ajudarão a resolvê-lo?
+    - Dado um conjunto de dados, que problemas interessantes se aplicarão a ele?
+
+
+## Genialidade x Sabedoria
+
+- Desenvolvedores são contratados para produzir código
+- Cientistas de dados são contratados para produzir *insights*
+
+- Genialidade é saber encontrar a resposta correta
+- **Sabedoria é saber evitar as respostas erradas!**
+- A sabedoria vem de:
+    - Experiência, conhecimento geral, ouvir os outros
+    - Humildade: observar quanto, como e porque você errou
+
+::: {.fragment .emph .text-center}
+Ciência de dados se beneficia mais de sábios que de gênios
+:::
+
+## Desenvolvendo a curiosidade
+
+- O bom cientista de dados desenvolve curiosidade sobre o domínio / aplicação que ele está trabalhando
+
+- Conversa com pessoas envolvidas nos dados que trabalha
+
+- Acompanha notícias para ter uma visão ampla do mundo
+
+- Eles são encorajados a perguntar:
+    - Que coisas interessantes você consegue aprender de um certo conjunto de dados?
+    - Que coisas você realmente quer saber?
+    - Que conjunto de dados pode levar você a isso?
+
+
+# Fazendo perguntas
+
+## IMDb: dados de filmes e séries
+
+<a href='https://www.imdb.com/title/tt4154756'><img src="../figs/avengers_imdb.png" width=85%></a>
+
+## IMDb: dados de atores
+
+:::: {.columns}
+::: {.column}
+<a href='https://www.imdb.com/name/nm0000375'><img src="../figs/downey_jr_imdb.png"></a>
+:::
+
+::: {.column}
+<a href='https://www.imdb.com/title/tt4154756/fullcredits'><img src="../figs/avengers_cast_imdb.png"></a>
+:::
+::::
+
+## IMDb: Perguntas? [1/2]
+
+- Quais atores atuaram em mais filmes? Nos melhores filmes? Ganharam mais dinheiro? Com carreiras mais longas?
+
+- Quais os filmes com melhores/piores avaliações? Por ano? Por gênero? Mais caros? Com elencos mais poderosos?
+
+- Filmes com maior faturamento recebem notas maiores e mais prêmios? É possível prever a nota e o faturamento?
+
+- Como os filmes de Hollywood se comparam a filmes indianos em: avaliação, orçamento, rendimento? Filmes americanos são mais bem avaliados do que estrangeiros?
+
+
+## IMDb: Perguntas? [2/2]
+
+- Como é a rede social da participação de atores em filmes?
+    - Exemplo: [grafo que indica graus a partir de Kevin Bacon](https://oracleofbacon.org)
+
+- Qual é a distribuição de idade de atores e atrizes em filmes? Atrizes tendem a ser mais jovens que atores?
+
+- Quais gêneros de filmes recebem as melhores avaliações? Quais gêneros são mais caros? Quais faturam mais?
+
+- Qual a probabilidade de uma pessoa gostar de um filme? (Exemplo: recomendações do Netflix)
+
+## Referências
+
+- Skiena S.S. (2017) [What is Data Science?](https://link.springer.com/chapter/10.1007%2F978-3-319-55444-0_1). In: The Data Science Design Manual. Texts in Computer Science. Springer.
+    - CSE 519: Data Science - Steven Skiena - [Lecture 1: Introduction to Data Science ](http://www3.cs.stonybrook.edu/~skiena/data-manual/lectures/pdf/L1.pdf)

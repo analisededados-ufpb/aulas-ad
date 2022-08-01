@@ -1,0 +1,47 @@
+/*-- scss:defaults --*/
+// importing fonts
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata&family=Lato&family=Yanone+Kaffeesatz&display=swap');
+
+// fonts
+$font-family-sans-serif: 'Lato', Tahoma, sans-serif !default;
+$presentation-font-size-root: 40px;
+$presentation-font-smaller: 0.8;
+
+// headings
+$presentation-h1-font-size: 2.6em;
+$presentation-h2-font-size: 1.8em;
+$presentation-h3-font-size: 1.6em;
+$presentation-h4-font-size: 1.3em;
+$presentation-heading-font: 'Yanone Kaffeesatz',  Tahoma, sans-serif  !default;
+$presentation-heading-color: #CB4335 !default;
+
+//code
+//$code-color: #88398A !default;
+$font-family-monospace: 'Inconsolata', monospace  !default;
+
+// general  
+$body-bg: #fff;
+$link-color: #2980B9;
+
+.subtitle {
+  font-size: $presentation-h4-font-size;
+}
+
+ .text-center {
+   text-align: center;
+ }
+
+.emph {
+  color: #148F77;
+}
+
+li {
+  font-size: 0.9em;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}

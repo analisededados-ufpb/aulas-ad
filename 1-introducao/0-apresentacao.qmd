@@ -1,0 +1,111 @@
+---
+title: "Análise de dados"
+subtitle: "Apresentação da disciplina"
+format:
+    revealjs:
+        slide-number: true
+        chalkboard: true
+        footer: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+        theme: [../custom.scss]
+---
+
+## Conteúdo - Unidade 1
+
+- Introdução à análise de dados
+    - Conceitos básicos
+    - Introdução a ferramentas [`Python, NumPy, Pandas, Jupyter`]
+    - Tratamento de dados
+        - Carregamento, limpeza, transformação
+    - Visualização básica
+
+- Exploratory Data Analysis (EDA)
+    - Estatística descritiva
+    - Análise de correlação
+    - Análise exploratória
+
+## Conteúdo - Unidade 2
+        
+- Inferência estatística
+    - Significância estatística e amostragem
+    - Intervalos de confiança
+    - Testes de hipótese
+    - Testes de permutação e p-valor
+
+- Regressão
+    - Regressão linear simples
+    - Regressão linear multivariada
+    - Regressão logística
+
+## Conteúdo - Unidade 3
+
+- Clustering
+    - Medidas de similaridade e divergência
+    - Agrupamento com K-means
+    - Agrupamento hierárquico
+
+- Visualização de dados
+
+- Projeto de análise de dados
+
+## Avaliações
+
+- Unidades 1 e 2:
+    - Atividades práticas de análise de dados
+        - Relatórios
+        - Questionários
+  
+- Unidade 3:
+    - Projeto de análise de dados
+        - Relatório analítico (ex: blog post, artigo)
+        - Aplicação web / mobile
+        - Dashboard
+    
+## Referências básicas
+
+- Python for Data Analysis. McKinney. 3 ed, 2022 ([online](https://wesmckinney.com/book/))
+
+- The Data Science Design Manual. Skienna. 2017 (pdf, [slides](http://www3.cs.stonybrook.edu/~skiena/data-manual/lectures/))
+
+- Python Data Science Handbook. VanderPlas. 2022 ([online](https://jakevdp.github.io/PythonDataScienceHandbook/))
+
+- Practical Statistics for Data Scientists. Bruce. 2 ed, 2020 (pdf)
+
+- R for Data Science. Wickham. 2017 ([online](http://r4ds.had.co.nz/))
+
+- Think Stats: Exploratory Data Analysis in Python. Downey, 2014 ([online](https://greenteapress.com/wp/think-stats-2e/))
+
+## Referências complementares
+
+- Ciência de Dados com R ([online](https://cdr.ibpad.com.br/))
+- Modern Dive: An Introduction to Statistical and Data sciences via R ([online](https://ismayc.github.io/moderndiver-book); [slides](https://ismayc.github.io/soc301_s2017))
+- Introductory Statistics with Randomization and Simulation
+- Exploratory Data Analysis with R
+- R Programming for Data Science
+- An Introduction to Statistical Learning
+- The Art of Data Science
+- OpenIntro Statistics
+
+## Ambientes virtuais
+
+- [Google Classroom](https://classroom.google.com/)
+    - Avisos gerais, slides e outros materiais
+    - **Precisa estar logado com a conta do DCX**
+
+- [Discord](https://discord.com/)
+    - Avisos, dúvidas, discussões
+    
+- [GitHub Classroom](https://classroom.github.com/)
+    - Material para atividades práticas, envio de código e relatórios
+    - **Criem uma conta no GitHub e aprendam git!**
+
+## Ferramentas para começar a brincar
+
+- [Python](https://www.python.org/downloads): linguagem de programação que usaremos no curso
+- [Jupyter Notebook](https://jupyter.org/install#jupyter-notebook): criar documentos com código executável
+- [NumPy](https://numpy.org/): biblioteca Python para computação numérica
+- [Pandas](https://pandas.pydata.org/docs/getting_started/install.html): biblioteca Python para análise de dados
+- [Matplotlib](https://matplotlib.org), [Seaborn](https://seaborn.pydata.org): bibliotecas Python de visualização de dados
+- [VS Code](https://code.visualstudio.com/Download): IDE usada nas aulas
+    - Instalar extensão [Python for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
+- [Google Colab](https://colab.research.google.com): ambiente de execução de notebooks
+    - Pode ser usado para executar código integrado ao [Github](https://github.com/)
