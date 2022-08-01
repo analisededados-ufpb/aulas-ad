@@ -1,0 +1,15 @@
+---
+title: "Análise de Dados I @ DCX / CCAE / UFPB"
+subtitle: "Prof. Marcus Carvalho"
+---
+
+Material da disciplina de Análise de Dados I
+
+## Aulas
+
+- [Apresentação da disciplina](1-introducao/0-apresentacao.qmd) (Slides)
+
+### Introdução
+
+- [1.1 Introdução à análise de dados](1-introducao/1-introducao-ad.qmd) (Slides)
+- [1.2 Introdução ao Python e Jupyter Notebook](1-introducao/1-introducao-ad.qmd) (Atividade)
