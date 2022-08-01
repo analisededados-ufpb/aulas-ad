@@ -10,13 +10,11 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: https://github.com/analisededados-ufpb/aulas-ad
+        text: GitHub
 
 format:
   html:
     theme: cosmo
     css: styles.css
     toc: true
-
-
-
