@@ -104,6 +104,18 @@ Com isso, você terá um ambiente de execução do notebook que pode ser editado
 
 ![](figs/colab_file.png)
 
+## Rodando na nuvem com GitHub Codespaces
+
+O GitHub também criou um ambiente de desenvolvimento e execução de código na própria plataforma, chamada [`GitHub Codespaces`](https://github.com/features/codespaces), que abre no browser uma IDE similar ao VS Code onde você também consegue executar notebooks Jupyter.
+
+Para criar um Codespace para o notebook da atividade, entre na [página do repositório no GitHub](https://github.com/wesm/pydata-book/tree/3rd-edition), escolha a branch correta (`3rd-edition`), clique no botão `Code` e em seguida em `Create codespace on 3rd-edition`, conforme a imagem abaixo.
+
+![](figs/codespaces_repo.png)
+
+:::{.callout-tip}
+## Dica
+Você também pode criar um Codespace apertando a tecla `.` do teclado na página do repositório e da branch que você deseja.
+:::
 
 ## Revisando Python com outro notebook
 

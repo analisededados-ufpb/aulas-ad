@@ -170,17 +170,17 @@ Ciência de dados se beneficia mais de sábios que de gênios
 
 ## IMDb: dados de filmes e séries
 
-<a href='https://www.imdb.com/title/tt4154756'><img src="../figs/avengers_imdb.png" width=85%></a>
+<a href='https://www.imdb.com/title/tt4154756'><img src="figs/avengers_imdb.png" width=85%></a>
 
 ## IMDb: dados de atores
 
 :::: {.columns}
 ::: {.column}
-<a href='https://www.imdb.com/name/nm0000375'><img src="../figs/downey_jr_imdb.png"></a>
+<a href='https://www.imdb.com/name/nm0000375'><img src="figs/downey_jr_imdb.png"></a>
 :::
 
 ::: {.column}
-<a href='https://www.imdb.com/title/tt4154756/fullcredits'><img src="../figs/avengers_cast_imdb.png"></a>
+<a href='https://www.imdb.com/title/tt4154756/fullcredits'><img src="figs/avengers_cast_imdb.png"></a>
 :::
 ::::
 
