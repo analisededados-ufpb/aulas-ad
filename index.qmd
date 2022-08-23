@@ -12,4 +12,4 @@ Material da disciplina de Análise de Dados I
 ### Introdução
 
 - [1.1 Introdução à análise de dados](1-introducao/1-introducao-ad.qmd) (Slides)
-- [1.2 Introdução ao Python e Jupyter Notebook](1-introducao/1-introducao-ad.qmd) (Atividade)
+- [1.2 Introdução ao Python e Jupyter Notebook](1-introducao/2-intro-python-jupyter.qmd) (Atividade)
