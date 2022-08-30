@@ -2,22 +2,30 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/0-apresentacao.html</loc>
-    <lastmod>2022-08-24T19:20:28.266Z</lastmod>
+    <lastmod>2022-08-30T11:12:34.480Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/1-introducao-ad.html</loc>
-    <lastmod>2022-08-24T19:20:29.067Z</lastmod>
+    <lastmod>2022-08-30T11:12:35.560Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/2-intro-python-jupyter.html</loc>
-    <lastmod>2022-08-24T19:20:36.801Z</lastmod>
+    <lastmod>2022-08-30T11:12:43.073Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/about.html</loc>
-    <lastmod>2022-08-24T19:20:38.225Z</lastmod>
+    <lastmod>2022-08-30T11:12:43.674Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/index.html</loc>
-    <lastmod>2022-08-24T19:20:39.983Z</lastmod>
+    <lastmod>2022-08-30T11:12:44.595Z</lastmod>
+  </url>
+  <url>
+    <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/3-intro-pandas.html</loc>
+    <lastmod>2022-08-30T11:12:45.701Z</lastmod>
+  </url>
+  <url>
+    <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/4-exemplo-pandas.html</loc>
+    <lastmod>2022-08-30T11:12:47.914Z</lastmod>
   </url>
 </urlset>
