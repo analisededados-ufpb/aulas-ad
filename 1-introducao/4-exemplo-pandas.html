@@ -162,9 +162,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#exemplo-pandas" id="toc-exemplo-pandas" class="nav-link active" data-scroll-target="#exemplo-pandas">Exemplo Pandas</a>
   <ul class="collapse">
   <li><a href="#carregamento-de-dados" id="toc-carregamento-de-dados" class="nav-link" data-scroll-target="#carregamento-de-dados">Carregamento de dados</a></li>
-  <li><a href="#adicionando-novas-colunas" id="toc-adicionando-novas-colunas" class="nav-link" data-scroll-target="#adicionando-novas-colunas">Adicionando novas colunas</a></li>
+  <li><a href="#concatenando-dataframes" id="toc-concatenando-dataframes" class="nav-link" data-scroll-target="#concatenando-dataframes">Concatenando DataFrames</a></li>
   <li><a href="#filtrando-dados" id="toc-filtrando-dados" class="nav-link" data-scroll-target="#filtrando-dados">Filtrando dados</a></li>
   <li><a href="#agrupando-por-coluna-e-sumarizando-dados" id="toc-agrupando-por-coluna-e-sumarizando-dados" class="nav-link" data-scroll-target="#agrupando-por-coluna-e-sumarizando-dados">Agrupando por coluna e sumarizando dados</a></li>
+  <li><a href="#organizando-dados-tidy-data" id="toc-organizando-dados-tidy-data" class="nav-link" data-scroll-target="#organizando-dados-tidy-data">Organizando dados (tidy data)</a>
+  <ul class="collapse">
+  <li><a href="#média-da-turma-por-unidade" id="toc-média-da-turma-por-unidade" class="nav-link" data-scroll-target="#média-da-turma-por-unidade">Média da turma por unidade</a></li>
+  <li><a href="#média-de-cada-aluno-em-cada-turma" id="toc-média-de-cada-aluno-em-cada-turma" class="nav-link" data-scroll-target="#média-de-cada-aluno-em-cada-turma">Média de cada aluno em cada turma</a></li>
+  <li><a href="#média-geral-de-cada-turma" id="toc-média-geral-de-cada-turma" class="nav-link" data-scroll-target="#média-geral-de-cada-turma">Média geral de cada turma</a></li>
+  <li><a href="#outras-estatísticas" id="toc-outras-estatísticas" class="nav-link" data-scroll-target="#outras-estatísticas">Outras estatísticas?</a></li>
+  <li><a href="#adicionando-nova-coluna-aplicando-função-por-linha" id="toc-adicionando-nova-coluna-aplicando-função-por-linha" class="nav-link" data-scroll-target="#adicionando-nova-coluna-aplicando-função-por-linha">Adicionando nova coluna aplicando função por linha</a></li>
+  <li><a href="#ordenando-as-médias-dos-alunos-da-maior-para-a-menor" id="toc-ordenando-as-médias-dos-alunos-da-maior-para-a-menor" class="nav-link" data-scroll-target="#ordenando-as-médias-dos-alunos-da-maior-para-a-menor">Ordenando as médias dos alunos da maior para a menor</a></li>
+  <li><a href="#como-pegar-as-3-maiores-notas-de-cada-turma" id="toc-como-pegar-as-3-maiores-notas-de-cada-turma" class="nav-link" data-scroll-target="#como-pegar-as-3-maiores-notas-de-cada-turma">Como pegar as 3 maiores notas de cada turma?</a></li>
+  </ul></li>
+  <li><a href="#slicing" id="toc-slicing" class="nav-link" data-scroll-target="#slicing">Slicing</a></li>
+  <li><a href="#saída-de-dados" id="toc-saída-de-dados" class="nav-link" data-scroll-target="#saída-de-dados">Saída de dados</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -179,13 +191,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Vamos usar um exemplo de análise para demonstrar mais funções da biblioteca Pandas de Python.</p>
 <section id="carregamento-de-dados" class="level2">
 <h2 class="anchored" data-anchor-id="carregamento-de-dados">Carregamento de dados</h2>
-<p>O primeiro passo será carregar os dados de um arquivo <em>CSV</em>. Vamos carregar o arquivo que possui as notas das 4 unidades da disciplina Sistemas Operacionais no período 2017.1. O parâmetro <code>index_col="id"</code> indica que a coluna <code>id</code> que consta no arquivo será o identificar das linhas do <em>DataFrame</em>.</p>
-<div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>so_20171 <span class="op">=</span> pd.read_csv(<span class="st">"../dados/notas_so_20171.csv"</span>, index_col<span class="op">=</span><span class="st">"id"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>so_20171</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="5">
+<p>O primeiro passo será carregar os dados que estão armazenados em um arquivo CSV. O arquivo que possui as notas das 4 unidades da disciplina Sistemas Operacionais no período 2017.1. O parâmetro <code>index_col="id"</code> indica que a coluna <code>id</code> que consta no arquivo será o identificar das linhas do <em>DataFrame</em>.</p>
+<div class="cell" data-execution_count="184">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>so_20171 <span class="op">=</span> pd.read_csv(<span class="st">"../dados/notas_so_20171.csv"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>so_20171</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="184">
 
 <div>
 
@@ -193,162 +206,177 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <thead>
     <tr>
       <th></th>
+      <th>id</th>
       <th>nota_1</th>
       <th>nota_2</th>
       <th>nota_3</th>
       <th>nota_4</th>
     </tr>
-    <tr>
-      <th>id</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <th>0</th>
+      <td>1</td>
       <td>8.3</td>
       <td>8.0</td>
       <td>9.3</td>
       <td>8.0</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
+      <td>2</td>
       <td>7.0</td>
       <td>7.7</td>
       <td>4.6</td>
       <td>8.7</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
+      <td>3</td>
       <td>7.8</td>
       <td>3.2</td>
       <td>7.7</td>
       <td>5.1</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
+      <td>4</td>
       <td>7.3</td>
       <td>9.3</td>
       <td>9.8</td>
       <td>4.8</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
+      <td>5</td>
       <td>5.8</td>
       <td>9.8</td>
       <td>10.0</td>
       <td>6.8</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
+      <td>6</td>
       <td>9.6</td>
       <td>9.8</td>
       <td>10.0</td>
       <td>9.0</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
+      <td>7</td>
       <td>9.0</td>
       <td>8.5</td>
       <td>8.5</td>
       <td>8.0</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
+      <td>8</td>
       <td>4.0</td>
       <td>7.5</td>
       <td>5.3</td>
       <td>2.0</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
+      <td>9</td>
       <td>10.0</td>
       <td>9.9</td>
       <td>9.6</td>
       <td>9.1</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
+      <td>10</td>
       <td>8.3</td>
       <td>8.7</td>
       <td>8.0</td>
       <td>6.7</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
+      <td>11</td>
       <td>10.0</td>
       <td>10.0</td>
       <td>8.5</td>
       <td>9.8</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
+      <td>12</td>
       <td>7.3</td>
       <td>9.0</td>
       <td>7.8</td>
       <td>7.0</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
+      <td>13</td>
       <td>8.8</td>
       <td>9.2</td>
       <td>10.0</td>
       <td>8.7</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>13</th>
+      <td>14</td>
       <td>6.5</td>
       <td>8.6</td>
       <td>7.0</td>
       <td>4.0</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>14</th>
+      <td>15</td>
       <td>10.0</td>
       <td>8.5</td>
       <td>8.1</td>
       <td>8.5</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>15</th>
+      <td>16</td>
       <td>9.7</td>
       <td>10.0</td>
       <td>7.7</td>
       <td>7.5</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>16</th>
+      <td>17</td>
       <td>8.3</td>
       <td>9.7</td>
       <td>8.7</td>
       <td>6.8</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>17</th>
+      <td>18</td>
       <td>7.5</td>
       <td>9.4</td>
       <td>6.0</td>
       <td>7.2</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>18</th>
+      <td>19</td>
       <td>9.3</td>
       <td>9.9</td>
       <td>9.8</td>
       <td>9.1</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>19</th>
+      <td>20</td>
       <td>0.0</td>
       <td>2.5</td>
       <td>1.0</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>20</th>
+      <td>21</td>
       <td>5.0</td>
       <td>8.0</td>
       <td>5.8</td>
@@ -360,26 +388,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Podemos usar o comando <code>info()</code> para obter informações sobre os tipos das colunas e a presença de dados nulos:</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="185">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>so_20171.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
-Int64Index: 21 entries, 1 to 21
-Data columns (total 4 columns):
+RangeIndex: 21 entries, 0 to 20
+Data columns (total 5 columns):
  #   Column  Non-Null Count  Dtype  
 ---  ------  --------------  -----  
- 0   nota_1  21 non-null     float64
- 1   nota_2  21 non-null     float64
- 2   nota_3  21 non-null     float64
- 3   nota_4  21 non-null     float64
-dtypes: float64(4)
-memory usage: 840.0 bytes</code></pre>
+ 0   id      21 non-null     int64  
+ 1   nota_1  21 non-null     float64
+ 2   nota_2  21 non-null     float64
+ 3   nota_3  21 non-null     float64
+ 4   nota_4  21 non-null     float64
+dtypes: float64(4), int64(1)
+memory usage: 968.0 bytes</code></pre>
 </div>
 </div>
 <p>Outra função útil é a <code>describe()</code>, que calcula estatísticas básicas para as colunas de um <em>DataFrame</em>:</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="186">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>so_20171.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="186">
 
 <div>
 
@@ -387,6 +416,7 @@ memory usage: 840.0 bytes</code></pre>
   <thead>
     <tr>
       <th></th>
+      <th>id</th>
       <th>nota_1</th>
       <th>nota_2</th>
       <th>nota_3</th>
@@ -400,9 +430,11 @@ memory usage: 840.0 bytes</code></pre>
       <td>21.000000</td>
       <td>21.000000</td>
       <td>21.000000</td>
+      <td>21.000000</td>
     </tr>
     <tr>
       <th>mean</th>
+      <td>11.000000</td>
       <td>7.595238</td>
       <td>8.438095</td>
       <td>7.771429</td>
@@ -410,6 +442,7 @@ memory usage: 840.0 bytes</code></pre>
     </tr>
     <tr>
       <th>std</th>
+      <td>6.204837</td>
       <td>2.408003</td>
       <td>2.020266</td>
       <td>2.242129</td>
@@ -417,6 +450,7 @@ memory usage: 840.0 bytes</code></pre>
     </tr>
     <tr>
       <th>min</th>
+      <td>1.000000</td>
       <td>0.000000</td>
       <td>2.500000</td>
       <td>1.000000</td>
@@ -424,6 +458,7 @@ memory usage: 840.0 bytes</code></pre>
     </tr>
     <tr>
       <th>25%</th>
+      <td>6.000000</td>
       <td>7.000000</td>
       <td>8.000000</td>
       <td>7.000000</td>
@@ -431,6 +466,7 @@ memory usage: 840.0 bytes</code></pre>
     </tr>
     <tr>
       <th>50%</th>
+      <td>11.000000</td>
       <td>8.300000</td>
       <td>9.000000</td>
       <td>8.100000</td>
@@ -438,6 +474,7 @@ memory usage: 840.0 bytes</code></pre>
     </tr>
     <tr>
       <th>75%</th>
+      <td>16.000000</td>
       <td>9.300000</td>
       <td>9.800000</td>
       <td>9.600000</td>
@@ -445,6 +482,7 @@ memory usage: 840.0 bytes</code></pre>
     </tr>
     <tr>
       <th>max</th>
+      <td>21.000000</td>
       <td>10.000000</td>
       <td>10.000000</td>
       <td>10.000000</td>
@@ -455,23 +493,24 @@ memory usage: 840.0 bytes</code></pre>
 </div>
 </div>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Já vimos que para calcular a média das notas de cada unidade podemos fazer:</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>so_20171.mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>nota_1    7.595238
-nota_2    8.438095
-nota_3    7.771429
-nota_4    6.742857
+<p>Já vimos que para calcular a média das notas de cada unidade podemos fazer:</p>
+<div class="cell" data-execution_count="187">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>so_20171.mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="187">
+<pre><code>id        11.000000
+nota_1     7.595238
+nota_2     8.438095
+nota_3     7.771429
+nota_4     6.742857
 dtype: float64</code></pre>
 </div>
 </div>
-<p>Suponha que queremos calcular a média das notas de cada uma das 4 unidades para todas as turmas de SO nos últimos 10 períodos. Para fazer do modo acima, precisaríamos de pelo menos 10 linhas de código, uma para cada turma. Isso não parece muito interessante. O jeito mais eficiente de fazer isso é juntando todos os dados em uma única tabela.</p>
-<p>Vamos fazer um exemplo carregando os dados de mais um período:</p>
-<div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>so_20172 <span class="op">=</span> pd.read_csv(<span class="st">"../dados/notas_so_20172.csv"</span>, index_col<span class="op">=</span><span class="st">"id"</span>)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>so_20172</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<p>Suponha que queremos calcular a média das notas de cada uma das 4 unidades para todas as turmas de SO nos últimos 10 períodos. Para fazer do modo acima, precisaríamos de pelo menos 10 linhas de código, uma para cada turma. Isso não parece muito interessante. O jeito mais eficiente de fazer isso é juntar todos os dados em uma única tabela e aplicar funções em grupos de dados.</p>
+<p>Vamos fazer um exemplo carregando os dados de mais um período (2017.2):</p>
+<div class="cell" data-execution_count="188">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>so_20172 <span class="op">=</span> pd.read_csv(<span class="st">"../dados/notas_so_20172.csv"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>so_20172</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="188">
 
 <div>
 
@@ -479,197 +518,217 @@ dtype: float64</code></pre>
   <thead>
     <tr>
       <th></th>
+      <th>id</th>
       <th>nota_1</th>
       <th>nota_2</th>
       <th>nota_3</th>
       <th>nota_4</th>
     </tr>
-    <tr>
-      <th>id</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <th>0</th>
+      <td>1</td>
       <td>9.8</td>
       <td>9.7</td>
       <td>9.5</td>
       <td>7.0</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
+      <td>2</td>
       <td>9.2</td>
       <td>9.8</td>
       <td>7.0</td>
       <td>7.2</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
+      <td>3</td>
       <td>9.1</td>
       <td>8.0</td>
       <td>9.5</td>
       <td>8.0</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
+      <td>4</td>
       <td>5.6</td>
       <td>7.8</td>
       <td>8.5</td>
       <td>6.5</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
+      <td>5</td>
       <td>6.3</td>
       <td>8.0</td>
       <td>6.3</td>
       <td>5.5</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
+      <td>6</td>
       <td>6.6</td>
       <td>6.7</td>
       <td>7.2</td>
       <td>3.8</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
+      <td>7</td>
       <td>9.3</td>
       <td>9.0</td>
       <td>9.2</td>
       <td>8.5</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
+      <td>8</td>
       <td>9.0</td>
       <td>10.0</td>
       <td>8.7</td>
       <td>8.1</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
+      <td>9</td>
       <td>7.8</td>
       <td>8.5</td>
       <td>9.0</td>
       <td>7.5</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
+      <td>10</td>
       <td>7.5</td>
       <td>8.0</td>
       <td>9.0</td>
       <td>5.3</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
+      <td>11</td>
       <td>8.3</td>
       <td>9.0</td>
       <td>5.2</td>
       <td>6.2</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
+      <td>12</td>
       <td>7.5</td>
       <td>9.8</td>
       <td>8.2</td>
       <td>6.0</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
+      <td>13</td>
       <td>7.7</td>
       <td>7.3</td>
       <td>4.5</td>
       <td>6.5</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>13</th>
+      <td>14</td>
       <td>5.8</td>
       <td>7.5</td>
       <td>6.5</td>
       <td>6.2</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>14</th>
+      <td>15</td>
       <td>7.8</td>
       <td>9.3</td>
       <td>8.8</td>
       <td>4.5</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>15</th>
+      <td>16</td>
       <td>0.0</td>
       <td>2.5</td>
       <td>2.0</td>
       <td>3.5</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>16</th>
+      <td>17</td>
       <td>5.8</td>
       <td>8.3</td>
       <td>7.5</td>
       <td>3.5</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>17</th>
+      <td>18</td>
       <td>9.6</td>
       <td>9.0</td>
       <td>10.0</td>
       <td>5.5</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>18</th>
+      <td>19</td>
       <td>7.0</td>
       <td>6.7</td>
       <td>6.6</td>
       <td>8.0</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>19</th>
+      <td>20</td>
       <td>7.3</td>
       <td>8.6</td>
       <td>7.3</td>
       <td>0.0</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>20</th>
+      <td>21</td>
       <td>9.5</td>
       <td>8.8</td>
       <td>7.8</td>
       <td>6.2</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>21</th>
+      <td>22</td>
       <td>2.0</td>
       <td>0.0</td>
       <td>1.0</td>
       <td>2.0</td>
     </tr>
     <tr>
-      <th>23</th>
+      <th>22</th>
+      <td>23</td>
       <td>7.3</td>
       <td>8.0</td>
       <td>6.7</td>
       <td>7.5</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>23</th>
+      <td>24</td>
       <td>9.5</td>
       <td>8.8</td>
       <td>7.0</td>
       <td>8.3</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>24</th>
+      <td>25</td>
       <td>9.7</td>
       <td>9.0</td>
       <td>3.4</td>
       <td>7.4</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>25</th>
+      <td>26</td>
       <td>8.9</td>
       <td>6.7</td>
       <td>5.5</td>
@@ -681,13 +740,13 @@ dtype: float64</code></pre>
 </div>
 </div>
 </section>
-<section id="adicionando-novas-colunas" class="level2">
-<h2 class="anchored" data-anchor-id="adicionando-novas-colunas">Adicionando novas colunas</h2>
+<section id="concatenando-dataframes" class="level2">
+<h2 class="anchored" data-anchor-id="concatenando-dataframes">Concatenando DataFrames</h2>
 <p>Note que a sua estrutura é semelhante à do <em>DataFrame</em> anterior. Desta forma, podemos juntá-los em um único data frame. Antes disso, temos que adicionar uma nova coluna que identifique o período que as notas se referem:</p>
-<div class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>so_20171[<span class="st">"periodo"</span>] <span class="op">=</span> <span class="st">"2017.1"</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>so_20171.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<div class="cell" data-execution_count="189">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>so_20171[<span class="st">"periodo"</span>] <span class="op">=</span> <span class="st">"2017.1"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>so_20171.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="189">
 
 <div>
 
@@ -695,24 +754,18 @@ dtype: float64</code></pre>
   <thead>
     <tr>
       <th></th>
+      <th>id</th>
       <th>nota_1</th>
       <th>nota_2</th>
       <th>nota_3</th>
       <th>nota_4</th>
       <th>periodo</th>
     </tr>
-    <tr>
-      <th>id</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <th>0</th>
+      <td>1</td>
       <td>8.3</td>
       <td>8.0</td>
       <td>9.3</td>
@@ -720,7 +773,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
+      <td>2</td>
       <td>7.0</td>
       <td>7.7</td>
       <td>4.6</td>
@@ -728,7 +782,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
+      <td>3</td>
       <td>7.8</td>
       <td>3.2</td>
       <td>7.7</td>
@@ -736,7 +791,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
+      <td>4</td>
       <td>7.3</td>
       <td>9.3</td>
       <td>9.8</td>
@@ -744,7 +800,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
+      <td>5</td>
       <td>5.8</td>
       <td>9.8</td>
       <td>10.0</td>
@@ -756,10 +813,10 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<div class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>so_20172[<span class="st">"periodo"</span>] <span class="op">=</span> <span class="st">"2017.2"</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>so_20172.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell" data-execution_count="190">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>so_20172[<span class="st">"periodo"</span>] <span class="op">=</span> <span class="st">"2017.2"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>so_20172.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="190">
 
 <div>
 
@@ -767,24 +824,18 @@ dtype: float64</code></pre>
   <thead>
     <tr>
       <th></th>
+      <th>id</th>
       <th>nota_1</th>
       <th>nota_2</th>
       <th>nota_3</th>
       <th>nota_4</th>
       <th>periodo</th>
     </tr>
-    <tr>
-      <th>id</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <th>0</th>
+      <td>1</td>
       <td>9.8</td>
       <td>9.7</td>
       <td>9.5</td>
@@ -792,7 +843,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
+      <td>2</td>
       <td>9.2</td>
       <td>9.8</td>
       <td>7.0</td>
@@ -800,7 +852,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
+      <td>3</td>
       <td>9.1</td>
       <td>8.0</td>
       <td>9.5</td>
@@ -808,7 +861,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
+      <td>4</td>
       <td>5.6</td>
       <td>7.8</td>
       <td>8.5</td>
@@ -816,7 +870,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
+      <td>5</td>
       <td>6.3</td>
       <td>8.0</td>
       <td>6.3</td>
@@ -828,12 +883,12 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>O comando <code>head()</code> mostra apenas as primeiras 5 linhas da tabela.</p>
-<p>Como os dois <em>DataFrames</em> possuem a mesma estrutura, podemos juntá-los com a função <a href="https://pandas.pydata.org/docs/reference/api/pandas.concat.html"><code>concat</code></a>:</p>
-<div class="cell" data-execution_count="50">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>so <span class="op">=</span> pd.concat([so_20171, so_20172])</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>so</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="50">
+<p>O comando <code>head()</code> mostra apenas as primeiras linhas da tabela.</p>
+<p>Como os dois <em>DataFrames</em> possuem as mesmas colunas, podemos juntá-los com a função <a href="https://pandas.pydata.org/docs/reference/api/pandas.concat.html"><code>concat</code></a>:</p>
+<div class="cell" data-execution_count="191">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>so <span class="op">=</span> pd.concat([so_20171, so_20172])</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>so</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="191">
 
 <div>
 
@@ -841,24 +896,18 @@ dtype: float64</code></pre>
   <thead>
     <tr>
       <th></th>
+      <th>id</th>
       <th>nota_1</th>
       <th>nota_2</th>
       <th>nota_3</th>
       <th>nota_4</th>
       <th>periodo</th>
     </tr>
-    <tr>
-      <th>id</th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
   </thead>
   <tbody>
     <tr>
-      <th>1</th>
+      <th>0</th>
+      <td>1</td>
       <td>8.3</td>
       <td>8.0</td>
       <td>9.3</td>
@@ -866,7 +915,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
+      <td>2</td>
       <td>7.0</td>
       <td>7.7</td>
       <td>4.6</td>
@@ -874,7 +924,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
+      <td>3</td>
       <td>7.8</td>
       <td>3.2</td>
       <td>7.7</td>
@@ -882,7 +933,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
+      <td>4</td>
       <td>7.3</td>
       <td>9.3</td>
       <td>9.8</td>
@@ -890,7 +942,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
+      <td>5</td>
       <td>5.8</td>
       <td>9.8</td>
       <td>10.0</td>
@@ -898,7 +951,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
+      <td>6</td>
       <td>9.6</td>
       <td>9.8</td>
       <td>10.0</td>
@@ -906,7 +960,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
+      <td>7</td>
       <td>9.0</td>
       <td>8.5</td>
       <td>8.5</td>
@@ -914,7 +969,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
+      <td>8</td>
       <td>4.0</td>
       <td>7.5</td>
       <td>5.3</td>
@@ -922,7 +978,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
+      <td>9</td>
       <td>10.0</td>
       <td>9.9</td>
       <td>9.6</td>
@@ -930,7 +987,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
+      <td>10</td>
       <td>8.3</td>
       <td>8.7</td>
       <td>8.0</td>
@@ -938,7 +996,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
+      <td>11</td>
       <td>10.0</td>
       <td>10.0</td>
       <td>8.5</td>
@@ -946,7 +1005,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
+      <td>12</td>
       <td>7.3</td>
       <td>9.0</td>
       <td>7.8</td>
@@ -954,7 +1014,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
+      <td>13</td>
       <td>8.8</td>
       <td>9.2</td>
       <td>10.0</td>
@@ -962,7 +1023,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>13</th>
+      <td>14</td>
       <td>6.5</td>
       <td>8.6</td>
       <td>7.0</td>
@@ -970,7 +1032,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>14</th>
+      <td>15</td>
       <td>10.0</td>
       <td>8.5</td>
       <td>8.1</td>
@@ -978,7 +1041,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>15</th>
+      <td>16</td>
       <td>9.7</td>
       <td>10.0</td>
       <td>7.7</td>
@@ -986,7 +1050,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>16</th>
+      <td>17</td>
       <td>8.3</td>
       <td>9.7</td>
       <td>8.7</td>
@@ -994,7 +1059,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>17</th>
+      <td>18</td>
       <td>7.5</td>
       <td>9.4</td>
       <td>6.0</td>
@@ -1002,7 +1068,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>18</th>
+      <td>19</td>
       <td>9.3</td>
       <td>9.9</td>
       <td>9.8</td>
@@ -1010,7 +1077,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>19</th>
+      <td>20</td>
       <td>0.0</td>
       <td>2.5</td>
       <td>1.0</td>
@@ -1018,7 +1086,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>20</th>
+      <td>21</td>
       <td>5.0</td>
       <td>8.0</td>
       <td>5.8</td>
@@ -1026,7 +1095,8 @@ dtype: float64</code></pre>
       <td>2017.1</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>0</th>
+      <td>1</td>
       <td>9.8</td>
       <td>9.7</td>
       <td>9.5</td>
@@ -1034,7 +1104,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>1</th>
+      <td>2</td>
       <td>9.2</td>
       <td>9.8</td>
       <td>7.0</td>
@@ -1042,7 +1113,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>2</th>
+      <td>3</td>
       <td>9.1</td>
       <td>8.0</td>
       <td>9.5</td>
@@ -1050,7 +1122,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>4</th>
+      <th>3</th>
+      <td>4</td>
       <td>5.6</td>
       <td>7.8</td>
       <td>8.5</td>
@@ -1058,7 +1131,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>5</th>
+      <th>4</th>
+      <td>5</td>
       <td>6.3</td>
       <td>8.0</td>
       <td>6.3</td>
@@ -1066,7 +1140,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>6</th>
+      <th>5</th>
+      <td>6</td>
       <td>6.6</td>
       <td>6.7</td>
       <td>7.2</td>
@@ -1074,7 +1149,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>7</th>
+      <th>6</th>
+      <td>7</td>
       <td>9.3</td>
       <td>9.0</td>
       <td>9.2</td>
@@ -1082,7 +1158,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>8</th>
+      <th>7</th>
+      <td>8</td>
       <td>9.0</td>
       <td>10.0</td>
       <td>8.7</td>
@@ -1090,7 +1167,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>9</th>
+      <th>8</th>
+      <td>9</td>
       <td>7.8</td>
       <td>8.5</td>
       <td>9.0</td>
@@ -1098,7 +1176,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>10</th>
+      <th>9</th>
+      <td>10</td>
       <td>7.5</td>
       <td>8.0</td>
       <td>9.0</td>
@@ -1106,7 +1185,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>11</th>
+      <th>10</th>
+      <td>11</td>
       <td>8.3</td>
       <td>9.0</td>
       <td>5.2</td>
@@ -1114,7 +1194,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>12</th>
+      <th>11</th>
+      <td>12</td>
       <td>7.5</td>
       <td>9.8</td>
       <td>8.2</td>
@@ -1122,7 +1203,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>13</th>
+      <th>12</th>
+      <td>13</td>
       <td>7.7</td>
       <td>7.3</td>
       <td>4.5</td>
@@ -1130,7 +1212,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>14</th>
+      <th>13</th>
+      <td>14</td>
       <td>5.8</td>
       <td>7.5</td>
       <td>6.5</td>
@@ -1138,7 +1221,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>15</th>
+      <th>14</th>
+      <td>15</td>
       <td>7.8</td>
       <td>9.3</td>
       <td>8.8</td>
@@ -1146,7 +1230,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>16</th>
+      <th>15</th>
+      <td>16</td>
       <td>0.0</td>
       <td>2.5</td>
       <td>2.0</td>
@@ -1154,7 +1239,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>17</th>
+      <th>16</th>
+      <td>17</td>
       <td>5.8</td>
       <td>8.3</td>
       <td>7.5</td>
@@ -1162,7 +1248,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>18</th>
+      <th>17</th>
+      <td>18</td>
       <td>9.6</td>
       <td>9.0</td>
       <td>10.0</td>
@@ -1170,7 +1257,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>19</th>
+      <th>18</th>
+      <td>19</td>
       <td>7.0</td>
       <td>6.7</td>
       <td>6.6</td>
@@ -1178,7 +1266,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>20</th>
+      <th>19</th>
+      <td>20</td>
       <td>7.3</td>
       <td>8.6</td>
       <td>7.3</td>
@@ -1186,7 +1275,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>21</th>
+      <th>20</th>
+      <td>21</td>
       <td>9.5</td>
       <td>8.8</td>
       <td>7.8</td>
@@ -1194,7 +1284,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>22</th>
+      <th>21</th>
+      <td>22</td>
       <td>2.0</td>
       <td>0.0</td>
       <td>1.0</td>
@@ -1202,7 +1293,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>23</th>
+      <th>22</th>
+      <td>23</td>
       <td>7.3</td>
       <td>8.0</td>
       <td>6.7</td>
@@ -1210,7 +1302,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>24</th>
+      <th>23</th>
+      <td>24</td>
       <td>9.5</td>
       <td>8.8</td>
       <td>7.0</td>
@@ -1218,7 +1311,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>25</th>
+      <th>24</th>
+      <td>25</td>
       <td>9.7</td>
       <td>9.0</td>
       <td>3.4</td>
@@ -1226,7 +1320,8 @@ dtype: float64</code></pre>
       <td>2017.2</td>
     </tr>
     <tr>
-      <th>26</th>
+      <th>25</th>
+      <td>26</td>
       <td>8.9</td>
       <td>6.7</td>
       <td>5.5</td>
@@ -1243,28 +1338,28 @@ dtype: float64</code></pre>
 <section id="filtrando-dados" class="level2">
 <h2 class="anchored" data-anchor-id="filtrando-dados">Filtrando dados</h2>
 <p>Podemos filtrar os dados de cada período e em seguida calcular a média da unidade 1:</p>
-<div class="cell" data-execution_count="21">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>so[so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.1"</span>][<span class="st">"nota_1"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="21">
+<div class="cell" data-execution_count="192">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>so[so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.1"</span>][<span class="st">"nota_1"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="192">
 <pre><code>7.595238095238097</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="22">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>so[so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.2"</span>][<span class="st">"nota_1"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="22">
+<div class="cell" data-execution_count="193">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>so[so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.2"</span>][<span class="st">"nota_1"</span>].mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="193">
 <pre><code>7.457692307692308</code></pre>
 </div>
 </div>
 <p>Da mesma forma, podemos ver a fração de alunos com nota acima da média na unidade 1:</p>
-<div class="cell" data-execution_count="42">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(so[(so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.1"</span>) <span class="op">&amp;</span> (so[<span class="st">"nota_1"</span>] <span class="op">&gt;=</span> <span class="dv">7</span>)].index) <span class="op">/</span> <span class="bu">len</span>(so[(so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.1"</span>)].index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="42">
+<div class="cell" data-execution_count="194">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(so[(so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.1"</span>) <span class="op">&amp;</span> (so[<span class="st">"nota_1"</span>] <span class="op">&gt;=</span> <span class="dv">7</span>)].index) <span class="op">/</span> <span class="bu">len</span>(so[(so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.1"</span>)].index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="194">
 <pre><code>0.7619047619047619</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="43">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a> <span class="bu">len</span>(so[(so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.2"</span>) <span class="op">&amp;</span> (so[<span class="st">"nota_1"</span>] <span class="op">&gt;=</span> <span class="dv">7</span>)].index) <span class="op">/</span> <span class="bu">len</span>(so[(so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.2"</span>)].index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="43">
+<div class="cell" data-execution_count="195">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a> <span class="bu">len</span>(so[(so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.2"</span>) <span class="op">&amp;</span> (so[<span class="st">"nota_1"</span>] <span class="op">&gt;=</span> <span class="dv">7</span>)].index) <span class="op">/</span> <span class="bu">len</span>(so[(so[<span class="st">"periodo"</span>] <span class="op">==</span> <span class="st">"2017.2"</span>)].index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="195">
 <pre><code>0.7307692307692307</code></pre>
 </div>
 </div>
@@ -1274,10 +1369,10 @@ dtype: float64</code></pre>
 <h2 class="anchored" data-anchor-id="agrupando-por-coluna-e-sumarizando-dados">Agrupando por coluna e sumarizando dados</h2>
 <p>A função <code>groupby</code> agrupa os dados de acordo com categorias definidas pelas colunas e aplica funções para cada grupo. A função <code>summarise</code> aplica uma função para cada grupo de dados, gerando novas colunas no data frame.</p>
 <p>Vamos usar como exemplo o cálculo da média para cada unidade, agrupado por período:</p>
-<div class="cell" data-execution_count="51">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>so_media <span class="op">=</span> so.groupby([<span class="st">"periodo"</span>]).mean()</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>so_media</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="51">
+<div class="cell" data-execution_count="196">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>so_media <span class="op">=</span> so.groupby([<span class="st">"periodo"</span>]).mean()</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>so_media</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="196">
 
 <div>
 
@@ -1285,6 +1380,7 @@ dtype: float64</code></pre>
   <thead>
     <tr>
       <th></th>
+      <th>id</th>
       <th>nota_1</th>
       <th>nota_2</th>
       <th>nota_3</th>
@@ -1296,11 +1392,13 @@ dtype: float64</code></pre>
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>2017.1</th>
+      <td>11.0</td>
       <td>7.595238</td>
       <td>8.438095</td>
       <td>7.771429</td>
@@ -1308,6 +1406,7 @@ dtype: float64</code></pre>
     </tr>
     <tr>
       <th>2017.2</th>
+      <td>13.5</td>
       <td>7.457692</td>
       <td>7.876923</td>
       <td>6.996154</td>
@@ -1319,18 +1418,1191 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Como fazemos então para calcular a fração de aprovados na unidade 1 para cada período?</p>
-<div class="cell" data-execution_count="53">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prop_aprovados(df, col<span class="op">=</span><span class="st">"nota_1"</span>, nota_aprovacao<span class="op">=</span><span class="dv">7</span>):</span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(df[df[<span class="st">"nota_1"</span>] <span class="op">&gt;=</span> nota_aprovacao].index) <span class="op">/</span> <span class="bu">len</span>(df.index)</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>so.groupby([<span class="st">"periodo"</span>]).<span class="bu">apply</span>(prop_aprovados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="53">
+<div class="cell" data-execution_count="197">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prop_aprovados(df, col<span class="op">=</span><span class="st">"nota_1"</span>, nota_aprovacao<span class="op">=</span><span class="dv">7</span>):</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="bu">len</span>(df[df[<span class="st">"nota_1"</span>] <span class="op">&gt;=</span> nota_aprovacao].index) <span class="op">/</span> <span class="bu">len</span>(df.index)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>so.groupby([<span class="st">"periodo"</span>]).<span class="bu">apply</span>(prop_aprovados)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="197">
 <pre><code>periodo
 2017.1    0.761905
 2017.2    0.730769
 dtype: float64</code></pre>
 </div>
 </div>
+<p>Ainda temos um incoveniente: ainda precisamos fazer cálculos especificando cada unidade que pretendemos observar. Além disso, se em algum dos períodos tivermos disciplinas com uma quantidade diferente de unidades (3 ao invés de 4) teríamos problemas com a estrutura atual. Vamos ver a seguir como organizar os dados de uma forma ainda mais adequada.</p>
+</section>
+<section id="organizando-dados-tidy-data" class="level2">
+<h2 class="anchored" data-anchor-id="organizando-dados-tidy-data">Organizando dados (tidy data)</h2>
+<p>Vamos carregar os dados de outras duas disciplinas, Sistemas Distribuídos e Avaliação de Desempenho, aproveitando para adicionar o nome da disciplina e o período no data frame:</p>
+<div class="cell" data-execution_count="198">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>ads_20171 <span class="op">=</span> pd.read_csv(<span class="st">"../dados/notas_ads_20171.csv"</span>)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>ads_20171[<span class="st">"disciplina"</span>] <span class="op">=</span> <span class="st">"Avaliação de Desempenho de Sistemas"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>ads_20171[<span class="st">"periodo"</span>] <span class="op">=</span> <span class="st">"2017.1"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>ads_20171.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="198">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>nota_1</th>
+      <th>nota_2</th>
+      <th>nota_3</th>
+      <th>disciplina</th>
+      <th>periodo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>9.8</td>
+      <td>7.0</td>
+      <td>5.0</td>
+      <td>Avaliação de Desempenho de Sistemas</td>
+      <td>2017.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>8.8</td>
+      <td>9.7</td>
+      <td>3.5</td>
+      <td>Avaliação de Desempenho de Sistemas</td>
+      <td>2017.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>9.5</td>
+      <td>7.0</td>
+      <td>8.0</td>
+      <td>Avaliação de Desempenho de Sistemas</td>
+      <td>2017.1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>7.0</td>
+      <td>9.8</td>
+      <td>9.8</td>
+      <td>Avaliação de Desempenho de Sistemas</td>
+      <td>2017.1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>3.5</td>
+      <td>8.8</td>
+      <td>9.0</td>
+      <td>Avaliação de Desempenho de Sistemas</td>
+      <td>2017.1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="199">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>sd_20172 <span class="op">=</span> pd.read_csv(<span class="st">"../dados/notas_sd_20172.csv"</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>sd_20172[<span class="st">"disciplina"</span>] <span class="op">=</span> <span class="st">"Sistemas Distribuidos"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>sd_20172[<span class="st">"periodo"</span>] <span class="op">=</span> <span class="st">"2017.2"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>sd_20172.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="199">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>id</th>
+      <th>nota_1</th>
+      <th>nota_2</th>
+      <th>nota_3</th>
+      <th>disciplina</th>
+      <th>periodo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>6.8</td>
+      <td>8.0</td>
+      <td>9.5</td>
+      <td>Sistemas Distribuidos</td>
+      <td>2017.2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>4.2</td>
+      <td>3.0</td>
+      <td>9.5</td>
+      <td>Sistemas Distribuidos</td>
+      <td>2017.2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>Sistemas Distribuidos</td>
+      <td>2017.2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>8.0</td>
+      <td>7.5</td>
+      <td>9.5</td>
+      <td>Sistemas Distribuidos</td>
+      <td>2017.2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>7.0</td>
+      <td>7.5</td>
+      <td>10.0</td>
+      <td>Sistemas Distribuidos</td>
+      <td>2017.2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Podemos juntar as notas de todas as disciplinas para facilitar o processamento. Mas temos um problema: as disciplinas de SO têm notas de 4 unidades, enquanto as de ADS e SD só têm 3 unidades. Além disso, ter uma coluna na tabela para cada unidade nos força a ter que especificar para qual unidade queremos calcular estatísticas. E se uma disciplina tiver 10 unidades (mini-testes, por exemplo), temos que ter 10 cálculos para calcular as médias de cada unidade?</p>
+<p>Ai que entra o <a href="http://r4ds.had.co.nz/tidy-data.html"><em>tidy data</em></a>, que é uma forma de organizar os dados que facilita muito a análise usando as ferramentas de análise de dados.</p>
+<p>Existem 3 regras para uma tabela ser <em>tidy</em>:</p>
+<ul>
+<li>Cada variável deve ter sua própria coluna.</li>
+<li>Cada observação deve ter sua própria linha.</li>
+<li>Cada valor deve ter sua própria célula.</li>
+</ul>
+<p>A figura abaixo mostra essas regras visualmente:</p>
+<p><img src="figs/tidy_data.png" class="img-fluid"></p>
+<p>Como transformar então nossas tabelas de notas no formato <em>tidy</em>? Um dos problems atuais é que a variável <em>nota</em> está espalhada em várias colunas: <em>nota_1</em>, <em>nota_2</em>, <em>nota_3</em>, … Temos outra variável implícita que está misturada com a variável nota que é a variável <em>unidade</em>, que pode indicar a qual unidade uma prova se refere. Desta forma, a tabela no formato tidy poderia ter uma coluna para a variável <em>unidade</em> e ter apenas uma coluna para a variável <em>nota</em>.</p>
+<p>Vamos usar o Pandas para transformar os dados no formato <em>tidy</em>, usando funções de <em>reshaping e pivot tables</em> (leia <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/reshaping.html">este tutorial do Pandas</a> para entender mais).</p>
+<p>Primeiro para as notas de Sistemas Operacionais, vamos adicionar uma coluna com o nome da disciplina e transformar as colunas <code>nota_1</code>, <code>nota_2</code>, <code>nota_3</code> e <code>nota_4</code> em duas colunas: <code>unidade</code> e <code>nota</code>. Ou seja, um aluno da turma ao invés de ter as 4 notas em apenas uma linha, ele terá as notas distribuídas em 4 linhas, uma para cada unidade. Para isto, vamos usar a função do Pandas <code>wide_to_long</code>:</p>
+<div class="cell" data-execution_count="200">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>so[<span class="st">"disciplina"</span>] <span class="op">=</span> <span class="st">"Sistemas Operacionais"</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>so_tidy <span class="op">=</span> pd.wide_to_long(so, stubnames<span class="op">=</span><span class="st">'nota'</span>, i<span class="op">=</span>[<span class="st">'id'</span>, <span class="st">'periodo'</span>, <span class="st">'disciplina'</span>],</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>                          j<span class="op">=</span><span class="st">'unidade'</span>, sep<span class="op">=</span><span class="st">"_"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>so_tidy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="200">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+    </tr>
+    <tr>
+      <th>id</th>
+      <th>periodo</th>
+      <th>disciplina</th>
+      <th>unidade</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">1</th>
+      <th rowspan="4" valign="top">2017.1</th>
+      <th rowspan="4" valign="top">Sistemas Operacionais</th>
+      <th>1</th>
+      <td>8.3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>2017.1</th>
+      <th>Sistemas Operacionais</th>
+      <th>1</th>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <th>2017.2</th>
+      <th>Sistemas Operacionais</th>
+      <th>4</th>
+      <td>7.4</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">26</th>
+      <th rowspan="4" valign="top">2017.2</th>
+      <th rowspan="4" valign="top">Sistemas Operacionais</th>
+      <th>1</th>
+      <td>8.9</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5.5</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.5</td>
+    </tr>
+  </tbody>
+</table>
+<p>188 rows × 1 columns</p>
+</div>
+</div>
+</div>
+<p>O parâmetro <code>stubname='nota'</code> indica que ele vai transformar as colunas que começam com a palavra “nota”. O parâmetro <code>i=['id', 'periodo', 'disciplina']</code> indica as colunas que identificarão unicamente cada linha de observação (serão os índices). E o parâmetro <code>j='unidade'</code> indica o nome da nova coluna que será criada, onde os valores serão os números encontrados nas colunas <code>nota_X</code>, considerando que <code>sep="_"</code> e os nomes das colunas têm o formato <code>nota_unidade</code>.</p>
+<p>Fazendo isso agora para as outras disciplinas e concatenando tudo em um único DataFrame. Vamos também renomear o index <code>id</code> para <code>id_aluno</code> para melhor compreensão dos dados. O parâmetro <code>inplace=True</code> faz com que o DataFrame <code>notas</code> seja alterado ao invés de retornar um novo DataFrame com a alteração realizada.</p>
+<div class="cell" data-execution_count="201">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>ads_tidy <span class="op">=</span> pd.wide_to_long(ads_20171, stubnames<span class="op">=</span><span class="st">'nota'</span>, i<span class="op">=</span>[<span class="st">'id'</span>, <span class="st">'periodo'</span>, <span class="st">'disciplina'</span>], j<span class="op">=</span><span class="st">'unidade'</span>, sep<span class="op">=</span><span class="st">"_"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>sd_tidy <span class="op">=</span> pd.wide_to_long(sd_20172, stubnames<span class="op">=</span><span class="st">'nota'</span>, i<span class="op">=</span>[<span class="st">'id'</span>, <span class="st">'periodo'</span>, <span class="st">'disciplina'</span>], j<span class="op">=</span><span class="st">'unidade'</span>, sep<span class="op">=</span><span class="st">"_"</span>)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>notas <span class="op">=</span> pd.concat([so_tidy, ads_tidy, sd_tidy])</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>notas.index.set_names({<span class="st">'id'</span>: <span class="st">'id_aluno'</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>notas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="201">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+    </tr>
+    <tr>
+      <th>id_aluno</th>
+      <th>periodo</th>
+      <th>disciplina</th>
+      <th>unidade</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="4" valign="top">1</th>
+      <th rowspan="4" valign="top">2017.1</th>
+      <th rowspan="4" valign="top">Sistemas Operacionais</th>
+      <th>1</th>
+      <td>8.3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>2017.1</th>
+      <th>Sistemas Operacionais</th>
+      <th>1</th>
+      <td>7.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">23</th>
+      <th rowspan="2" valign="top">2017.2</th>
+      <th rowspan="2" valign="top">Sistemas Distribuidos</th>
+      <th>2</th>
+      <td>9.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">24</th>
+      <th rowspan="3" valign="top">2017.2</th>
+      <th rowspan="3" valign="top">Sistemas Distribuidos</th>
+      <th>1</th>
+      <td>9.8</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9.5</td>
+    </tr>
+  </tbody>
+</table>
+<p>344 rows × 1 columns</p>
+</div>
+</div>
+</div>
+<p>Como calcular agora a nota média para cada disciplina, período e unidade? Ficou bem mais fácil.</p>
+<section id="média-da-turma-por-unidade" class="level3">
+<h3 class="anchored" data-anchor-id="média-da-turma-por-unidade">Média da turma por unidade</h3>
+<div class="cell" data-execution_count="202">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>notas.groupby([<span class="st">"disciplina"</span>, <span class="st">"periodo"</span>, <span class="st">"unidade"</span>]).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="202">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+    </tr>
+    <tr>
+      <th>disciplina</th>
+      <th>periodo</th>
+      <th>unidade</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">Avaliação de Desempenho de Sistemas</th>
+      <th rowspan="3" valign="top">2017.1</th>
+      <th>1</th>
+      <td>7.939286</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8.382143</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7.425000</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">Sistemas Distribuidos</th>
+      <th rowspan="3" valign="top">2017.2</th>
+      <th>1</th>
+      <td>7.441667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>6.729167</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>8.895833</td>
+    </tr>
+    <tr>
+      <th rowspan="8" valign="top">Sistemas Operacionais</th>
+      <th rowspan="4" valign="top">2017.1</th>
+      <th>1</th>
+      <td>7.595238</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8.438095</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>7.771429</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>6.742857</td>
+    </tr>
+    <tr>
+      <th rowspan="4" valign="top">2017.2</th>
+      <th>1</th>
+      <td>7.457692</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.876923</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>6.996154</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.892308</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="média-de-cada-aluno-em-cada-turma" class="level3">
+<h3 class="anchored" data-anchor-id="média-de-cada-aluno-em-cada-turma">Média de cada aluno em cada turma</h3>
+<div class="cell" data-execution_count="203">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>media_alunos <span class="op">=</span> notas.groupby([<span class="st">"disciplina"</span>, <span class="st">"periodo"</span>, <span class="st">"id_aluno"</span>]).mean()</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>media_alunos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="203">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+    </tr>
+    <tr>
+      <th>disciplina</th>
+      <th>periodo</th>
+      <th>id_aluno</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">Avaliação de Desempenho de Sistemas</th>
+      <th rowspan="5" valign="top">2017.1</th>
+      <th>1</th>
+      <td>7.266667</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.333333</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>8.166667</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8.866667</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7.100000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">Sistemas Operacionais</th>
+      <th rowspan="5" valign="top">2017.2</th>
+      <th>22</th>
+      <td>1.250000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>7.375000</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>8.400000</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>7.375000</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>6.400000</td>
+    </tr>
+  </tbody>
+</table>
+<p>99 rows × 1 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="média-geral-de-cada-turma" class="level3">
+<h3 class="anchored" data-anchor-id="média-geral-de-cada-turma">Média geral de cada turma</h3>
+<div class="cell" data-execution_count="204">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>media_turma <span class="op">=</span> media_alunos.groupby([<span class="st">"disciplina"</span>, <span class="st">"periodo"</span>]).mean()</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>media_turma</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="204">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+    </tr>
+    <tr>
+      <th>disciplina</th>
+      <th>periodo</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Avaliação de Desempenho de Sistemas</th>
+      <th>2017.1</th>
+      <td>7.915476</td>
+    </tr>
+    <tr>
+      <th>Sistemas Distribuidos</th>
+      <th>2017.2</th>
+      <td>7.688889</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sistemas Operacionais</th>
+      <th>2017.1</th>
+      <td>7.636905</td>
+    </tr>
+    <tr>
+      <th>2017.2</th>
+      <td>7.055769</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="outras-estatísticas" class="level3">
+<h3 class="anchored" data-anchor-id="outras-estatísticas">Outras estatísticas?</h3>
+<p>E se eu quiser calcular outras estatísticas como a quantidade de alunos, nota mínima, mediana, média e máxima? Podemos usar a função <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.agg.html"><code>agg</code></a> para aplicar várias funções de agregação nos dados.</p>
+<div class="cell" data-execution_count="205">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prop_aprovados(medias, min_media_aprovacao<span class="op">=</span><span class="dv">5</span>):</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> medias[medias <span class="op">&gt;=</span> min_media_aprovacao].count() <span class="op">/</span> medias.count()</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    media_alunos</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"disciplina"</span>, <span class="st">"periodo"</span>])</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    .agg([<span class="st">'count'</span>, <span class="st">'min'</span>, <span class="st">'median'</span>, <span class="st">'mean'</span>, <span class="st">'max'</span>, prop_aprovados])</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="205">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th colspan="6" halign="left">nota</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>count</th>
+      <th>min</th>
+      <th>median</th>
+      <th>mean</th>
+      <th>max</th>
+      <th>prop_aprovados</th>
+    </tr>
+    <tr>
+      <th>disciplina</th>
+      <th>periodo</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Avaliação de Desempenho de Sistemas</th>
+      <th>2017.1</th>
+      <td>28</td>
+      <td>0.000</td>
+      <td>8.266667</td>
+      <td>7.915476</td>
+      <td>10.00</td>
+      <td>0.892857</td>
+    </tr>
+    <tr>
+      <th>Sistemas Distribuidos</th>
+      <th>2017.2</th>
+      <td>24</td>
+      <td>0.000</td>
+      <td>8.250000</td>
+      <td>7.688889</td>
+      <td>10.00</td>
+      <td>0.916667</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sistemas Operacionais</th>
+      <th>2017.1</th>
+      <td>21</td>
+      <td>0.875</td>
+      <td>8.100000</td>
+      <td>7.636905</td>
+      <td>9.65</td>
+      <td>0.904762</td>
+    </tr>
+    <tr>
+      <th>2017.2</th>
+      <td>26</td>
+      <td>1.250</td>
+      <td>7.375000</td>
+      <td>7.055769</td>
+      <td>9.00</td>
+      <td>0.923077</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Você também pode aplicar uma função própria, por exemplo a que calcula a proporção de alunos aprovados em cada disciplina, que conta as linhas apenas de alunos com nota maior ou igual à 5 e divide pela quantidade total de alunos dentro do grupo:</p>
+<div class="cell" data-execution_count="206">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prop_aprovados(medias, min_media_aprovacao<span class="op">=</span><span class="dv">5</span>):</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> medias[medias <span class="op">&gt;=</span> min_media_aprovacao].count() <span class="op">/</span> medias.count()</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    media_alunos</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">"disciplina"</span>, <span class="st">"periodo"</span>])</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>    .agg([prop_aprovados])</span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="st">"APROVADO"</span> <span class="cf">if</span> media_alunos[<span class="st">"nota"</span>] <span class="op">&gt;=</span> <span class="dv">5</span> <span class="cf">else</span> <span class="st">"REPROVADO"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<pre><code>SyntaxError: invalid syntax (2677895194.py, line 8)</code></pre>
+</div>
+</div>
+</section>
+<section id="adicionando-nova-coluna-aplicando-função-por-linha" class="level3">
+<h3 class="anchored" data-anchor-id="adicionando-nova-coluna-aplicando-função-por-linha">Adicionando nova coluna aplicando função por linha</h3>
+<p>Vamos adicionar uma coluna na tabela indicando se o aluno foi aprovado por média ou não. Para isso, vamos criar a nova função e aplicá-la para cada linha do dataframe com a função <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.apply.html"><code>apply</code></a>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calcula_resultado(media):</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">'APROVADO'</span> <span class="cf">if</span> media <span class="op">&gt;=</span> <span class="dv">5</span> <span class="cf">else</span> <span class="st">'REPROVADO'</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>media_alunos[<span class="st">"resultado"</span>] <span class="op">=</span> media_alunos[<span class="st">"nota"</span>].<span class="bu">apply</span>(calcula_resultado)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>media_alunos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="161">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+      <th>resultado</th>
+    </tr>
+    <tr>
+      <th>disciplina</th>
+      <th>periodo</th>
+      <th>id_aluno</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">Avaliação de Desempenho de Sistemas</th>
+      <th rowspan="5" valign="top">2017.1</th>
+      <th>1</th>
+      <td>7.266667</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.333333</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>8.166667</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8.866667</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>7.100000</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="5" valign="top">Sistemas Operacionais</th>
+      <th rowspan="5" valign="top">2017.2</th>
+      <th>22</th>
+      <td>1.250000</td>
+      <td>REPROVADO</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>7.375000</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>8.400000</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>7.375000</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>6.400000</td>
+      <td>APROVADO</td>
+    </tr>
+  </tbody>
+</table>
+<p>99 rows × 2 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="ordenando-as-médias-dos-alunos-da-maior-para-a-menor" class="level3">
+<h3 class="anchored" data-anchor-id="ordenando-as-médias-dos-alunos-da-maior-para-a-menor">Ordenando as médias dos alunos da maior para a menor</h3>
+<p>A função <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html"><code>sort_values</code></a> ordena o dataframe com base nos valores de uma ou mais colunas. O parâmetro <code>ascending=False</code> é usado para indicar que a ordenação não será feita na ordem padrão ascendente (ou seja, será na ordem descendente do maior para o menor valor).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>media_alunos.sort_values(<span class="st">'nota'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="162">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+      <th>resultado</th>
+    </tr>
+    <tr>
+      <th>disciplina</th>
+      <th>periodo</th>
+      <th>id_aluno</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">Avaliação de Desempenho de Sistemas</th>
+      <th rowspan="3" valign="top">2017.1</th>
+      <th>9</th>
+      <td>10.000000</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10.000000</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>10.000000</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sistemas Distribuidos</th>
+      <th rowspan="2" valign="top">2017.2</th>
+      <th>12</th>
+      <td>10.000000</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9.933333</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <th>...</th>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sistemas Operacionais</th>
+      <th>2017.2</th>
+      <th>22</th>
+      <td>1.250000</td>
+      <td>REPROVADO</td>
+    </tr>
+    <tr>
+      <th>2017.1</th>
+      <th>20</th>
+      <td>0.875000</td>
+      <td>REPROVADO</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">Sistemas Distribuidos</th>
+      <th rowspan="2" valign="top">2017.2</th>
+      <th>8</th>
+      <td>0.666667</td>
+      <td>REPROVADO</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000000</td>
+      <td>REPROVADO</td>
+    </tr>
+    <tr>
+      <th>Avaliação de Desempenho de Sistemas</th>
+      <th>2017.1</th>
+      <th>20</th>
+      <td>0.000000</td>
+      <td>REPROVADO</td>
+    </tr>
+  </tbody>
+</table>
+<p>99 rows × 2 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="como-pegar-as-3-maiores-notas-de-cada-turma" class="level3">
+<h3 class="anchored" data-anchor-id="como-pegar-as-3-maiores-notas-de-cada-turma">Como pegar as 3 maiores notas de cada turma?</h3>
+<p>Pega o dataframe com a média dos alunos, ordena pela média em ordem decrescente, agrupa por turma (disciplina e período) e pega as 3 primeiras linhas de cada grupo.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>    media_alunos</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>    .sort_values(<span class="st">'nota'</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>    .groupby([<span class="st">'disciplina'</span>, <span class="st">'periodo'</span>])</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a>    .head(<span class="dv">3</span>)</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="120">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+    </tr>
+    <tr>
+      <th>disciplina</th>
+      <th>periodo</th>
+      <th>id_aluno</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="3" valign="top">Avaliação de Desempenho de Sistemas</th>
+      <th rowspan="3" valign="top">2017.1</th>
+      <th>9</th>
+      <td>10.000000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10.000000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>10.000000</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">Sistemas Distribuidos</th>
+      <th rowspan="3" valign="top">2017.2</th>
+      <th>12</th>
+      <td>10.000000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9.933333</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>9.900000</td>
+    </tr>
+    <tr>
+      <th rowspan="6" valign="top">Sistemas Operacionais</th>
+      <th rowspan="3" valign="top">2017.1</th>
+      <th>9</th>
+      <td>9.650000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>9.600000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>9.575000</td>
+    </tr>
+    <tr>
+      <th rowspan="3" valign="top">2017.2</th>
+      <th>1</th>
+      <td>9.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>9.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8.950000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Note que organizamos a sequência de comandos com uma função por linha. Essa forma fica mais legível quando se tem muitos comandos seguidos. Como cada função retorna um dataframe, dá para encadear chamadas de funções dessa forma no Pandas. Para funcionar com um comando por linha é preciso colocar a sequência de funções entre parênteses.</p>
+</section>
+</section>
+<section id="slicing" class="level2">
+<h2 class="anchored" data-anchor-id="slicing">Slicing</h2>
+<p>Outra utilidade do Pandas é pegar apenas “fatias” (<em>slices</em>) dos dados, seja filtrando linhas ou colunas. O pandas oferece a função <code>.loc</code> para fazer o slicing a partir dos índices e a função <code>.iloc</code> para filtrar com base no número da linha.</p>
+<p>Por exemplo, para pegar apenas as linhas que tem “Sistemas Operacionais” como primeiro índice (disciplina), podemos usar:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>media_alunos.loc[<span class="st">"Sistemas Distribuidos"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="137">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+    </tr>
+    <tr>
+      <th>periodo</th>
+      <th>id_aluno</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="24" valign="top">2017.2</th>
+      <th>1</th>
+      <td>8.100000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5.566667</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>8.333333</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>8.166667</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>9.533333</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8.433333</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9.933333</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>6.266667</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>9.700000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>10.000000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>7.666667</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>6.033333</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>9.133333</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>7.266667</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>8.833333</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>7.566667</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>8.766667</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>9.833333</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>7.933333</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>7.800000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>9.900000</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>9.100000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>E se quisermos pegar apenas as linhas 5 a 10 do DataFrame podemos usar:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>media_alunos.iloc[<span class="dv">5</span>:<span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="135">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>nota</th>
+    </tr>
+    <tr>
+      <th>disciplina</th>
+      <th>periodo</th>
+      <th>id_aluno</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th rowspan="5" valign="top">Avaliação de Desempenho de Sistemas</th>
+      <th rowspan="5" valign="top">2017.1</th>
+      <th>6</th>
+      <td>8.200000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>9.933333</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>3.766667</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10.000000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>10.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Podemos também fazer um slice de linha e coluna ao mesmo tempo. Por exemplo, para filtrar as linhas com índices de 0 a 4 e a coluna <code>nota_3</code>, podemos fazer:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>so.loc[<span class="dv">0</span>:<span class="dv">4</span>, <span class="st">"nota_3"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="146">
+<pre><code>0     9.3
+1     4.6
+2     7.7
+3     9.8
+4    10.0
+Name: nota_3, dtype: float64</code></pre>
+</div>
+</div>
+<p>Ou para pegar o valor que está na linha 10 e coluna 3 (lembrando que Python indexa a partir do 0):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>so.iloc[<span class="dv">10</span>, <span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="156">
+<pre><code>8.5</code></pre>
+</div>
+</div>
+</section>
+<section id="saída-de-dados" class="level2">
+<h2 class="anchored" data-anchor-id="saída-de-dados">Saída de dados</h2>
+<p>Também podemos exportar um dataframe pra um arquivo. Por exemplo, para exportar a tabela de média dos alunos para um arquivo podemos rodar:</p>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>media_alunos.to_csv(<span class="st">"../dados/notas_medias_alunos.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

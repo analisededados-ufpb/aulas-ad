@@ -161,10 +161,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <ul>
   <li><a href="#introdução-à-biblioteca-pandas" id="toc-introdução-à-biblioteca-pandas" class="nav-link active" data-scroll-target="#introdução-à-biblioteca-pandas">Introdução à biblioteca Pandas</a>
   <ul class="collapse">
+  <li><a href="#motivação" id="toc-motivação" class="nav-link" data-scroll-target="#motivação">Motivação</a></li>
   <li><a href="#estruturas-de-dados-pandas" id="toc-estruturas-de-dados-pandas" class="nav-link" data-scroll-target="#estruturas-de-dados-pandas">Estruturas de dados Pandas</a>
   <ul class="collapse">
   <li><a href="#series" id="toc-series" class="nav-link" data-scroll-target="#series">Series</a></li>
   <li><a href="#dataframe" id="toc-dataframe" class="nav-link" data-scroll-target="#dataframe">DataFrame</a></li>
+  <li><a href="#função-apply" id="toc-função-apply" class="nav-link" data-scroll-target="#função-apply">Função <code>apply</code></a></li>
+  <li><a href="#filtros" id="toc-filtros" class="nav-link" data-scroll-target="#filtros">Filtros</a></li>
+  <li><a href="#group-by" id="toc-group-by" class="nav-link" data-scroll-target="#group-by">Group by</a></li>
+  <li><a href="#ordenação" id="toc-ordenação" class="nav-link" data-scroll-target="#ordenação">Ordenação</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#referências" id="toc-referências" class="nav-link" data-scroll-target="#referências">Referências</a></li>
@@ -178,19 +183,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="introdução-à-biblioteca-pandas" class="level1">
 <h1>Introdução à biblioteca Pandas</h1>
-<p>Pandas é uma biblioteca Python muito usada para manipulação e análise de dados. Nós iremos usar essa biblioteca nas atividades da disciplina.</p>
+<p>Pandas é uma biblioteca Python muito usada para manipulação e análise de dados. Nós iremos usar essa biblioteca nas atividades da disciplina. Vamos explicar neste notebook algumas das suas principais funções.</p>
 <p>Para instalar a biblioteca Pandas voc o comando <code>pip install pandas</code>. Em seguida, carregue a biblioteca com o comando abaixo:</p>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="motivação" class="level2">
+<h2 class="anchored" data-anchor-id="motivação">Motivação</h2>
 <p>Suponha que você tem uma lista de notas de uma unidade de uma disciplina:</p>
-<div class="cell" data-execution_count="10">
+<div class="cell" data-execution_count="64">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>notas_lst <span class="op">=</span> [<span class="dv">10</span>, <span class="fl">8.5</span>, <span class="dv">5</span>, <span class="dv">5</span>]</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>notas_lst</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="64">
 <pre><code>[10, 8.5, 5, 5]</code></pre>
 </div>
 </div>
 <p>Uma forma tradicional de calcular a média das notas é através de um <code>for-loop</code>:</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="65">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>soma <span class="op">=</span> <span class="dv">0</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> nota <span class="kw">in</span> notas_lst:</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    soma <span class="op">+=</span> nota</span>
@@ -201,16 +208,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Nós vamos ver que à medida que precisamos manipular dados e calcular estatísticas em agrupamentos, o uso de <code>loops</code> se torna muito complexo. Veremos que a biblioteca Pandas apresenta muitas facilidades para manipulação e análise de dados através de suas estruturas de dados e funções aplicadas nos dados.</p>
+</section>
 <section id="estruturas-de-dados-pandas" class="level2">
 <h2 class="anchored" data-anchor-id="estruturas-de-dados-pandas">Estruturas de dados Pandas</h2>
 <p>O Pandas tem duas estruturas de dados principais: <em>Series</em> e <em>DataFrame</em>.</p>
 <section id="series" class="level3">
 <h3 class="anchored" data-anchor-id="series">Series</h3>
 <p>Uma <em>Series</em> é um objeto unidimensional como um array, que contém uma sequência de valores do mesmo tipo. Abaixo temos um exemplo da criação de <em>Series</em> recebendo uma lista de notas como entrada:</p>
-<div class="cell" data-execution_count="6">
+<div class="cell" data-execution_count="66">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>notas <span class="op">=</span> pd.Series([<span class="dv">10</span>, <span class="fl">8.5</span>, <span class="dv">5</span>, <span class="dv">5</span>])</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>notas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="66">
 <pre><code>0    10.0
 1     8.5
 2     5.0
@@ -219,10 +227,10 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Um <em>Series</em> também possui uma sequência de <em>labels</em> chamada <em>index</em>, que identifica cada elemento da série. Por padrão o <em>index</em> é um inteiro incremental de 0 à n-1, mas pode ser definido na sua criação. Por exemplo, adicionando o nome dos aluno relacionado a cada nota:</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="67">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>notas <span class="op">=</span> pd.Series([<span class="dv">10</span>, <span class="fl">8.5</span>, <span class="dv">5</span>, <span class="dv">5</span>], index<span class="op">=</span>[<span class="st">"john"</span>, <span class="st">"paul"</span>, <span class="st">"george"</span>, <span class="st">"ringo"</span>])</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>notas</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="67">
 <pre><code>john      10.0
 paul       8.5
 george     5.0
@@ -231,25 +239,25 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>O Pandas pode aplicar funções em todos os dados de um série sem a necessidade de <code>loops</code>, como no exemplo abaixo que calcula a média:</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="68">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>notas.mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
+<div class="cell-output cell-output-display" data-execution_count="68">
 <pre><code>7.125</code></pre>
 </div>
 </div>
 <p>Também podemos aplicar filtros, extraindo por exemplo apenas as notas acima da média:</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="69">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>notas[notas <span class="op">&gt;=</span> <span class="dv">7</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="69">
 <pre><code>john    10.0
 paul     8.5
 dtype: float64</code></pre>
 </div>
 </div>
 <p>Ou pegar a nota com um <em>index</em> específico:</p>
-<div class="cell" data-execution_count="15">
+<div class="cell" data-execution_count="70">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>notas[<span class="st">"paul"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<div class="cell-output cell-output-display" data-execution_count="70">
 <pre><code>8.5</code></pre>
 </div>
 </div>
@@ -258,7 +266,7 @@ dtype: float64</code></pre>
 <h3 class="anchored" data-anchor-id="dataframe">DataFrame</h3>
 <p>Um <em>DataFrame</em> representa dados como uma tabela retangular, com colunas e linhas que posuem nomes (<em>index</em>). Colunas diferentes podem ser de tipos diferentes (ex: string, int, float), mas para uma coluna específica todos os seus valores terão o mesmo tipo. Podemos pensar no <em>DataFrame</em> como um dicionário de <em>Series</em>.</p>
 <p>Uma das formas de criar um <em>DataFrame</em> é passando um dicionário de listas de mesmo tamanho, como no exemplo abaixo:</p>
-<div class="cell" data-execution_count="43">
+<div class="cell" data-execution_count="71">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>notas_df <span class="op">=</span> pd.DataFrame({</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aluno"</span>: [<span class="st">"john"</span>, <span class="st">"paul"</span>, <span class="st">"george"</span>, <span class="st">"ringo"</span>],</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nota1"</span>: [<span class="dv">10</span>, <span class="fl">8.5</span>, <span class="dv">5</span>, <span class="dv">5</span>],</span>
@@ -266,7 +274,7 @@ dtype: float64</code></pre>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"nota3"</span>: [<span class="dv">8</span>, <span class="dv">10</span>, <span class="dv">3</span>, <span class="fl">3.6</span>]</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>notas_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="43">
+<div class="cell-output cell-output-display" data-execution_count="71">
 
 <div>
 
@@ -315,10 +323,10 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Para adicionar uma nova coluna com a média de cada aluno na disciplina, podemos aplicar a função <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html"><code>mean</code></a> nas colunas de notas do <em>DataFrame</em>. O parâmetro <code>axis=columns</code> indica que vamos calcular a média para colunas e não para linhas.</p>
-<div class="cell" data-execution_count="45">
+<div class="cell" data-execution_count="72">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>notas_df[<span class="st">"media"</span>] <span class="op">=</span> notas_df[[<span class="st">"nota1"</span>, <span class="st">"nota2"</span>, <span class="st">"nota3"</span>]].mean(axis<span class="op">=</span><span class="st">"columns"</span>)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>notas_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="45">
+<div class="cell-output cell-output-display" data-execution_count="72">
 
 <div>
 
@@ -371,15 +379,18 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="função-apply" class="level3">
+<h3 class="anchored" data-anchor-id="função-apply">Função <code>apply</code></h3>
 <p>E se quisermos adicionar uma nova coluna que indica se um aluno foi aprovado (<code>nota &gt;= 5</code>) ou reprovado? Podemos criar uma função que faça esse cálculo e usar a função <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.apply.html"><code>apply</code></a> de um <em>DataFrame</em> para aplicar para cada linha:</p>
-<div class="cell" data-execution_count="46">
+<div class="cell" data-execution_count="73">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> calcula_resultado(media):</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="st">'APROVADO'</span> <span class="cf">if</span> media <span class="op">&gt;=</span> <span class="dv">5</span> <span class="cf">else</span> <span class="st">'REPROVADO'</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>notas_df[<span class="st">"resultado"</span>] <span class="op">=</span> notas_df[<span class="st">"media"</span>].<span class="bu">apply</span>(calcula_resultado)</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>notas_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="46">
+<div class="cell-output cell-output-display" data-execution_count="73">
 
 <div>
 
@@ -437,10 +448,13 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
+</section>
+<section id="filtros" class="level3">
+<h3 class="anchored" data-anchor-id="filtros">Filtros</h3>
 <p>Podemos filtrar linhas tabela de acordo com alguma condição. Por exemplo, filtrando apenas os aprovados:</p>
-<div class="cell" data-execution_count="48">
+<div class="cell" data-execution_count="74">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>notas_df[notas_df[<span class="st">"resultado"</span>] <span class="op">==</span> <span class="st">"APROVADO"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="48">
+<div class="cell-output cell-output-display" data-execution_count="74">
 
 <div>
 
@@ -481,9 +495,9 @@ dtype: float64</code></pre>
 </div>
 </div>
 <p>Se quisermos calcular a média das notas dos alunos aprovados e dos reprovados? Uma primeira opção é aplicando filtros para cada grupo e em seguida calculando a média:</p>
-<div class="cell" data-execution_count="51">
+<div class="cell" data-execution_count="75">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>notas_df[notas_df[<span class="st">"resultado"</span>] <span class="op">==</span> <span class="st">"APROVADO"</span>].mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="51">
+<div class="cell-output cell-output-display" data-execution_count="75">
 <pre><code>nota1    9.25
 nota2    9.50
 nota3    9.00
@@ -491,9 +505,9 @@ media    9.25
 dtype: float64</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="52">
+<div class="cell" data-execution_count="76">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>notas_df[notas_df[<span class="st">"resultado"</span>] <span class="op">==</span> <span class="st">"REPROVADO"</span>].mean(numeric_only<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="52">
+<div class="cell-output cell-output-display" data-execution_count="76">
 <pre><code>nota1    5.0
 nota2    2.5
 nota3    3.3
@@ -501,10 +515,13 @@ media    3.6
 dtype: float64</code></pre>
 </div>
 </div>
-<p>Nesse exemplo só temos dois grupos, então é relativamente fácil filtrar e aplicar a função em seguida. Quando temos muitos grupos, uma forma mais adequada é aplicando a função <code>groupby</code> para aplicar funções para os grupos definidos pelos valores de colunas da tabela. Exemplos:</p>
-<div class="cell" data-execution_count="53">
+</section>
+<section id="group-by" class="level3">
+<h3 class="anchored" data-anchor-id="group-by">Group by</h3>
+<p>Nesse exemplo só temos dois grupos, então é relativamente fácil filtrar e aplicar a função em seguida. Quando temos muitos grupos, uma forma mais adequada é aplicando a função <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html"><code>groupby</code></a> para aplicar funções para os grupos definidos pelos valores de colunas da tabela. Exemplos:</p>
+<div class="cell" data-execution_count="77">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>notas_df.groupby([<span class="st">"resultado"</span>]).mean()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="53">
+<div class="cell-output cell-output-display" data-execution_count="77">
 
 <div>
 
@@ -545,7 +562,83 @@ dtype: float64</code></pre>
 </div>
 </div>
 </div>
-<p>E</p>
+</section>
+<section id="ordenação" class="level3">
+<h3 class="anchored" data-anchor-id="ordenação">Ordenação</h3>
+<p>Podemos ordenar um <em>DataFrame</em> com base em alguma coluna com a função <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.sort_values.html"><code>sort_values</code></a>, por exemplo:</p>
+<div class="cell" data-execution_count="78">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>notas_df.sort_values(by<span class="op">=</span><span class="st">"media"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="78">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>aluno</th>
+      <th>nota1</th>
+      <th>nota2</th>
+      <th>nota3</th>
+      <th>media</th>
+      <th>resultado</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>george</td>
+      <td>5.0</td>
+      <td>1</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>REPROVADO</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>ringo</td>
+      <td>5.0</td>
+      <td>4</td>
+      <td>3.6</td>
+      <td>4.2</td>
+      <td>REPROVADO</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>john</td>
+      <td>10.0</td>
+      <td>9</td>
+      <td>8.0</td>
+      <td>9.0</td>
+      <td>APROVADO</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>paul</td>
+      <td>8.5</td>
+      <td>10</td>
+      <td>10.0</td>
+      <td>9.5</td>
+      <td>APROVADO</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<p>Desta forma, se quisermos pegar o aluno com a maior média, podemos fazer ordenar o <em>DataFrame</em> em ordem descendente (<code>ascending=False</code>) e obter o primeiro item com a função <code>.iloc[0]</code>.</p>
+<div class="cell" data-execution_count="79">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>notas_df.sort_values(by<span class="op">=</span><span class="st">"media"</span>, ascending<span class="op">=</span><span class="va">False</span>).iloc[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="79">
+<pre><code>aluno            paul
+nota1             8.5
+nota2              10
+nota3            10.0
+media             9.5
+resultado    APROVADO
+Name: 1, dtype: object</code></pre>
+</div>
+</div>
 </section>
 </section>
 </section>
