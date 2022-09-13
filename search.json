@@ -182,6 +182,97 @@
     "text": "Nós iremos usar a linguagem Python para demonstrações nas aulas e atividades práticas do curso. Espera-se que você já tenha algum contato com Python em disciplinas anteriores. Além disso, nós usaremos o Jupyter Notebook para criação de notebooks que servirão para fazer as atividades práticas e os relatórios de análise de dados.\nPara se familiarizar com as ferramentas e montar o ambiente de desenvolvimento necessário para o curso, nessa atividade vocês irão instalar o Python e o Jupyter Notebook e seguir um passo a passo de um Notebook para revisar os conceitos básicos dessas ferramentas. Além de conseguir rodar um notebook na sua máquina local, você também deve ser capaz de experimentar a execução de notebooks Jupyter em ambientes de execução na nuvem, como através do GitHub Codespaces e do Google Colab.\nNesta atividade, você deve seguir o passo a passo dos capítulos 2 - Python Language Basics, IPython, and Jupyter Notebooks e 3 - Built-In Data Structures, Functions, and Files do livro Python for Data Science, seguindo suas instruções através de notebooks dos capítulos.\nNo repositório do livro no GitHub o autor disponibiliza o Notebook reference a estes capítulos nos arquivos ch02.ipynb e ch03.ipynb. Nesta atividade, você deve ser capaz de abrir cada Notebook em um ambiente de execução e executar o seu código.\nAntes de começar, você deve:\n\nInstalar o Python\nInstalar o Jupyter Notebook\nInstalar o git\n\n\n\nVamos iniciar com a execução do Notebook do capítulo 2 (ch02.ipynb)\n\n\nPara rodar localmente, você deve baixar o arquivo ch02.ipynb para a sua máquina. Para isso, você pode fazer um clone do repositório que possui todos os notebooks do livro, rodando em um terminal:\ngit clone https://github.com/wesm/pydata-book \nEm seguida, entre no diretório do repositório e mude para a branch da 3a edição do livro, que iremos usar nas atividades, rodando:\ncd pydata-book\ngit checkout 3rd-edition\n\n\n\n\n\n\nDica\n\n\n\nSe não quiser baixar todo o repositório do livro, você pode fazer o download apenas do arquivo específico no repositório.\n\n\n\n\n\nNo diretório onde está o arquivo do notebook (pydata-book), inicie o Jupyter rodando no terminal:\njupyter notebook\nEste comando deve abrir um browser com o Jupyter Notebook em execução, como na imagem abaixo:\n\nLocalize o nome do arquivo do notebook ch02.ipynb e clique em seu nome para abrir.\nSe deu tudo certo, você deve ver uma tela como a de baixo:\n\nO notebook combina blocos de texto (Markdown) com blocos de código. Você deve fazer a leitura do notebook e ser capaz de executar todas as células que contêm código. Para executar uma célula de código, clique na célula para selecioná-la e clique no botão Run do menu acima. O código é apresentado no bloco In e a saída gerada pela execução do código é apresentada no bloco Out, conforme imagem abaixo.\n\nVocê deve seguir a execução dos blocos na sequência, porque pode existir uma dependência do código de baixo com o de cima. Se quiser rodar todas as células na sequência, você pode ir no menu Cell -> Run All. Verique se houve algum erro na execução de alguma célula, verificando as saídas que cada uma gerou.\nVocê também pode editar o conteúdo do notebook, alterando o código ou o texto dos blocos, ou adicionando novas células.\nInsira uma nova célula de código no final do notebook com código Python que imprime essa mensagem:\nprint(\"Agora eu sei editar e executar um Jupyter Notebook!\")\nVocê pode inserir novas células escolhendo na barra de menu o tipo de célula (Code para código ou Markdown para texto) e clicando no botão +. Você também pode fazer isso clicando em Insert no menu superior.\n\n\n\nOs notebooks jupyter também podem ser executados diretamente de alguma IDE que dê suporte para ele, como VS Code (com a extensão Python) e PyCharm. Para isso vocês devem ter instalado o Python e o Jupyter Notebook anteriormente.\nTeste executar o notebook em sua IDE favorita (durante a disciplina usarei o VS Code para demonstrações).\n\n\n\n\nVocê também pode rodar o notebook em algum serviço da nuvem gratuito como o Google Colab. Para isso, acesse em seu browser o endereço https://colab.research.google.com.\n\n\n\n\n\n\nAtenção\n\n\n\nO ideal é estar logado com a sua conta Google do domínio @dcx.ufpb.br para usar o Google Notebook.\n\n\nAo abrir o Colab, você pode fazer o upload do arquivo notebook (.ipynb) que deseja executar. Uma forma ainda mais fácil é criar um notebook usando a opção GitHub, inserindo o link do repositório do livro https://github.com/wesm/pydata-book, escolhendo a ramificação (branch) 3rd-edition e clicando no nome do arquivo ch02.ipynb para abrí-lo, como na imagem abaixo:\n\nCom isso, você terá um ambiente de execução do notebook que pode ser editado e executado de forma similar ao ambiente Jupyter, mas que irá rodar na nuvem da Google e poderá ser compartilhado facilmente com outras pessoas. A tela de edição do notebook no Colab é mostrada abaixo:\n\n\n\n\nO GitHub também criou um ambiente de desenvolvimento e execução de código na própria plataforma, chamada GitHub Codespaces, que abre no browser uma IDE similar ao VS Code onde você também consegue executar notebooks Jupyter.\nPara criar um Codespace para o notebook da atividade, entre na página do repositório no GitHub, escolha a branch correta (3rd-edition), clique no botão Code e em seguida em Create codespace on 3rd-edition, conforme a imagem abaixo.\n\n\n\n\n\n\n\nDica\n\n\n\nVocê também pode criar um Codespace apertando a tecla . do teclado na página do repositório e da branch que você deseja.\n\n\n\n\n\nPara fazer outro teste dos passos feitos anteriormente e também fazer uma revisão de estruturas de dados, funções e arquivos em Python, você deve seguir o passo a passo do notebook do capítulo 3, lendo e executando os blocos do notebook.\nEscolha o ambiente de execução mais adequado para você (Jupyter, IDE ou Colab) e faça novamente os passos anteriores, agora com o arquivo ch03.ipynb do repositório.\n\n\n\n\nMcKinney, Wes. Python for Data Analysis(3rd Edition). O’Reilly Media, 2022."
   },
   {
+    "objectID": "2-eda/1-intro-eda.html#o-que-é-eda",
+    "href": "2-eda/1-intro-eda.html#o-que-é-eda",
+    "title": "Análise de dados",
+    "section": "O que é EDA?",
+    "text": "O que é EDA?\n\nSumarização e visualização de dados para analisar suas características principais\nCiclo iterativo:\n\nFaça perguntas sobre os dados.\nProcure respostas visualizando, transformando e modelando os dados.\nUse o que aprendeu para refinar perguntas e/ou fazer novas perguntas.\n\nInicialmente, investigue qualquer ideia que surgir\n\nAlgumas darão certo, outras não."
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#far-better-an-approximate-answer-to-the-right-question-which-is-often-vague-than-an-exact-answer-to-the-wrong-question-which-can-always-be-made-precise.-john-tukey",
+    "href": "2-eda/1-intro-eda.html#far-better-an-approximate-answer-to-the-right-question-which-is-often-vague-than-an-exact-answer-to-the-wrong-question-which-can-always-be-made-precise.-john-tukey",
+    "title": "Análise de dados",
+    "section": "“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.” — John Tukey",
+    "text": "“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.” — John Tukey"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#fazendo-perguntas",
+    "href": "2-eda/1-intro-eda.html#fazendo-perguntas",
+    "title": "Análise de dados",
+    "section": "Fazendo perguntas",
+    "text": "Fazendo perguntas\n\nSeu objetivo na EDA é desenvolver um entendimento dos dados\n\nA forma mais fácil é fazendo perguntas para guiar sua investigação\nFoca sua atenção em partes específicas dos dados\nAjuda a decidir que gráficos, modelos ou transformações fazer\n\nÉ um processo criativo\n\nProduzir grande quantidade de perguntas para obter qualidade\nComo fazer perguntas reveladoras sem conhecer os dados?\n\nCada pergunta expõe um novo aspecto dos dados\n\nAumenta a chance de novas descobertas\nLeva a insights interessantes deixando as perguntas levarem a outras"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#tipos-de-perguntas",
+    "href": "2-eda/1-intro-eda.html#tipos-de-perguntas",
+    "title": "Análise de dados",
+    "section": "Tipos de perguntas",
+    "text": "Tipos de perguntas\n\nDois tipos muito úteis para novas descobertas:\n\nQue tipo de variação ocorre em cada variável?\nQue tipo de covariação ocorre entre as minhas variáveis?\n\nAlgumas definições:\n\nVariável: quantidade, qualidade ou propriedade que se pode medir\nValor: estado de uma variável quando você a mede (pode mudar)\nObservação: conjunto de medições feitas em condições similares"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#o-que-é-variância-e-por-que-analisá-la",
+    "href": "2-eda/1-intro-eda.html#o-que-é-variância-e-por-que-analisá-la",
+    "title": "Análise de dados",
+    "section": "O que é variância e por que analisá-la?",
+    "text": "O que é variância e por que analisá-la?\n\nTendência de variável mudar seu valor entre uma medição e outra\nCada variável tem seu próprio padrão de variação\n\nPode revelar informações interessantes\n\nVisualizar a distribuição dos dados ajuda a entender padrões\nComo visualizar distribuições?\n\nDepende se dados são categóricos ou contínuos"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#visualizando-dados-categóricos",
+    "href": "2-eda/1-intro-eda.html#visualizando-dados-categóricos",
+    "title": "Análise de dados",
+    "section": "Visualizando dados categóricos",
+    "text": "Visualizando dados categóricos\n\nVariável que só pode assumir pequeno conjunto de valores\nExaminando a distribuição com gráfico de barras:\n\n\n\n\n\n\n\ndfw\n\n              Count\nCause              \nCarrier    64263.16\nATC        84856.50\nWeather    11235.42\nSecurity     343.15\nInbound   118427.82\n\n\n\n\ndfw.plot.bar(figsize=(5, 4),\n             legend=False)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos",
+    "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos",
+    "title": "Análise de dados",
+    "section": "Visualizando dados contínuos",
+    "text": "Visualizando dados contínuos\n\nVariável com valor em um conjunto infinito de valores possíveis\nHistograma ou computando faixas manualmente\n\n\n\n\n\n\n\nbinPop = pd.cut(population, 10)\nbinPop.value_counts()\n\n(0.527, 4.233]      24\n(4.233, 7.902]      14\n(7.902, 11.571]      6\n(11.571, 15.24]      2\n(15.24, 18.909]      1\n(18.909, 22.578]     1\n(22.578, 26.247]     1\n(33.585, 37.254]     1\n(26.247, 29.916]     0\n(29.916, 33.585]     0\nName: Population, dtype: int64\n\n\n\n\nax = population.plot.hist(figsize=(5, 4))\nax.set_xlabel('Population (millions)')"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-histograma",
+    "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-histograma",
+    "title": "Análise de dados",
+    "section": "Visualizando dados contínuos: Histograma",
+    "text": "Visualizando dados contínuos: Histograma\n\nO parâmetro bins define a quantidade de intervalos\n\nExemplo para estados com menos de 10 milhões de habitantes\n\n\n\npopulation[population < 10].plot.hist(bins=5)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-density-plot",
+    "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-density-plot",
+    "title": "Análise de dados",
+    "section": "Visualizando dados contínuos: density plot",
+    "text": "Visualizando dados contínuos: density plot\n\nSimilar ao histograma, mas com linha contínua suavizada\n\nExemplo para taxas de homicídio nos Estados Unidos\n\n\n\n\n\n\nax = murder_rate.plot.hist(density=True, xlim=[0,12], bins=range(1,12))\nmurder_rate.plot.density(ax=ax)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-percentis",
+    "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-percentis",
+    "title": "Análise de dados",
+    "section": "Visualizando dados contínuos: percentis",
+    "text": "Visualizando dados contínuos: percentis\n\nFaz recortes dos dados ordenados em posições específicas\nPode ser usado para examinar distribuição dos dados\nÉ muito comum reportar os quartis (25, 50 e 75 percentil)\n\n50 percentil é a mediana, divide os dados ao meio\n\nTambém é usado para analisar valores na cauda (ex: 99 percentil)\nExemplo: percentis para taxa de homicídios nos Estados Unidos\n\n\nmurder_rate.quantile([0.05, 0.25, 0.5, 0.75, 0.95])\n\n0.05    1.600\n0.25    2.425\n0.50    4.000\n0.75    5.550\n0.95    6.510\nName: Murder.Rate, dtype: float64"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-boxplot",
+    "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-boxplot",
+    "title": "Análise de dados",
+    "section": "Visualizando dados contínuos: boxplot",
+    "text": "Visualizando dados contínuos: boxplot\n\nMostra visualmente estatísticas populares de uma distribuição"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-boxplot-1",
+    "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-boxplot-1",
+    "title": "Análise de dados",
+    "section": "Visualizando dados contínuos: boxplot",
+    "text": "Visualizando dados contínuos: boxplot\n\n\n\nExemplo: populações dos EUA\n\nObservamos que:\n\nA mediana é aproximadamente 5 milhões de habitantes\nMetade dos estados tem entre 2 e 7 milhões de habitantes\nPopulações acima de 13 milhões são consideradas incomuns (outliers)\n\n\n\n\n\npopulation.plot.box()"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#filtrando-outliers",
+    "href": "2-eda/1-intro-eda.html#filtrando-outliers",
+    "title": "Análise de dados",
+    "section": "Filtrando outliers",
+    "text": "Filtrando outliers\n\nAnalisando os estados outliers (com mais de 13 milhões de habitantes) com mais detalhes\n\nVemos que California, Florida, New York e Texas tem as maiores populações, sendo “fora da curva” em comparação aos outros\n\n\n\nstate[state['Population'] > 13]\n\n         State  Population  Murder.Rate Abbreviation\n4   California   37.253956          4.4           CA\n8      Florida   18.801310          5.8           FL\n31    New York   19.378102          3.1           NY\n42       Texas   25.145561          4.4           TX\n\n\n\n\nProf. Marcus Carvalho @ DCX / CCAE / UFPB"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -200,7 +291,7 @@
     "href": "index.html#aulas",
     "title": "Análise de Dados I @ DCX / CCAE / UFPB",
     "section": "Aulas",
-    "text": "Aulas\n\nApresentação da disciplina (Slides)\n\n\nIntrodução\n\n1.1 Introdução à análise de dados (Slides)\n1.2 Introdução ao Python e Jupyter Notebook (Atividade)\n1.3 Introdução ao Pandas (Notebook)\n1.4 Exemplo com Pandas: análise de notas (Notebook)"
+    "text": "Aulas\n\nApresentação da disciplina (Slides)\n\n\nIntrodução\n\n1.1 Introdução à análise de dados (Slides)\n1.2 Introdução ao Python e Jupyter Notebook (Atividade)\n1.3 Introdução ao Pandas (Notebook)\n1.4 Exemplo com Pandas: análise de notas (Notebook)\nLaboratório 1: Manipulação de dados (GitHub)"
   },
   {
     "objectID": "1-introducao/3-intro-pandas.html",
