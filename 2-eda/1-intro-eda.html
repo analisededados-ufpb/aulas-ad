@@ -378,6 +378,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body>
   <div class="reveal">
@@ -388,18 +391,6 @@
   <p class="subtitle">Introdução à Análise Exploratória de Dados</p>
 </section>
 
-<section class="slide level2">
-
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> Markdown, display</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> os</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> pandas <span class="im">as</span> pd </span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="im">from</span> tabulate <span class="im">import</span> tabulate</span>
-<span id="cb1-6"><a href="#cb1-6"></a></span>
-<span id="cb1-7"><a href="#cb1-7"></a>data_dir <span class="op">=</span> <span class="st">'../dados'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
 <section>
 <section id="exploratory-data-analysis-eda" class="title-slide slide level1 center">
 <h1>Exploratory Data Analysis (EDA)</h1>
@@ -487,29 +478,72 @@
 <li class="fragment"><p>Variável que só pode assumir pequeno conjunto de valores</p></li>
 <li class="fragment"><p>Examinando a distribuição com gráfico de barras:</p></li>
 </ul>
-<div class="cell">
-
-</div>
 <div class="columns">
 <div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>dfw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>              Count
-Cause              
-Carrier    64263.16
-ATC        84856.50
-Weather    11235.42
-Security     343.15
-Inbound   118427.82</code></pre>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>dfw</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="3">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Count</th>
+    </tr>
+    <tr>
+      <th>Cause</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Carrier</th>
+      <td>64263.16</td>
+    </tr>
+    <tr>
+      <th>ATC</th>
+      <td>84856.50</td>
+    </tr>
+    <tr>
+      <th>Weather</th>
+      <td>11235.42</td>
+    </tr>
+    <tr>
+      <th>Security</th>
+      <td>343.15</td>
+    </tr>
+    <tr>
+      <th>Inbound</th>
+      <td>118427.82</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 </div>
 </div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>dfw.plot.bar(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>),</span>
-<span id="cb4-2"><a href="#cb4-2"></a>             legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="1-intro-eda_files/figure-revealjs/unnamed-chunk-8-1.png" width="480"></p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>dfw.plot.bar(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>),</span>
+<span id="cb2-2"><a href="#cb2-2"></a>             legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>&lt;AxesSubplot:xlabel='Cause'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-5-output-2.png" width="451" height="393"></p>
 </div>
 </div>
 </div>
@@ -521,15 +555,12 @@ Inbound   118427.82</code></pre>
 <li class="fragment">Variável com valor em um conjunto infinito de valores possíveis</li>
 <li class="fragment">Histograma ou computando faixas manualmente</li>
 </ul>
-<div class="cell">
-
-</div>
 <div class="columns">
 <div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>binPop <span class="op">=</span> pd.cut(population, <span class="dv">10</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>binPop.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>binPop <span class="op">=</span> pd.cut(population, <span class="dv">10</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a>binPop.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>(0.527, 4.233]      24
 (4.233, 7.902]      14
 (7.902, 11.571]      6
@@ -544,11 +575,14 @@ Name: Population, dtype: int64</code></pre>
 </div>
 </div>
 </div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>ax <span class="op">=</span> population.plot.hist(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
-<span id="cb7-2"><a href="#cb7-2"></a>ax.set_xlabel(<span class="st">'Population (millions)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="1-intro-eda_files/figure-revealjs/unnamed-chunk-14-3.png" width="480"></p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>ax <span class="op">=</span> population.plot.hist(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb6-2"><a href="#cb6-2"></a>ax.set_xlabel(<span class="st">'Population (millions)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>Text(0.5, 0, 'Population (millions)')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-8-output-2.png" width="436" height="352"></p>
 </div>
 </div>
 </div>
@@ -562,11 +596,16 @@ Name: Population, dtype: int64</code></pre>
 <li class="fragment">Exemplo para estados com menos de 10 milhões de habitantes</li>
 </ul></li>
 </ul>
-<div class="cell">
+<div class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>population[population <span class="op">&lt;</span> <span class="dv">10</span>].plot.hist(bins<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>&lt;AxesSubplot:ylabel='Frequency'&gt;</code></pre>
 </div>
-<img data-src="1-intro-eda_files/figure-revealjs/unnamed-chunk-16-5.png" width="480" class="r-stretch"></section>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-9-output-2.png" width="808" height="404"></p>
+</div>
+</div>
+</section>
 <section id="visualizando-dados-contínuos-density-plot" class="slide level2">
 <h2>Visualizando dados contínuos: density plot</h2>
 <ul>
@@ -575,15 +614,17 @@ Name: Population, dtype: int64</code></pre>
 <li class="fragment">Exemplo para taxas de homicídio nos Estados Unidos</li>
 </ul></li>
 </ul>
-<div class="cell">
-
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>ax <span class="op">=</span> murder_rate.plot.hist(density<span class="op">=</span><span class="va">True</span>, xlim<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">12</span>], bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">12</span>))</span>
+<span id="cb10-2"><a href="#cb10-2"></a>murder_rate.plot.density(ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>&lt;AxesSubplot:ylabel='Density'&gt;</code></pre>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1"></a>ax <span class="op">=</span> murder_rate.plot.hist(density<span class="op">=</span><span class="va">True</span>, xlim<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">12</span>], bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">12</span>))</span>
-<span id="cb9-2"><a href="#cb9-2"></a>murder_rate.plot.density(ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-11-output-2.png" width="829" height="404"></p>
 </div>
-<img data-src="1-intro-eda_files/figure-revealjs/unnamed-chunk-20-7.png" width="480" class="r-stretch"></section>
+</div>
+</section>
 <section id="visualizando-dados-contínuos-percentis" class="slide level2">
 <h2>Visualizando dados contínuos: percentis</h2>
 <ul>
@@ -596,9 +637,9 @@ Name: Population, dtype: int64</code></pre>
 <li class="fragment">Também é usado para analisar valores na cauda (ex: 99 percentil)</li>
 <li class="fragment">Exemplo: percentis para taxa de homicídios nos Estados Unidos</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>murder_rate.quantile([<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>murder_rate.quantile([<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>0.05    1.600
 0.25    2.425
 0.50    4.000
@@ -631,10 +672,13 @@ Name: Murder.Rate, dtype: float64</code></pre>
 </ul></li>
 </ul>
 </div><div class="column">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>population.plot.box()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img data-src="1-intro-eda_files/figure-revealjs/unnamed-chunk-24-9.png" width="480"></p>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>population.plot.box()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>&lt;AxesSubplot:&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-13-output-2.png" width="790" height="404"></p>
 </div>
 </div>
 </div>
@@ -648,14 +692,66 @@ Name: Murder.Rate, dtype: float64</code></pre>
 <li class="fragment">Vemos que California, Florida, New York e Texas tem as maiores populações, sendo “fora da curva” em comparação aos outros</li>
 </ul></li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1"></a>state[state[<span class="st">'Population'</span>] <span class="op">&gt;</span> <span class="dv">13</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>         State  Population  Murder.Rate Abbreviation
-4   California   37.253956          4.4           CA
-8      Florida   18.801310          5.8           FL
-31    New York   19.378102          3.1           NY
-42       Texas   25.145561          4.4           TX</code></pre>
+<div class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>state[state[<span class="st">'Population'</span>] <span class="op">&gt;</span> <span class="dv">13</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>State</th>
+      <th>Population</th>
+      <th>Murder.Rate</th>
+      <th>Abbreviation</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>4</th>
+      <td>California</td>
+      <td>37.253956</td>
+      <td>4.4</td>
+      <td>CA</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Florida</td>
+      <td>18.801310</td>
+      <td>5.8</td>
+      <td>FL</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>New York</td>
+      <td>19.378102</td>
+      <td>3.1</td>
+      <td>NY</td>
+    </tr>
+    <tr>
+      <th>42</th>
+      <td>Texas</td>
+      <td>25.145561</td>
+      <td>4.4</td>
+      <td>TX</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 </div>
 
@@ -876,48 +972,6 @@ Name: Murder.Rate, dtype: float64</code></pre>
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        function fireSlideChanged(previousSlide, currentSlide) {
-
-          // dispatch for htmlwidgets
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for reveal
-        if (window.Reveal) {
-          window.Reveal.addEventListener("slidechanged", function(event) {
-            fireSlideChanged(event.previousSlide, event.currentSlide);
-          });
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")

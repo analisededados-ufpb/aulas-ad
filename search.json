@@ -221,28 +221,28 @@
     "href": "2-eda/1-intro-eda.html#visualizando-dados-categóricos",
     "title": "Análise de dados",
     "section": "Visualizando dados categóricos",
-    "text": "Visualizando dados categóricos\n\nVariável que só pode assumir pequeno conjunto de valores\nExaminando a distribuição com gráfico de barras:\n\n\n\n\n\n\n\ndfw\n\n              Count\nCause              \nCarrier    64263.16\nATC        84856.50\nWeather    11235.42\nSecurity     343.15\nInbound   118427.82\n\n\n\n\ndfw.plot.bar(figsize=(5, 4),\n             legend=False)"
+    "text": "Visualizando dados categóricos\n\nVariável que só pode assumir pequeno conjunto de valores\nExaminando a distribuição com gráfico de barras:\n\n\n\n\ndfw\n\n\n\n\n\n  \n    \n      \n      Count\n    \n    \n      Cause\n      \n    \n  \n  \n    \n      Carrier\n      64263.16\n    \n    \n      ATC\n      84856.50\n    \n    \n      Weather\n      11235.42\n    \n    \n      Security\n      343.15\n    \n    \n      Inbound\n      118427.82\n    \n  \n\n\n\n\n\n\ndfw.plot.bar(figsize=(5, 4),\n             legend=False)\n\n<AxesSubplot:xlabel='Cause'>"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos",
     "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos",
     "title": "Análise de dados",
     "section": "Visualizando dados contínuos",
-    "text": "Visualizando dados contínuos\n\nVariável com valor em um conjunto infinito de valores possíveis\nHistograma ou computando faixas manualmente\n\n\n\n\n\n\n\nbinPop = pd.cut(population, 10)\nbinPop.value_counts()\n\n(0.527, 4.233]      24\n(4.233, 7.902]      14\n(7.902, 11.571]      6\n(11.571, 15.24]      2\n(15.24, 18.909]      1\n(18.909, 22.578]     1\n(22.578, 26.247]     1\n(33.585, 37.254]     1\n(26.247, 29.916]     0\n(29.916, 33.585]     0\nName: Population, dtype: int64\n\n\n\n\nax = population.plot.hist(figsize=(5, 4))\nax.set_xlabel('Population (millions)')"
+    "text": "Visualizando dados contínuos\n\nVariável com valor em um conjunto infinito de valores possíveis\nHistograma ou computando faixas manualmente\n\n\n\n\nbinPop = pd.cut(population, 10)\nbinPop.value_counts()\n\n(0.527, 4.233]      24\n(4.233, 7.902]      14\n(7.902, 11.571]      6\n(11.571, 15.24]      2\n(15.24, 18.909]      1\n(18.909, 22.578]     1\n(22.578, 26.247]     1\n(33.585, 37.254]     1\n(26.247, 29.916]     0\n(29.916, 33.585]     0\nName: Population, dtype: int64\n\n\n\n\nax = population.plot.hist(figsize=(5, 4))\nax.set_xlabel('Population (millions)')\n\nText(0.5, 0, 'Population (millions)')"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-histograma",
     "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-histograma",
     "title": "Análise de dados",
     "section": "Visualizando dados contínuos: Histograma",
-    "text": "Visualizando dados contínuos: Histograma\n\nO parâmetro bins define a quantidade de intervalos\n\nExemplo para estados com menos de 10 milhões de habitantes\n\n\n\npopulation[population < 10].plot.hist(bins=5)"
+    "text": "Visualizando dados contínuos: Histograma\n\nO parâmetro bins define a quantidade de intervalos\n\nExemplo para estados com menos de 10 milhões de habitantes\n\n\n\npopulation[population < 10].plot.hist(bins=5)\n\n<AxesSubplot:ylabel='Frequency'>"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-density-plot",
     "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-density-plot",
     "title": "Análise de dados",
     "section": "Visualizando dados contínuos: density plot",
-    "text": "Visualizando dados contínuos: density plot\n\nSimilar ao histograma, mas com linha contínua suavizada\n\nExemplo para taxas de homicídio nos Estados Unidos\n\n\n\n\n\n\nax = murder_rate.plot.hist(density=True, xlim=[0,12], bins=range(1,12))\nmurder_rate.plot.density(ax=ax)"
+    "text": "Visualizando dados contínuos: density plot\n\nSimilar ao histograma, mas com linha contínua suavizada\n\nExemplo para taxas de homicídio nos Estados Unidos\n\n\n\nax = murder_rate.plot.hist(density=True, xlim=[0,12], bins=range(1,12))\nmurder_rate.plot.density(ax=ax)\n\n<AxesSubplot:ylabel='Density'>"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-percentis",
@@ -263,14 +263,14 @@
     "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-boxplot-1",
     "title": "Análise de dados",
     "section": "Visualizando dados contínuos: boxplot",
-    "text": "Visualizando dados contínuos: boxplot\n\n\n\nExemplo: populações dos EUA\n\nObservamos que:\n\nA mediana é aproximadamente 5 milhões de habitantes\nMetade dos estados tem entre 2 e 7 milhões de habitantes\nPopulações acima de 13 milhões são consideradas incomuns (outliers)\n\n\n\n\n\npopulation.plot.box()"
+    "text": "Visualizando dados contínuos: boxplot\n\n\n\nExemplo: populações dos EUA\n\nObservamos que:\n\nA mediana é aproximadamente 5 milhões de habitantes\nMetade dos estados tem entre 2 e 7 milhões de habitantes\nPopulações acima de 13 milhões são consideradas incomuns (outliers)\n\n\n\n\n\npopulation.plot.box()\n\n<AxesSubplot:>"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#filtrando-outliers",
     "href": "2-eda/1-intro-eda.html#filtrando-outliers",
     "title": "Análise de dados",
     "section": "Filtrando outliers",
-    "text": "Filtrando outliers\n\nAnalisando os estados outliers (com mais de 13 milhões de habitantes) com mais detalhes\n\nVemos que California, Florida, New York e Texas tem as maiores populações, sendo “fora da curva” em comparação aos outros\n\n\n\nstate[state['Population'] > 13]\n\n         State  Population  Murder.Rate Abbreviation\n4   California   37.253956          4.4           CA\n8      Florida   18.801310          5.8           FL\n31    New York   19.378102          3.1           NY\n42       Texas   25.145561          4.4           TX\n\n\n\n\nProf. Marcus Carvalho @ DCX / CCAE / UFPB"
+    "text": "Filtrando outliers\n\nAnalisando os estados outliers (com mais de 13 milhões de habitantes) com mais detalhes\n\nVemos que California, Florida, New York e Texas tem as maiores populações, sendo “fora da curva” em comparação aos outros\n\n\n\nstate[state['Population'] > 13]\n\n\n\n\n\n  \n    \n      \n      State\n      Population\n      Murder.Rate\n      Abbreviation\n    \n  \n  \n    \n      4\n      California\n      37.253956\n      4.4\n      CA\n    \n    \n      8\n      Florida\n      18.801310\n      5.8\n      FL\n    \n    \n      31\n      New York\n      19.378102\n      3.1\n      NY\n    \n    \n      42\n      Texas\n      25.145561\n      4.4\n      TX\n    \n  \n\n\n\n\n\n\nProf. Marcus Carvalho @ DCX / CCAE / UFPB"
   },
   {
     "objectID": "about.html",
@@ -291,7 +291,7 @@
     "href": "index.html#aulas",
     "title": "Análise de Dados I @ DCX / CCAE / UFPB",
     "section": "Aulas",
-    "text": "Aulas\n\nApresentação da disciplina (Slides)\n\n\nIntrodução\n\n1.1 Introdução à análise de dados (Slides)\n1.2 Introdução ao Python e Jupyter Notebook (Atividade)\n1.3 Introdução ao Pandas (Notebook)\n1.4 Exemplo com Pandas: análise de notas (Notebook)\nLaboratório 1: Manipulação de dados (GitHub)"
+    "text": "Aulas\n\nApresentação da disciplina (Slides)\n\n\nIntrodução\n\n1.1 Introdução à análise de dados (Slides)\n1.2 Introdução ao Python e Jupyter Notebook (Atividade)\n1.3 Introdução ao Pandas (Notebook)\n1.4 Exemplo com Pandas: análise de notas (Notebook)\nLaboratório 1: Manipulação de dados (GitHub)\n\n\n\nAnálise Exploratória de Dados\n\n2.1 Introdução à Análise Exploratória de Dados (Slides)"
   },
   {
     "objectID": "1-introducao/3-intro-pandas.html",
