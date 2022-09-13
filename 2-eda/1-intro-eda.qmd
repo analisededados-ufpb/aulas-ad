@@ -1,0 +1,215 @@
+---
+title: "Análise de dados"
+subtitle: "Introdução à Análise Exploratória de Dados"
+format:
+    revealjs:
+        slide-number: true
+        chalkboard: true
+        footer: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+        incremental: true
+        theme: [default, ../custom.scss]
+        echo: true
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = FALSE)
+
+library(dplyr)
+library(emo)
+library(ggplot2)
+```
+
+```{python}
+from IPython.display import Markdown, display
+import os
+import pandas as pd 
+import seaborn as sns
+from tabulate import tabulate
+
+data_dir = '../dados'
+```
+
+# Exploratory Data Analysis (EDA)
+
+## O que é EDA?
+
+- Sumarização e visualização de dados para analisar suas características principais
+
+- Ciclo iterativo:
+    - Faça perguntas sobre os dados.
+    - Procure respostas visualizando, transformando e modelando os dados.
+    - Use o que aprendeu para refinar perguntas e/ou fazer novas perguntas.
+
+- Inicialmente, investigue qualquer ideia que surgir
+    - Algumas darão certo, outras não.
+
+## *“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.”* — John Tukey
+
+## Fazendo perguntas
+
+- Seu objetivo na EDA é desenvolver um entendimento dos dados
+  - A forma mais fácil é fazendo perguntas para guiar sua investigação
+  - Foca sua atenção em partes específicas dos dados
+  - Ajuda a decidir que gráficos, modelos ou transformações fazer
+    
+- É um processo criativo
+  - Produzir grande **quantidade** de perguntas para obter **qualidade**
+  - Como fazer perguntas reveladoras sem conhecer os dados?
+
+- Cada pergunta expõe um novo aspecto dos dados
+  - Aumenta a chance de novas descobertas
+  - Leva a insights interessantes deixando as perguntas levarem a outras
+
+## Tipos de perguntas
+
+- Dois tipos muito úteis para novas descobertas:
+  - Que tipo de **variação** ocorre em cada variável?
+  - Que tipo de **covariação** ocorre entre as minhas variáveis?
+    
+- Algumas definições:
+  - **Variável**: quantidade, qualidade ou propriedade que se pode medir
+  - **Valor**: estado de uma variável quando você a mede (pode mudar)
+  - **Observação**: conjunto de medições feitas em condições similares
+
+# Variância
+
+## O que é *variância* e por que analisá-la?
+
+- Tendência de variável mudar seu valor entre uma medição e outra
+
+- Cada variável tem seu próprio padrão de variação
+    - Pode revelar informações interessantes
+
+- Visualizar a distribuição dos dados ajuda a entender padrões
+
+- Como visualizar distribuições?
+    - Depende se dados são *categóricos* ou *contínuos*
+    
+## Visualizando dados categóricos
+
+- Variável que só pode assumir pequeno conjunto de valores
+
+- Examinando a distribuição com gráfico de barras:
+
+```{python}
+#| echo: false
+dfw = (
+  pd.read_csv(os.path.join(data_dir, 'dfw_airline.csv'))
+  .transpose()
+  .rename(columns={0: 'Count'})
+)
+dfw.index.names = ['Cause']
+```
+
+:::: {.columns}
+::: {.column}
+```{python}
+dfw
+```
+:::
+::: {.column}
+```{python}
+dfw.plot.bar(figsize=(5, 4),
+             legend=False)
+```
+:::
+::::
+
+## Visualizando dados contínuos
+
+- Variável com valor em um conjunto infinito de valores possíveis
+- Histograma ou computando faixas manualmente
+
+```{python}
+#| echo: false
+state = pd.read_csv(os.path.join(data_dir, 'state.csv'))
+state['Population'] = state['Population'] / 1_000_000
+population = state['Population']
+```
+
+:::: {.columns}
+::: {.column}
+```{python}
+binPop = pd.cut(population, 10)
+binPop.value_counts()
+```
+:::
+::: {.column}
+```{python}
+ax = population.plot.hist(figsize=(5, 4))
+ax.set_xlabel('Population (millions)')
+```
+:::
+
+::::
+
+
+## Visualizando dados contínuos: Histograma
+
+- O parâmetro *bins* define a quantidade de intervalos
+  - Exemplo para estados com menos de 10 milhões de habitantes
+
+```{python}
+population[population < 10].plot.hist(bins=5)
+```
+
+## Visualizando dados contínuos: density plot
+
+- Similar ao histograma, mas com linha contínua suavizada
+  - Exemplo para taxas de homicídio nos Estados Unidos
+
+```{python}
+#| echo: false
+murder_rate = state['Murder.Rate']
+```
+```{python}
+ax = murder_rate.plot.hist(density=True, xlim=[0,12], bins=range(1,12))
+murder_rate.plot.density(ax=ax)
+```
+
+
+## Visualizando dados contínuos: percentis
+
+- Faz recortes dos dados ordenados em posições específicas
+- Pode ser usado para examinar distribuição dos dados
+- É muito comum reportar os quartis (25, 50 e 75 percentil)
+  - 50 percentil é a mediana, divide os dados ao meio
+- Também é usado para analisar valores na cauda (ex: 99 percentil)
+- Exemplo: percentis para taxa de homicídios nos Estados Unidos
+
+```{python}
+murder_rate.quantile([0.05, 0.25, 0.5, 0.75, 0.95])
+```
+
+## Visualizando dados contínuos: boxplot
+
+- Mostra visualmente estatísticas populares de uma distribuição
+
+![](figs/EDA-boxplot.png)
+
+## Visualizando dados contínuos: boxplot
+
+:::: {.columns}
+::: {.column}
+- Exemplo: populações dos EUA
+  - Observamos que:
+    - A mediana é aproximadamente 5 milhões de habitantes
+    - Metade dos estados tem entre 2 e 7 milhões de habitantes
+    - Populações acima de 13 milhões são consideradas incomuns (_outliers_)
+:::
+::: {.column}
+```{python}
+population.plot.box()
+```
+:::
+::::
+
+## Filtrando outliers
+
+- Analisando os estados outliers (com mais de 13 milhões de habitantes) com mais detalhes
+  - Vemos que California, Florida, New York e Texas tem as maiores populações, sendo "fora da curva" em comparação aos outros
+
+```{python}
+state[state['Population'] > 13]
+```
+
