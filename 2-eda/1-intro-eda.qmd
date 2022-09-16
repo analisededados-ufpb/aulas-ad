@@ -611,12 +611,22 @@ ax = sns.histplot(x='waiting', data=faithful)
 
 ## Exemplo EDA - vulcão: covariância
 
+:::: {.columns}
+:::{.column width="60%"}
 ```{python}
+fig, ax = plt.subplots(figsize=(7, 6))
 ax = sns.scatterplot(x='eruptions', y='waiting', data=faithful)
 ```
+:::
+::: {.column width="40%"}
 - Tempos de espera mais longos após erupções mais longas
-- **Variância** gera incerteza; **Covariância** reduz incerteza
-    - Valores de uma variável podem ajudar a prever valores de outra
+- **Variância** gera incerteza
+- **Covariância** reduz incerteza
+- Uma variável pode ajudar a prever a outra
+:::
+::::
+
+
 
 ## Referências
 
