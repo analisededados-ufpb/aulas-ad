@@ -24,6 +24,7 @@ DATA_DIR = Path().resolve().parent / 'dados'
 
 AIRLINE_STATS_CSV = DATA_DIR / 'airline_stats.csv'
 AIRPORT_DELAYS_CSV = DATA_DIR / 'dfw_airline.csv'
+FAITHFUL_CSV = DATA_DIR / 'faithful.csv'
 KC_TAX_CSV = DATA_DIR / 'kc_tax.csv.gz'
 LC_LOANS_CSV = DATA_DIR / 'lc_loans.csv'
 SP500_DATA_CSV = DATA_DIR / 'sp500_data.csv.gz'
@@ -555,6 +556,7 @@ ax = g.map_dataframe(sns.scatterplot, x="carat", y="price", alpha=0.1, linewidth
 ## Exemplo EDA - diamantes: 2 contínuas e 2 categóricas
 
 ::: {.smaller-code-fold}
+
 ```{python}
 #| code-fold: true
 diamond["price (k$)"] = diamond["price"] / 1000
@@ -562,6 +564,59 @@ g = sns.FacetGrid(diamond, row="cut", col="clarity", margin_titles=True, height=
 ax = g.map_dataframe(sns.scatterplot, x="carat", y="price (k$)", alpha=0.3, linewidth=0)
 ```
 :::
+
+## Padrões nos dados
+
+- Se encontrar padrões, pergunte-se:
+  - Este padrão acontece por coincidência?
+  - Como você descreve o relaciomento implicado pelo padrão?
+  - Quão forte é o relacionado implicado pelo padrão?
+  - Que outras variáveis afetam este relacionamento?
+  - O relacionamento muda se você olhar subgrupos individuais dos dados?
+
+## Exemplo EDA - vulcão
+
+- Dados de erupções do vulcão _Old Faithful Geyser_
+  - `eruptions`: duração da erupção em segundos
+  - `waiting`: tempo entre a erupção atual e a seguinte
+
+::: {.smaller-table}
+
+```{python}
+#| echo: false
+faithful = pd.read_csv(FAITHFUL_CSV)
+faithful
+```
+:::
+
+## Exemplo EDA - vulcão: variância
+
+- Analisando a variância de `eruptions` e `waiting`
+
+:::: {.columns}
+:::{.column}
+
+```{python}
+fig, ax = plt.subplots(figsize=(5, 4))
+ax = sns.histplot(x='eruptions', data=faithful)
+```
+:::
+::: {.column}
+```{python}
+fig, ax = plt.subplots(figsize=(5, 4))
+ax = sns.histplot(x='waiting', data=faithful)
+```
+:::
+::::
+
+## Exemplo EDA - vulcão: covariância
+
+```{python}
+ax = sns.scatterplot(x='eruptions', y='waiting', data=faithful)
+```
+- Tempos de espera mais longos após erupções mais longas
+- **Variância** gera incerteza; **Covariância** reduz incerteza
+    - Valores de uma variável podem ajudar a prever valores de outra
 
 ## Referências
 
