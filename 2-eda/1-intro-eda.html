@@ -9,6 +9,7 @@
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-0.9.653">
 
+  <meta name="author" content="Prof.&nbsp;Marcus Carvalho @ DCX / CCAE / UFPB">
   <title>Aulas AD 1 - Análise de dados</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -389,6 +390,7 @@
 <section id="title-slide" class="center">
   <h1 class="title">Análise de dados</h1>
   <p class="subtitle">Introdução à Análise Exploratória de Dados</p>
+  <p class="author">Prof.&nbsp;Marcus Carvalho @ DCX / CCAE / UFPB</p>
 </section>
 
 <section>
@@ -399,56 +401,57 @@
 <section id="o-que-é-eda" class="slide level2">
 <h2>O que é EDA?</h2>
 <ul>
-<li class="fragment"><p>Sumarização e visualização de dados para analisar suas características principais</p></li>
-<li class="fragment"><p>Ciclo iterativo:</p>
+<li><p>Sumarização e visualização de dados para analisar suas características principais</p></li>
+<li><p>Ciclo iterativo:</p>
 <ul>
-<li class="fragment">Faça perguntas sobre os dados.</li>
-<li class="fragment">Procure respostas visualizando, transformando e modelando os dados.</li>
-<li class="fragment">Use o que aprendeu para refinar perguntas e/ou fazer novas perguntas.</li>
+<li>Faça perguntas sobre os dados.</li>
+<li>Procure respostas visualizando, transformando e modelando os dados.</li>
+<li>Use o que aprendeu para refinar perguntas e/ou fazer novas perguntas.</li>
 </ul></li>
-<li class="fragment"><p>Inicialmente, investigue qualquer ideia que surgir</p>
+<li><p>Inicialmente, investigue qualquer ideia que surgir</p>
 <ul>
-<li class="fragment">Algumas darão certo, outras não.</li>
+<li>Algumas darão certo, outras não.</li>
 </ul></li>
 </ul>
 </section>
-<section id="far-better-an-approximate-answer-to-the-right-question-which-is-often-vague-than-an-exact-answer-to-the-wrong-question-which-can-always-be-made-precise.-john-tukey" class="slide level2">
-<h2><em>“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.”</em> — John Tukey</h2>
+<section id="section" class="slide level2">
+<h2></h2>
+<h3 id="far-better-an-approximate-answer-to-the-right-question-which-is-often-vague-than-an-exact-answer-to-the-wrong-question-which-can-always-be-made-precise.-john-tukey"><em>“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.”</em> — John Tukey</h3>
 </section>
 <section id="fazendo-perguntas" class="slide level2">
 <h2>Fazendo perguntas</h2>
 <ul>
-<li class="fragment">Seu objetivo na EDA é desenvolver um entendimento dos dados
+<li>Seu objetivo na EDA é desenvolver um entendimento dos dados
 <ul>
-<li class="fragment">A forma mais fácil é fazendo perguntas para guiar sua investigação</li>
-<li class="fragment">Foca sua atenção em partes específicas dos dados</li>
-<li class="fragment">Ajuda a decidir que gráficos, modelos ou transformações fazer</li>
+<li>A forma mais fácil é fazendo perguntas para guiar sua investigação</li>
+<li>Foca sua atenção em partes específicas dos dados</li>
+<li>Ajuda a decidir que gráficos, modelos ou transformações fazer</li>
 </ul></li>
-<li class="fragment">É um processo criativo
+<li>É um processo criativo
 <ul>
-<li class="fragment">Produzir grande <strong>quantidade</strong> de perguntas para obter <strong>qualidade</strong></li>
-<li class="fragment">Como fazer perguntas reveladoras sem conhecer os dados?</li>
+<li>Produzir grande <strong>quantidade</strong> de perguntas para obter <strong>qualidade</strong></li>
+<li>Como fazer perguntas reveladoras sem conhecer os dados?</li>
 </ul></li>
-<li class="fragment">Cada pergunta expõe um novo aspecto dos dados
+<li>Cada pergunta expõe um novo aspecto dos dados
 <ul>
-<li class="fragment">Aumenta a chance de novas descobertas</li>
-<li class="fragment">Leva a insights interessantes deixando as perguntas levarem a outras</li>
+<li>Aumenta a chance de novas descobertas</li>
+<li>Leva a insights interessantes deixando as perguntas levarem a outras</li>
 </ul></li>
 </ul>
 </section>
 <section id="tipos-de-perguntas" class="slide level2">
 <h2>Tipos de perguntas</h2>
 <ul>
-<li class="fragment">Dois tipos muito úteis para novas descobertas:
+<li>Dois tipos muito úteis para novas descobertas:
 <ul>
-<li class="fragment">Que tipo de <strong>variação</strong> ocorre em cada variável?</li>
-<li class="fragment">Que tipo de <strong>covariação</strong> ocorre entre as minhas variáveis?</li>
+<li>Que tipo de <strong>variação</strong> ocorre em cada variável?</li>
+<li>Que tipo de <strong>covariação</strong> ocorre entre as minhas variáveis?</li>
 </ul></li>
-<li class="fragment">Algumas definições:
+<li>Algumas definições:
 <ul>
-<li class="fragment"><strong>Variável</strong>: quantidade, qualidade ou propriedade que se pode medir</li>
-<li class="fragment"><strong>Valor</strong>: estado de uma variável quando você a mede (pode mudar)</li>
-<li class="fragment"><strong>Observação</strong>: conjunto de medições feitas em condições similares</li>
+<li><strong>Variável</strong>: quantidade, qualidade ou propriedade que se pode medir</li>
+<li><strong>Valor</strong>: estado de uma variável quando você a mede (pode mudar)</li>
+<li><strong>Observação</strong>: conjunto de medições feitas em condições similares</li>
 </ul></li>
 </ul>
 </section></section>
@@ -460,23 +463,23 @@
 <section id="o-que-é-variância-e-por-que-analisá-la" class="slide level2">
 <h2>O que é <em>variância</em> e por que analisá-la?</h2>
 <ul>
-<li class="fragment"><p>Tendência de variável mudar seu valor entre uma medição e outra</p></li>
-<li class="fragment"><p>Cada variável tem seu próprio padrão de variação</p>
+<li><p>Tendência de variável mudar seu valor entre uma medição e outra</p></li>
+<li><p>Cada variável tem seu próprio padrão de variação</p>
 <ul>
-<li class="fragment">Pode revelar informações interessantes</li>
+<li>Pode revelar informações interessantes</li>
 </ul></li>
-<li class="fragment"><p>Visualizar a distribuição dos dados ajuda a entender padrões</p></li>
-<li class="fragment"><p>Como visualizar distribuições?</p>
+<li><p>Visualizar a distribuição dos dados ajuda a entender padrões</p></li>
+<li><p>Como visualizar distribuições?</p>
 <ul>
-<li class="fragment">Depende se dados são <em>categóricos</em> ou <em>contínuos</em></li>
+<li>Depende se dados são <em>categóricos</em> ou <em>contínuos</em></li>
 </ul></li>
 </ul>
 </section>
 <section id="visualizando-dados-categóricos" class="slide level2">
 <h2>Visualizando dados categóricos</h2>
 <ul>
-<li class="fragment"><p>Variável que só pode assumir pequeno conjunto de valores</p></li>
-<li class="fragment"><p>Examinando a distribuição com gráfico de barras:</p></li>
+<li><p>Variável que só pode assumir pequeno conjunto de valores</p></li>
+<li><p>Examinando a distribuição com gráfico de barras:</p></li>
 </ul>
 <div class="columns">
 <div class="column">
@@ -537,13 +540,9 @@
 </div>
 </div><div class="column">
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>dfw.plot.bar(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>),</span>
-<span id="cb2-2"><a href="#cb2-2"></a>             legend<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="4">
-<pre><code>&lt;AxesSubplot:xlabel='Cause'&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1"></a>ax <span class="op">=</span> dfw.plot.bar(legend<span class="op">=</span><span class="va">False</span>, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img data-src="1-intro-eda_files/figure-revealjs/cell-5-output-2.png" width="451" height="393"></p>
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-5-output-1.png" width="451" height="393"></p>
 </div>
 </div>
 </div>
@@ -552,14 +551,14 @@
 <section id="visualizando-dados-contínuos" class="slide level2">
 <h2>Visualizando dados contínuos</h2>
 <ul>
-<li class="fragment">Variável com valor em um conjunto infinito de valores possíveis</li>
-<li class="fragment">Histograma ou computando faixas manualmente</li>
+<li>Variável com valor em um conjunto infinito de valores possíveis</li>
+<li>Histograma ou computando faixas manualmente</li>
 </ul>
 <div class="columns">
 <div class="column">
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1"></a>binPop <span class="op">=</span> pd.cut(population, <span class="dv">10</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a>binPop.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>binPop <span class="op">=</span> pd.cut(population, <span class="dv">10</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>binPop.value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>(0.527, 4.233]      24
 (4.233, 7.902]      14
@@ -576,13 +575,10 @@ Name: Population, dtype: int64</code></pre>
 </div>
 </div><div class="column">
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>ax <span class="op">=</span> population.plot.hist(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
-<span id="cb6-2"><a href="#cb6-2"></a>ax.set_xlabel(<span class="st">'Population (millions)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="7">
-<pre><code>Text(0.5, 0, 'Population (millions)')</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>ax <span class="op">=</span> population.plot.hist(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb5-2"><a href="#cb5-2"></a>ax <span class="op">=</span> ax.set_xlabel(<span class="st">'Population (millions)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img data-src="1-intro-eda_files/figure-revealjs/cell-8-output-2.png" width="436" height="352"></p>
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-8-output-1.png" width="436" height="352"></p>
 </div>
 </div>
 </div>
@@ -591,54 +587,48 @@ Name: Population, dtype: int64</code></pre>
 <section id="visualizando-dados-contínuos-histograma" class="slide level2">
 <h2>Visualizando dados contínuos: Histograma</h2>
 <ul>
-<li class="fragment">O parâmetro <em>bins</em> define a quantidade de intervalos
+<li>O parâmetro <em>bins</em> define a quantidade de intervalos
 <ul>
-<li class="fragment">Exemplo para estados com menos de 10 milhões de habitantes</li>
+<li>Exemplo para estados com menos de 10 milhões de habitantes</li>
 </ul></li>
 </ul>
 <div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>population[population <span class="op">&lt;</span> <span class="dv">10</span>].plot.hist(bins<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="8">
-<pre><code>&lt;AxesSubplot:ylabel='Frequency'&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1"></a>ax <span class="op">=</span> population[population <span class="op">&lt;</span> <span class="dv">10</span>].plot.hist(bins<span class="op">=</span><span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img data-src="1-intro-eda_files/figure-revealjs/cell-9-output-2.png" width="808" height="404"></p>
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-9-output-1.png" width="436" height="331"></p>
 </div>
 </div>
 </section>
 <section id="visualizando-dados-contínuos-density-plot" class="slide level2">
 <h2>Visualizando dados contínuos: density plot</h2>
 <ul>
-<li class="fragment">Similar ao histograma, mas com linha contínua suavizada
+<li>Similar ao histograma, mas com linha contínua suavizada
 <ul>
-<li class="fragment">Exemplo para taxas de homicídio nos Estados Unidos</li>
+<li>Exemplo para taxas de homicídio nos Estados Unidos</li>
 </ul></li>
 </ul>
 <div class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>ax <span class="op">=</span> murder_rate.plot.hist(density<span class="op">=</span><span class="va">True</span>, xlim<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">12</span>], bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">12</span>))</span>
-<span id="cb10-2"><a href="#cb10-2"></a>murder_rate.plot.density(ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
-<pre><code>&lt;AxesSubplot:ylabel='Density'&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>ax <span class="op">=</span> murder_rate.plot.hist(density<span class="op">=</span><span class="va">True</span>, xlim<span class="op">=</span>[<span class="dv">0</span>,<span class="dv">12</span>], bins<span class="op">=</span><span class="bu">range</span>(<span class="dv">1</span>,<span class="dv">12</span>))</span>
+<span id="cb7-2"><a href="#cb7-2"></a>ax <span class="op">=</span> murder_rate.plot.density(ax<span class="op">=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img data-src="1-intro-eda_files/figure-revealjs/cell-11-output-2.png" width="829" height="404"></p>
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-11-output-1.png" width="829" height="404"></p>
 </div>
 </div>
 </section>
 <section id="visualizando-dados-contínuos-percentis" class="slide level2">
 <h2>Visualizando dados contínuos: percentis</h2>
 <ul>
-<li class="fragment">Faz recortes dos dados ordenados em posições específicas</li>
-<li class="fragment">Pode ser usado para examinar distribuição dos dados</li>
-<li class="fragment">É muito comum reportar os quartis (25, 50 e 75 percentil)
+<li>Faz recortes dos dados ordenados em posições específicas</li>
+<li>Pode ser usado para examinar distribuição dos dados</li>
+<li>É muito comum reportar os quartis (25, 50 e 75 percentil)
 <ul>
-<li class="fragment">50 percentil é a mediana, divide os dados ao meio</li>
+<li>50 percentil é a mediana, divide os dados ao meio</li>
 </ul></li>
-<li class="fragment">Também é usado para analisar valores na cauda (ex: 99 percentil)</li>
-<li class="fragment">Exemplo: percentis para taxa de homicídios nos Estados Unidos</li>
+<li>Também é usado para analisar valores na cauda (ex: 99 percentil)</li>
+<li>Exemplo: percentis para taxa de homicídios nos Estados Unidos</li>
 </ul>
 <div class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>murder_rate.quantile([<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>murder_rate.quantile([<span class="fl">0.05</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.95</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>0.05    1.600
 0.25    2.425
@@ -652,48 +642,54 @@ Name: Murder.Rate, dtype: float64</code></pre>
 <section id="visualizando-dados-contínuos-boxplot" class="slide level2">
 <h2>Visualizando dados contínuos: boxplot</h2>
 <ul>
-<li class="fragment">Mostra visualmente estatísticas populares de uma distribuição</li>
+<li>Mostra visualmente estatísticas populares de uma distribuição</li>
 </ul>
-
-<img data-src="figs/EDA-boxplot.png" class="r-stretch"></section>
+<div class="column-page">
+<p><img data-src="figs/EDA-boxplot.png"></p>
+</div>
+</section>
 <section id="visualizando-dados-contínuos-boxplot-1" class="slide level2">
 <h2>Visualizando dados contínuos: boxplot</h2>
 <div class="columns">
 <div class="column">
 <ul>
-<li class="fragment">Exemplo: populações dos EUA
+<li>Exemplo: populações dos EUA
 <ul>
-<li class="fragment">Observamos que:
+<li>Observamos que:
 <ul>
-<li class="fragment">A mediana é aproximadamente 5 milhões de habitantes</li>
-<li class="fragment">Metade dos estados tem entre 2 e 7 milhões de habitantes</li>
-<li class="fragment">Populações acima de 13 milhões são consideradas incomuns (<em>outliers</em>)</li>
+<li>A mediana é aproximadamente 5 milhões de habitantes</li>
+<li>Metade dos estados tem entre 2 e 7 milhões de habitantes</li>
+<li>Populações acima de 13 milhões são consideradas incomuns (<em>outliers</em>)</li>
 </ul></li>
 </ul></li>
 </ul>
 </div><div class="column">
 <div class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>population.plot.box()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>&lt;AxesSubplot:&gt;</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>ax <span class="op">=</span> population.plot.box()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img data-src="1-intro-eda_files/figure-revealjs/cell-13-output-2.png" width="790" height="404"></p>
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-13-output-1.png" width="790" height="404"></p>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="filtrando-outliers" class="slide level2">
-<h2>Filtrando outliers</h2>
+<section id="outliers" class="slide level2">
+<h2>Outliers</h2>
 <ul>
-<li class="fragment">Analisando os estados outliers (com mais de 13 milhões de habitantes) com mais detalhes
+<li><em>Outliers</em> são valores muito distantes dos outros
 <ul>
-<li class="fragment">Vemos que California, Florida, New York e Texas tem as maiores populações, sendo “fora da curva” em comparação aos outros</li>
+<li>Podem ser dados com erros, mas também podem ser válidos
+<ul>
+<li>Se for erro podem ser excluídos, mas com boa justificativa</li>
+</ul></li>
+<li>Requer investigação mais detalhada para entender o caso</li>
+<li>Exemplo das populações outliers e impacto nas estatísticas:</li>
 </ul></li>
 </ul>
+<div class="columns">
+<div class="column smaller-table">
 <div class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>state[state[<span class="st">'Population'</span>] <span class="op">&gt;</span> <span class="dv">13</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1"></a>state[state[<span class="st">'Population'</span>] <span class="op">&gt;</span> <span class="dv">13</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
 
 <div>
@@ -754,9 +750,1246 @@ Name: Murder.Rate, dtype: float64</code></pre>
 </div>
 </div>
 </div>
+</div><div class="column">
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>state.Population.agg([<span class="st">"mean"</span>, <span class="st">"median"</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+<pre><code>mean      6.162876
+median    4.436369
+Name: Population, dtype: float64</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="covariância" class="title-slide slide level1 center">
+<h1>Covariância</h1>
+
+</section>
+<section id="o-que-é-covariância-e-por-que-analisá-la" class="slide level2">
+<h2>O que é covariância e por que analisá-la?</h2>
+<ul>
+<li><em>Covariância</em> descreve o comportamento <strong>entre variáveis</strong>.
+<ul>
+<li>Tendência de 2 ou mais variáveis variarem juntas, de forma relacionada.</li>
+</ul></li>
+<li>Útil para encontrar padrões de relacionamento entre variáveis
+<ul>
+<li>E criar modelos que estimam valores com base nessas relações</li>
+<li>Ex: estimar votos de candidatos com base nos gastos de campanha</li>
+</ul></li>
+<li>A melhor forma de identificar covariância é visualizar o relacionamento entre variáveis
+<ul>
+<li>Novamente, isto depende dos tipos das variáveis</li>
+</ul></li>
+</ul>
+</section>
+<section id="covariância-duas-variáveis-categóricas" class="slide level2">
+<h2>Covariância: duas variáveis categóricas</h2>
+<ul>
+<li>Vamos analisar uma base de dados de empréstimos</li>
+</ul>
+<div class="columns">
+<div class="column smaller-table" style="width:45%;">
+<div class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>loans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>status</th>
+      <th>grade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Fully Paid</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Charged Off</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Fully Paid</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Fully Paid</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Current</td>
+      <td>B</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>450956</th>
+      <td>Current</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>450957</th>
+      <td>Current</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>450958</th>
+      <td>Current</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>450959</th>
+      <td>Current</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>450960</th>
+      <td>Fully Paid</td>
+      <td>A</td>
+    </tr>
+  </tbody>
+</table>
+<p>450961 rows × 2 columns</p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:55%;">
+<ul>
+<li>O nível do empréstimo (<code>grade</code>) é uma variável categórica <strong>ordinal</strong>
+<ul>
+<li>Há uma ordem do nível melhor (<em>A</em>) para o pior (<em>G</em>)</li>
+</ul></li>
+<li>O resultado (<code>status</code>) é uma variável <strong>não ordinal</strong>
+<ul>
+<li>Não há ordem pré-definida dos seus valores</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="covariância-duas-variáveis-categóricas-1" class="slide level2">
+<h2>Covariância: duas variáveis categóricas</h2>
+<ul>
+<li>Podemos contar as observações para cada combinação
+<ul>
+<li>Visualizando com tabela <code>pivot</code> e mapa de calor (<code>heatmap</code>)</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column smaller-table">
+<div class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1"></a>loans.pivot_table(index<span class="op">=</span><span class="st">'grade'</span>, columns<span class="op">=</span><span class="st">'status'</span>,</span>
+<span id="cb15-2"><a href="#cb15-2"></a>                  aggfunc<span class="op">=</span><span class="kw">lambda</span> x: <span class="bu">len</span>(x))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>status</th>
+      <th>Charged Off</th>
+      <th>Current</th>
+      <th>Fully Paid</th>
+      <th>Late</th>
+    </tr>
+    <tr>
+      <th>grade</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>A</th>
+      <td>1562</td>
+      <td>50051</td>
+      <td>20408</td>
+      <td>469</td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td>5302</td>
+      <td>93852</td>
+      <td>31160</td>
+      <td>2056</td>
+    </tr>
+    <tr>
+      <th>C</th>
+      <td>6023</td>
+      <td>88928</td>
+      <td>23147</td>
+      <td>2777</td>
+    </tr>
+    <tr>
+      <th>D</th>
+      <td>5007</td>
+      <td>53281</td>
+      <td>13681</td>
+      <td>2308</td>
+    </tr>
+    <tr>
+      <th>E</th>
+      <td>2842</td>
+      <td>24639</td>
+      <td>5949</td>
+      <td>1374</td>
+    </tr>
+    <tr>
+      <th>F</th>
+      <td>1526</td>
+      <td>8444</td>
+      <td>2328</td>
+      <td>606</td>
+    </tr>
+    <tr>
+      <th>G</th>
+      <td>409</td>
+      <td>1990</td>
+      <td>643</td>
+      <td>199</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb16-2"><a href="#cb16-2"></a>ax <span class="op">=</span> sns.heatmap(loans_pivot, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-19-output-1.png" width="442" height="350"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="covariância-uma-categórica-e-uma-contínua" class="slide level2">
+<h2>Covariância: uma categórica e uma contínua</h2>
+<ul>
+<li>Covariância de 2 variáveis da base de dados de voôs cancelados
+<ul>
+<li><code>airline</code> (categórica não ordinal): nome da empresa aérea</li>
+<li><code>pct_carrier_delay</code> (contínua): % de atrasos causados pela empresa</li>
+</ul></li>
+</ul>
+<div class="smaller-table">
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a>airline_stats</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>airline</th>
+      <th>pct_carrier_delay</th>
+      <th>pct_weather_delay</th>
+      <th>pct_atc_delay</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>American</td>
+      <td>8.153226</td>
+      <td>0.762097</td>
+      <td>1.971774</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>American</td>
+      <td>5.959924</td>
+      <td>1.585878</td>
+      <td>3.706107</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>American</td>
+      <td>7.157270</td>
+      <td>2.026706</td>
+      <td>2.706231</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>American</td>
+      <td>12.100000</td>
+      <td>0.000000</td>
+      <td>11.033333</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>American</td>
+      <td>7.333333</td>
+      <td>1.774194</td>
+      <td>3.365591</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>33463</th>
+      <td>Southwest</td>
+      <td>6.186422</td>
+      <td>1.651940</td>
+      <td>8.798491</td>
+    </tr>
+    <tr>
+      <th>33464</th>
+      <td>Southwest</td>
+      <td>9.522167</td>
+      <td>0.261084</td>
+      <td>3.591133</td>
+    </tr>
+    <tr>
+      <th>33465</th>
+      <td>Southwest</td>
+      <td>9.164179</td>
+      <td>0.343284</td>
+      <td>2.664179</td>
+    </tr>
+    <tr>
+      <th>33466</th>
+      <td>Southwest</td>
+      <td>5.152293</td>
+      <td>0.122817</td>
+      <td>1.964520</td>
+    </tr>
+    <tr>
+      <th>33467</th>
+      <td>Southwest</td>
+      <td>3.964393</td>
+      <td>0.019449</td>
+      <td>1.700479</td>
+    </tr>
+  </tbody>
+</table>
+<p>33468 rows × 4 columns</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="covariância-uma-categórica-e-uma-contínua-1" class="slide level2">
+<h2>Covariância: uma categórica e uma contínua</h2>
+<ul>
+<li><code>Boxplot</code> e <code>density plot</code> da contínua agrupado pela categórica</li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>ax <span class="op">=</span> airline_stats.boxplot(by<span class="op">=</span><span class="st">'airline'</span>,</span>
+<span id="cb18-2"><a href="#cb18-2"></a>  column<span class="op">=</span><span class="st">'pct_carrier_delay'</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-22-output-1.png" width="515" height="458"></p>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb19-2"><a href="#cb19-2"></a>ax <span class="op">=</span> sns.kdeplot(data<span class="op">=</span>airline_stats,</span>
+<span id="cb19-3"><a href="#cb19-3"></a>  x<span class="op">=</span><span class="st">"pct_carrier_delay"</span>, hue<span class="op">=</span><span class="st">"airline"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-23-output-1.png" width="531" height="422"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="covariância-uma-categórica-e-uma-contínua-2" class="slide level2">
+<h2>Covariância: uma categórica e uma contínua</h2>
+<ul>
+<li><code>violin plot</code> é outra alternativa ao boxplot</li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb20-2"><a href="#cb20-2"></a>ax <span class="op">=</span> sns.violinplot(data<span class="op">=</span>airline_stats,</span>
+<span id="cb20-3"><a href="#cb20-3"></a>  x<span class="op">=</span><span class="st">'airline'</span>, y<span class="op">=</span><span class="st">'pct_carrier_delay'</span>, ax<span class="op">=</span>ax, inner<span class="op">=</span><span class="st">'quartile'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-24-output-1.png" width="519" height="422"></p>
+</div>
+</div>
+</div><div class="column">
+<ul>
+<li>Mostra a densidade da contínua para cada grupo da categóricas</li>
+<li>É mais fácil observar a concentração dos dados.</li>
+<li>Nota-se:
+<ul>
+<li>Uma concentração mais perto de 0% para a <code>Alaska</code></li>
+<li><code>Delta</code> e <code>United</code> com mais valores extremos (<em>outliers</em>)</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="covariância-duas-variáveis-contínuas" class="slide level2">
+<h2>Covariância: duas variáveis contínuas</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Vamos analisar a variação diária da cotação de empresas de telecomunicação na bolsa de valores</li>
+<li>Se quisermos comparar a covariância da cotação de duas empresas?
+<ul>
+<li>Teremos duas variáveis contínuas</li>
+</ul></li>
+</ul>
+</div><div class="column">
+<div class="smaller-table">
+<div class="cell" data-execution_count="24">
+<div class="cell-output cell-output-display" data-execution_count="24">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>T</th>
+      <th>CTL</th>
+      <th>FTR</th>
+      <th>VZ</th>
+      <th>LVLT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2012-07-02</th>
+      <td>0.422496</td>
+      <td>0.140847</td>
+      <td>0.070879</td>
+      <td>0.554180</td>
+      <td>-0.519998</td>
+    </tr>
+    <tr>
+      <th>2012-07-03</th>
+      <td>-0.177448</td>
+      <td>0.066280</td>
+      <td>0.070879</td>
+      <td>-0.025976</td>
+      <td>-0.049999</td>
+    </tr>
+    <tr>
+      <th>2012-07-05</th>
+      <td>-0.160548</td>
+      <td>-0.132563</td>
+      <td>0.055128</td>
+      <td>-0.051956</td>
+      <td>-0.180000</td>
+    </tr>
+    <tr>
+      <th>2012-07-06</th>
+      <td>0.342205</td>
+      <td>0.132563</td>
+      <td>0.007875</td>
+      <td>0.140106</td>
+      <td>-0.359999</td>
+    </tr>
+    <tr>
+      <th>2012-07-09</th>
+      <td>0.136883</td>
+      <td>0.124279</td>
+      <td>-0.023626</td>
+      <td>0.253943</td>
+      <td>0.180000</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>2015-06-25</th>
+      <td>0.049342</td>
+      <td>-1.600000</td>
+      <td>-0.040000</td>
+      <td>-0.187790</td>
+      <td>-0.330002</td>
+    </tr>
+    <tr>
+      <th>2015-06-26</th>
+      <td>-0.256586</td>
+      <td>0.039999</td>
+      <td>-0.070000</td>
+      <td>0.029650</td>
+      <td>-0.739998</td>
+    </tr>
+    <tr>
+      <th>2015-06-29</th>
+      <td>-0.098685</td>
+      <td>-0.559999</td>
+      <td>-0.060000</td>
+      <td>-0.504063</td>
+      <td>-1.360000</td>
+    </tr>
+    <tr>
+      <th>2015-06-30</th>
+      <td>-0.503298</td>
+      <td>-0.420000</td>
+      <td>-0.070000</td>
+      <td>-0.523829</td>
+      <td>0.199997</td>
+    </tr>
+    <tr>
+      <th>2015-07-01</th>
+      <td>-0.019737</td>
+      <td>0.080000</td>
+      <td>-0.050000</td>
+      <td>0.355811</td>
+      <td>0.139999</td>
+    </tr>
+  </tbody>
+</table>
+<p>754 rows × 5 columns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="covariância-duas-variáveis-contínuas-1" class="slide level2">
+<h2>Covariância: duas variáveis contínuas</h2>
+<ul>
+<li><code>Scatterplot</code> comparando cotação diária da <em>Verizon</em> (V) x <em>AT&amp;T</em> (T)
+<ul>
+<li>Com transparência (<code>alpha</code>) destacamos a concentração dos pontos</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="25">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1"></a>ax <span class="op">=</span> telecom.plot.scatter(x<span class="op">=</span><span class="st">'T'</span>, y<span class="op">=</span><span class="st">'VZ'</span>,</span>
+<span id="cb21-2"><a href="#cb21-2"></a>       figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-26-output-1.png" width="527" height="422"></p>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="26">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>ax <span class="op">=</span> telecom.plot.scatter(x<span class="op">=</span><span class="st">'T'</span>, y<span class="op">=</span><span class="st">'VZ'</span>,</span>
+<span id="cb22-2"><a href="#cb22-2"></a>       alpha<span class="op">=</span><span class="fl">0.4</span>, linewidth<span class="op">=</span><span class="dv">0</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-27-output-1.png" width="527" height="422"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="covariância-duas-variáveis-contínuas-2" class="slide level2">
+<h2>Covariância: duas variáveis contínuas</h2>
+<ul>
+<li>Outras alternativas: <code>hexbin</code> e <code>jointplot</code> (com <code>kind='hex'</code>)</li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1"></a>ax <span class="op">=</span> telecom.plot.hexbin(x<span class="op">=</span><span class="st">'T'</span>, y<span class="op">=</span><span class="st">'VZ'</span>, gridsize<span class="op">=</span><span class="dv">30</span>, sharex<span class="op">=</span><span class="va">False</span>, figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-28-output-1.png" width="516" height="422"></p>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="28">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>ax <span class="op">=</span> sns.jointplot(x<span class="op">=</span><span class="st">'T'</span>, y<span class="op">=</span><span class="st">'VZ'</span>, kind<span class="op">=</span><span class="st">"hex"</span>, height<span class="op">=</span><span class="dv">5</span>, data<span class="op">=</span>telecom)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-29-output-1.png" width="481" height="470"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="covariância-duas-variáveis-contínuas-3" class="slide level2 incremental">
+<h2>Covariância: duas variáveis contínuas</h2>
+<ul>
+<li>Analisando tamanho x valor de casas em uma região dos EUA</li>
+</ul>
+<div class="columns">
+<div class="column smaller-table">
+<div class="cell" data-execution_count="29">
+<div class="cell-output cell-output-display" data-execution_count="29">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>TaxAssessedValue</th>
+      <th>SqFtTotLiving</th>
+      <th>ZipCode</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>361000.0</td>
+      <td>2000</td>
+      <td>98108</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>459000.0</td>
+      <td>3150</td>
+      <td>98108</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>202000.0</td>
+      <td>830</td>
+      <td>98108</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>210000.0</td>
+      <td>1130</td>
+      <td>98108</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>193000.0</td>
+      <td>1560</td>
+      <td>98108</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>498049</th>
+      <td>346000.0</td>
+      <td>1430</td>
+      <td>98105</td>
+    </tr>
+    <tr>
+      <th>498050</th>
+      <td>463000.0</td>
+      <td>1610</td>
+      <td>98105</td>
+    </tr>
+    <tr>
+      <th>498051</th>
+      <td>553000.0</td>
+      <td>1580</td>
+      <td>98105</td>
+    </tr>
+    <tr>
+      <th>498052</th>
+      <td>571000.0</td>
+      <td>1840</td>
+      <td>98105</td>
+    </tr>
+    <tr>
+      <th>498053</th>
+      <td>694000.0</td>
+      <td>2420</td>
+      <td>98105</td>
+    </tr>
+  </tbody>
+</table>
+<p>19690 rows × 3 columns</p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="30">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1"></a>ax <span class="op">=</span> sns.jointplot(data<span class="op">=</span>kc_tax0, x<span class="op">=</span><span class="st">'SqFtTotLiving'</span>, y<span class="op">=</span><span class="st">'TaxAssessedValue'</span>, kind<span class="op">=</span><span class="st">"hex"</span>, height<span class="op">=</span><span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-31-output-1.png" width="500" height="470"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="covariância-duas-contínuas-e-uma-categórica" class="slide level2">
+<h2>Covariância: duas contínuas e uma categórica</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<ul>
+<li>A localização (<code>ZipCode</code>) da casa também influencia o preço?</li>
+<li>Usamos <code>facets</code> para quebrar em um <em>subplot</em> por categoria</li>
+<li>Nota-se a influência tanto da localização quanto do tamanho no valor da casa</li>
+</ul>
+</div><div class="column smaller-code-fold" style="width:60%;">
+<div class="cell" data-execution_count="31">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">def</span> hexbin(x, y, color, <span class="op">**</span>kwargs):</span>
+<span id="cb26-2"><a href="#cb26-2"></a>    cmap <span class="op">=</span> sns.light_palette(color, as_cmap<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-3"><a href="#cb26-3"></a>    plt.hexbin(x, y, gridsize<span class="op">=</span><span class="dv">25</span>, cmap<span class="op">=</span>cmap, <span class="op">**</span>kwargs)</span>
+<span id="cb26-4"><a href="#cb26-4"></a></span>
+<span id="cb26-5"><a href="#cb26-5"></a>g <span class="op">=</span> sns.FacetGrid(kc_tax_zip, col<span class="op">=</span><span class="st">'ZipCode'</span>, col_wrap<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb26-6"><a href="#cb26-6"></a>ax <span class="op">=</span> g.<span class="bu">map</span>(hexbin, <span class="st">'SqFtTotLiving'</span>, <span class="st">'TaxAssessedValue'</span>, </span>
+<span id="cb26-7"><a href="#cb26-7"></a>      extent<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">3500</span>, <span class="dv">0</span>, <span class="dv">700000</span>])</span>
+<span id="cb26-8"><a href="#cb26-8"></a></span>
+<span id="cb26-9"><a href="#cb26-9"></a>g.set_axis_labels(<span class="st">'Finished Square Feet'</span>, <span class="st">'Tax Assessed Value'</span>)</span>
+<span id="cb26-10"><a href="#cb26-10"></a>g.set_titles(<span class="st">'Zip code </span><span class="sc">{col_name:.0f}</span><span class="st">'</span>)</span>
+<span id="cb26-11"><a href="#cb26-11"></a></span>
+<span id="cb26-12"><a href="#cb26-12"></a>plt.tight_layout()</span>
+<span id="cb26-13"><a href="#cb26-13"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-32-output-1.png" width="566" height="566"></p>
+</div>
+</div>
+</div>
+</div>
+<p>::::</p>
+</section>
+<section id="exemplo-eda---diamantes" class="slide level2">
+<h2>Exemplo EDA - diamantes</h2>
+<ul>
+<li>Dados de diamantes com variáveis: quilates (<code>caret</code>), qualidade do corte (<code>cut</code>), cor (<code>color</code>), claridade (<code>clarity</code>), preço (<code>price</code>), etc.</li>
+</ul>
+<div class="smaller-table">
+<div class="cell" data-execution_count="32">
+<div class="cell-output cell-output-display" data-execution_count="32">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>carat</th>
+      <th>cut</th>
+      <th>color</th>
+      <th>clarity</th>
+      <th>depth</th>
+      <th>table</th>
+      <th>price</th>
+      <th>x</th>
+      <th>y</th>
+      <th>z</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.23</td>
+      <td>Ideal</td>
+      <td>E</td>
+      <td>SI2</td>
+      <td>61.5</td>
+      <td>55.0</td>
+      <td>326</td>
+      <td>3.95</td>
+      <td>3.98</td>
+      <td>2.43</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.21</td>
+      <td>Premium</td>
+      <td>E</td>
+      <td>SI1</td>
+      <td>59.8</td>
+      <td>61.0</td>
+      <td>326</td>
+      <td>3.89</td>
+      <td>3.84</td>
+      <td>2.31</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.23</td>
+      <td>Good</td>
+      <td>E</td>
+      <td>VS1</td>
+      <td>56.9</td>
+      <td>65.0</td>
+      <td>327</td>
+      <td>4.05</td>
+      <td>4.07</td>
+      <td>2.31</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.29</td>
+      <td>Premium</td>
+      <td>I</td>
+      <td>VS2</td>
+      <td>62.4</td>
+      <td>58.0</td>
+      <td>334</td>
+      <td>4.20</td>
+      <td>4.23</td>
+      <td>2.63</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.31</td>
+      <td>Good</td>
+      <td>J</td>
+      <td>SI2</td>
+      <td>63.3</td>
+      <td>58.0</td>
+      <td>335</td>
+      <td>4.34</td>
+      <td>4.35</td>
+      <td>2.75</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>53935</th>
+      <td>0.72</td>
+      <td>Ideal</td>
+      <td>D</td>
+      <td>SI1</td>
+      <td>60.8</td>
+      <td>57.0</td>
+      <td>2757</td>
+      <td>5.75</td>
+      <td>5.76</td>
+      <td>3.50</td>
+    </tr>
+    <tr>
+      <th>53936</th>
+      <td>0.72</td>
+      <td>Good</td>
+      <td>D</td>
+      <td>SI1</td>
+      <td>63.1</td>
+      <td>55.0</td>
+      <td>2757</td>
+      <td>5.69</td>
+      <td>5.75</td>
+      <td>3.61</td>
+    </tr>
+    <tr>
+      <th>53937</th>
+      <td>0.70</td>
+      <td>Very Good</td>
+      <td>D</td>
+      <td>SI1</td>
+      <td>62.8</td>
+      <td>60.0</td>
+      <td>2757</td>
+      <td>5.66</td>
+      <td>5.68</td>
+      <td>3.56</td>
+    </tr>
+    <tr>
+      <th>53938</th>
+      <td>0.86</td>
+      <td>Premium</td>
+      <td>H</td>
+      <td>SI2</td>
+      <td>61.0</td>
+      <td>58.0</td>
+      <td>2757</td>
+      <td>6.15</td>
+      <td>6.12</td>
+      <td>3.74</td>
+    </tr>
+    <tr>
+      <th>53939</th>
+      <td>0.75</td>
+      <td>Ideal</td>
+      <td>D</td>
+      <td>SI2</td>
+      <td>62.2</td>
+      <td>55.0</td>
+      <td>2757</td>
+      <td>5.83</td>
+      <td>5.87</td>
+      <td>3.64</td>
+    </tr>
+  </tbody>
+</table>
+<p>53940 rows × 10 columns</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exemplo-eda---diamantes-variância" class="slide level2">
+<h2>Exemplo EDA - diamantes: Variância</h2>
+<div class="columns">
+<div class="column">
+<ul>
+<li>Corte (categórica ordinal)</li>
+</ul>
+<div class="cell" data-execution_count="33">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb27-2"><a href="#cb27-2"></a>ax <span class="op">=</span> sns.countplot(data<span class="op">=</span>diamond, x<span class="op">=</span><span class="st">'cut'</span>,</span>
+<span id="cb27-3"><a href="#cb27-3"></a>  order<span class="op">=</span>[<span class="st">'Fair'</span>, <span class="st">'Good'</span>, <span class="st">'Very Good'</span>, <span class="st">'Premium'</span>, <span class="st">'Ideal'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-34-output-1.png" width="536" height="422"></p>
+</div>
+</div>
+</div><div class="column">
+<ul>
+<li>Quilates (contínua)</li>
+</ul>
+<div class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">5</span>))</span>
+<span id="cb28-2"><a href="#cb28-2"></a>ax <span class="op">=</span> sns.histplot(data<span class="op">=</span>diamond, x<span class="op">=</span><span class="st">"carat"</span>,</span>
+<span id="cb28-3"><a href="#cb28-3"></a>                  binwidth<span class="op">=</span><span class="fl">0.2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-35-output-1.png" width="536" height="422"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exemplo-eda---diamantes-covariância" class="slide level2">
+<h2>Exemplo EDA - diamantes: covariância</h2>
+<ul>
+<li>Relação de preço e corte dos diamantes com <code>density</code> e <code>box plot</code>
+<ul>
+<li>Por que melhor corte (<em>Ideal</em>) é mais barato?</li>
+</ul></li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="35">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb29-2"><a href="#cb29-2"></a>ax <span class="op">=</span> sns.kdeplot(x<span class="op">=</span><span class="st">"price"</span>, hue<span class="op">=</span><span class="st">"cut"</span>, data<span class="op">=</span>diamond)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-36-output-1.png" width="548" height="350"></p>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="36">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb30-2"><a href="#cb30-2"></a>ax <span class="op">=</span> sns.boxplot(x<span class="op">=</span><span class="st">'price'</span>, y<span class="op">=</span><span class="st">'cut'</span>, data<span class="op">=</span>diamond)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-37-output-1.png" width="562" height="350"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exemplo-eda---diamantes-covariância-1" class="slide level2">
+<h2>Exemplo EDA - diamantes: covariância</h2>
+<ul>
+<li>Relação de corte e cor (duas variáveis categóricas)</li>
+</ul>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1"></a>cut_color <span class="op">=</span> diamond[[<span class="st">'cut'</span>, <span class="st">'color'</span>]].pivot_table(index<span class="op">=</span><span class="st">'cut'</span>, columns<span class="op">=</span><span class="st">'color'</span>, aggfunc<span class="op">=</span><span class="bu">len</span>)</span>
+<span id="cb31-2"><a href="#cb31-2"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">5</span>))</span>
+<span id="cb31-3"><a href="#cb31-3"></a>ax <span class="op">=</span> sns.heatmap(cut_color, annot<span class="op">=</span><span class="va">True</span>, fmt<span class="op">=</span><span class="st">"d"</span>, cmap<span class="op">=</span><span class="st">"YlGnBu"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-38-output-1.png" width="690" height="422"></p>
+</div>
+</div>
+</section>
+<section id="exemplo-eda---diamantes-covariância-2" class="slide level2">
+<h2>Exemplo EDA - diamantes: covariância</h2>
+<ul>
+<li>Relação de preço e quilates (duas variáveis contínuas)</li>
+</ul>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1"></a>ax <span class="op">=</span> sns.jointplot(x<span class="op">=</span><span class="st">"carat"</span>, y<span class="op">=</span><span class="st">"price"</span>, linewidth<span class="op">=</span><span class="dv">0</span>, alpha<span class="op">=</span><span class="fl">0.01</span>, height<span class="op">=</span><span class="dv">5</span>, data<span class="op">=</span>diamond)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-39-output-1.png" width="491" height="470"></p>
+</div>
+</div>
+</section>
+<section id="exemplo-eda---diamantes-2-contínuas-e-1-categórica" class="slide level2">
+<h2>Exemplo EDA - diamantes: 2 contínuas e 1 categórica</h2>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1"></a>g <span class="op">=</span> sns.FacetGrid(diamond, col<span class="op">=</span><span class="st">"cut"</span>, col_wrap<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb33-2"><a href="#cb33-2"></a>ax <span class="op">=</span> g.map_dataframe(sns.scatterplot, x<span class="op">=</span><span class="st">"carat"</span>, y<span class="op">=</span><span class="st">"price"</span>, alpha<span class="op">=</span><span class="fl">0.1</span>, linewidth<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-40-output-1.png" width="854" height="566"></p>
+</div>
+</div>
+</section>
+<section id="exemplo-eda---diamantes-2-contínuas-e-2-categóricas" class="slide level2">
+<h2>Exemplo EDA - diamantes: 2 contínuas e 2 categóricas</h2>
+<div class="smaller-code-fold">
+<div class="cell" data-execution_count="40">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1"></a>diamond[<span class="st">"price (k$)"</span>] <span class="op">=</span> diamond[<span class="st">"price"</span>] <span class="op">/</span> <span class="dv">1000</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>g <span class="op">=</span> sns.FacetGrid(diamond, row<span class="op">=</span><span class="st">"cut"</span>, col<span class="op">=</span><span class="st">"clarity"</span>, margin_titles<span class="op">=</span><span class="va">True</span>, height<span class="op">=</span><span class="fl">1.3</span>)</span>
+<span id="cb34-3"><a href="#cb34-3"></a>ax <span class="op">=</span> g.map_dataframe(sns.scatterplot, x<span class="op">=</span><span class="st">"carat"</span>, y<span class="op">=</span><span class="st">"price (k$)"</span>, alpha<span class="op">=</span><span class="fl">0.3</span>, linewidth<span class="op">=</span><span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-41-output-1.png" width="989" height="614"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="padrões-nos-dados" class="slide level2">
+<h2>Padrões nos dados</h2>
+<ul>
+<li>Se encontrar padrões, pergunte-se:
+<ul>
+<li>Este padrão acontece por coincidência?</li>
+<li>Como você descreve o relaciomento implicado pelo padrão?</li>
+<li>Quão forte é o relacionado implicado pelo padrão?</li>
+<li>Que outras variáveis afetam este relacionamento?</li>
+<li>O relacionamento muda se você olhar subgrupos individuais dos dados?</li>
+</ul></li>
+</ul>
+</section>
+<section id="exemplo-eda---vulcão" class="slide level2">
+<h2>Exemplo EDA - vulcão</h2>
+<ul>
+<li>Dados de erupções do vulcão <em>Old Faithful Geyser</em>
+<ul>
+<li><code>eruptions</code>: duração da erupção em segundos</li>
+<li><code>waiting</code>: tempo entre a erupção atual e a seguinte</li>
+</ul></li>
+</ul>
+<div class="smaller-table">
+<div class="cell" data-execution_count="41">
+<div class="cell-output cell-output-display" data-execution_count="41">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>eruptions</th>
+      <th>waiting</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3.600</td>
+      <td>79</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.800</td>
+      <td>54</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.333</td>
+      <td>74</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.283</td>
+      <td>62</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4.533</td>
+      <td>85</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>267</th>
+      <td>4.117</td>
+      <td>81</td>
+    </tr>
+    <tr>
+      <th>268</th>
+      <td>2.150</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>269</th>
+      <td>4.417</td>
+      <td>90</td>
+    </tr>
+    <tr>
+      <th>270</th>
+      <td>1.817</td>
+      <td>46</td>
+    </tr>
+    <tr>
+      <th>271</th>
+      <td>4.467</td>
+      <td>74</td>
+    </tr>
+  </tbody>
+</table>
+<p>272 rows × 2 columns</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exemplo-eda---vulcão-variância" class="slide level2">
+<h2>Exemplo EDA - vulcão: variância</h2>
+<ul>
+<li>Analisando a variância de <code>eruptions</code> e <code>waiting</code></li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb35-2"><a href="#cb35-2"></a>ax <span class="op">=</span> sns.histplot(x<span class="op">=</span><span class="st">'eruptions'</span>, data<span class="op">=</span>faithful)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-43-output-1.png" width="436" height="350"></p>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">5</span>, <span class="dv">4</span>))</span>
+<span id="cb36-2"><a href="#cb36-2"></a>ax <span class="op">=</span> sns.histplot(x<span class="op">=</span><span class="st">'waiting'</span>, data<span class="op">=</span>faithful)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-44-output-1.png" width="436" height="350"></p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exemplo-eda---vulcão-covariância" class="slide level2">
+<h2>Exemplo EDA - vulcão: covariância</h2>
+<div class="cell" data-execution_count="44">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1"></a>ax <span class="op">=</span> sns.scatterplot(x<span class="op">=</span><span class="st">'eruptions'</span>, y<span class="op">=</span><span class="st">'waiting'</span>, data<span class="op">=</span>faithful)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="1-intro-eda_files/figure-revealjs/cell-45-output-1.png" width="808" height="422"></p>
+</div>
+</div>
+<ul>
+<li>Tempos de espera mais longos após erupções mais longas</li>
+<li><strong>Variância</strong> gera incerteza; <strong>Covariância</strong> reduz incerteza
+<ul>
+<li>Valores de uma variável podem ajudar a prever valores de outra</li>
+</ul></li>
+</ul>
+</section>
+<section id="referências" class="slide level2">
+<h2>Referências</h2>
+<ul>
+<li><p>Bruce, P. et al.&nbsp;Practical Statistics for Data Scientists. 2nd Edition. O’Reilly, 20220. Code and Datasets: https://github.com/gedeck/practical-statistics-for-data-scientists</p></li>
+<li><p>Wickhan, H. R for Data Science. O’Reilly, 2017. Open Access: http://r4ds.had.co.nz</p></li>
+<li><p>Grus, Joel. Data Science do Zero. Editora Alta Books, 2021. Disponível em: Minha Biblioteca da UFPB.</p></li>
+</ul>
 
 <div class="footer footer-default">
-<p>Prof.&nbsp;Marcus Carvalho @ DCX / CCAE / UFPB</p>
+
 </div>
 </section></section>
     </div>

@@ -189,10 +189,10 @@
     "text": "O que é EDA?\n\nSumarização e visualização de dados para analisar suas características principais\nCiclo iterativo:\n\nFaça perguntas sobre os dados.\nProcure respostas visualizando, transformando e modelando os dados.\nUse o que aprendeu para refinar perguntas e/ou fazer novas perguntas.\n\nInicialmente, investigue qualquer ideia que surgir\n\nAlgumas darão certo, outras não."
   },
   {
-    "objectID": "2-eda/1-intro-eda.html#far-better-an-approximate-answer-to-the-right-question-which-is-often-vague-than-an-exact-answer-to-the-wrong-question-which-can-always-be-made-precise.-john-tukey",
-    "href": "2-eda/1-intro-eda.html#far-better-an-approximate-answer-to-the-right-question-which-is-often-vague-than-an-exact-answer-to-the-wrong-question-which-can-always-be-made-precise.-john-tukey",
+    "objectID": "2-eda/1-intro-eda.html#section",
+    "href": "2-eda/1-intro-eda.html#section",
     "title": "Análise de dados",
-    "section": "“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.” — John Tukey",
+    "section": "",
     "text": "“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.” — John Tukey"
   },
   {
@@ -221,28 +221,28 @@
     "href": "2-eda/1-intro-eda.html#visualizando-dados-categóricos",
     "title": "Análise de dados",
     "section": "Visualizando dados categóricos",
-    "text": "Visualizando dados categóricos\n\nVariável que só pode assumir pequeno conjunto de valores\nExaminando a distribuição com gráfico de barras:\n\n\n\n\ndfw\n\n\n\n\n\n  \n    \n      \n      Count\n    \n    \n      Cause\n      \n    \n  \n  \n    \n      Carrier\n      64263.16\n    \n    \n      ATC\n      84856.50\n    \n    \n      Weather\n      11235.42\n    \n    \n      Security\n      343.15\n    \n    \n      Inbound\n      118427.82\n    \n  \n\n\n\n\n\n\ndfw.plot.bar(figsize=(5, 4),\n             legend=False)\n\n<AxesSubplot:xlabel='Cause'>"
+    "text": "Visualizando dados categóricos\n\nVariável que só pode assumir pequeno conjunto de valores\nExaminando a distribuição com gráfico de barras:\n\n\n\n\ndfw\n\n\n\n\n\n  \n    \n      \n      Count\n    \n    \n      Cause\n      \n    \n  \n  \n    \n      Carrier\n      64263.16\n    \n    \n      ATC\n      84856.50\n    \n    \n      Weather\n      11235.42\n    \n    \n      Security\n      343.15\n    \n    \n      Inbound\n      118427.82\n    \n  \n\n\n\n\n\n\nax = dfw.plot.bar(legend=False, figsize=(5, 4))"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos",
     "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos",
     "title": "Análise de dados",
     "section": "Visualizando dados contínuos",
-    "text": "Visualizando dados contínuos\n\nVariável com valor em um conjunto infinito de valores possíveis\nHistograma ou computando faixas manualmente\n\n\n\n\nbinPop = pd.cut(population, 10)\nbinPop.value_counts()\n\n(0.527, 4.233]      24\n(4.233, 7.902]      14\n(7.902, 11.571]      6\n(11.571, 15.24]      2\n(15.24, 18.909]      1\n(18.909, 22.578]     1\n(22.578, 26.247]     1\n(33.585, 37.254]     1\n(26.247, 29.916]     0\n(29.916, 33.585]     0\nName: Population, dtype: int64\n\n\n\n\nax = population.plot.hist(figsize=(5, 4))\nax.set_xlabel('Population (millions)')\n\nText(0.5, 0, 'Population (millions)')"
+    "text": "Visualizando dados contínuos\n\nVariável com valor em um conjunto infinito de valores possíveis\nHistograma ou computando faixas manualmente\n\n\n\n\nbinPop = pd.cut(population, 10)\nbinPop.value_counts()\n\n(0.527, 4.233]      24\n(4.233, 7.902]      14\n(7.902, 11.571]      6\n(11.571, 15.24]      2\n(15.24, 18.909]      1\n(18.909, 22.578]     1\n(22.578, 26.247]     1\n(33.585, 37.254]     1\n(26.247, 29.916]     0\n(29.916, 33.585]     0\nName: Population, dtype: int64\n\n\n\n\nax = population.plot.hist(figsize=(5, 4))\nax = ax.set_xlabel('Population (millions)')"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-histograma",
     "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-histograma",
     "title": "Análise de dados",
     "section": "Visualizando dados contínuos: Histograma",
-    "text": "Visualizando dados contínuos: Histograma\n\nO parâmetro bins define a quantidade de intervalos\n\nExemplo para estados com menos de 10 milhões de habitantes\n\n\n\npopulation[population < 10].plot.hist(bins=5)\n\n<AxesSubplot:ylabel='Frequency'>"
+    "text": "Visualizando dados contínuos: Histograma\n\nO parâmetro bins define a quantidade de intervalos\n\nExemplo para estados com menos de 10 milhões de habitantes\n\n\n\nax = population[population < 10].plot.hist(bins=5, figsize=(5, 4))"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-density-plot",
     "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-density-plot",
     "title": "Análise de dados",
     "section": "Visualizando dados contínuos: density plot",
-    "text": "Visualizando dados contínuos: density plot\n\nSimilar ao histograma, mas com linha contínua suavizada\n\nExemplo para taxas de homicídio nos Estados Unidos\n\n\n\nax = murder_rate.plot.hist(density=True, xlim=[0,12], bins=range(1,12))\nmurder_rate.plot.density(ax=ax)\n\n<AxesSubplot:ylabel='Density'>"
+    "text": "Visualizando dados contínuos: density plot\n\nSimilar ao histograma, mas com linha contínua suavizada\n\nExemplo para taxas de homicídio nos Estados Unidos\n\n\n\nax = murder_rate.plot.hist(density=True, xlim=[0,12], bins=range(1,12))\nax = murder_rate.plot.density(ax=ax)"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-percentis",
@@ -263,14 +263,175 @@
     "href": "2-eda/1-intro-eda.html#visualizando-dados-contínuos-boxplot-1",
     "title": "Análise de dados",
     "section": "Visualizando dados contínuos: boxplot",
-    "text": "Visualizando dados contínuos: boxplot\n\n\n\nExemplo: populações dos EUA\n\nObservamos que:\n\nA mediana é aproximadamente 5 milhões de habitantes\nMetade dos estados tem entre 2 e 7 milhões de habitantes\nPopulações acima de 13 milhões são consideradas incomuns (outliers)\n\n\n\n\n\npopulation.plot.box()\n\n<AxesSubplot:>"
+    "text": "Visualizando dados contínuos: boxplot\n\n\n\nExemplo: populações dos EUA\n\nObservamos que:\n\nA mediana é aproximadamente 5 milhões de habitantes\nMetade dos estados tem entre 2 e 7 milhões de habitantes\nPopulações acima de 13 milhões são consideradas incomuns (outliers)\n\n\n\n\n\nax = population.plot.box()"
   },
   {
-    "objectID": "2-eda/1-intro-eda.html#filtrando-outliers",
-    "href": "2-eda/1-intro-eda.html#filtrando-outliers",
+    "objectID": "2-eda/1-intro-eda.html#outliers",
+    "href": "2-eda/1-intro-eda.html#outliers",
     "title": "Análise de dados",
-    "section": "Filtrando outliers",
-    "text": "Filtrando outliers\n\nAnalisando os estados outliers (com mais de 13 milhões de habitantes) com mais detalhes\n\nVemos que California, Florida, New York e Texas tem as maiores populações, sendo “fora da curva” em comparação aos outros\n\n\n\nstate[state['Population'] > 13]\n\n\n\n\n\n  \n    \n      \n      State\n      Population\n      Murder.Rate\n      Abbreviation\n    \n  \n  \n    \n      4\n      California\n      37.253956\n      4.4\n      CA\n    \n    \n      8\n      Florida\n      18.801310\n      5.8\n      FL\n    \n    \n      31\n      New York\n      19.378102\n      3.1\n      NY\n    \n    \n      42\n      Texas\n      25.145561\n      4.4\n      TX\n    \n  \n\n\n\n\n\n\nProf. Marcus Carvalho @ DCX / CCAE / UFPB"
+    "section": "Outliers",
+    "text": "Outliers\n\nOutliers são valores muito distantes dos outros\n\nPodem ser dados com erros, mas também podem ser válidos\n\nSe for erro podem ser excluídos, mas com boa justificativa\n\nRequer investigação mais detalhada para entender o caso\nExemplo das populações outliers e impacto nas estatísticas:\n\n\n\n\n\nstate[state['Population'] > 13]\n\n\n\n\n\n  \n    \n      \n      State\n      Population\n      Murder.Rate\n      Abbreviation\n    \n  \n  \n    \n      4\n      California\n      37.253956\n      4.4\n      CA\n    \n    \n      8\n      Florida\n      18.801310\n      5.8\n      FL\n    \n    \n      31\n      New York\n      19.378102\n      3.1\n      NY\n    \n    \n      42\n      Texas\n      25.145561\n      4.4\n      TX\n    \n  \n\n\n\n\n\n\nstate.Population.agg([\"mean\", \"median\"])\n\nmean      6.162876\nmedian    4.436369\nName: Population, dtype: float64"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#o-que-é-covariância-e-por-que-analisá-la",
+    "href": "2-eda/1-intro-eda.html#o-que-é-covariância-e-por-que-analisá-la",
+    "title": "Análise de dados",
+    "section": "O que é covariância e por que analisá-la?",
+    "text": "O que é covariância e por que analisá-la?\n\nCovariância descreve o comportamento entre variáveis.\n\nTendência de 2 ou mais variáveis variarem juntas, de forma relacionada.\n\nÚtil para encontrar padrões de relacionamento entre variáveis\n\nE criar modelos que estimam valores com base nessas relações\nEx: estimar votos de candidatos com base nos gastos de campanha\n\nA melhor forma de identificar covariância é visualizar o relacionamento entre variáveis\n\nNovamente, isto depende dos tipos das variáveis"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-duas-variáveis-categóricas",
+    "href": "2-eda/1-intro-eda.html#covariância-duas-variáveis-categóricas",
+    "title": "Análise de dados",
+    "section": "Covariância: duas variáveis categóricas",
+    "text": "Covariância: duas variáveis categóricas\n\nVamos analisar uma base de dados de empréstimos\n\n\n\n\nloans\n\n\n\n\n\n  \n    \n      \n      status\n      grade\n    \n  \n  \n    \n      0\n      Fully Paid\n      B\n    \n    \n      1\n      Charged Off\n      C\n    \n    \n      2\n      Fully Paid\n      C\n    \n    \n      3\n      Fully Paid\n      C\n    \n    \n      4\n      Current\n      B\n    \n    \n      ...\n      ...\n      ...\n    \n    \n      450956\n      Current\n      D\n    \n    \n      450957\n      Current\n      D\n    \n    \n      450958\n      Current\n      D\n    \n    \n      450959\n      Current\n      D\n    \n    \n      450960\n      Fully Paid\n      A\n    \n  \n\n450961 rows × 2 columns\n\n\n\n\n\nO nível do empréstimo (grade) é uma variável categórica ordinal\n\nHá uma ordem do nível melhor (A) para o pior (G)\n\nO resultado (status) é uma variável não ordinal\n\nNão há ordem pré-definida dos seus valores"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-duas-variáveis-categóricas-1",
+    "href": "2-eda/1-intro-eda.html#covariância-duas-variáveis-categóricas-1",
+    "title": "Análise de dados",
+    "section": "Covariância: duas variáveis categóricas",
+    "text": "Covariância: duas variáveis categóricas\n\nPodemos contar as observações para cada combinação\n\nVisualizando com tabela pivot e mapa de calor (heatmap)\n\n\n\n\n\nloans.pivot_table(index='grade', columns='status',\n                  aggfunc=lambda x: len(x))\n\n\n\n\n\n  \n    \n      status\n      Charged Off\n      Current\n      Fully Paid\n      Late\n    \n    \n      grade\n      \n      \n      \n      \n    \n  \n  \n    \n      A\n      1562\n      50051\n      20408\n      469\n    \n    \n      B\n      5302\n      93852\n      31160\n      2056\n    \n    \n      C\n      6023\n      88928\n      23147\n      2777\n    \n    \n      D\n      5007\n      53281\n      13681\n      2308\n    \n    \n      E\n      2842\n      24639\n      5949\n      1374\n    \n    \n      F\n      1526\n      8444\n      2328\n      606\n    \n    \n      G\n      409\n      1990\n      643\n      199\n    \n  \n\n\n\n\n\n\nfig, ax = plt.subplots(figsize=(5, 4))\nax = sns.heatmap(loans_pivot, annot=True, fmt=\"d\")"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-uma-categórica-e-uma-contínua",
+    "href": "2-eda/1-intro-eda.html#covariância-uma-categórica-e-uma-contínua",
+    "title": "Análise de dados",
+    "section": "Covariância: uma categórica e uma contínua",
+    "text": "Covariância: uma categórica e uma contínua\n\nCovariância de 2 variáveis da base de dados de voôs cancelados\n\nairline (categórica não ordinal): nome da empresa aérea\npct_carrier_delay (contínua): % de atrasos causados pela empresa\n\n\n\n\nairline_stats\n\n\n\n\n\n  \n    \n      \n      airline\n      pct_carrier_delay\n      pct_weather_delay\n      pct_atc_delay\n    \n  \n  \n    \n      0\n      American\n      8.153226\n      0.762097\n      1.971774\n    \n    \n      1\n      American\n      5.959924\n      1.585878\n      3.706107\n    \n    \n      2\n      American\n      7.157270\n      2.026706\n      2.706231\n    \n    \n      3\n      American\n      12.100000\n      0.000000\n      11.033333\n    \n    \n      4\n      American\n      7.333333\n      1.774194\n      3.365591\n    \n    \n      ...\n      ...\n      ...\n      ...\n      ...\n    \n    \n      33463\n      Southwest\n      6.186422\n      1.651940\n      8.798491\n    \n    \n      33464\n      Southwest\n      9.522167\n      0.261084\n      3.591133\n    \n    \n      33465\n      Southwest\n      9.164179\n      0.343284\n      2.664179\n    \n    \n      33466\n      Southwest\n      5.152293\n      0.122817\n      1.964520\n    \n    \n      33467\n      Southwest\n      3.964393\n      0.019449\n      1.700479\n    \n  \n\n33468 rows × 4 columns"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-uma-categórica-e-uma-contínua-1",
+    "href": "2-eda/1-intro-eda.html#covariância-uma-categórica-e-uma-contínua-1",
+    "title": "Análise de dados",
+    "section": "Covariância: uma categórica e uma contínua",
+    "text": "Covariância: uma categórica e uma contínua\n\nBoxplot e density plot da contínua agrupado pela categórica\n\n\n\n\nax = airline_stats.boxplot(by='airline',\n  column='pct_carrier_delay', figsize=(6, 5))\n\n\n\n\n\n\nfig, ax = plt.subplots(figsize=(6, 5))\nax = sns.kdeplot(data=airline_stats,\n  x=\"pct_carrier_delay\", hue=\"airline\")"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-uma-categórica-e-uma-contínua-2",
+    "href": "2-eda/1-intro-eda.html#covariância-uma-categórica-e-uma-contínua-2",
+    "title": "Análise de dados",
+    "section": "Covariância: uma categórica e uma contínua",
+    "text": "Covariância: uma categórica e uma contínua\n\nviolin plot é outra alternativa ao boxplot\n\n\n\n\nfig, ax = plt.subplots(figsize=(6, 5))\nax = sns.violinplot(data=airline_stats,\n  x='airline', y='pct_carrier_delay', ax=ax, inner='quartile')\n\n\n\n\n\n\nMostra a densidade da contínua para cada grupo da categóricas\nÉ mais fácil observar a concentração dos dados.\nNota-se:\n\nUma concentração mais perto de 0% para a Alaska\nDelta e United com mais valores extremos (outliers)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-duas-variáveis-contínuas",
+    "href": "2-eda/1-intro-eda.html#covariância-duas-variáveis-contínuas",
+    "title": "Análise de dados",
+    "section": "Covariância: duas variáveis contínuas",
+    "text": "Covariância: duas variáveis contínuas\n\n\n\nVamos analisar a variação diária da cotação de empresas de telecomunicação na bolsa de valores\nSe quisermos comparar a covariância da cotação de duas empresas?\n\nTeremos duas variáveis contínuas\n\n\n\n\n\n\n\n\n\n\n  \n    \n      \n      T\n      CTL\n      FTR\n      VZ\n      LVLT\n    \n  \n  \n    \n      2012-07-02\n      0.422496\n      0.140847\n      0.070879\n      0.554180\n      -0.519998\n    \n    \n      2012-07-03\n      -0.177448\n      0.066280\n      0.070879\n      -0.025976\n      -0.049999\n    \n    \n      2012-07-05\n      -0.160548\n      -0.132563\n      0.055128\n      -0.051956\n      -0.180000\n    \n    \n      2012-07-06\n      0.342205\n      0.132563\n      0.007875\n      0.140106\n      -0.359999\n    \n    \n      2012-07-09\n      0.136883\n      0.124279\n      -0.023626\n      0.253943\n      0.180000\n    \n    \n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n    \n    \n      2015-06-25\n      0.049342\n      -1.600000\n      -0.040000\n      -0.187790\n      -0.330002\n    \n    \n      2015-06-26\n      -0.256586\n      0.039999\n      -0.070000\n      0.029650\n      -0.739998\n    \n    \n      2015-06-29\n      -0.098685\n      -0.559999\n      -0.060000\n      -0.504063\n      -1.360000\n    \n    \n      2015-06-30\n      -0.503298\n      -0.420000\n      -0.070000\n      -0.523829\n      0.199997\n    \n    \n      2015-07-01\n      -0.019737\n      0.080000\n      -0.050000\n      0.355811\n      0.139999\n    \n  \n\n754 rows × 5 columns"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-duas-variáveis-contínuas-1",
+    "href": "2-eda/1-intro-eda.html#covariância-duas-variáveis-contínuas-1",
+    "title": "Análise de dados",
+    "section": "Covariância: duas variáveis contínuas",
+    "text": "Covariância: duas variáveis contínuas\n\nScatterplot comparando cotação diária da Verizon (V) x AT&T (T)\n\nCom transparência (alpha) destacamos a concentração dos pontos\n\n\n\n\n\nax = telecom.plot.scatter(x='T', y='VZ',\n       figsize=(6, 5))\n\n\n\n\n\n\nax = telecom.plot.scatter(x='T', y='VZ',\n       alpha=0.4, linewidth=0, figsize=(6, 5))"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-duas-variáveis-contínuas-2",
+    "href": "2-eda/1-intro-eda.html#covariância-duas-variáveis-contínuas-2",
+    "title": "Análise de dados",
+    "section": "Covariância: duas variáveis contínuas",
+    "text": "Covariância: duas variáveis contínuas\n\nOutras alternativas: hexbin e jointplot (com kind='hex')\n\n\n\n\nax = telecom.plot.hexbin(x='T', y='VZ', gridsize=30, sharex=False, figsize=(6, 5))\n\n\n\n\n\n\nax = sns.jointplot(x='T', y='VZ', kind=\"hex\", height=5, data=telecom)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-duas-variáveis-contínuas-3",
+    "href": "2-eda/1-intro-eda.html#covariância-duas-variáveis-contínuas-3",
+    "title": "Análise de dados",
+    "section": "Covariância: duas variáveis contínuas",
+    "text": "Covariância: duas variáveis contínuas\n\nAnalisando tamanho x valor de casas em uma região dos EUA\n\n\n\n\n\n\n\n\n\n  \n    \n      \n      TaxAssessedValue\n      SqFtTotLiving\n      ZipCode\n    \n  \n  \n    \n      3\n      361000.0\n      2000\n      98108\n    \n    \n      4\n      459000.0\n      3150\n      98108\n    \n    \n      10\n      202000.0\n      830\n      98108\n    \n    \n      11\n      210000.0\n      1130\n      98108\n    \n    \n      12\n      193000.0\n      1560\n      98108\n    \n    \n      ...\n      ...\n      ...\n      ...\n    \n    \n      498049\n      346000.0\n      1430\n      98105\n    \n    \n      498050\n      463000.0\n      1610\n      98105\n    \n    \n      498051\n      553000.0\n      1580\n      98105\n    \n    \n      498052\n      571000.0\n      1840\n      98105\n    \n    \n      498053\n      694000.0\n      2420\n      98105\n    \n  \n\n19690 rows × 3 columns\n\n\n\n\n\nax = sns.jointplot(data=kc_tax0, x='SqFtTotLiving', y='TaxAssessedValue', kind=\"hex\", height=5)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#covariância-duas-contínuas-e-uma-categórica",
+    "href": "2-eda/1-intro-eda.html#covariância-duas-contínuas-e-uma-categórica",
+    "title": "Análise de dados",
+    "section": "Covariância: duas contínuas e uma categórica",
+    "text": "Covariância: duas contínuas e uma categórica\n\n\n\nA localização (ZipCode) da casa também influencia o preço?\nUsamos facets para quebrar em um subplot por categoria\nNota-se a influência tanto da localização quanto do tamanho no valor da casa\n\n\n\n\nCode\ndef hexbin(x, y, color, **kwargs):\n    cmap = sns.light_palette(color, as_cmap=True)\n    plt.hexbin(x, y, gridsize=25, cmap=cmap, **kwargs)\n\ng = sns.FacetGrid(kc_tax_zip, col='ZipCode', col_wrap=2)\nax = g.map(hexbin, 'SqFtTotLiving', 'TaxAssessedValue', \n      extent=[0, 3500, 0, 700000])\n\ng.set_axis_labels('Finished Square Feet', 'Tax Assessed Value')\ng.set_titles('Zip code {col_name:.0f}')\n\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\n::::"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---diamantes",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---diamantes",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - diamantes",
+    "text": "Exemplo EDA - diamantes\n\nDados de diamantes com variáveis: quilates (caret), qualidade do corte (cut), cor (color), claridade (clarity), preço (price), etc.\n\n\n\n\n\n\n\n\n  \n    \n      \n      carat\n      cut\n      color\n      clarity\n      depth\n      table\n      price\n      x\n      y\n      z\n    \n  \n  \n    \n      0\n      0.23\n      Ideal\n      E\n      SI2\n      61.5\n      55.0\n      326\n      3.95\n      3.98\n      2.43\n    \n    \n      1\n      0.21\n      Premium\n      E\n      SI1\n      59.8\n      61.0\n      326\n      3.89\n      3.84\n      2.31\n    \n    \n      2\n      0.23\n      Good\n      E\n      VS1\n      56.9\n      65.0\n      327\n      4.05\n      4.07\n      2.31\n    \n    \n      3\n      0.29\n      Premium\n      I\n      VS2\n      62.4\n      58.0\n      334\n      4.20\n      4.23\n      2.63\n    \n    \n      4\n      0.31\n      Good\n      J\n      SI2\n      63.3\n      58.0\n      335\n      4.34\n      4.35\n      2.75\n    \n    \n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n      ...\n    \n    \n      53935\n      0.72\n      Ideal\n      D\n      SI1\n      60.8\n      57.0\n      2757\n      5.75\n      5.76\n      3.50\n    \n    \n      53936\n      0.72\n      Good\n      D\n      SI1\n      63.1\n      55.0\n      2757\n      5.69\n      5.75\n      3.61\n    \n    \n      53937\n      0.70\n      Very Good\n      D\n      SI1\n      62.8\n      60.0\n      2757\n      5.66\n      5.68\n      3.56\n    \n    \n      53938\n      0.86\n      Premium\n      H\n      SI2\n      61.0\n      58.0\n      2757\n      6.15\n      6.12\n      3.74\n    \n    \n      53939\n      0.75\n      Ideal\n      D\n      SI2\n      62.2\n      55.0\n      2757\n      5.83\n      5.87\n      3.64\n    \n  \n\n53940 rows × 10 columns"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-variância",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-variância",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - diamantes: Variância",
+    "text": "Exemplo EDA - diamantes: Variância\n\n\n\nCorte (categórica ordinal)\n\n\nfig, ax = plt.subplots(figsize=(6, 5))\nax = sns.countplot(data=diamond, x='cut',\n  order=['Fair', 'Good', 'Very Good', 'Premium', 'Ideal'])\n\n\n\n\n\n\nQuilates (contínua)\n\n\nfig, ax = plt.subplots(figsize=(6, 5))\nax = sns.histplot(data=diamond, x=\"carat\",\n                  binwidth=0.2)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-covariância",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-covariância",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - diamantes: covariância",
+    "text": "Exemplo EDA - diamantes: covariância\n\nRelação de preço e corte dos diamantes com density e box plot\n\nPor que melhor corte (Ideal) é mais barato?\n\n\n\n\n\nfig, ax = plt.subplots(figsize=(6, 4))\nax = sns.kdeplot(x=\"price\", hue=\"cut\", data=diamond)\n\n\n\n\n\n\nfig, ax = plt.subplots(figsize=(6, 4))\nax = sns.boxplot(x='price', y='cut', data=diamond)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-covariância-1",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-covariância-1",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - diamantes: covariância",
+    "text": "Exemplo EDA - diamantes: covariância\n\nRelação de corte e cor (duas variáveis categóricas)\n\n\ncut_color = diamond[['cut', 'color']].pivot_table(index='cut', columns='color', aggfunc=len)\nfig, ax = plt.subplots(figsize=(9, 5))\nax = sns.heatmap(cut_color, annot=True, fmt=\"d\", cmap=\"YlGnBu\")"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-covariância-2",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-covariância-2",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - diamantes: covariância",
+    "text": "Exemplo EDA - diamantes: covariância\n\nRelação de preço e quilates (duas variáveis contínuas)\n\n\nax = sns.jointplot(x=\"carat\", y=\"price\", linewidth=0, alpha=0.01, height=5, data=diamond)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-2-contínuas-e-1-categórica",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-2-contínuas-e-1-categórica",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - diamantes: 2 contínuas e 1 categórica",
+    "text": "Exemplo EDA - diamantes: 2 contínuas e 1 categórica\n\ng = sns.FacetGrid(diamond, col=\"cut\", col_wrap=3)\nax = g.map_dataframe(sns.scatterplot, x=\"carat\", y=\"price\", alpha=0.1, linewidth=0)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-2-contínuas-e-2-categóricas",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---diamantes-2-contínuas-e-2-categóricas",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - diamantes: 2 contínuas e 2 categóricas",
+    "text": "Exemplo EDA - diamantes: 2 contínuas e 2 categóricas\n\n\n\nCode\ndiamond[\"price (k$)\"] = diamond[\"price\"] / 1000\ng = sns.FacetGrid(diamond, row=\"cut\", col=\"clarity\", margin_titles=True, height=1.3)\nax = g.map_dataframe(sns.scatterplot, x=\"carat\", y=\"price (k$)\", alpha=0.3, linewidth=0)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#padrões-nos-dados",
+    "href": "2-eda/1-intro-eda.html#padrões-nos-dados",
+    "title": "Análise de dados",
+    "section": "Padrões nos dados",
+    "text": "Padrões nos dados\n\nSe encontrar padrões, pergunte-se:\n\nEste padrão acontece por coincidência?\nComo você descreve o relaciomento implicado pelo padrão?\nQuão forte é o relacionado implicado pelo padrão?\nQue outras variáveis afetam este relacionamento?\nO relacionamento muda se você olhar subgrupos individuais dos dados?"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---vulcão",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---vulcão",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - vulcão",
+    "text": "Exemplo EDA - vulcão\n\nDados de erupções do vulcão Old Faithful Geyser\n\neruptions: duração da erupção em segundos\nwaiting: tempo entre a erupção atual e a seguinte\n\n\n\n\n\n\n\n\n\n  \n    \n      \n      eruptions\n      waiting\n    \n  \n  \n    \n      0\n      3.600\n      79\n    \n    \n      1\n      1.800\n      54\n    \n    \n      2\n      3.333\n      74\n    \n    \n      3\n      2.283\n      62\n    \n    \n      4\n      4.533\n      85\n    \n    \n      ...\n      ...\n      ...\n    \n    \n      267\n      4.117\n      81\n    \n    \n      268\n      2.150\n      46\n    \n    \n      269\n      4.417\n      90\n    \n    \n      270\n      1.817\n      46\n    \n    \n      271\n      4.467\n      74\n    \n  \n\n272 rows × 2 columns"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---vulcão-variância",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---vulcão-variância",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - vulcão: variância",
+    "text": "Exemplo EDA - vulcão: variância\n\nAnalisando a variância de eruptions e waiting\n\n\n\n\nfig, ax = plt.subplots(figsize=(5, 4))\nax = sns.histplot(x='eruptions', data=faithful)\n\n\n\n\n\n\nfig, ax = plt.subplots(figsize=(5, 4))\nax = sns.histplot(x='waiting', data=faithful)"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#exemplo-eda---vulcão-covariância",
+    "href": "2-eda/1-intro-eda.html#exemplo-eda---vulcão-covariância",
+    "title": "Análise de dados",
+    "section": "Exemplo EDA - vulcão: covariância",
+    "text": "Exemplo EDA - vulcão: covariância\n\nax = sns.scatterplot(x='eruptions', y='waiting', data=faithful)\n\n\n\n\n\nTempos de espera mais longos após erupções mais longas\nVariância gera incerteza; Covariância reduz incerteza\n\nValores de uma variável podem ajudar a prever valores de outra"
+  },
+  {
+    "objectID": "2-eda/1-intro-eda.html#referências",
+    "href": "2-eda/1-intro-eda.html#referências",
+    "title": "Análise de dados",
+    "section": "Referências",
+    "text": "Referências\n\nBruce, P. et al. Practical Statistics for Data Scientists. 2nd Edition. O’Reilly, 20220. Code and Datasets: https://github.com/gedeck/practical-statistics-for-data-scientists\nWickhan, H. R for Data Science. O’Reilly, 2017. Open Access: http://r4ds.had.co.nz\nGrus, Joel. Data Science do Zero. Editora Alta Books, 2021. Disponível em: Minha Biblioteca da UFPB."
   },
   {
     "objectID": "about.html",
@@ -287,11 +448,18 @@
     "text": "Material da disciplina de Análise de Dados I"
   },
   {
-    "objectID": "index.html#aulas",
-    "href": "index.html#aulas",
+    "objectID": "index.html#introdução",
+    "href": "index.html#introdução",
     "title": "Análise de Dados I @ DCX / CCAE / UFPB",
-    "section": "Aulas",
-    "text": "Aulas\n\nApresentação da disciplina (Slides)\n\n\nIntrodução\n\n1.1 Introdução à análise de dados (Slides)\n1.2 Introdução ao Python e Jupyter Notebook (Atividade)\n1.3 Introdução ao Pandas (Notebook)\n1.4 Exemplo com Pandas: análise de notas (Notebook)\nLaboratório 1: Manipulação de dados (GitHub)\n\n\n\nAnálise Exploratória de Dados\n\n2.1 Introdução à Análise Exploratória de Dados (Slides)"
+    "section": "Introdução",
+    "text": "Introdução\n\n1.1 Introdução à análise de dados (Slides)\n1.2 Introdução ao Python e Jupyter Notebook (Atividade)\n1.3 Introdução ao Pandas (Notebook)\n1.4 Exemplo com Pandas: análise de notas (Notebook)\nLaboratório 1: Manipulação de dados (GitHub)"
+  },
+  {
+    "objectID": "index.html#análise-exploratória-de-dados",
+    "href": "index.html#análise-exploratória-de-dados",
+    "title": "Análise de Dados I @ DCX / CCAE / UFPB",
+    "section": "Análise Exploratória de Dados",
+    "text": "Análise Exploratória de Dados\n\n2.1 Introdução à Análise Exploratória de Dados (Slides)"
   },
   {
     "objectID": "1-introducao/3-intro-pandas.html",
