@@ -4,8 +4,9 @@
 
 // fonts
 $font-family-sans-serif: 'Lato', Tahoma, sans-serif !default;
-$presentation-font-size-root: 40px;
+$presentation-font-size-root: 35px;
 $presentation-font-smaller: 0.8;
+$presentation-block-margin: 6px;
 
 // headings
 $presentation-h1-font-size: 2.6em;
@@ -33,12 +34,38 @@ $link-color: #2980B9;
    text-align: center;
  }
 
+ .text-left {
+  text-align: left;
+  margin-left: 0px;
+  margin-right: auto;
+}
+
 .emph {
   color: #148F77;
 }
 
-li {
+li li {
   font-size: 0.9em;
+}
+
+table {
+  font-size: 0.7em;
+}
+
+.smaller-table table {
+  font-size: 0.5em;
+}
+
+.smaller-code-fold summary {
+  font-size: 0.5em;
+}
+
+.smaller-code-fold details {
+  margin-bottom: 0em;
+}
+
+.tiny {
+  font-size: 0.3em;
 }
 
 .center {
@@ -46,4 +73,8 @@ li {
   margin-left: auto;
   margin-right: auto;
   width: 50%;
+}
+
+.no-margin {
+  margin-top: 0px;
 }

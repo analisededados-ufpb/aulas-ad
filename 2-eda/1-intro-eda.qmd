@@ -1,32 +1,34 @@
 ---
 title: "Análise de dados"
 subtitle: "Introdução à Análise Exploratória de Dados"
+author: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
 format:
     revealjs:
         slide-number: true
         chalkboard: true
-        footer: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
-        incremental: true
-        theme: [default, ../custom.scss]
+        #footer: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+        incremental: false
+        theme: [simple, ../custom.scss]
         echo: true
+        #scrollable: true
 ---
 
-```{r setup, include=FALSE}
-#knitr::opts_chunk$set(echo = FALSE)
-
-library(dplyr)
-library(emo)
-library(ggplot2)
-```
-
 ```{python}
-from IPython.display import Markdown, display
-import os
-import pandas as pd 
+#| echo: false
+import matplotlib.pylab as plt
+import pandas as pd
+from pathlib import Path
 import seaborn as sns
-from tabulate import tabulate
 
-data_dir = '../dados'
+DATA_DIR = Path().resolve().parent / 'dados'
+
+AIRLINE_STATS_CSV = DATA_DIR / 'airline_stats.csv'
+AIRPORT_DELAYS_CSV = DATA_DIR / 'dfw_airline.csv'
+KC_TAX_CSV = DATA_DIR / 'kc_tax.csv.gz'
+LC_LOANS_CSV = DATA_DIR / 'lc_loans.csv'
+SP500_DATA_CSV = DATA_DIR / 'sp500_data.csv.gz'
+SP500_SECTORS_CSV = DATA_DIR / 'sp500_sectors.csv'
+STATE_CSV = DATA_DIR / 'state.csv'
 ```
 
 # Exploratory Data Analysis (EDA)
@@ -43,7 +45,9 @@ data_dir = '../dados'
 - Inicialmente, investigue qualquer ideia que surgir
     - Algumas darão certo, outras não.
 
-## *“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.”* — John Tukey
+##
+
+### *“Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise.”* — John Tukey
 
 ## Fazendo perguntas
 
@@ -94,7 +98,7 @@ data_dir = '../dados'
 ```{python}
 #| echo: false
 dfw = (
-  pd.read_csv(os.path.join(data_dir, 'dfw_airline.csv'))
+  pd.read_csv(AIRPORT_DELAYS_CSV)
   .transpose()
   .rename(columns={0: 'Count'})
 )
@@ -109,8 +113,7 @@ dfw
 :::
 ::: {.column}
 ```{python}
-dfw.plot.bar(figsize=(5, 4),
-             legend=False)
+ax = dfw.plot.bar(legend=False, figsize=(5, 4))
 ```
 :::
 ::::
@@ -122,7 +125,7 @@ dfw.plot.bar(figsize=(5, 4),
 
 ```{python}
 #| echo: false
-state = pd.read_csv(os.path.join(data_dir, 'state.csv'))
+state = pd.read_csv(STATE_CSV)
 state['Population'] = state['Population'] / 1_000_000
 population = state['Population']
 ```
@@ -137,7 +140,7 @@ binPop.value_counts()
 ::: {.column}
 ```{python}
 ax = population.plot.hist(figsize=(5, 4))
-ax.set_xlabel('Population (millions)')
+ax = ax.set_xlabel('Population (millions)')
 ```
 :::
 
@@ -150,7 +153,7 @@ ax.set_xlabel('Population (millions)')
   - Exemplo para estados com menos de 10 milhões de habitantes
 
 ```{python}
-population[population < 10].plot.hist(bins=5)
+ax = population[population < 10].plot.hist(bins=5, figsize=(5, 4))
 ```
 
 ## Visualizando dados contínuos: density plot
@@ -164,7 +167,7 @@ murder_rate = state['Murder.Rate']
 ```
 ```{python}
 ax = murder_rate.plot.hist(density=True, xlim=[0,12], bins=range(1,12))
-murder_rate.plot.density(ax=ax)
+ax = murder_rate.plot.density(ax=ax)
 ```
 
 
@@ -185,7 +188,9 @@ murder_rate.quantile([0.05, 0.25, 0.5, 0.75, 0.95])
 
 - Mostra visualmente estatísticas populares de uma distribuição
 
+:::{.column-page}
 ![](figs/EDA-boxplot.png)
+:::
 
 ## Visualizando dados contínuos: boxplot
 
@@ -199,17 +204,369 @@ murder_rate.quantile([0.05, 0.25, 0.5, 0.75, 0.95])
 :::
 ::: {.column}
 ```{python}
-population.plot.box()
+ax = population.plot.box()
 ```
 :::
 ::::
 
-## Filtrando outliers
+## Outliers
 
-- Analisando os estados outliers (com mais de 13 milhões de habitantes) com mais detalhes
-  - Vemos que California, Florida, New York e Texas tem as maiores populações, sendo "fora da curva" em comparação aos outros
+- _Outliers_ são valores muito distantes dos outros
+  - Podem ser dados com erros, mas também podem ser válidos
+    - Se for erro podem ser excluídos, mas com boa justificativa
+  - Requer investigação mais detalhada para entender o caso
+  - Exemplo das populações outliers e impacto nas estatísticas:
 
+:::: {.columns}
+::: {.column .smaller-table}
 ```{python}
 state[state['Population'] > 13]
 ```
+:::
+::: {.column}
+```{python}
+state.Population.agg(["mean", "median"])
+```
+:::
+::::
 
+# Covariância
+
+## O que é covariância e por que analisá-la?
+
+- *Covariância* descreve o comportamento **entre variáveis**.
+    - Tendência de 2 ou mais variáveis variarem juntas, de forma relacionada.
+
+- Útil para encontrar padrões de relacionamento entre variáveis
+    - E criar modelos que estimam valores com base nessas relações
+    - Ex: estimar votos de candidatos com base nos gastos de campanha
+    
+- A melhor forma de identificar covariância é visualizar o relacionamento entre variáveis
+    - Novamente, isto depende dos tipos das variáveis
+
+
+## Covariância: duas variáveis categóricas
+
+- Vamos analisar uma base de dados de empréstimos
+
+```{python}
+#| echo: false
+loans = pd.read_csv(LC_LOANS_CSV)
+loans_pivot = loans.pivot_table(
+  index='grade', columns='status',
+  aggfunc=lambda x: len(x)
+)
+```
+
+:::: {.columns}
+::: {.column .smaller-table width="45%"}
+
+```{python}
+loans
+```
+:::
+::: {.column width="55%"}
+- O nível do empréstimo (`grade`) é uma variável categórica **ordinal**
+    - Há uma ordem do nível melhor (*A*) para o pior (*G*)
+
+- O resultado (`status`) é uma variável **não ordinal**
+    - Não há ordem pré-definida dos seus valores
+:::
+::::
+
+## Covariância: duas variáveis categóricas
+
+- Podemos contar as observações para cada combinação
+  - Visualizando com tabela `pivot` e mapa de calor (`heatmap`)
+
+:::: {.columns}
+::: {.column .smaller-table}
+
+```{python}
+loans.pivot_table(index='grade', columns='status',
+                  aggfunc=lambda x: len(x))
+```
+:::
+::: {.column}
+
+```{python}
+fig, ax = plt.subplots(figsize=(5, 4))
+ax = sns.heatmap(loans_pivot, annot=True, fmt="d")
+```
+:::
+::::
+
+## Covariância: uma categórica e uma contínua
+
+- Covariância de 2 variáveis da base de dados de voôs cancelados
+  - `airline` (categórica não ordinal): nome da empresa aérea
+  - `pct_carrier_delay` (contínua): % de atrasos causados pela empresa 
+
+```{python}
+#| echo: false
+airline_stats = pd.read_csv(AIRLINE_STATS_CSV)[['airline', 'pct_carrier_delay', 'pct_weather_delay', 'pct_atc_delay']]
+```
+
+::: {.smaller-table}
+```{python}
+airline_stats
+```
+:::
+
+## Covariância: uma categórica e uma contínua
+
+- `Boxplot` e `density plot` da contínua agrupado pela categórica
+
+:::: {.columns}
+::: {.column}
+```{python}
+ax = airline_stats.boxplot(by='airline',
+  column='pct_carrier_delay', figsize=(6, 5))
+```
+:::
+::: {.column}
+```{python}
+fig, ax = plt.subplots(figsize=(6, 5))
+ax = sns.kdeplot(data=airline_stats,
+  x="pct_carrier_delay", hue="airline")
+```
+:::
+::::
+
+## Covariância: uma categórica e uma contínua
+
+- `violin plot` é outra alternativa ao boxplot
+
+:::: {.columns}
+::: {.column}
+```{python}
+fig, ax = plt.subplots(figsize=(6, 5))
+ax = sns.violinplot(data=airline_stats,
+  x='airline', y='pct_carrier_delay', ax=ax, inner='quartile')
+```
+:::
+::: {.column}
+- Mostra a densidade da contínua para cada grupo da categóricas
+- É mais fácil observar a concentração dos dados.
+- Nota-se:
+  -  Uma concentração mais perto de 0% para a `Alaska`
+  -  `Delta` e `United` com mais valores extremos (_outliers_)
+:::
+::::
+
+## Covariância: duas variáveis contínuas
+
+:::: {.columns}
+::: {.column}
+- Vamos analisar a variação diária da cotação de empresas de telecomunicação na bolsa de valores
+- Se quisermos comparar a covariância da cotação de duas empresas?
+  - Teremos duas variáveis contínuas
+:::
+::: {.column}
+::: {.smaller-table}
+```{python}
+#| echo: false
+
+sp500_sym = pd.read_csv(SP500_SECTORS_CSV)
+sp500_px = pd.read_csv(SP500_DATA_CSV, index_col=0)
+telecomSymbols = sp500_sym[sp500_sym['sector'] == 'telecommunications_services']['symbol']
+
+# Filter data for dates July 2012 through June 2015
+telecom = sp500_px.loc[sp500_px.index >= '2012-07-01', telecomSymbols]
+telecom
+```
+:::
+:::
+::::
+
+
+## Covariância: duas variáveis contínuas
+
+- `Scatterplot` comparando cotação diária da _Verizon_ (V) x _AT&T_ (T)
+  - Com transparência (`alpha`) destacamos a concentração dos pontos
+
+:::: {.columns}
+::: {.column}
+```{python}
+ax = telecom.plot.scatter(x='T', y='VZ',
+       figsize=(6, 5))
+```
+:::
+::: {.column}
+```{python}
+ax = telecom.plot.scatter(x='T', y='VZ',
+       alpha=0.4, linewidth=0, figsize=(6, 5))
+```
+:::
+::::
+
+## Covariância: duas variáveis contínuas
+
+- Outras alternativas: `hexbin` e `jointplot` (com `kind='hex'`)
+
+:::: {.columns}
+::: {.column}
+```{python}
+ax = telecom.plot.hexbin(x='T', y='VZ', gridsize=30, sharex=False, figsize=(6, 5))
+```
+:::
+::: {.column}
+```{python}
+ax = sns.jointplot(x='T', y='VZ', kind="hex", height=5, data=telecom)
+```
+:::
+::::
+
+## Covariância: duas variáveis contínuas {.incremental}
+
+- Analisando tamanho x valor de casas em uma região dos EUA
+
+:::: {.columns}
+::: {.column .smaller-table}
+```{python}
+#| echo: false
+kc_tax = pd.read_csv(KC_TAX_CSV, dtype={'ZipCode': 'Int64'})
+kc_tax0 = kc_tax.loc[(kc_tax.TaxAssessedValue < 750000) & 
+                     (kc_tax.SqFtTotLiving > 100) &
+                     (kc_tax.SqFtTotLiving < 3500), :]
+zip_codes = [98188, 98105, 98108, 98126]
+kc_tax_zip = kc_tax0.loc[kc_tax0.ZipCode.isin(zip_codes),:]
+kc_tax_zip
+```
+
+:::
+::: {.column}
+```{python}
+ax = sns.jointplot(data=kc_tax0, x='SqFtTotLiving', y='TaxAssessedValue', kind="hex", height=5)
+```
+:::
+::::
+
+## Covariância: duas contínuas e uma categórica
+
+:::: {.columns}
+::: {.column width="40%"}
+- A localização (`ZipCode`) da casa também influencia o preço?
+- Usamos `facets` para quebrar em um _subplot_ por categoria
+- Nota-se a influência tanto da localização quanto do tamanho no valor da casa
+
+:::
+::: {.column .smaller-code-fold width="60%"}
+```{python}
+#| code-fold: true
+def hexbin(x, y, color, **kwargs):
+    cmap = sns.light_palette(color, as_cmap=True)
+    plt.hexbin(x, y, gridsize=25, cmap=cmap, **kwargs)
+
+g = sns.FacetGrid(kc_tax_zip, col='ZipCode', col_wrap=2)
+ax = g.map(hexbin, 'SqFtTotLiving', 'TaxAssessedValue', 
+      extent=[0, 3500, 0, 700000])
+
+g.set_axis_labels('Finished Square Feet', 'Tax Assessed Value')
+g.set_titles('Zip code {col_name:.0f}')
+
+plt.tight_layout()
+plt.show()
+```
+:::
+:::
+::::
+
+## Exemplo EDA - diamantes
+
+- Dados de diamantes com variáveis: quilates (`caret`), qualidade do corte (`cut`), cor (`color`), claridade (`clarity`), preço (`price`), etc.
+
+::: {.smaller-table}
+```{python}
+#| echo: false
+diamond = sns.load_dataset('diamonds')
+diamond
+```
+:::
+
+## Exemplo EDA - diamantes: Variância
+
+:::: {.columns}
+::: {.column}
+- Corte (categórica ordinal)
+
+```{python}
+fig, ax = plt.subplots(figsize=(6, 5))
+ax = sns.countplot(data=diamond, x='cut',
+  order=['Fair', 'Good', 'Very Good', 'Premium', 'Ideal'])
+```
+
+:::
+::: {.column}
+- Quilates (contínua)
+```{python}
+fig, ax = plt.subplots(figsize=(6, 5))
+ax = sns.histplot(data=diamond, x="carat",
+                  binwidth=0.2)
+```
+:::
+::::
+
+## Exemplo EDA - diamantes: covariância
+
+- Relação de preço e corte dos diamantes com `density` e `box plot`
+  - Por que melhor corte (_Ideal_) é mais barato?
+
+:::: {.columns}
+::: {.column}
+```{python}
+fig, ax = plt.subplots(figsize=(6, 4))
+ax = sns.kdeplot(x="price", hue="cut", data=diamond)
+```
+:::
+::: {.column}
+```{python}
+fig, ax = plt.subplots(figsize=(6, 4))
+ax = sns.boxplot(x='price', y='cut', data=diamond)
+```
+:::
+::::
+
+## Exemplo EDA - diamantes: covariância
+
+- Relação de corte e cor (duas variáveis categóricas)
+
+```{python}
+cut_color = diamond[['cut', 'color']].pivot_table(index='cut', columns='color', aggfunc=len)
+fig, ax = plt.subplots(figsize=(9, 5))
+ax = sns.heatmap(cut_color, annot=True, fmt="d", cmap="YlGnBu")
+```
+
+## Exemplo EDA - diamantes: covariância
+
+- Relação de preço e quilates (duas variáveis contínuas)
+
+```{python}
+ax = sns.jointplot(x="carat", y="price", linewidth=0, alpha=0.01, height=5, data=diamond)
+```
+
+## Exemplo EDA - diamantes: 2 contínuas e 1 categórica
+
+```{python}
+g = sns.FacetGrid(diamond, col="cut", col_wrap=3)
+ax = g.map_dataframe(sns.scatterplot, x="carat", y="price", alpha=0.1, linewidth=0)
+```
+
+## Exemplo EDA - diamantes: 2 contínuas e 2 categóricas
+
+::: {.smaller-code-fold}
+```{python}
+#| code-fold: true
+diamond["price (k$)"] = diamond["price"] / 1000
+g = sns.FacetGrid(diamond, row="cut", col="clarity", margin_titles=True, height=1.3)
+ax = g.map_dataframe(sns.scatterplot, x="carat", y="price (k$)", alpha=0.3, linewidth=0)
+```
+:::
+
+## Referências
+
+- Bruce, P. et al. Practical Statistics for Data Scientists. 2nd Edition. O’Reilly, 20220. Code and Datasets: https://github.com/gedeck/practical-statistics-for-data-scientists
+
+- Wickhan, H. R for Data Science. O'Reilly, 2017. Open Access: http://r4ds.had.co.nz
+
+- Grus, Joel. Data Science do Zero. Editora Alta Books, 2021. Disponível em: Minha Biblioteca da UFPB.
