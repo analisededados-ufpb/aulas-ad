@@ -424,7 +424,7 @@
     "href": "2-eda/1-intro-eda.html#exemplo-eda---vulcão-covariância",
     "title": "Análise de dados",
     "section": "Exemplo EDA - vulcão: covariância",
-    "text": "Exemplo EDA - vulcão: covariância\n\nax = sns.scatterplot(x='eruptions', y='waiting', data=faithful)\n\n\n\n\n\nTempos de espera mais longos após erupções mais longas\nVariância gera incerteza; Covariância reduz incerteza\n\nValores de uma variável podem ajudar a prever valores de outra"
+    "text": "Exemplo EDA - vulcão: covariância\n\n\n\nfig, ax = plt.subplots(figsize=(7, 6))\nax = sns.scatterplot(x='eruptions', y='waiting', data=faithful)\n\n\n\n\n\n\nTempos de espera mais longos após erupções mais longas\nVariância gera incerteza\nCovariância reduz incerteza\nUma variável pode ajudar a prever a outra"
   },
   {
     "objectID": "2-eda/1-intro-eda.html#referências",
