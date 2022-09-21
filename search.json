@@ -434,6 +434,188 @@
     "text": "Referências\n\nBruce, P. et al. Practical Statistics for Data Scientists. 2nd Edition. O’Reilly, 20220. Code and Datasets: https://github.com/gedeck/practical-statistics-for-data-scientists\nWickhan, H. R for Data Science. O’Reilly, 2017. Open Access: http://r4ds.had.co.nz\nGrus, Joel. Data Science do Zero. Editora Alta Books, 2021. Disponível em: Minha Biblioteca da UFPB."
   },
   {
+    "objectID": "2-eda/2-estatistica-descritiva.html#probabilidade-vs.-estatística",
+    "href": "2-eda/2-estatistica-descritiva.html#probabilidade-vs.-estatística",
+    "title": "Análise de dados",
+    "section": "Probabilidade vs. Estatística",
+    "text": "Probabilidade vs. Estatística\n\nA probabilidade busca prever a chance de eventos futuros ocorrerem\n\nA estatística analisa a frequência de eventos passados\n\n\n\nA probabilidade é um ramo da matemática teórica sobre consequências de definições\nA estatística é matemática aplicada na busca de entender observações do mundo real"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#distribuições-de-variáveis-aleatórias",
+    "href": "2-eda/2-estatistica-descritiva.html#distribuições-de-variáveis-aleatórias",
+    "title": "Análise de dados",
+    "section": "Distribuições de variáveis aleatórias",
+    "text": "Distribuições de variáveis aleatórias\n\nVariáveis Aleatórias (VAs) são funções numéricas onde valores possuem probabilidades\nA função densidade de probabilidade (FDP) mostra VAs (como histogramas)"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#distribuições-de-variáveis-aleatórias-1",
+    "href": "2-eda/2-estatistica-descritiva.html#distribuições-de-variáveis-aleatórias-1",
+    "title": "Análise de dados",
+    "section": "Distribuições de variáveis aleatórias",
+    "text": "Distribuições de variáveis aleatórias\n\nFunção Densidade Acumulada (FDA) é o somatório da FDP\n\nFDA é a integral da FDP, enquanto a FDP é a derivada da FDA\n\n\n\\[C(X \\leq k) = \\sum_{x \\leq k} P(X = x)\\]"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#visualizando-distribuições-acumuladas",
+    "href": "2-eda/2-estatistica-descritiva.html#visualizando-distribuições-acumuladas",
+    "title": "Análise de dados",
+    "section": "Visualizando distribuições acumuladas",
+    "text": "Visualizando distribuições acumuladas\n\nAs vendas de iPhone estão bombando?"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#o-crescimento-é-mesmo-significativo",
+    "href": "2-eda/2-estatistica-descritiva.html#o-crescimento-é-mesmo-significativo",
+    "title": "Análise de dados",
+    "section": "O crescimento é mesmo significativo?",
+    "text": "O crescimento é mesmo significativo?\n\nFDAs podem dar uma visão errônea do crescimento\n\nA mudança incremental é a derivada da FDA, que é difícil de visualizar"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#estatística-descritiva-vs.-inferencial",
+    "href": "2-eda/2-estatistica-descritiva.html#estatística-descritiva-vs.-inferencial",
+    "title": "Análise de dados",
+    "section": "Estatística descritiva vs. inferencial",
+    "text": "Estatística descritiva vs. inferencial\n\nEstatística descritiva: captura propriedades e distribuição dos dados\n\nMedidas de tendência central descrevem o centro de sua distribuição\nMedidas de variabilidade ou dispersão descrevem o seu espalhamento\n\n\n\n\nEstatística inferencial: tomar decisões e achar relações nos dados\n\nUsa fundamentos e teorias da probabilidade\nPreocupa-se em modelar fenômenos aleatórios\nExemplo: as diferenças nos dados entre duas situações podem ser atribuídas a diferenças reais ou ao acaso?"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#estatística-descritiva",
+    "href": "2-eda/2-estatistica-descritiva.html#estatística-descritiva",
+    "title": "Análise de dados",
+    "section": "Estatística descritiva",
+    "text": "Estatística descritiva\nObjetivos:\n\nDar uma noção de como os dados estão distribuídos\nEntender melhor a natureza dos dados\nIdentificar pontos anormais (possíveis outliers)\nApresentação gráfica de aspectos importantes dos dados\nIdentificar relações entre variáveis"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#medidas-de-centralidade-com-número-único",
+    "href": "2-eda/2-estatistica-descritiva.html#medidas-de-centralidade-com-número-único",
+    "title": "Análise de dados",
+    "section": "Medidas de centralidade com número único",
+    "text": "Medidas de centralidade com número único\n\nUm número que seja representativo da maior parte dos dados\nA princípio pode parecer trivial: é só calcular a média\n\nEm alguns casos ela pode não ser a melhor medida de valor central\n\n\n\n\nÍndices de tendência central (average) mais populares:\n\nMédia amostral\nMediana amostral\nModa amostral"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-média-aritmética",
+    "href": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-média-aritmética",
+    "title": "Análise de dados",
+    "section": "Medida de centralidade: média aritmética",
+    "text": "Medida de centralidade: média aritmética\n\nSoma dividida pelo tamanho da amostra: \\(\\mu_x = \\frac{\\sum_{i = 1}^{n} x_i}{n}\\)\nChamada de primeiro momento da distribuição ou valor esperado\nA média é significativa para distribuições simétricas\n\nMas é sensível a outliers, principalmente se a amostra é pequena"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-variações-da-média",
+    "href": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-variações-da-média",
+    "title": "Análise de dados",
+    "section": "Medida de centralidade: variações da média",
+    "text": "Medida de centralidade: variações da média\n\nA média truncada (trimmed mean) remove os \\(p\\) menores e os \\(p\\) maiores valores antes de calcular a média\n\nAjuda a tirar o viés de valores extremos\n\n\n\\[\\text{Trimmed mean} = \\frac{\\sum^{n-p}_{i=p+1} x_i}{n − 2p}\\]"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-variações-da-média-1",
+    "href": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-variações-da-média-1",
+    "title": "Análise de dados",
+    "section": "Medida de centralidade: variações da média",
+    "text": "Medida de centralidade: variações da média\n\nA média ponderada (weighted mean) considera um peso \\(w\\) para cada valor\n\nExemplo: para calcular incidência média de covid-19 nos estados do Brasil, devem considerar a população de cada estado como peso\n\n\n\\[\\text{Weighted mean} = \\frac{\\sum^{n}_{i=1} w_i x_i}{\\sum{w_i}}\\]"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-mediana",
+    "href": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-mediana",
+    "title": "Análise de dados",
+    "section": "Medida de centralidade: mediana",
+    "text": "Medida de centralidade: mediana\n\nValor do meio dos dados ordenados (2o quartil ou 50-percentil)\n\nEx: [1, 4, 4, 6, 7, 9, 14] # Mediana: \\(6\\)\n\nSe o tamanho for par, a mediana é a média dos dois valores do meio\n\nEx: [2, 5, 8, 10, 15, 16] # Mediana: \\(\\frac{8+10}{2} = 9\\)\nÉ mais resistente a outliers, mas descarta muita informação"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-moda",
+    "href": "2-eda/2-estatistica-descritiva.html#medida-de-centralidade-moda",
+    "title": "Análise de dados",
+    "section": "Medida de centralidade: moda 😎",
+    "text": "Medida de centralidade: moda 😎\n\nÉ o valor que detém o maior número de observações\n\nOu seja, o valor ou valores mais frequentes\nNo gráfico de barras ou histograma, ele é a maior barra\nTambém é resistente a outliers, mas descarta muita informação"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#efeito-de-outliers-na-média",
+    "href": "2-eda/2-estatistica-descritiva.html#efeito-de-outliers-na-média",
+    "title": "Análise de dados",
+    "section": "Efeito de outliers na média",
+    "text": "Efeito de outliers na média\n\nimport pandas as pd\n\nx = pd.Series([1.2, 1.3, 1.5, 1.4, 1.5, 1.7, 1.4, 1.5, 1.6, 1.5, 1.4, 1.5, 1.5,\n               1.9, 1.7, 1.6, 1.8, 1.9, 1.7, 1.6, 1.8, 1.9, 1.7, 1.6, 1.7, 1.8,\n               1.6, 1.5, 1.4, 1.8, 1.6, 1.5, 1.6, 1.7, 1.5, 1.3, 1.4, 1.5, 1.5, 120])\nprint(f\"Média: {x.mean()} / Mediana: {x.median()} / Moda: {float(x.mode())}\")\n\nMédia: 4.54 / Mediana: 1.6 / Moda: 1.5\n\n\n\nx_f = x[x < 5]\nprint(f\"Média: {x_f.mean()} / Mediana: {x_f.median()} / Moda: {float(x_f.mode())}\")\n\nMédia: 1.5794871794871794 / Mediana: 1.6 / Moda: 1.5"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#qual-métrica-usar",
+    "href": "2-eda/2-estatistica-descritiva.html#qual-métrica-usar",
+    "title": "Análise de dados",
+    "section": "Qual métrica usar?",
+    "text": "Qual métrica usar?\n\n\n\n\n\nTipo de variável / escala\nÍndice de tendência central\n\n\n\n\nCategórica nominal\nModa\n\n\nCategórica ordinal\nMediana\n\n\nContínua Simétrica e sem outliers\nMédia\n\n\nContínua Assimétrica ou com outliers\nMediana\n\n\n\n\n\n\n\nBill Gates adiciona $250 à renda média, mas não muda mediana\nNo geral: se histograma é enviesado, usar mediana. Caso contrário, usar a média"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#exemplo-medidas-de-centralidade",
+    "href": "2-eda/2-estatistica-descritiva.html#exemplo-medidas-de-centralidade",
+    "title": "Análise de dados",
+    "section": "Exemplo: medidas de centralidade",
+    "text": "Exemplo: medidas de centralidade\n\n\n\nDados de população e taxa de homicídios nos EUA:\n\n\n\n             State  Population  Murder.Rate Abbreviation\n0          Alabama     4779736          5.7           AL\n1           Alaska      710231          5.6           AK\n2          Arizona     6392017          4.7           AZ\n3         Arkansas     2915918          5.6           AR\n4       California    37253956          4.4           CA\n5         Colorado     5029196          2.8           CO\n6      Connecticut     3574097          2.4           CT\n7         Delaware      897934          5.8           DE\n8          Florida    18801310          5.8           FL\n9          Georgia     9687653          5.7           GA\n10          Hawaii     1360301          1.8           HI\n11           Idaho     1567582          2.0           ID\n12        Illinois    12830632          5.3           IL\n13         Indiana     6483802          5.0           IN\n14            Iowa     3046355          1.9           IA\n15          Kansas     2853118          3.1           KS\n16        Kentucky     4339367          3.6           KY\n17       Louisiana     4533372         10.3           LA\n18           Maine     1328361          1.6           ME\n19        Maryland     5773552          6.1           MD\n20   Massachusetts     6547629          2.0           MA\n21        Michigan     9883640          5.4           MI\n22       Minnesota     5303925          1.6           MN\n23     Mississippi     2967297          8.6           MS\n24        Missouri     5988927          6.6           MO\n25         Montana      989415          3.6           MT\n26        Nebraska     1826341          2.9           NE\n27          Nevada     2700551          6.0           NV\n28   New Hampshire     1316470          0.9           NH\n29      New Jersey     8791894          3.9           NJ\n30      New Mexico     2059179          4.8           NM\n31        New York    19378102          3.1           NY\n32  North Carolina     9535483          5.1           NC\n33    North Dakota      672591          3.0           ND\n34            Ohio    11536504          4.0           OH\n35        Oklahoma     3751351          4.5           OK\n36          Oregon     3831074          2.0           OR\n37    Pennsylvania    12702379          4.8           PA\n38    Rhode Island     1052567          2.4           RI\n39  South Carolina     4625364          6.4           SC\n40    South Dakota      814180          2.3           SD\n41       Tennessee     6346105          5.7           TN\n42           Texas    25145561          4.4           TX\n43            Utah     2763885          2.3           UT\n44         Vermont      625741          1.6           VT\n45        Virginia     8001024          4.1           VA\n46      Washington     6724540          2.5           WA\n47   West Virginia     1852994          4.0           WV\n48       Wisconsin     5686986          2.9           WI\n49         Wyoming      563626          2.7           WY\n\n\n\n\nMédia da População\n\n\nstate['Population'].mean()\n\n6162876.3\n\n\n\nMédia truncada (10%)\n\n\nfrom scipy.stats import trim_mean\ntrim_mean(state['Population'], 0.1)\n\n4783697.125\n\n\n\nMediana\n\n\nstate['Population'].median()\n\n4436369.5"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#exemplo-medidas-de-centralidade-1",
+    "href": "2-eda/2-estatistica-descritiva.html#exemplo-medidas-de-centralidade-1",
+    "title": "Análise de dados",
+    "section": "Exemplo: medidas de centralidade",
+    "text": "Exemplo: medidas de centralidade\n\n\n\nDados de população e taxa de homicídios nos EUA\n\n\n\n             State  Population  Murder.Rate Abbreviation\n0          Alabama     4779736          5.7           AL\n1           Alaska      710231          5.6           AK\n2          Arizona     6392017          4.7           AZ\n3         Arkansas     2915918          5.6           AR\n4       California    37253956          4.4           CA\n5         Colorado     5029196          2.8           CO\n6      Connecticut     3574097          2.4           CT\n7         Delaware      897934          5.8           DE\n8          Florida    18801310          5.8           FL\n9          Georgia     9687653          5.7           GA\n10          Hawaii     1360301          1.8           HI\n11           Idaho     1567582          2.0           ID\n12        Illinois    12830632          5.3           IL\n13         Indiana     6483802          5.0           IN\n14            Iowa     3046355          1.9           IA\n15          Kansas     2853118          3.1           KS\n16        Kentucky     4339367          3.6           KY\n17       Louisiana     4533372         10.3           LA\n18           Maine     1328361          1.6           ME\n19        Maryland     5773552          6.1           MD\n20   Massachusetts     6547629          2.0           MA\n21        Michigan     9883640          5.4           MI\n22       Minnesota     5303925          1.6           MN\n23     Mississippi     2967297          8.6           MS\n24        Missouri     5988927          6.6           MO\n25         Montana      989415          3.6           MT\n26        Nebraska     1826341          2.9           NE\n27          Nevada     2700551          6.0           NV\n28   New Hampshire     1316470          0.9           NH\n29      New Jersey     8791894          3.9           NJ\n30      New Mexico     2059179          4.8           NM\n31        New York    19378102          3.1           NY\n32  North Carolina     9535483          5.1           NC\n33    North Dakota      672591          3.0           ND\n34            Ohio    11536504          4.0           OH\n35        Oklahoma     3751351          4.5           OK\n36          Oregon     3831074          2.0           OR\n37    Pennsylvania    12702379          4.8           PA\n38    Rhode Island     1052567          2.4           RI\n39  South Carolina     4625364          6.4           SC\n40    South Dakota      814180          2.3           SD\n41       Tennessee     6346105          5.7           TN\n42           Texas    25145561          4.4           TX\n43            Utah     2763885          2.3           UT\n44         Vermont      625741          1.6           VT\n45        Virginia     8001024          4.1           VA\n46      Washington     6724540          2.5           WA\n47   West Virginia     1852994          4.0           WV\n48       Wisconsin     5686986          2.9           WI\n49         Wyoming      563626          2.7           WY\n\n\n\n\nMédia da Taxa de homicídios\n\n\nstate['Murder.Rate'].mean()\n\n4.066\n\n\n\nProblema: na média aritmética os estados têm mesmo peso\n\nSolução: média ponderada pela população\n\nMédia ponderada\n\n\nfrom numpy import average\naverage(state['Murder.Rate'], weights=state['Population'])\n\n4.445833981123393"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#sumariando-variabilidade",
+    "href": "2-eda/2-estatistica-descritiva.html#sumariando-variabilidade",
+    "title": "Análise de dados",
+    "section": "Sumariando variabilidade",
+    "text": "Sumariando variabilidade\n“Então há um homem que morreu afogado atravessando um riacho com uma profundidade média de seis polegadas”\n\n\nA tendência central não é suficiente\nPodemos adicionar a ela um índice de dispersão:\n\nRange / Intervalo (ex: valores mínimo e máximo)\nVariância / Desvio padrão / Coeficiente de variação\nPercentis extremos (ex: 10-percentil e 90-percentil)\nIntervalo semi-quartis (SIQR)"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#sumariando-a-variabilidade",
+    "href": "2-eda/2-estatistica-descritiva.html#sumariando-a-variabilidade",
+    "title": "Análise de dados",
+    "section": "Sumariando a variabilidade",
+    "text": "Sumariando a variabilidade\n\nHistograma do desempenho de dois sistemas:\n\n\n\n\n\nA média é a mesma. Mas qual você prefere?"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#range",
+    "href": "2-eda/2-estatistica-descritiva.html#range",
+    "title": "Análise de dados",
+    "section": "Range",
+    "text": "Range\nIntervalo: [min, max]\n\nÚtil apenas quando os valores de uma variavél são limitados (bounded)\n\nDá para ter noção desses limites com o range\n\nVaria de acordo com o número de observações\n\nNão dá para saber se o range é significativo ou não"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#variância-e-desvio-padrão",
+    "href": "2-eda/2-estatistica-descritiva.html#variância-e-desvio-padrão",
+    "title": "Análise de dados",
+    "section": "Variância e desvio padrão",
+    "text": "Variância e desvio padrão\nVariância amostral (unidade dos dados ao quadrado):\n\\[s^2 = \\frac{\\sum_{i=1}^{n} (x_i - \\bar{x})^2}{n - 1}\\]\nDesvio padrão amostral (mesma unidade dos dados):\n\\[s = \\sqrt{s^2}\\]\nCoeficiente de variação (independente da média e da unidade):\n\\[COV = \\bar{C} = \\frac{s}{\\bar{x}}\\]"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#quantis",
+    "href": "2-eda/2-estatistica-descritiva.html#quantis",
+    "title": "Análise de dados",
+    "section": "Quantis",
+    "text": "Quantis\n\n0,05-quantil; 0,95-quantil: similar ao range\nDecis \\((\\frac{1}{10})\\), Quartis \\((\\frac{1}{4})\\)\nIntervalos entre quartis\n\nInter-Quartile Range: \\[\\mathit{IQR} = Q3 - Q1\\]\nSemi IQR: \\[\\mathit{SIQR} = \\frac{Q3 - Q1}{2}\\]"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#top-frequent",
+    "href": "2-eda/2-estatistica-descritiva.html#top-frequent",
+    "title": "Análise de dados",
+    "section": "Top frequent",
+    "text": "Top frequent\n\nPara dados categóricos, a dispersão pode ser a porcentagem de observações das categorias mais frequentes\nExemplo: top 90%, top 45%\n\nQual está mais espalhado?"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#como-selecionar-um-índice-de-dispersão",
+    "href": "2-eda/2-estatistica-descritiva.html#como-selecionar-um-índice-de-dispersão",
+    "title": "Análise de dados",
+    "section": "Como selecionar um índice de dispersão?",
+    "text": "Como selecionar um índice de dispersão?\n\n\n\n\n\nTipo de variável\nÍndice de dispersão\n\n\n\n\nCategórica\nTop frequent\n\n\nContínua Simétrica\nVariância, desvio padrão ou COV\n\n\nContínua Assimétrica\nQuantis, IQR ou SIQR\n\n\n\n\n\n\n\nIntervalo (range) pode ser usado para complementar a análise de dispersão"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#exemplos---índices-de-dispersão",
+    "href": "2-eda/2-estatistica-descritiva.html#exemplos---índices-de-dispersão",
+    "title": "Análise de dados",
+    "section": "Exemplos - Índices de dispersão",
+    "text": "Exemplos - Índices de dispersão"
+  },
+  {
+    "objectID": "2-eda/2-estatistica-descritiva.html#referências",
+    "href": "2-eda/2-estatistica-descritiva.html#referências",
+    "title": "Análise de dados",
+    "section": "Referências",
+    "text": "Referências\n\nSlides baseados no material de:\n\nProf. Raquel Lopes (UFCG)\nProf. Steven Skiena (Stony Brok University)\n\nOutras referências:\n\nProbability and Statistics for Engineering and the Sciences. Jay Devore\nThe Art of Computer Systems Performance Analysis. Raj Jain"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",

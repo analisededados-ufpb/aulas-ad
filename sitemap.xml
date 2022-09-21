@@ -2,34 +2,38 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/0-apresentacao.html</loc>
-    <lastmod>2022-09-16T15:02:01.320Z</lastmod>
+    <lastmod>2022-09-21T12:10:06.684Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/1-introducao-ad.html</loc>
-    <lastmod>2022-09-16T15:02:02.163Z</lastmod>
+    <lastmod>2022-09-21T12:10:07.227Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/2-intro-python-jupyter.html</loc>
-    <lastmod>2022-09-16T15:02:08.858Z</lastmod>
+    <lastmod>2022-09-21T12:10:15.061Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/2-eda/1-intro-eda.html</loc>
-    <lastmod>2022-09-16T15:02:49.464Z</lastmod>
+    <lastmod>2022-09-21T12:11:05.296Z</lastmod>
+  </url>
+  <url>
+    <loc>https://analisededados-ufpb.github.io/aulas-ad/2-eda/2-estatistica-descritiva.html</loc>
+    <lastmod>2022-09-21T12:11:27.915Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/about.html</loc>
-    <lastmod>2022-09-16T15:02:50.732Z</lastmod>
+    <lastmod>2022-09-21T12:11:28.205Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/index.html</loc>
-    <lastmod>2022-09-16T15:02:51.717Z</lastmod>
+    <lastmod>2022-09-21T12:11:28.730Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/3-intro-pandas.html</loc>
-    <lastmod>2022-09-16T15:02:52.604Z</lastmod>
+    <lastmod>2022-09-21T12:11:29.173Z</lastmod>
   </url>
   <url>
     <loc>https://analisededados-ufpb.github.io/aulas-ad/1-introducao/4-exemplo-pandas.html</loc>
-    <lastmod>2022-09-16T15:02:53.583Z</lastmod>
+    <lastmod>2022-09-21T12:11:29.786Z</lastmod>
   </url>
 </urlset>
