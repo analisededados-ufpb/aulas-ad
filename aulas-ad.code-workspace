@@ -2,12 +2,6 @@
 	"folders": [
 		{
 			"path": "."
-		},
-		{
-			"path": "../pydata-book"
-		},
-		{
-			"path": "../lab-manipulacao-dados"
 		}
 	],
 	"settings": {}

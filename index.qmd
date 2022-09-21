@@ -19,23 +19,21 @@ Material da disciplina de Análise de Dados I
 
 ## Análise Exploratória de Dados
 
-- [2.1 Introdução à Análise Exploratória de Dados](2-eda/1-intro-eda.qmd) (Slides)
+- [2.1 Introdução à análise exploratória](2-eda/1-intro-eda.qmd) (Slides)
+- [2.2 Estatística descritiva](2-eda/2-estatistica-descritiva.qmd) (Slides)
 
 # Referências
 
-- McKinney, W. Python for Data Analysis, 3rd Edition, 2022. Open Access: [https://wesmckinney.com/book/](https://wesmckinney.com/book/)
-    - 2a edição em português disponível na biblioteca do CCAE-UFPB)
+- Bruce, P. et al. Estatística Prática para Cientistas de Dados. O’Reilly, 2020. Código e datasets: [https://github.com/gedeck/practical-statistics-for-data-scientists](https://github.com/gedeck/practical-statistics-for-data-scientists)
 
-- Grus, Joel. Data Science do Zero. Editora Alta Books, 2021.
-    - Disponível na biblioteca virtual da UFPB (Minha Biblioteca)
+- McKinney, W. Python for Data Analysis, 3rd Edition, 2022. Disponível on-line: [https://wesmckinney.com/book/](https://wesmckinney.com/book/). [2a edição em português disponível na biblioteca do CCAE-UFPB]
+
+- Grus, Joel. Data Science do Zero. Editora Alta Books, 2021. [Disponível na biblioteca virtual da UFPB (Minha Biblioteca)]
 
 - Skienna, S. The Data Science Design Manual. Springer, 2017.
 
-- Bruce, P. et al. Practical Statistics for Data Scientists. O’Reilly, 2020
-    - Código e datasets: [https://github.com/gedeck/practical-statistics-for-data-scientists](https://github.com/gedeck/practical-statistics-for-data-scientists)
+- VanderPlas, J. Python Data Science Handbook. 2022. Disponível em: [https://jakevdp.github.io/PythonDataScienceHandbook/](https://jakevdp.github.io/PythonDataScienceHandbook/)
 
-- VanderPlas, J. Python Data Science Handbook. 2022. Open URL: [https://jakevdp.github.io/PythonDataScienceHandbook/](https://jakevdp.github.io/PythonDataScienceHandbook/)
-
-- Wickhan, H. R for Data Science. Open Access: [http://r4ds.had.co.nz](http://r4ds.had.co.nz)
+- Wickhan, H. R for Data Science. Disponível em: [http://r4ds.had.co.nz](http://r4ds.had.co.nz)
 
 - Downey, A. Think Stats - Exploratory Data Analysis in Python. 
