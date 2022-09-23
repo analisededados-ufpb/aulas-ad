@@ -616,6 +616,118 @@
     "text": "Referências\n\nSlides baseados no material de:\n\nProf. Raquel Lopes (UFCG)\nProf. Steven Skiena (Stony Brok University)\n\nOutras referências:\n\nProbability and Statistics for Engineering and the Sciences. Jay Devore\nThe Art of Computer Systems Performance Analysis. Raj Jain"
   },
   {
+    "objectID": "2-eda/3-correlacao.html#relação-entre-variáveis",
+    "href": "2-eda/3-correlacao.html#relação-entre-variáveis",
+    "title": "Análise de dados",
+    "section": "Relação entre variáveis",
+    "text": "Relação entre variáveis\n\nEm análise exploratória, é útil examinar se há associação entre duas variáveis numéricas\nCaracterísticas importantes para essa associação:\n\nFormato: linear, exponencial, parabólica, linear e depois assintótica, outro formato arbitrário, etc.\nForça: correlação forte, fraca, nenhuma\nSinal: correlação positiva ou negativa, quando é perceptível\nPontos extremos fora da associação\n\nJá vimos como visualizar a covariância com gráficos de dispersão\nOutra técnica para relacionar variáveis é a análise de correlação"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#correlação",
+    "href": "2-eda/3-correlacao.html#correlação",
+    "title": "Análise de dados",
+    "section": "Correlação",
+    "text": "Correlação\n\nMedida que indica se a relação entre 2 variáveis \\(x\\) e \\(y\\) é estatisticamente significativa\nO coeficiente de correlação é uma estatística que mede em que grau \\(y\\) é uma função de \\(x\\) e vice versa\nO coeficiente de Pearson é o mais popular e usado principalmente para relações lineares\nOs coeficientes de Spearman e Kendall são baseados em ranking\n\nSão menos sensíveis a outliers e capturam algumas relações não lineares"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#coeficiente-de-correlação-de-pearson",
+    "href": "2-eda/3-correlacao.html#coeficiente-de-correlação-de-pearson",
+    "title": "Análise de dados",
+    "section": "Coeficiente de Correlação de Pearson",
+    "text": "Coeficiente de Correlação de Pearson\n\nIndica a força e a direção da correlação linear entre duas variáveis\nSeu coeficiente amostral para as variáveis x e y é definido por:\n\n\\[r_{xy} = \\frac{1}{n-1} \\sum_{i=1}^{n} \\left( \\frac{x_i - \\bar{x}}{s_x} \\right) \\left( \\frac{y_i - \\bar{y}}{s_y} \\right)\\]\n\nO valor do coeficiente de correlação \\(r_{xy}\\) varia de -1 a 1:\n\nSe \\(r_{xy}\\) é positivo: quando \\(x\\) aumenta, \\(y\\) aumenta linearmente\nSe \\(r_{xy}\\) é negativo: quando \\(x\\) aumenta, \\(y\\) diminui linearmente\nSe \\(r_{xy}\\) é aproximadamente 0: não há relação linear entre \\(x\\) e \\(y\\)"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#coeficiente-de-correlação-de-pearson-1",
+    "href": "2-eda/3-correlacao.html#coeficiente-de-correlação-de-pearson-1",
+    "title": "Análise de dados",
+    "section": "Coeficiente de Correlação de Pearson",
+    "text": "Coeficiente de Correlação de Pearson\n\nValores tipicamente usados para indicar a força da correlação:\n\nSe \\(r_{xy} \\gt 0.7\\) ou \\(r_{xy} \\lt -0.7\\): correlação forte\nSe \\(0.3 \\lt r_{xy} \\lt 0.7\\) ou \\(-0.7 \\lt r_{xy} \\lt - 0.3\\): correlação moderada\nSe \\(-0.3 \\lt r_{xy} \\lt 0.3\\): correlação fraca\nSe \\(r_{xy} \\approx 0\\): não há correlação (ou não se pode concluir nada)\n\nPorém, a avaliação da correlação vai depender de cada contexto\n\nNão há um número apenas que possa lhe responder tudo sobre a associação entre as duas variáveis\nA correlação servirá para complementar e quantificar observações feitas em gráficos de dispersão"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#exemplo-quarteto-de-anscombe",
+    "href": "2-eda/3-correlacao.html#exemplo-quarteto-de-anscombe",
+    "title": "Análise de dados",
+    "section": "Exemplo: quarteto de Anscombe",
+    "text": "Exemplo: quarteto de Anscombe\n\nQuatro datasets com pares de variáveis \\(x\\) e \\(y\\)\n\nNota-se estatísticas bem similares em cada dataset…\n\n\n\n\nanscombe.groupby(['dataset']).x.describe()\n\n\n\n\n\n  \n    \n      \n      count\n      mean\n      std\n      min\n      25%\n      50%\n      75%\n      max\n    \n    \n      dataset\n      \n      \n      \n      \n      \n      \n      \n      \n    \n  \n  \n    \n      I\n      11.0\n      9.0\n      3.316625\n      4.0\n      6.5\n      9.0\n      11.5\n      14.0\n    \n    \n      II\n      11.0\n      9.0\n      3.316625\n      4.0\n      6.5\n      9.0\n      11.5\n      14.0\n    \n    \n      III\n      11.0\n      9.0\n      3.316625\n      4.0\n      6.5\n      9.0\n      11.5\n      14.0\n    \n    \n      IV\n      11.0\n      9.0\n      3.316625\n      8.0\n      8.0\n      8.0\n      8.0\n      19.0\n    \n  \n\n\n\n\n\n\n\nanscombe.groupby(['dataset']).y.describe()\n\n\n\n\n\n  \n    \n      \n      count\n      mean\n      std\n      min\n      25%\n      50%\n      75%\n      max\n    \n    \n      dataset\n      \n      \n      \n      \n      \n      \n      \n      \n    \n  \n  \n    \n      I\n      11.0\n      7.500909\n      2.031568\n      4.26\n      6.315\n      7.58\n      8.57\n      10.84\n    \n    \n      II\n      11.0\n      7.500909\n      2.031657\n      3.10\n      6.695\n      8.14\n      8.95\n      9.26\n    \n    \n      III\n      11.0\n      7.500000\n      2.030424\n      5.39\n      6.250\n      7.11\n      7.98\n      12.74\n    \n    \n      IV\n      11.0\n      7.500909\n      2.030579\n      5.25\n      6.170\n      7.04\n      8.19\n      12.50"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#exemplo-quarteto-de-anscombe-1",
+    "href": "2-eda/3-correlacao.html#exemplo-quarteto-de-anscombe-1",
+    "title": "Análise de dados",
+    "section": "Exemplo: quarteto de Anscombe",
+    "text": "Exemplo: quarteto de Anscombe\n\nCalculando a correlação linear entre \\(x\\) e \\(y\\) em cada dataset:\n\n\n\nanscombe.groupby(['dataset']).corr()\n\n\n\n\n\n  \n    \n      \n      \n      x\n      y\n    \n    \n      dataset\n      \n      \n      \n    \n  \n  \n    \n      I\n      x\n      1.000000\n      0.816421\n    \n    \n      y\n      0.816421\n      1.000000\n    \n    \n      II\n      x\n      1.000000\n      0.816237\n    \n    \n      y\n      0.816237\n      1.000000\n    \n    \n      III\n      x\n      1.000000\n      0.816287\n    \n    \n      y\n      0.816287\n      1.000000\n    \n    \n      IV\n      x\n      1.000000\n      0.816521\n    \n    \n      y\n      0.816521\n      1.000000\n    \n  \n\n\n\n\n\n\nTodos os datasets são iguais? E se olharmos os dados?"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#exemplo-quarteto-de-anscombe-2",
+    "href": "2-eda/3-correlacao.html#exemplo-quarteto-de-anscombe-2",
+    "title": "Análise de dados",
+    "section": "Exemplo: quarteto de Anscombe",
+    "text": "Exemplo: quarteto de Anscombe\n\n\n\nax = sns.lmplot(data=anscombe, x=\"x\", y=\"y\", col=\"dataset\", height=3,\n                hue=\"dataset\", col_wrap=2, palette=\"muted\", ci=None)\n\n\n\n\n\n\nRelações diferentes, mesma quantificação\n\nNo 2o grupo não há uma relação linear\nNo 3o há relação perfeita entre maioria das observações, com uma exceção\nNo 4o não há relação; há uma exceção que faz parecer que há uma relação"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#outros-coeficientes-de-correlação",
+    "href": "2-eda/3-correlacao.html#outros-coeficientes-de-correlação",
+    "title": "Análise de dados",
+    "section": "Outros coeficientes de correlação",
+    "text": "Outros coeficientes de correlação\n\nCoeficientes de Spearman e Kendall são baseados em ranking\n\nMenos sensíveis a outliers e capturam algumas relações não lineares\n\n\n\npd.DataFrame({\n    'pearson': anscombe.groupby(['dataset']).corr(method='pearson').y.xs('x', level=1),\n    'spearman': anscombe.groupby(['dataset']).corr(method='spearman').y.xs('x', level=1),\n    'kendall': anscombe.groupby(['dataset']).corr(method='kendall').y.xs('x', level=1)\n})\n\n\n\n\n\n  \n    \n      \n      pearson\n      spearman\n      kendall\n    \n    \n      dataset\n      \n      \n      \n    \n  \n  \n    \n      I\n      0.816421\n      0.818182\n      0.636364\n    \n    \n      II\n      0.816237\n      0.690909\n      0.563636\n    \n    \n      III\n      0.816287\n      0.990909\n      0.963636\n    \n    \n      IV\n      0.816521\n      0.500000\n      0.426401"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#força-e-direção-da-correlação",
+    "href": "2-eda/3-correlacao.html#força-e-direção-da-correlação",
+    "title": "Análise de dados",
+    "section": "Força e direção da correlação",
+    "text": "Força e direção da correlação\n\nExemplos de relação entre o valor esperado do coeficiente (linear) e vários tipos de associação entre duas variáveis:\n\n\nFonte: wikipedia"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#exemplo-dados-com-relação-linear",
+    "href": "2-eda/3-correlacao.html#exemplo-dados-com-relação-linear",
+    "title": "Análise de dados",
+    "section": "Exemplo: dados com relação linear",
+    "text": "Exemplo: dados com relação linear\n\n\n\nrng = np.random.default_rng(12345)\nx = 100 * rng.normal(size=100)\nruido = 40 * rng.normal(size=100)\ny = 0.5 * x + ruido + 20\ndf = pd.DataFrame({'x': x, 'y': y})\nsns.lmplot(data=df, x='x', y='y', height=4, aspect=1.3)\nprint(f\"Correlação: {df.x.corr(df.y)}\")\n\nCorrelação: 0.7460018986073979\n\n\n\n\n\n\n\n# Com o dobro do erro / ruído\n# Dados mais espalhados, correlação diminui\nruido2 = 80 * rng.normal(size=100)\ny = 0.5 * x + ruido2 + 20\ndf = pd.DataFrame({'x': x, 'y': y})\nsns.lmplot(x='x', y='y', data=df, height=4, aspect=1.3)\nprint(f\"Correlação: {df.x.corr(df.y)}\")\n\nCorrelação: 0.4340703264617881"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#exemplo-dados-com-relação-não-linear",
+    "href": "2-eda/3-correlacao.html#exemplo-dados-com-relação-não-linear",
+    "title": "Análise de dados",
+    "section": "Exemplo: dados com relação não linear",
+    "text": "Exemplo: dados com relação não linear\n\n\n\nfig, ax = plt.subplots(figsize=(6, 5))\nx = rng.uniform(low=1, high=20, size=100)\ny = 100 * np.exp(-1.2 * x)\ndf = pd.DataFrame({'x': x, 'y': y})\nax = sns.scatterplot(data=df, x='x', y='y', linewidth=0, ax=ax)\n\n\n\n\n\n\npd.Series({\n    'pearson': df.x.corr(df.y, method='pearson'),\n    'spearman': df.x.corr(df.y, method='spearman'),\n    'kendall': df.x.corr(df.y, method='kendall')\n}, name='correlacao').to_frame()\n\n\n\n\n\n  \n    \n      \n      correlacao\n    \n  \n  \n    \n      pearson\n      -0.466498\n    \n    \n      spearman\n      -1.000000\n    \n    \n      kendall\n      -1.000000"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#exemplo-dados-com-relação-não-linear-1",
+    "href": "2-eda/3-correlacao.html#exemplo-dados-com-relação-não-linear-1",
+    "title": "Análise de dados",
+    "section": "Exemplo: dados com relação não linear",
+    "text": "Exemplo: dados com relação não linear\n\nVisualizando os mesmos dados em escala logarítmica\n\n\n\n\n# Escala normal\nfig, ax = plt.subplots(figsize=(6, 5))\nax = sns.scatterplot(data=df, x='x', y='y', linewidth=0, ax=ax)\n\n\n\n\n\n\nfig, ax = plt.subplots(figsize=(6, 5))\nax = sns.scatterplot(data=df, x='x', y='y', linewidth=0, ax=ax)\nax.set_yscale('log')"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#correlação-vs.-causalidade",
+    "href": "2-eda/3-correlacao.html#correlação-vs.-causalidade",
+    "title": "Análise de dados",
+    "section": "Correlação vs. Causalidade",
+    "text": "Correlação vs. Causalidade\n\nATENÇÃO! Correlação não implica causalidade!\n\nEx: a quantidade de remédios consumidos tem forte correlação com a quantidade de pessoas doentes; mas o remédio não causa a doença\n\n\n\nFonte: XKCD\nLinks: correlações espúrias, wikipedia e aula na Khan Academy"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#cuidado-com-sumários-datasaurus",
+    "href": "2-eda/3-correlacao.html#cuidado-com-sumários-datasaurus",
+    "title": "Análise de dados",
+    "section": "Cuidado com sumários: datasaurus",
+    "text": "Cuidado com sumários: datasaurus\n\n\n\n# Correlação\ndatasaurus = pd.read_csv(DATASAURUS_CSV)\ndatasaurus.groupby(['dataset']).corr().y.xs('x', level=1).to_frame()\n\n\n\n\n\n  \n    \n      \n      y\n    \n    \n      dataset\n      \n    \n  \n  \n    \n      away\n      -0.064128\n    \n    \n      bullseye\n      -0.068586\n    \n    \n      circle\n      -0.068343\n    \n    \n      dino\n      -0.064472\n    \n    \n      dots\n      -0.060341\n    \n    \n      h_lines\n      -0.061715\n    \n    \n      high_lines\n      -0.068504\n    \n    \n      slant_down\n      -0.068980\n    \n    \n      slant_up\n      -0.068609\n    \n    \n      star\n      -0.062961\n    \n    \n      v_lines\n      -0.069446\n    \n    \n      wide_lines\n      -0.066575\n    \n    \n      x_shape\n      -0.065583\n    \n  \n\n\n\n\n\n\n# Média e desvio padrão\ndatasaurus.groupby(['dataset']).agg(['mean', 'std'])\n\n\n\n\n\n  \n    \n      \n      x\n      y\n    \n    \n      \n      mean\n      std\n      mean\n      std\n    \n    \n      dataset\n      \n      \n      \n      \n    \n  \n  \n    \n      away\n      54.266100\n      16.769825\n      47.834721\n      26.939743\n    \n    \n      bullseye\n      54.268730\n      16.769239\n      47.830823\n      26.935727\n    \n    \n      circle\n      54.267320\n      16.760013\n      47.837717\n      26.930036\n    \n    \n      dino\n      54.263273\n      16.765142\n      47.832253\n      26.935403\n    \n    \n      dots\n      54.260303\n      16.767735\n      47.839829\n      26.930192\n    \n    \n      h_lines\n      54.261442\n      16.765898\n      47.830252\n      26.939876\n    \n    \n      high_lines\n      54.268805\n      16.766704\n      47.835450\n      26.939998\n    \n    \n      slant_down\n      54.267849\n      16.766759\n      47.835896\n      26.936105\n    \n    \n      slant_up\n      54.265882\n      16.768853\n      47.831496\n      26.938608\n    \n    \n      star\n      54.267341\n      16.768959\n      47.839545\n      26.930275\n    \n    \n      v_lines\n      54.269927\n      16.769959\n      47.836988\n      26.937684\n    \n    \n      wide_lines\n      54.266916\n      16.770000\n      47.831602\n      26.937902\n    \n    \n      x_shape\n      54.260150\n      16.769958\n      47.839717\n      26.930002"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#cuidado-com-sumários-datasaurus-1",
+    "href": "2-eda/3-correlacao.html#cuidado-com-sumários-datasaurus-1",
+    "title": "Análise de dados",
+    "section": "Cuidado com sumários: datasaurus",
+    "text": "Cuidado com sumários: datasaurus\n\nMuito parecidos?\n\n\n\n\nfig, ax = plt.subplots(figsize=(5, 4))\nax = sns.boxplot(x='x', y='dataset', data=datasaurus)\n\n\n\n\n\n\nfig, ax = plt.subplots(figsize=(5, 4))\nax = sns.boxplot(x='y', y='dataset', data=datasaurus)"
+  },
+  {
+    "objectID": "2-eda/3-correlacao.html#cuidado-com-sumários-datasaurus-2",
+    "href": "2-eda/3-correlacao.html#cuidado-com-sumários-datasaurus-2",
+    "title": "Análise de dados",
+    "section": "Cuidado com sumários: datasaurus",
+    "text": "Cuidado com sumários: datasaurus\n\ng = sns.FacetGrid(datasaurus, col=\"dataset\", col_wrap=5, height=2, hue=\"dataset\")\nax = g.map_dataframe(sns.scatterplot, x=\"x\", y=\"y\", linewidth=0)"
+  },
+  {
     "objectID": "about.html",
     "href": "about.html",
     "title": "About",
@@ -641,7 +753,7 @@
     "href": "index.html#análise-exploratória-de-dados",
     "title": "Análise de Dados I @ DCX / CCAE / UFPB",
     "section": "Análise Exploratória de Dados",
-    "text": "Análise Exploratória de Dados\n\n2.1 Introdução à análise exploratória (Slides)\n2.2 Estatística descritiva (Slides)"
+    "text": "Análise Exploratória de Dados\n\n2.1 Introdução à análise exploratória (Slides)\n2.2 Estatística descritiva (Slides)\n2.3 Análise de correlação (Slides)"
   },
   {
     "objectID": "1-introducao/3-intro-pandas.html",
