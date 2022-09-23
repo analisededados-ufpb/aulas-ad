@@ -5,7 +5,7 @@ subtitle: "Prof. Marcus Carvalho"
 
 Material da disciplina de Análise de Dados I
 
-# Aulas
+# Material das aulas
 
 - [Apresentação da disciplina](1-introducao/0-apresentacao.qmd) (Slides)
 
@@ -21,6 +21,7 @@ Material da disciplina de Análise de Dados I
 
 - [2.1 Introdução à análise exploratória](2-eda/1-intro-eda.qmd) (Slides)
 - [2.2 Estatística descritiva](2-eda/2-estatistica-descritiva.qmd) (Slides)
+- [2.3 Análise de correlação](2-eda/3-correlacao.qmd) (Slides)
 
 # Referências
 

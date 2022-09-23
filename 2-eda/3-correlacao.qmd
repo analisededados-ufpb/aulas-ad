@@ -1,0 +1,271 @@
+---
+title: "Análise de dados"
+subtitle: "Análise de Correlação"
+author: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+format:
+    revealjs:
+        slide-number: true
+        chalkboard: true
+        incremental: false
+        theme: [simple, ../custom.scss]
+        echo: true
+        scrollable: false
+---
+
+## Relação entre variáveis
+
+```{python}
+#| echo: false
+import math
+import matplotlib.pylab as plt
+import numpy as np
+import pandas as pd
+from pathlib import Path
+import seaborn as sns
+from scipy import stats
+
+sns.set_context('talk')
+DATA_DIR = Path().resolve().parent / 'dados'
+DATASAURUS_CSV = DATA_DIR / 'datasaurus.csv'
+anscombe = sns.load_dataset("anscombe")
+```
+
+- Em análise exploratória, é útil examinar se há associação entre duas variáveis numéricas
+- Características importantes para essa associação: 
+    1. **Formato**: linear, exponencial, parabólica, linear e depois assintótica, outro formato arbitrário, etc.
+    2. **Força**: correlação forte, fraca, nenhuma
+    3. **Sinal**: correlação positiva ou negativa, quando é perceptível
+    4. **Pontos extremos** fora da associação
+  
+- Já vimos como visualizar a covariância com gráficos de dispersão
+- Outra técnica para relacionar variáveis é a **análise de correlação**
+
+## Correlação
+
+- Medida que indica se a relação entre 2 variáveis $x$ e $y$ é estatisticamente significativa
+- O **coeficiente de correlação** é uma estatística que mede em que grau $y$ é uma função de $x$ e vice versa
+- O coeficiente de **Pearson** é o mais popular e usado principalmente para relações *lineares*
+- Os coeficientes de **Spearman** e **Kendall** são baseados em ranking
+    - São menos sensíveis a _outliers_ e capturam algumas relações não lineares
+
+## Coeficiente de Correlação de Pearson
+
+- Indica a força e a direção da correlação linear entre duas variáveis
+- Seu coeficiente amostral para as variáveis *x* e *y* é definido por:
+
+$$r_{xy} = \frac{1}{n-1} \sum_{i=1}^{n} \left( \frac{x_i - \bar{x}}{s_x} \right) \left( \frac{y_i - \bar{y}}{s_y} \right)$$
+
+- O valor do coeficiente de correlação $r_{xy}$ varia de -1 a 1:
+    - Se $r_{xy}$ é **positivo**: quando $x$ aumenta, $y$ aumenta linearmente
+    - Se $r_{xy}$ é **negativo**: quando $x$ aumenta, $y$ diminui linearmente
+    - Se $r_{xy}$ é **aproximadamente 0**: não há relação linear entre $x$ e $y$
+
+## Coeficiente de Correlação de Pearson
+
+- Valores tipicamente usados para indicar a força da correlação:
+    - Se $r_{xy} \gt 0.7$ ou $r_{xy} \lt -0.7$: **correlação forte**
+    - Se $0.3 \lt r_{xy} \lt 0.7$ ou $-0.7 \lt r_{xy} \lt - 0.3$: **correlação moderada**
+    - Se $-0.3 \lt r_{xy} \lt 0.3$: **correlação fraca**
+    - Se $r_{xy} \approx 0$: **não há correlação** (ou não se pode concluir nada)
+
+- Porém, a avaliação da correlação vai depender de cada contexto
+    - Não há um número apenas que possa lhe responder tudo sobre a associação entre as duas variáveis
+    - A correlação servirá para complementar e quantificar observações feitas em gráficos de dispersão
+
+
+## Exemplo: quarteto de Anscombe
+
+- Quatro datasets com pares de variáveis $x$ e $y$
+    - Nota-se estatísticas bem similares em cada dataset...
+
+::: {.smaller-table}
+```{python}
+anscombe.groupby(['dataset']).x.describe()
+```
+:::
+
+::: {.smaller-table}
+```{python}
+anscombe.groupby(['dataset']).y.describe()
+```
+:::
+
+## Exemplo: quarteto de Anscombe
+
+- Calculando a correlação linear entre $x$ e $y$ em cada dataset: 
+
+::: {.smaller-table}
+```{python}
+anscombe.groupby(['dataset']).corr()
+```
+:::
+
+- Todos os datasets são iguais? E se olharmos os dados?
+
+## Exemplo: quarteto de Anscombe
+
+:::: {.columns}
+:::{.column width="55%"}
+```{python}
+ax = sns.lmplot(data=anscombe, x="x", y="y", col="dataset", height=3,
+                hue="dataset", col_wrap=2, palette="muted", ci=None)
+```
+:::
+::: {.column width="45%"}
+- Relações diferentes, mesma quantificação
+    - No 2o grupo não há uma relação linear
+    - No 3o há relação perfeita entre maioria das observações, com uma exceção
+    - No 4o não há relação; há uma exceção que faz parecer que há uma relação
+:::
+::::
+
+## Outros coeficientes de correlação
+
+- Coeficientes de *Spearman* e *Kendall* são baseados em ranking
+    - Menos sensíveis a outliers e capturam algumas relações não lineares
+
+```{python}
+pd.DataFrame({
+    'pearson': anscombe.groupby(['dataset']).corr(method='pearson').y.xs('x', level=1),
+    'spearman': anscombe.groupby(['dataset']).corr(method='spearman').y.xs('x', level=1),
+    'kendall': anscombe.groupby(['dataset']).corr(method='kendall').y.xs('x', level=1)
+})
+```
+
+## Força e direção da correlação
+
+- Exemplos de relação entre o valor esperado do coeficiente (linear) e vários tipos de associação entre duas variáveis:
+
+![Fonte: [wikipedia](https://en.wikipedia.org/wiki/Correlation)](figs/correlation_examples2.svg)
+
+## Exemplo: dados com relação linear
+
+:::: {.columns}
+:::{.column}
+```{python}
+rng = np.random.default_rng(12345)
+x = 100 * rng.normal(size=100)
+ruido = 40 * rng.normal(size=100)
+y = 0.5 * x + ruido + 20
+df = pd.DataFrame({'x': x, 'y': y})
+sns.lmplot(data=df, x='x', y='y', height=4, aspect=1.3)
+print(f"Correlação: {df.x.corr(df.y)}")
+```
+:::
+::: {.column}
+```{python}
+# Com o dobro do erro / ruído
+# Dados mais espalhados, correlação diminui
+ruido2 = 80 * rng.normal(size=100)
+y = 0.5 * x + ruido2 + 20
+df = pd.DataFrame({'x': x, 'y': y})
+sns.lmplot(x='x', y='y', data=df, height=4, aspect=1.3)
+print(f"Correlação: {df.x.corr(df.y)}")
+```
+:::
+::::
+
+## Exemplo: dados com relação não linear
+
+:::: {.columns}
+:::{.column}
+```{python}
+fig, ax = plt.subplots(figsize=(6, 5))
+x = rng.uniform(low=1, high=20, size=100)
+y = 100 * np.exp(-1.2 * x)
+df = pd.DataFrame({'x': x, 'y': y})
+ax = sns.scatterplot(data=df, x='x', y='y', linewidth=0, ax=ax)
+```
+:::
+::: {.column}
+```{python}
+pd.Series({
+    'pearson': df.x.corr(df.y, method='pearson'),
+    'spearman': df.x.corr(df.y, method='spearman'),
+    'kendall': df.x.corr(df.y, method='kendall')
+}, name='correlacao').to_frame()
+```
+:::
+::::
+
+## Exemplo: dados com relação não linear
+
+- Visualizando os mesmos dados em escala logarítmica
+
+:::: {.columns}
+:::{.column}
+```{python}
+# Escala normal
+fig, ax = plt.subplots(figsize=(6, 5))
+ax = sns.scatterplot(data=df, x='x', y='y', linewidth=0, ax=ax)
+```
+:::
+::: {.column}
+```{python}
+fig, ax = plt.subplots(figsize=(6, 5))
+ax = sns.scatterplot(data=df, x='x', y='y', linewidth=0, ax=ax)
+ax.set_yscale('log')
+```
+:::
+::::
+
+## Correlação vs. Causalidade
+
+- **ATENÇÃO! Correlação não implica causalidade!**
+    - Ex: a quantidade de remédios consumidos tem forte correlação com a quantidade de pessoas doentes; mas o remédio não causa a doença
+
+![Fonte: [XKCD](https://xkcd.com/552/)](figs/correlation_xkcd.png)
+
+- Links: [correlações espúrias](http://www.tylervigen.com/spurious-correlations), [wikipedia](https://en.wikipedia.org/wiki/Correlation_does_not_imply_causation) e [aula na Khan Academy](https://www.khanacademy.org/math/probability/scatterplots-a1/creating-interpreting-scatterplots/v/correlation-and-causality)
+
+
+## Cuidado com sumários: datasaurus
+
+:::: {.columns}
+:::{.column .smaller-table width="45%"}
+```{python}
+# Correlação
+datasaurus = pd.read_csv(DATASAURUS_CSV)
+datasaurus.groupby(['dataset']).corr().y.xs('x', level=1).to_frame()
+```
+:::
+::: {.column .smaller-table width="55%"}
+```{python}
+# Média e desvio padrão
+datasaurus.groupby(['dataset']).agg(['mean', 'std'])
+```
+:::
+::::
+
+
+## Cuidado com sumários: datasaurus
+
+- Muito parecidos?
+
+:::: {.columns}
+:::{.column}
+```{python}
+fig, ax = plt.subplots(figsize=(5, 4))
+ax = sns.boxplot(x='x', y='dataset', data=datasaurus)
+```
+:::
+::: {.column}
+```{python}
+fig, ax = plt.subplots(figsize=(5, 4))
+ax = sns.boxplot(x='y', y='dataset', data=datasaurus)
+```
+:::
+::::
+
+## Cuidado com sumários: datasaurus
+
+```{python}
+#| echo: false
+sns.set_context('notebook')
+```
+
+
+```{python}
+g = sns.FacetGrid(datasaurus, col="dataset", col_wrap=5, height=2, hue="dataset")
+ax = g.map_dataframe(sns.scatterplot, x="x", y="y", linewidth=0)
+```
