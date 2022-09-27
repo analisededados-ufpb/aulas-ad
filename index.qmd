@@ -9,7 +9,7 @@ Material da disciplina de Análise de Dados I
 
 - [Apresentação da disciplina](1-introducao/0-apresentacao.qmd) (Slides)
 
-## Introdução
+## 1 Introdução
 
 - [1.1 Introdução à análise de dados](1-introducao/1-introducao-ad.qmd) (Slides)
 - [1.2 Introdução ao Python e Jupyter Notebook](1-introducao/2-intro-python-jupyter.qmd) (Atividade)
@@ -17,11 +17,12 @@ Material da disciplina de Análise de Dados I
 - [1.4 Exemplo com Pandas: análise de notas](1-introducao/4-exemplo-pandas.ipynb) (Notebook)
 - [Laboratório 1: Manipulação de dados](https://github.com/analisededados-ufpb/lab-manipulacao-dados) (GitHub)
 
-## Análise Exploratória de Dados
+## 2 Análise Exploratória de Dados
 
 - [2.1 Introdução à análise exploratória](2-eda/1-intro-eda.qmd) (Slides)
 - [2.2 Estatística descritiva](2-eda/2-estatistica-descritiva.qmd) (Slides)
 - [2.3 Análise de correlação](2-eda/3-correlacao.qmd) (Slides)
+- [Laboratório 2: Análise Exploratória de Dados](https://github.com/analisededados-ufpb/lab-eda-imdb) (GitHub)
 
 # Referências
 
