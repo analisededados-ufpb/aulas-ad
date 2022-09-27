@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.653">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Aulas AD 1 – exemplo-eda-eleicoes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Aulas AD 1</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/analisededados-ufpb/aulas-ad">GitHub</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="37">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>cand <span class="op">=</span> pd.read_csv(<span class="st">'~/local/datasets/dados-tse/consulta_cand_2018/consulta_cand_2018_PB.csv'</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                   encoding<span class="op">=</span><span class="st">'latin1'</span>, delimiter<span class="op">=</span><span class="st">';'</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>bem <span class="op">=</span> pd.read_csv(<span class="st">'~/local/datasets/dados-tse/bem_candidato_2018/bem_candidato_2018_PB.csv'</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                   encoding<span class="op">=</span><span class="st">'latin1'</span>, delimiter<span class="op">=</span><span class="st">';'</span>, decimal<span class="op">=</span><span class="st">","</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>fed_cand <span class="op">=</span> cand[cand.DS_CARGO <span class="op">==</span> <span class="st">'DEPUTADO FEDERAL'</span>]</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>fed_cand.VR_DESPESA_MAX_CAMPANHA</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="37">
+<pre><code>0      2500000
+1      2500000
+2      2500000
+4      2500000
+8      2500000
+        ...   
+594    2500000
+595    2500000
+598    2500000
+599    2500000
+615    2500000
+Name: VR_DESPESA_MAX_CAMPANHA, Length: 159, dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="38">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bem_total <span class="op">=</span> bem.groupby([<span class="st">'SQ_CANDIDATO'</span>]).VR_BEM_CANDIDATO.<span class="bu">sum</span>()</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>bem_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="38">
+<pre><code>SQ_CANDIDATO
+150000600157    299157.64
+150000600158      5000.00
+150000600159    104342.05
+150000600160    134000.00
+150000600161    154800.00
+                  ...    
+150000627767    100000.00
+150000628272     12000.00
+150000628316    150000.00
+150000629583    133777.18
+150000630006    152000.00
+Name: VR_BEM_CANDIDATO, Length: 346, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="39">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>bem_total.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="39">
+<pre><code>count    3.460000e+02
+mean     5.694704e+05
+std      9.459294e+05
+min      3.276000e+01
+25%      8.000000e+04
+50%      2.320457e+05
+75%      6.322912e+05
+max      8.037674e+06
+Name: VR_BEM_CANDIDATO, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="42">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sns.histplot(bem_total, bins<span class="op">=</span><span class="dv">20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="42">
+<pre><code>&lt;AxesSubplot:xlabel='VR_BEM_CANDIDATO', ylabel='Count'&gt;</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="4-exemplo-eda-eleicoes_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell" data-execution_count="41">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>bem_total</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="41">
+<pre><code>SQ_CANDIDATO
+150000600157    299157.64
+150000600158      5000.00
+150000600159    104342.05
+150000600160    134000.00
+150000600161    154800.00
+                  ...    
+150000627767    100000.00
+150000628272     12000.00
+150000628316    150000.00
+150000629583    133777.18
+150000630006    152000.00
+Name: VR_BEM_CANDIDATO, Length: 346, dtype: float64</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="43">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fed_cand.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="43">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>ANO_ELEICAO</th>
+      <th>CD_TIPO_ELEICAO</th>
+      <th>NR_TURNO</th>
+      <th>CD_ELEICAO</th>
+      <th>CD_CARGO</th>
+      <th>SQ_CANDIDATO</th>
+      <th>NR_CANDIDATO</th>
+      <th>NR_CPF_CANDIDATO</th>
+      <th>CD_SITUACAO_CANDIDATURA</th>
+      <th>CD_DETALHE_SITUACAO_CAND</th>
+      <th>...</th>
+      <th>CD_GRAU_INSTRUCAO</th>
+      <th>CD_ESTADO_CIVIL</th>
+      <th>CD_COR_RACA</th>
+      <th>CD_OCUPACAO</th>
+      <th>VR_DESPESA_MAX_CAMPANHA</th>
+      <th>CD_SIT_TOT_TURNO</th>
+      <th>NR_PROTOCOLO_CANDIDATURA</th>
+      <th>NR_PROCESSO</th>
+      <th>CD_SITUACAO_CANDIDATO_PLEITO</th>
+      <th>CD_SITUACAO_CANDIDATO_URNA</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>159.0</td>
+      <td>159.0</td>
+      <td>159.0</td>
+      <td>159.0</td>
+      <td>159.0</td>
+      <td>1.590000e+02</td>
+      <td>159.000000</td>
+      <td>1.590000e+02</td>
+      <td>159.000000</td>
+      <td>159.000000</td>
+      <td>...</td>
+      <td>159.000000</td>
+      <td>159.000000</td>
+      <td>159.000000</td>
+      <td>159.000000</td>
+      <td>159.0</td>
+      <td>159.000000</td>
+      <td>159.0</td>
+      <td>1.590000e+02</td>
+      <td>159.000000</td>
+      <td>159.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2018.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>297.0</td>
+      <td>6.0</td>
+      <td>1.500006e+11</td>
+      <td>3585.672956</td>
+      <td>3.334962e+10</td>
+      <td>10.754717</td>
+      <td>3.232704</td>
+      <td>...</td>
+      <td>7.025157</td>
+      <td>3.540881</td>
+      <td>1.635220</td>
+      <td>424.213836</td>
+      <td>2500000.0</td>
+      <td>4.132075</td>
+      <td>-1.0</td>
+      <td>6.004408e+18</td>
+      <td>2.176101</td>
+      <td>2.006289</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>7.936943e+03</td>
+      <td>1994.729598</td>
+      <td>2.980634e+10</td>
+      <td>3.117360</td>
+      <td>3.396191</td>
+      <td>...</td>
+      <td>1.453715</td>
+      <td>2.668955</td>
+      <td>0.903029</td>
+      <td>338.249110</td>
+      <td>0.0</td>
+      <td>1.547203</td>
+      <td>0.0</td>
+      <td>1.802354e+15</td>
+      <td>1.924310</td>
+      <td>1.481946</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2018.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>297.0</td>
+      <td>6.0</td>
+      <td>1.500006e+11</td>
+      <td>1001.000000</td>
+      <td>7.811349e+07</td>
+      <td>3.000000</td>
+      <td>2.000000</td>
+      <td>...</td>
+      <td>3.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>101.000000</td>
+      <td>2500000.0</td>
+      <td>-1.000000</td>
+      <td>-1.0</td>
+      <td>6.001577e+18</td>
+      <td>-1.000000</td>
+      <td>-1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2018.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>297.0</td>
+      <td>6.0</td>
+      <td>1.500006e+11</td>
+      <td>1768.500000</td>
+      <td>6.058035e+09</td>
+      <td>12.000000</td>
+      <td>2.000000</td>
+      <td>...</td>
+      <td>6.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>167.500000</td>
+      <td>2500000.0</td>
+      <td>4.000000</td>
+      <td>-1.0</td>
+      <td>6.003690e+18</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2018.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>297.0</td>
+      <td>6.0</td>
+      <td>1.500006e+11</td>
+      <td>3131.000000</td>
+      <td>2.625417e+10</td>
+      <td>12.000000</td>
+      <td>2.000000</td>
+      <td>...</td>
+      <td>8.000000</td>
+      <td>3.000000</td>
+      <td>1.000000</td>
+      <td>266.000000</td>
+      <td>2500000.0</td>
+      <td>5.000000</td>
+      <td>-1.0</td>
+      <td>6.004097e+18</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>2018.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>297.0</td>
+      <td>6.0</td>
+      <td>1.500006e+11</td>
+      <td>5014.000000</td>
+      <td>5.634612e+10</td>
+      <td>12.000000</td>
+      <td>2.000000</td>
+      <td>...</td>
+      <td>8.000000</td>
+      <td>3.000000</td>
+      <td>3.000000</td>
+      <td>755.500000</td>
+      <td>2500000.0</td>
+      <td>5.000000</td>
+      <td>-1.0</td>
+      <td>6.004690e+18</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>2018.0</td>
+      <td>2.0</td>
+      <td>1.0</td>
+      <td>297.0</td>
+      <td>6.0</td>
+      <td>1.500006e+11</td>
+      <td>9090.000000</td>
+      <td>9.814353e+10</td>
+      <td>12.000000</td>
+      <td>14.000000</td>
+      <td>...</td>
+      <td>8.000000</td>
+      <td>9.000000</td>
+      <td>4.000000</td>
+      <td>999.000000</td>
+      <td>2500000.0</td>
+      <td>5.000000</td>
+      <td>-1.0</td>
+      <td>6.007925e+18</td>
+      <td>14.000000</td>
+      <td>17.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 27 columns</p>
+</div>
+</div>
+</div>
+<div class="cell" data-execution_count="46">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>vot_cand <span class="op">=</span> pd.read_csv(<span class="st">'~/local/datasets/dados-tse/votacao_candidato.csv'</span>, encoding<span class="op">=</span><span class="st">'latin1'</span>,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                       delimiter<span class="op">=</span><span class="st">';'</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>vot_cand</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="46">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>ds_cargo</th>
+      <th>cd_municipio</th>
+      <th>nm_municipio</th>
+      <th>nm_candidato</th>
+      <th>nr_candidato</th>
+      <th>sg_partido</th>
+      <th>nm_regiao</th>
+      <th>ds_sit_totalizacao</th>
+      <th>nr_turno</th>
+      <th>sg_uf</th>
+      <th>qt_votos_nominais</th>
+      <th>qt_votos_validos</th>
+      <th>dt_carga</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Deputado Estadual</td>
+      <td>19003</td>
+      <td>RIACHÃO DO POÇO</td>
+      <td>ADEILTON FERREIRA DE SOUZA</td>
+      <td>15111</td>
+      <td>MDB</td>
+      <td>NORDESTE</td>
+      <td>Suplente</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>0</td>
+      <td>2982</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Deputado Estadual</td>
+      <td>19003</td>
+      <td>RIACHÃO DO POÇO</td>
+      <td>ADERALDO GONÇALVES DO NASCIMENTO JÚNIOR</td>
+      <td>33333</td>
+      <td>PMN</td>
+      <td>NORDESTE</td>
+      <td>Suplente</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>1</td>
+      <td>2982</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Deputado Estadual</td>
+      <td>19003</td>
+      <td>RIACHÃO DO POÇO</td>
+      <td>ADILSON MORAES DE LUCENA</td>
+      <td>65224</td>
+      <td>PC do B</td>
+      <td>NORDESTE</td>
+      <td>Suplente</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>0</td>
+      <td>2982</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Deputado Estadual</td>
+      <td>19003</td>
+      <td>RIACHÃO DO POÇO</td>
+      <td>ADRIANO CEZAR GALDINO DE ARAÚJO</td>
+      <td>40444</td>
+      <td>PSB</td>
+      <td>NORDESTE</td>
+      <td>Eleito</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>0</td>
+      <td>2982</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Deputado Estadual</td>
+      <td>19003</td>
+      <td>RIACHÃO DO POÇO</td>
+      <td>ALIPIO BARBOSA DE CARVALHO FILHO</td>
+      <td>36014</td>
+      <td>PTC</td>
+      <td>NORDESTE</td>
+      <td>Suplente</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>0</td>
+      <td>2982</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>81613</th>
+      <td>Deputado Estadual</td>
+      <td>22438</td>
+      <td>VÁRZEA</td>
+      <td>WILSON PAULO DE LIRA</td>
+      <td>15112</td>
+      <td>MDB</td>
+      <td>NORDESTE</td>
+      <td>Suplente</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>0</td>
+      <td>1743</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+    <tr>
+      <th>81614</th>
+      <td>Deputado Estadual</td>
+      <td>22438</td>
+      <td>VÁRZEA</td>
+      <td>WIVIANE EUGÊNIA PAIVA</td>
+      <td>28123</td>
+      <td>PRTB</td>
+      <td>NORDESTE</td>
+      <td>Suplente</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>0</td>
+      <td>1743</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+    <tr>
+      <th>81615</th>
+      <td>Deputado Estadual</td>
+      <td>22438</td>
+      <td>VÁRZEA</td>
+      <td>YASNAIA POLLYANNA WERTON DUTRA</td>
+      <td>40111</td>
+      <td>PSB</td>
+      <td>NORDESTE</td>
+      <td>Eleito</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>14</td>
+      <td>1743</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+    <tr>
+      <th>81616</th>
+      <td>Deputado Estadual</td>
+      <td>22438</td>
+      <td>VÁRZEA</td>
+      <td>ZENIVALDO DE OLIVEIRA BARBOSA</td>
+      <td>13069</td>
+      <td>PT</td>
+      <td>NORDESTE</td>
+      <td>Suplente</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>0</td>
+      <td>1743</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+    <tr>
+      <th>81617</th>
+      <td>Deputado Estadual</td>
+      <td>22438</td>
+      <td>VÁRZEA</td>
+      <td>ZENNEDY BEZERRA</td>
+      <td>43660</td>
+      <td>PV</td>
+      <td>NORDESTE</td>
+      <td>Suplente</td>
+      <td>1</td>
+      <td>PB</td>
+      <td>0</td>
+      <td>1743</td>
+      <td>2022-09-11 04:27:51</td>
+    </tr>
+  </tbody>
+</table>
+<p>81618 rows × 13 columns</p>
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
