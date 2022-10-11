@@ -1,0 +1,240 @@
+---
+title: "Análise de dados"
+subtitle: "Introdução à Regressão Linear"
+author: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+format:
+    revealjs:
+        slide-number: true
+        chalkboard: true
+        #footer: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+        incremental: false
+        theme: [simple, ../custom.scss]
+        echo: true
+        #scrollable: true
+---
+
+```{python}
+#| include: false
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from pathlib import Path
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_squared_error
+import statsmodels.api as sm
+
+DATA_DIR = Path().resolve().parent / 'dados'
+LUNG_CSV = DATA_DIR / 'LungDisease.csv'
+```
+
+## Regressão linear
+
+- Com frequência queremos saber se uma variável $x$ está associada a uma variável $y$
+    - Se sim, qual a relação e como podemos usar isso para prever $y$?
+
+- A **regressão linear simples** oferece um modelo do relacionamento entre a magnitude de duas variáveis
+    - Exemplo: quando $x$ cresce, $y$ também cresce
+
+- Já usamos a *correlação* para avaliar a relação entre variáveis
+    - A **correlação** mede a *força* da associação entre duas variáveis
+    - A **regressão** quantifica a natureza desta relação
+
+
+## Regressão linear simples
+
+- Quanto a variável $y$ mudará quando $x$ muda uma certa quantia?
+- Tenta estimar $y$ com base em $x$ usando a equação da reta:
+
+$$y = b_0 + b_1 x$$
+
+- $b_0$ é o valor *constante* da reta, onde ela intercepta o eixo $y$
+- $b_1$ é valor que representa a *inclinação* da reta
+    - Também é o *coeficiente* da variável $x$
+- $y$ é chamada de variável *dependente* ou *resposta*
+- $x$ é chamada de variável *independente* ou *preditora*
+
+## Exemplo: respiração vs exposição à poeira
+
+- Encontrar a "melhor" linha para estimar a capacidade do pulmão (`PEFR`) em função da exposição à poeira de algodão (`Exposure`):
+    - Equação da reta: $PEFR = b_0 + b_1 Exposure$
+
+:::: {.columns}
+:::{.column}
+```{python}
+#| echo: false
+
+lung = pd.read_csv(DATA_DIR / 'LungDisease.csv')
+
+lung.plot.scatter(x='Exposure', y='PEFR', figsize=(5, 4))
+
+plt.tight_layout()
+plt.show()
+```
+:::
+::: {.column}
+
+- Regressão com `scikit-learn`:
+
+```{python}
+predictors = ['Exposure']
+outcome = 'PEFR'
+model = LinearRegression()
+model.fit(lung[predictors], lung[outcome])
+print(f'b0 (intercept): {model.intercept_:.2f}')
+print(f'b1 (coefficient): {model.coef_[0]:.2f}')
+```
+:::
+::::
+
+## Exemplo: respiração vs exposição à poeira
+
+- Equação da reta: $PEFR = 424.58 - 4.18 Exposure$
+
+:::: {.columns}
+:::{.column .smaller-code-fold width="40%"}
+```{python}
+#| code-fold: true
+fig, ax = plt.subplots(figsize=(4, 4))
+ax.set_xlim(0, 23)
+ax.set_ylim(295, 450)
+ax.set_xlabel('Exposure')
+ax.set_ylabel('PEFR')
+ax.plot((0, 23), model.predict(pd.DataFrame({'Exposure': [0, 23]})))
+ax.text(0.4, model.intercept_, r'$b_0$', size='larger')
+
+x = pd.DataFrame({'Exposure': [7.5,17.5]})
+y = model.predict(x)
+ax.plot((7.5, 7.5, 17.5), (y[0], y[1], y[1]), '--')
+ax.text(5, np.mean(y), r'$\Delta Y$', size='larger')
+ax.text(12, y[1] - 10, r'$\Delta X$', size='larger')
+ax.text(12, 390, r'$b_1 = \frac{\Delta Y}{\Delta X}$', size='larger')
+
+plt.tight_layout()
+plt.show()
+```
+:::
+::: {.column width="60%"}
+- O intercept $b_0 = 424.58$ é a estimativa de `PEFR` para `Exposure = 0`
+- O coeficiente $b_1 = –4.18$ representa a redução do `PEFR` à cada ano adicional de exposição à poeira (`Exposure`)
+:::
+::::
+
+## Regressão linear: predições e resíduos
+
+:::: {.columns}
+:::{.column}
+- Os dados nem sempre seguem perfeitamente uma reta
+
+- Para cada valor original $y_i$ teremos um erro explícito $e_i$:
+    - $y_i = b_0 + b_1 x_i + e_i$
+
+- O erro residual é a diferença entre o valor original e o estimado ($\hat{Y}_i$):
+    - $\hat{e}_i = (y_i) - (\hat{y}_i)$
+
+:::
+::: {.column .smaller-code-fold}
+```{python}
+#| code-fold: true
+fitted = model.predict(lung[predictors])
+residuals = lung[outcome] - fitted
+
+ax = lung.plot.scatter(x='Exposure', y='PEFR', figsize=(5, 4))
+ax.plot(lung.Exposure, fitted)
+for x, yactual, yfitted in zip(lung.Exposure, lung.PEFR, fitted): 
+    ax.plot((x, x), (yactual, yfitted), '--', color='C1')
+
+plt.tight_layout()
+plt.show()
+```
+:::
+::::
+
+- As linhas tracejadas representam o erro residual
+
+## Regressão: ajuste do modelo aos dados
+
+- Afinal, como a equação da reta é determinada?
+    - Você pode se imaginar fazendo na mão para casos mais fáceis
+- Na prática, busca-se valores de $\hat{b}_0$ e $\hat{b}_1$ da reta que minimize a soma dos erros ao quadrado (_sum of squares error_):
+
+$$SSE = \sum^{n}_{i = 1} \left( y_i - \hat{y}_i \right)^2 = \sum^{n}_{i = 1} \left( y_i - \hat{b}_0 - \hat{b}_1 X_1 \right)^2$$
+
+- Método chamado de **mínimos quadrados** ou _ordinary least squares_ (OLS), que é rápido de computar em softwares estatísticos
+
+## Avaliando a qualidade do modelo
+
+- Já temos um modelo: $y = b_0 + b_1 x$
+
+- Quão bom é o? Quanto da variação de $y$ de fato está sendo explicada pela variação de $x$?
+
+- Quanto da variação total de $y$ está sendo devido a erros randômicos ou sistemáticos e não devido à variação de $x$?
+
+## Avaliando a qualidade do modelo
+
+Além do $SSE$, outras métricas são usadas para avaliar o modelo:
+
+- Variação total de $y$ (_sum of squares total_):
+
+$$SST = \sum^{n}_{i = 1} \left( y_i - \overline{y} \right)^2 = \sum^{n}_{i = 1} y_i^2 - n\overline{y}^2$$
+
+- Variação de $y$ explicada pela regressão (_sum of squares regression_):
+
+$$SSR = \sum^{n}_{i = 1} \left( \hat{y}_i - \overline{y} \right)^2$$
+
+## Avaliando a qualidade do modelo
+
+- Dividimos a variação total em duas partes:
+    - A parte não explicada pela regressão ($SSE$)
+    - A parte explicada pela regressão ($SSR$)
+
+- A diferença entre $SST$ e $SSE$ é a soma dos quadrados explicada pela regressão:
+    - $SSR = SST - SSE \Rightarrow SST = SSR + SSE$
+
+- A fração de variação capturada pelo modelo indica a sua qualidade, chamado _coeficiente de determinação_:
+
+$$R^2 = \frac{SSR}{SST} = \frac{SST - SSE}{SST}$$
+
+## Coeficiente de determinação $R^2$
+
+- Um valor mais altos de $R^2$ significa uma melhor regressão:
+    - $R^2 = 1 \implies$ Regressão perfeita
+    - $R^2 = 0 \implies$ Regressão péssima
+
+- Por que esse coeficiente se chama de $R^2$?
+    - Porque é igual ao quadrado da correlação amostral $R_{y\hat{y}}$ (coeficiente de Pearson) entre $y$ e $y\hat{y}$
+
+- Ou seja:
+    - Coeficiente de determinação $R^2$  = Coeficiente de correlação $R_{y\hat{y}}^2$ 
+
+## Exemplo: avaliando o modelo
+
+- Avaliando o modelo com o `scikit-learn`:
+
+```{python}
+RMSE = np.sqrt(mean_squared_error(lung[outcome], fitted))
+r2 = r2_score(lung[outcome], fitted)
+print(f'Root Mean Square Error (RMSE): {RMSE:.0f}')
+print(f'Coefficiente of determination (r2): {r2:.4f}')
+```
+
+## Exemplo: avaliando o modelo
+
+- Aplicando a regressão e avaliando o modelo com o `statsmodels`:
+
+```{python}
+model = sm.OLS(lung[outcome], lung[predictors].assign(const=1))
+results = model.fit()
+print(results.summary())
+```
+
+## Regressão: predição vs explicação dos dados
+
+- Historicamente a regressão era usada para **entender** e **explicar** a relação entre variáveis
+    - Quantifica a influência de variáveis em outras
+    - O foco não é _prever_ casos específicos, mas **compreender** a relação geral
+
+- Com o surgimento do _big data_ e _machine learning_, a regressão também passou a ser muito usada para a **predição** de novos dados
+
+- [**Atenção**: um modelo de regressão também não prova relação **causalidade** entre as variáveis]{.emph}
+
