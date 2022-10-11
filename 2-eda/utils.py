@@ -19,7 +19,7 @@ def etl_eleicoes(input_dir, output_file):
 
 def load_candidatos(tse_data_dir, ano, uf='BR', cargo="PRESIDENTE"):
     cand = (
-        pd.read_csv(tse_data_dir / f'consulta_cand_{ano}/consulta_cand_{ano}_{uf}.csv',
+        pd.read_csv(f'{tse_data_dir}/consulta_cand_{ano}/consulta_cand_{ano}_{uf}.csv',
                     encoding='latin1', delimiter=';')
         .query(f"DS_CARGO == '{cargo}'")
     )
@@ -75,7 +75,7 @@ def load_eleicoes_2022(tse_data_dir, uf='BR', cargo="PRESIDENTE"):
 
 def load_eleicoes(tse_data_dir):
     eleicao_18 = load_eleicoes_2018()
-    eleicao_22 = pd.concat([load_eleicoes_2022(tse_data_dir, uf) for uf in eleicao_18.uf])
+    eleicao_22 = pd.concat([load_eleicoes_2022(tse_data_dir, uf) for uf in eleicao_18.uf.unique()])
     eleicoes = pd.concat([eleicao_18, eleicao_22]).reset_index(drop=True)
     eleicoes['nr_turno'] = eleicoes['nr_turno'].astype('int64')
     eleicoes['ano_eleicao'] = eleicoes['ano_eleicao'].astype('int64')
