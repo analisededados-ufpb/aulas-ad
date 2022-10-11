@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-0.9.653">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Aulas AD 1 – analise_eleicoes_2022</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Aulas AD 1</span>
+  </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html">Home</a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://github.com/analisededados-ufpb/aulas-ad">GitHub</a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#from geobr import read_state</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib <span class="im">import</span> cm</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> utils</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>DATA_DIR <span class="op">=</span> Path().resolve().parent <span class="op">/</span> <span class="st">'dados'</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#TSE_DADOS_DIR = DATA_DIR / 'tse'</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>TSE_DADOS_DIR <span class="op">=</span> Path(<span class="st">'~/local/datasets/dados-tse'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>ELEICOES_FILE <span class="op">=</span> DATA_DIR <span class="op">/</span> <span class="st">'eleicoes_resultado_presidente_uf_2018_2022.csv'</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">#sns.set(rc={'figure.figsize':(14, 8)})</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"whitegrid"</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>sns.set_context(<span class="st">"talk"</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Na primeira vez, descomente e rode o comando abaixo para gerar o arquivo de entrada</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>utils.etl_eleicoes(TSE_DADOS_DIR, ELEICOES_FILE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>ano_eleicao</th>
+      <th>nr_turno</th>
+      <th>nr_candidato</th>
+      <th>nm_urna_candidato</th>
+      <th>uf</th>
+      <th>votos</th>
+      <th>perc_votos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2018</td>
+      <td>1</td>
+      <td>12</td>
+      <td>CIRO GOMES</td>
+      <td>AC</td>
+      <td>21809</td>
+      <td>5.170730</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2018</td>
+      <td>1</td>
+      <td>12</td>
+      <td>CIRO GOMES</td>
+      <td>AL</td>
+      <td>155457</td>
+      <td>10.122572</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2018</td>
+      <td>1</td>
+      <td>12</td>
+      <td>CIRO GOMES</td>
+      <td>AM</td>
+      <td>138997</td>
+      <td>7.498796</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2018</td>
+      <td>1</td>
+      <td>12</td>
+      <td>CIRO GOMES</td>
+      <td>AP</td>
+      <td>50553</td>
+      <td>12.337312</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2018</td>
+      <td>1</td>
+      <td>12</td>
+      <td>CIRO GOMES</td>
+      <td>BA</td>
+      <td>693273</td>
+      <td>9.408547</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>751</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>22</td>
+      <td>JAIR BOLSONARO</td>
+      <td>ZZ</td>
+      <td>122548</td>
+      <td>41.610000</td>
+    </tr>
+    <tr>
+      <th>752</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>44</td>
+      <td>SORAYA THRONICKE</td>
+      <td>ZZ</td>
+      <td>753</td>
+      <td>0.260000</td>
+    </tr>
+    <tr>
+      <th>753</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>80</td>
+      <td>LÉO PÉRICLES</td>
+      <td>ZZ</td>
+      <td>319</td>
+      <td>0.110000</td>
+    </tr>
+    <tr>
+      <th>754</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>16</td>
+      <td>VERA</td>
+      <td>ZZ</td>
+      <td>464</td>
+      <td>0.160000</td>
+    </tr>
+    <tr>
+      <th>755</th>
+      <td>2022</td>
+      <td>1</td>
+      <td>15</td>
+      <td>SIMONE TEBET</td>
+      <td>ZZ</td>
+      <td>13167</td>
+      <td>4.470000</td>
+    </tr>
+  </tbody>
+</table>
+<p>756 rows × 7 columns</p>
+</div>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>eleicoes <span class="op">=</span> pd.read_csv(ELEICOES_FILE)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bolsonaro <span class="op">=</span> eleicoes.loc[(eleicoes.nm_urna_candidato <span class="op">==</span> <span class="st">'JAIR BOLSONARO'</span>) <span class="op">&amp;</span> (eleicoes.nr_turno <span class="op">==</span> <span class="dv">1</span>)]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">8</span>))</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> sns.barplot(x<span class="op">=</span><span class="st">'uf'</span>, y<span class="op">=</span><span class="st">'perc_votos'</span>, hue<span class="op">=</span><span class="st">'ano_eleicao'</span>, ax<span class="op">=</span>ax, data<span class="op">=</span>bolsonaro)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="analise_eleicoes_2022_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bolsonaro_dif <span class="op">=</span> (</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    bolsonaro.pivot_table(index<span class="op">=</span><span class="st">'uf'</span>, columns<span class="op">=</span><span class="st">'ano_eleicao'</span>, values<span class="op">=</span><span class="st">'perc_votos'</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"uf != 'ZZ'"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>bolsonaro_dif[<span class="st">'dif'</span>] <span class="op">=</span> bolsonaro_dif[<span class="dv">2022</span>] <span class="op">-</span> bolsonaro_dif[<span class="dv">2018</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> sns.barplot(x<span class="op">=</span><span class="st">'uf'</span>, y<span class="op">=</span><span class="st">'dif'</span>, data<span class="op">=</span>bolsonaro_dif, palette<span class="op">=</span>cm.RdYlBu(bolsonaro_dif[<span class="st">'dif'</span>]))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>p.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'UF'</span>, ylabel<span class="op">=</span><span class="st">'Diferença no percentual de votos'</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>      title<span class="op">=</span><span class="st">'Diferença no percentual de votos de Bolsonaro entre 2022 e 2018'</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="analise_eleicoes_2022_files/figure-html/cell-6-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>pt <span class="op">=</span> eleicoes.loc[(eleicoes.nr_candidato <span class="op">==</span> <span class="dv">13</span>) <span class="op">&amp;</span> (eleicoes.nr_turno <span class="op">==</span> <span class="dv">1</span>)]</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.barplot(x<span class="op">=</span><span class="st">'uf'</span>, y<span class="op">=</span><span class="st">'perc_votos'</span>, hue<span class="op">=</span><span class="st">'ano_eleicao'</span>, data<span class="op">=</span>pt)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="analise_eleicoes_2022_files/figure-html/cell-7-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pt_dif <span class="op">=</span> (</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    pt.pivot_table(index<span class="op">=</span><span class="st">'uf'</span>, columns<span class="op">=</span><span class="st">'ano_eleicao'</span>, values<span class="op">=</span><span class="st">'perc_votos'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    .reset_index()</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    .query(<span class="st">"uf != 'ZZ'"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>pt_dif[<span class="st">'dif'</span>] <span class="op">=</span> pt_dif[<span class="dv">2022</span>] <span class="op">-</span> pt_dif[<span class="dv">2018</span>]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> sns.barplot(x<span class="op">=</span><span class="st">'uf'</span>, y<span class="op">=</span><span class="st">'dif'</span>, data<span class="op">=</span>pt_dif, palette<span class="op">=</span>cm.RdYlBu(pt_dif[<span class="st">'dif'</span>]))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>p.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'UF'</span>, ylabel<span class="op">=</span><span class="st">'Diferença no percentual de votos'</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>      title<span class="op">=</span><span class="st">'Diferença no percentual de votos do PT entre 2022 e 2018 no 1o turno'</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="analise_eleicoes_2022_files/figure-html/cell-8-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>jb_pt <span class="op">=</span> bolsonaro.merge(pt, on<span class="op">=</span>[<span class="st">'ano_eleicao'</span>, <span class="st">'nr_turno'</span>, <span class="st">'uf'</span>], suffixes<span class="op">=</span>[<span class="st">'_jb'</span>, <span class="st">'_pt'</span>])</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>jb_pt[<span class="st">'dif_jb_pt'</span>] <span class="op">=</span> jb_pt[<span class="st">'perc_votos_jb'</span>] <span class="op">-</span> jb_pt[<span class="st">'perc_votos_pt'</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>jb_pt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="81">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Unnamed: 0_jb</th>
+      <th>ano_eleicao</th>
+      <th>nr_turno</th>
+      <th>nr_candidato_jb</th>
+      <th>nm_urna_candidato_jb</th>
+      <th>uf</th>
+      <th>votos_jb</th>
+      <th>perc_votos_jb</th>
+      <th>Unnamed: 0_pt</th>
+      <th>nr_candidato_pt</th>
+      <th>nm_urna_candidato_pt</th>
+      <th>votos_pt</th>
+      <th>perc_votos_pt</th>
+      <th>dif_jb_pt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>112</td>
+      <td>2018</td>
+      <td>1</td>
+      <td>17</td>
+      <td>JAIR BOLSONARO</td>
+      <td>AC</td>
+      <td>262508</td>
+      <td>62.238429</td>
+      <td>28</td>
+      <td>13</td>
+      <td>FERNANDO HADDAD</td>
+      <td>78170</td>
+      <td>18.533447</td>
+      <td>43.704982</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>113</td>
+      <td>2018</td>
+      <td>1</td>
+      <td>17</td>
+      <td>JAIR BOLSONARO</td>
+      <td>AL</td>
+      <td>528355</td>
+      <td>34.403801</td>
+      <td>29</td>
+      <td>13</td>
+      <td>FERNANDO HADDAD</td>
+      <td>687247</td>
+      <td>44.750043</td>
+      <td>-10.346242</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>114</td>
+      <td>2018</td>
+      <td>1</td>
+      <td>17</td>
+      <td>JAIR BOLSONARO</td>
+      <td>AM</td>
+      <td>805902</td>
+      <td>43.477876</td>
+      <td>30</td>
+      <td>13</td>
+      <td>FERNANDO HADDAD</td>
+      <td>746998</td>
+      <td>40.300045</td>
+      <td>3.177832</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>115</td>
+      <td>2018</td>
+      <td>1</td>
+      <td>17</td>
+      <td>JAIR BOLSONARO</td>
+      <td>AP</td>
+      <td>166935</td>
+      <td>40.740000</td>
+      <td>31</td>
+      <td>13</td>
+      <td>FERNANDO HADDAD</td>
+      <td>134287</td>
+      <td>32.772350</td>
+      <td>7.967649</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>116</td>
+      <td>2018</td>
+      <td>1</td>
+      <td>17</td>
+      <td>JAIR BOLSONARO</td>
+      <td>BA</td>
+      <td>1725140</td>
+      <td>23.412220</td>
+      <td>32</td>
+      <td>13</td>
+      <td>FERNANDO HADDAD</td>
+      <td>4441955</td>
+      <td>60.282661</td>
+      <td>-36.870441</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>6323</th>
+      <td>5455</td>
+      <td>2022</td>
+      <td>1</td>
+      <td>22</td>
+      <td>JAIR BOLSONARO</td>
+      <td>ZZ</td>
+      <td>122548</td>
+      <td>41.610000</td>
+      <td>4106</td>
+      <td>13</td>
+      <td>LULA</td>
+      <td>138933</td>
+      <td>47.170000</td>
+      <td>-5.560000</td>
+    </tr>
+    <tr>
+      <th>6324</th>
+      <td>5455</td>
+      <td>2022</td>
+      <td>1</td>
+      <td>22</td>
+      <td>JAIR BOLSONARO</td>
+      <td>ZZ</td>
+      <td>122548</td>
+      <td>41.610000</td>
+      <td>4442</td>
+      <td>13</td>
+      <td>LULA</td>
+      <td>138933</td>
+      <td>47.170000</td>
+      <td>-5.560000</td>
+    </tr>
+    <tr>
+      <th>6325</th>
+      <td>5455</td>
+      <td>2022</td>
+      <td>1</td>
+      <td>22</td>
+      <td>JAIR BOLSONARO</td>
+      <td>ZZ</td>
+      <td>122548</td>
+      <td>41.610000</td>
+      <td>4778</td>
+      <td>13</td>
+      <td>LULA</td>
+      <td>138933</td>
+      <td>47.170000</td>
+      <td>-5.560000</td>
+    </tr>
+    <tr>
+      <th>6326</th>
+      <td>5455</td>
+      <td>2022</td>
+      <td>1</td>
+      <td>22</td>
+      <td>JAIR BOLSONARO</td>
+      <td>ZZ</td>
+      <td>122548</td>
+      <td>41.610000</td>
+      <td>5114</td>
+      <td>13</td>
+      <td>LULA</td>
+      <td>138933</td>
+      <td>47.170000</td>
+      <td>-5.560000</td>
+    </tr>
+    <tr>
+      <th>6327</th>
+      <td>5455</td>
+      <td>2022</td>
+      <td>1</td>
+      <td>22</td>
+      <td>JAIR BOLSONARO</td>
+      <td>ZZ</td>
+      <td>122548</td>
+      <td>41.610000</td>
+      <td>5450</td>
+      <td>13</td>
+      <td>LULA</td>
+      <td>138933</td>
+      <td>47.170000</td>
+      <td>-5.560000</td>
+    </tr>
+  </tbody>
+</table>
+<p>6328 rows × 14 columns</p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">10</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> jb_pt[jb_pt.nr_turno <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> sns.barplot(x<span class="op">=</span><span class="st">'dif_jb_pt'</span>, y<span class="op">=</span><span class="st">'uf'</span>, hue<span class="op">=</span><span class="st">'ano_eleicao'</span>, ax<span class="op">=</span>ax, data<span class="op">=</span>df)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="analise_eleicoes_2022_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">10</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> jb_pt[jb_pt.nr_turno <span class="op">==</span> <span class="dv">1</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#p = sns.scatterplot(x='dif_jb_pt', y='uf', hue='ano_eleicao', palette="deep", ax=ax, data=df)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> sns.scatterplot(x<span class="op">=</span><span class="st">'dif_jb_pt'</span>, y<span class="op">=</span><span class="st">'uf'</span>, hue<span class="op">=</span><span class="st">'ano_eleicao'</span>, palette<span class="op">=</span><span class="st">"deep"</span>, ax<span class="op">=</span>ax, data<span class="op">=</span>df)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x<span class="op">=</span><span class="st">'dif_jb_pt'</span>, y<span class="op">=</span><span class="st">'uf'</span>, hue<span class="op">=</span><span class="st">'uf'</span>, palette<span class="op">=</span><span class="st">"deep"</span>, ax<span class="op">=</span>ax, data<span class="op">=</span>df)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="analise_eleicoes_2022_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>jb_pt_dif <span class="op">=</span> bolsonaro_dif.merge(pt_dif, on<span class="op">=</span>[<span class="st">'uf'</span>], suffixes<span class="op">=</span>[<span class="st">'_jb'</span>, <span class="st">'_pt'</span>])</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>jb_pt_dif[<span class="st">'dif_2018'</span>] <span class="op">=</span> jb_pt_dif[<span class="st">'2018_jb'</span>] <span class="op">-</span> jb_pt_dif[<span class="st">'2018_pt'</span>]</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>jb_pt_dif[<span class="st">'dif_2022'</span>] <span class="op">=</span> jb_pt_dif[<span class="st">'2022_jb'</span>] <span class="op">-</span> jb_pt_dif[<span class="st">'2022_pt'</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>jb_pt_dif[<span class="st">'dif_jb_pt'</span>] <span class="op">=</span> jb_pt_dif[<span class="st">'dif_2022'</span>] <span class="op">-</span> jb_pt_dif[<span class="st">'dif_2018'</span>]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>jb_pt_dif</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="72">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th>ano_eleicao</th>
+      <th>uf</th>
+      <th>2018_jb</th>
+      <th>2022_jb</th>
+      <th>dif_jb</th>
+      <th>2018_pt</th>
+      <th>2022_pt</th>
+      <th>dif_pt</th>
+      <th>dif_2018</th>
+      <th>dif_2022</th>
+      <th>dif_jb_pt</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>AC</td>
+      <td>62.238429</td>
+      <td>62.50</td>
+      <td>0.261571</td>
+      <td>18.533447</td>
+      <td>29.26</td>
+      <td>10.726553</td>
+      <td>43.704982</td>
+      <td>33.24</td>
+      <td>-10.464982</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>AL</td>
+      <td>34.403801</td>
+      <td>36.05</td>
+      <td>1.646199</td>
+      <td>44.750043</td>
+      <td>56.50</td>
+      <td>11.749957</td>
+      <td>-10.346242</td>
+      <td>-20.45</td>
+      <td>-10.103758</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>AM</td>
+      <td>43.477876</td>
+      <td>42.80</td>
+      <td>-0.677876</td>
+      <td>40.300045</td>
+      <td>49.58</td>
+      <td>9.279955</td>
+      <td>3.177832</td>
+      <td>-6.78</td>
+      <td>-9.957832</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>AP</td>
+      <td>40.740000</td>
+      <td>43.41</td>
+      <td>2.670000</td>
+      <td>32.772350</td>
+      <td>45.67</td>
+      <td>12.897650</td>
+      <td>7.967649</td>
+      <td>-2.26</td>
+      <td>-10.227649</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>BA</td>
+      <td>23.412220</td>
+      <td>24.31</td>
+      <td>0.897780</td>
+      <td>60.282661</td>
+      <td>69.73</td>
+      <td>9.447339</td>
+      <td>-36.870441</td>
+      <td>-45.42</td>
+      <td>-8.549559</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>CE</td>
+      <td>21.742650</td>
+      <td>25.38</td>
+      <td>3.637350</td>
+      <td>33.123784</td>
+      <td>65.91</td>
+      <td>32.786216</td>
+      <td>-11.381134</td>
+      <td>-40.53</td>
+      <td>-29.148866</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>DF</td>
+      <td>58.366100</td>
+      <td>51.65</td>
+      <td>-6.716100</td>
+      <td>11.873230</td>
+      <td>36.85</td>
+      <td>24.976770</td>
+      <td>46.492870</td>
+      <td>14.80</td>
+      <td>-31.692870</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>ES</td>
+      <td>54.760857</td>
+      <td>52.23</td>
+      <td>-2.530857</td>
+      <td>24.198740</td>
+      <td>40.40</td>
+      <td>16.201260</td>
+      <td>30.562117</td>
+      <td>11.83</td>
+      <td>-18.732117</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>GO</td>
+      <td>57.237573</td>
+      <td>52.16</td>
+      <td>-5.077573</td>
+      <td>21.855471</td>
+      <td>39.51</td>
+      <td>17.654529</td>
+      <td>35.382103</td>
+      <td>12.65</td>
+      <td>-22.732103</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>MA</td>
+      <td>24.281077</td>
+      <td>26.02</td>
+      <td>1.738923</td>
+      <td>61.261374</td>
+      <td>68.84</td>
+      <td>7.578626</td>
+      <td>-36.980297</td>
+      <td>-42.82</td>
+      <td>-5.839703</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>MG</td>
+      <td>48.308929</td>
+      <td>43.60</td>
+      <td>-4.708929</td>
+      <td>27.648672</td>
+      <td>48.29</td>
+      <td>20.641328</td>
+      <td>20.660257</td>
+      <td>-4.69</td>
+      <td>-25.350257</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>MS</td>
+      <td>55.056999</td>
+      <td>52.70</td>
+      <td>-2.356999</td>
+      <td>23.866867</td>
+      <td>39.04</td>
+      <td>15.173133</td>
+      <td>31.190133</td>
+      <td>13.66</td>
+      <td>-17.530133</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>MT</td>
+      <td>60.039005</td>
+      <td>59.84</td>
+      <td>-0.199005</td>
+      <td>24.759506</td>
+      <td>34.39</td>
+      <td>9.630494</td>
+      <td>35.279499</td>
+      <td>25.45</td>
+      <td>-9.829499</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>PA</td>
+      <td>36.190922</td>
+      <td>40.27</td>
+      <td>4.079078</td>
+      <td>41.393476</td>
+      <td>52.22</td>
+      <td>10.826524</td>
+      <td>-5.202553</td>
+      <td>-11.95</td>
+      <td>-6.747447</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>PB</td>
+      <td>31.295508</td>
+      <td>29.62</td>
+      <td>-1.675508</td>
+      <td>45.457308</td>
+      <td>64.21</td>
+      <td>18.752692</td>
+      <td>-14.161800</td>
+      <td>-34.59</td>
+      <td>-20.428200</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>PE</td>
+      <td>30.573946</td>
+      <td>29.91</td>
+      <td>-0.663946</td>
+      <td>48.867692</td>
+      <td>65.27</td>
+      <td>16.402308</td>
+      <td>-18.293746</td>
+      <td>-35.36</td>
+      <td>-17.066254</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>PI</td>
+      <td>18.764451</td>
+      <td>19.90</td>
+      <td>1.135549</td>
+      <td>63.395518</td>
+      <td>74.25</td>
+      <td>10.854482</td>
+      <td>-44.631068</td>
+      <td>-54.35</td>
+      <td>-9.718932</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>PR</td>
+      <td>56.892693</td>
+      <td>55.26</td>
+      <td>-1.632693</td>
+      <td>19.704446</td>
+      <td>35.99</td>
+      <td>16.285554</td>
+      <td>37.188247</td>
+      <td>19.27</td>
+      <td>-17.918247</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>RJ</td>
+      <td>59.785790</td>
+      <td>51.09</td>
+      <td>-8.695790</td>
+      <td>14.694689</td>
+      <td>40.68</td>
+      <td>25.985311</td>
+      <td>45.091101</td>
+      <td>10.41</td>
+      <td>-34.681101</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>RN</td>
+      <td>30.210467</td>
+      <td>31.02</td>
+      <td>0.809533</td>
+      <td>41.186428</td>
+      <td>62.98</td>
+      <td>21.793572</td>
+      <td>-10.975962</td>
+      <td>-31.96</td>
+      <td>-20.984038</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>RO</td>
+      <td>62.239609</td>
+      <td>64.36</td>
+      <td>2.120391</td>
+      <td>20.361521</td>
+      <td>28.98</td>
+      <td>8.618479</td>
+      <td>41.878088</td>
+      <td>35.38</td>
+      <td>-6.498088</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>RR</td>
+      <td>62.974551</td>
+      <td>69.57</td>
+      <td>6.595449</td>
+      <td>17.849762</td>
+      <td>23.05</td>
+      <td>5.200238</td>
+      <td>45.124789</td>
+      <td>46.52</td>
+      <td>1.395211</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>RS</td>
+      <td>52.627017</td>
+      <td>48.89</td>
+      <td>-3.737017</td>
+      <td>22.805894</td>
+      <td>42.28</td>
+      <td>19.474106</td>
+      <td>29.821123</td>
+      <td>6.61</td>
+      <td>-23.211123</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>SC</td>
+      <td>65.819207</td>
+      <td>62.21</td>
+      <td>-3.609207</td>
+      <td>15.131720</td>
+      <td>29.54</td>
+      <td>14.408280</td>
+      <td>50.687487</td>
+      <td>32.67</td>
+      <td>-18.017487</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>SE</td>
+      <td>27.211105</td>
+      <td>29.16</td>
+      <td>1.948895</td>
+      <td>50.091548</td>
+      <td>63.82</td>
+      <td>13.728452</td>
+      <td>-22.880443</td>
+      <td>-34.66</td>
+      <td>-11.779557</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>SP</td>
+      <td>53.004450</td>
+      <td>47.71</td>
+      <td>-5.294450</td>
+      <td>16.417669</td>
+      <td>40.89</td>
+      <td>24.472331</td>
+      <td>36.586781</td>
+      <td>6.82</td>
+      <td>-29.766781</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>TO</td>
+      <td>44.635287</td>
+      <td>44.00</td>
+      <td>-0.635287</td>
+      <td>41.124267</td>
+      <td>50.40</td>
+      <td>9.275733</td>
+      <td>3.511021</td>
+      <td>-6.40</td>
+      <td>-9.911021</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> sns.barplot(x<span class="op">=</span><span class="st">'uf'</span>, y<span class="op">=</span><span class="st">'dif_jb_pt'</span>, data<span class="op">=</span>jb_pt_dif, palette<span class="op">=</span>cm.RdYlBu(jb_pt_dif[<span class="st">'dif_jb_pt'</span>]))</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>p.<span class="bu">set</span>(xlabel<span class="op">=</span><span class="st">'UF'</span>, ylabel<span class="op">=</span><span class="st">'Diferença no percentual de votos'</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>      title<span class="op">=</span><span class="st">'Diferença no percentual de votos do PT entre 2022 e 2018 no 1o turno'</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img src="analise_eleicoes_2022_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
