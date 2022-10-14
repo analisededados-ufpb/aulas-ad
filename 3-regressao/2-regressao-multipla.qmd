@@ -1,0 +1,223 @@
+---
+title: "Análise de dados"
+subtitle: "Regressão linear múltipla"
+author: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+format:
+    revealjs:
+        slide-number: true
+        chalkboard: true
+        incremental: false
+        theme: [simple, ../custom.scss]
+        echo: true
+---
+
+```{python}
+#| include: false
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from pathlib import Path
+import seaborn as sns
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import r2_score, mean_squared_error
+import statsmodels.api as sm
+
+DATA_DIR = Path().resolve().parent / 'dados'
+HOUSE_CSV = DATA_DIR / 'house_sales.csv'
+```
+
+## Regressão linear múltipla
+
+- Estima o valor de uma variável resposta $y$ em função de $k$ variáveis preditoras $(x_1, ..., x_k)$ com base em uma relação linear:
+
+$$y = b_0 + b_1 x_1 + b_2 x_2 + ... + b_k x_k + e$$
+
+- Onde:
+    - $(b_0, ..., b_k)$ são os $k+1$ parâmetros da regressão
+    - $e$ representa o erro do modelo
+
+## Exemplo de regressão múltipla: preço de casas
+
+- O governo precisa estimar o preço de casas para cobrar impostos
+- Podemos estimar o preço de uma casa (`AdjSalePrice`) com base em outras variáveis: área (`SqFtTotLiving`), banheiros (`Bathrooms`), quartos (`Bedrooms`), nível (`BldgGrade`)
+
+```{python}
+#| echo: false
+subset = ['AdjSalePrice', 'SqFtTotLiving', 'SqFtLot', 'Bathrooms', 
+          'Bedrooms', 'BldgGrade']
+house = pd.read_csv(HOUSE_CSV, sep='\t')
+house[subset].head(5)
+```
+
+## Exemplo de regressão múltipla: preço de casas
+
+- Aplicando e avaliando o modelo de regressão com `scikit-learn`
+
+:::: {.columns}
+:::{.column}
+```{python}
+predictors = ['SqFtTotLiving', 'SqFtLot', 'Bathrooms',
+              'Bedrooms', 'BldgGrade']
+outcome = 'AdjSalePrice'
+
+house_lm = LinearRegression()
+house_lm.fit(house[predictors], house[outcome])
+
+print(f'Intercept: {house_lm.intercept_:.3f}')
+print('Coefficients:')
+for name, coef in zip(predictors, house_lm.coef_):
+    print(f' {name}: {coef}')
+```
+:::
+::: {.column}
+```{python}
+fitted = house_lm.predict(house[predictors])
+RMSE = np.sqrt(mean_squared_error(house[outcome], fitted))
+r2 = r2_score(house[outcome], fitted)
+print(f'Root Mean Square Error (RMSE): {RMSE:.0f}')
+print(f'Coefficiente of determination (r2): {r2:.4f}')
+```
+:::
+::::
+
+
+## Exemplo de regressão múltipla: preço de casas
+
+- Avaliando o modelo de regressão linear com o `statsmodels`
+
+```{python}
+model = sm.OLS(house[outcome], house[predictors].assign(const=1))
+results = model.fit()
+print(results.summary())
+```
+
+
+## Interpretando resultados da regressão múltipla
+
+- Os coeficientes das variáveis preditoras têm o mesmo significado da regressão simples
+    - Indica quanto a variável resposta muda para cada unidade da variável preditora correspondente
+
+- _Root mean squared error_, raíz da média dos erros ao quadrado, é uma métrica útil para comparar a qualidade de diferentes modelos
+
+$$RMSE = \sqrt{\frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{n}}$$
+
+## Interpretando resultados da regressão múltipla
+
+- Além do `R-squared` ($R^2$), algumas ferramentas como o `statsmodels` também reportam outras métricas:
+    - `Adjusted R-squared` penaliza modelos com muitos preditores
+        - `AIC` e `BIC` são métricas que também penalizam a adição de variáveis
+    - O _Teste-t_ é usado para medir a importância de cada preditor
+        - _p-valor_ da estatística `t` (`P>|t|`) indica significância estatística de preditor
+        - Quanto maior o `t` e menor seu _p-valor_, mais significativo é o preditor
+    - O _Teste-F_ verifica se a regressão é significativa ($SSR > SSE$)
+    - No geral, p-valores $< 0.05$ indicam significância estatística
+        - Veremos sobre testes de hipótese e p-valor mais para frente
+
+## Variáveis preditoras não numéricas
+
+- Deve-se converter variáveis categóricas e _boolean_ em númericas
+
+::: {.smaller-table}
+```{python}
+#| echo: false
+predictors2 = ['PropertyType', 'NbrLivingUnits', 'SqFtFinBasement',
+               'YrBuilt', 'YrRenovated', 'NewConstruction']
+predictors_full = predictors + predictors2
+house.filter(predictors2).head()
+```
+:::
+
+- Variáveis _dummy_: cada categoria vira uma coluna, com valor 0 ou 1
+
+::: {.smaller-table}
+```{python}
+X = pd.get_dummies(house[predictors_full], drop_first=True)
+X['NewConstruction'] = [1 if nc else 0 for nc in X['NewConstruction']]
+```
+
+```{python}
+#| echo: false
+X.drop(columns=predictors).head()
+```
+:::
+
+## Avaliando modelo com mais variáveis
+
+- $R^2$ melhorou (era $0.541$), mas nem sempre é o caso
+    - Pode-se ir removendo variáveis pouco significativas e re-avaliar
+
+```{python}
+house_full = sm.OLS(house[outcome], X.assign(const=1))
+results = house_full.fit()
+print(results.summary())
+```
+
+## Modelo ajustado
+
+- Removendo variáveis com pouca significância
+
+```{python}
+#| echo: false
+X2 = X.drop(columns=['NbrLivingUnits','YrRenovated', 'NewConstruction',
+                     'SqFtLot', 'SqFtFinBasement', 'PropertyType_Single Family'])
+house_lm2 = sm.OLS(house[outcome], X2.assign(const=1))
+results = house_lm2.fit()
+print(results.summary())
+```
+
+
+## Problema da multicolinearidade
+
+- Quando duas variáveis preditores são linearmente dependentes, dizemos que elas são colineares
+- A correlação linear é medida pelas suas correlações
+- Se a correlação não é zero
+
+- Indício: $R^2$ é alto, a regressão é significativa, mas nenhum dos coeficientes da regressão é estatisticamente significativo segundo o teste-t
+    - Resultados contraditórios de testes de significância
+
+## Problema da multicolinearidade
+
+- Quando duas variáveis preditoras estão correlacionadas elas deixam de ser independentes entre si e ambas trazem essencialmente a mesma informação
+    - Nenhuma pode contribuir significativamente para a variação de y depois que a outra foi incluída
+- Juntas, elas constribuem muito; se ambas forem removidas do modelo, a qualidade do modelo seria pior!
+
+
+## Correlação entre variáveis {.scrollable}
+
+```{python}
+#| echo: false
+
+from scipy.stats import pearsonr
+import matplotlib.pyplot as plt 
+
+def corrfunc(x, y, ax=None, **kws):
+    """Plot the correlation coefficient in the top left hand corner of a plot."""
+    r, _ = pearsonr(x, y)
+    ax = ax or plt.gca()
+    ax.annotate(f'ρ = {r:.2f}', xy=(.2, .99), xycoords=ax.transAxes)
+
+g = sns.pairplot(X2, height=1.3)
+g.map_lower(corrfunc)
+plt.show()
+```
+
+## Problema da multicolinearidade
+
+- Precisamos encontrar a correlação entre vários pares $x_i$
+- Quando a correlação for alta devemos eliminar uma das variáveis do modelo e refazer os cálculos
+- Se a significância da regressão aumentar, então concluímos que a correlação forte estava causando o problema
+
+::: {.smaller-table}
+```{python}
+X2.corr()
+```
+:::
+
+## Seleção das variáveis
+
+- Teoria forte: use o seu conhecimento sobre o que está sendo estudado
+
+- Erro de medição: você confia na amostra que vai usar para gerar o modelo de regressão?
+
+- Erro de especificação: incluir variáveis irrelevantes ou omitir variáveis relevantes
