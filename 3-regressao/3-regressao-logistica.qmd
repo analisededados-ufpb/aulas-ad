@@ -1,0 +1,367 @@
+---
+title: "Análise de dados"
+subtitle: "Regressão logística"
+author: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+format:
+    revealjs:
+        slide-number: true
+        chalkboard: true
+        incremental: false
+        theme: [simple, ../custom.scss]
+        echo: true
+---
+
+```{python}
+#| include: false
+
+from dmba import classificationSummary
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from pathlib import Path
+import seaborn as sns
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import confusion_matrix, precision_recall_fscore_support
+from sklearn.metrics import roc_curve, accuracy_score, roc_auc_score
+from sklearn.preprocessing import OrdinalEncoder
+import statsmodels.api as sm
+
+DATA_DIR = Path().resolve().parent / 'dados'
+LOAN_DATA_CSV = DATA_DIR / 'loan_data.csv.gz'
+```
+
+## Regressão logística
+
+- Similar à regressão linear múltipla, mas resposta é **binária**
+    - É um método popular de **classificação** (prevê uma classe/categoria)
+
+- A variável resposta é pensada como a probabilidade do valor ser 1
+- Função da resposta logística ou _logit inversa_ dos preditores
+    - Para os valores de $p$ ficarem em uma escala de 0 a 1
+
+$$p = \frac{1}{1 + e^{-(\beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_q x_q)}}$$
+
+## Regressão logística
+
+- _Odds_ é a probabilidade de sucesso dividido pelo insucesso
+    - $Odds (Y = 1) = \frac{p}{1 - p}$
+
+- Podemos obter a probabilidade dos _odds_ com a função inversa:
+    - $p = \frac{Odds}{1 + Odds}$
+
+- Combinando com a função da resposta logística e aplicando log, teremos a função _log-odds_ ou _logit_:
+
+$$log(Odds(Y = 1)) = \beta_0 + \beta_1 x_1 + \beta_2 x_2 + ... + \beta_q x_q$$
+
+
+## Regressão logística {.smaller-code-fold}
+
+- A função _logit_ mapeia $p$ de $(0,1)$ para valores de $(-\infty, \infty)$
+    - Se a probabilidade $p$ for maior que um limiar, classificamos como 1
+
+```{python}
+#| code-fold: true
+p = np.arange(0.01, 1, 0.01)
+df = pd.DataFrame({
+    'p': p,
+    'logit': np.log(p / (1 - p)),
+    'odds': p / (1 - p),
+})
+
+fig, ax = plt.subplots(figsize=(4, 4))
+ax.axhline(0, color='grey', linestyle='--')
+ax.axvline(0.5, color='grey', linestyle='--')
+ax.plot(df['p'], df['logit'])
+ax.set_xlabel('Probability')
+ax.set_ylabel('logit(p)')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Exemplo de regressão logística: dados de empréstimo {.smaller-code-fold .smaller-table .scrollable}
+
+- Estimar status de empréstimo: pago (_paid off_) ou não pago (_default_)
+
+```{python}
+#| code-fold: true
+
+loan_data = pd.read_csv(LOAN_DATA_CSV, index_col=0)
+
+# convert to categorical
+loan_data.outcome = loan_data.outcome.astype('category')
+loan_data.outcome.cat.reorder_categories(['paid off', 'default'])
+loan_data.purpose_ = loan_data.purpose_.astype('category')
+loan_data.home_ = loan_data.home_.astype('category')
+loan_data.emp_len_ = loan_data.emp_len_.astype('category')
+
+outcome = 'outcome'
+predictors = ['payment_inc_ratio', 'purpose_', 'home_', 'emp_len_', 
+              'borrower_score']
+loan_data[[outcome] + predictors]
+```
+
+
+## Exemplo de regressão logística: dados de empréstimo {.smaller-code-fold .smaller-table .scrollable}
+
+:::: {.columns}
+:::{.column width="60%"}
+- A regressão logística é um tipo de _General Linear Model_ (GLM) com:
+    - Distribuição de probabilidade: **binomial**
+    - Função de ligação (_link_) para mapear preditores: **logit**
+:::
+::: {.column width="40%"}
+- Aplicando a regressão com `scikit-learn`
+
+```{python}
+#| code-fold: true
+X = pd.get_dummies(loan_data[predictors], prefix='', prefix_sep='', 
+                   drop_first=True)
+y = loan_data[outcome] # .cat.categories
+
+logit_reg = LogisticRegression(penalty='l2', C=1e42, solver='liblinear')
+logit_reg.fit(X, y)
+
+print('intercept ', logit_reg.intercept_[0])
+print('classes', logit_reg.classes_)
+pd.DataFrame({'coeff': logit_reg.coef_[0]}, 
+             index=X.columns)
+```
+:::
+::::
+
+## Regressão logística {.scrollable}
+
+- O valor estimado da regressão logística é $\hat{Y} = log(Odds(Y = 1))$
+- A probabilidade estimada é dada pela função resposta logística:
+
+$$ \hat{p} = \frac{1}{1 + e^{-\hat{Y}}}$$
+
+- Estatísticas dos valores e das probabilidades estimadas:
+
+:::: {.columns}
+:::{.column}
+
+```{python}
+pred = pd.DataFrame(logit_reg.predict_log_proba(X), columns=logit_reg.classes_)
+print(pred.describe())
+```
+
+:::
+::: {.column}
+
+```{python}
+pred = pd.DataFrame(logit_reg.predict_proba(X), columns=logit_reg.classes_)
+print(pred.describe())
+```
+
+:::
+::::
+
+## Regressão logística {.scrollable}
+
+- Usa-se um limiar da probabilidade para definir resposta (0 ou 1)
+    - Geralmente, $p > 0.5$ se considera valor 1
+
+```{python}
+#| echo: false
+pred
+```
+
+## Interpretando coeficientes e _odds ratio_ {.smaller-code-fold .scrollable}
+
+- _Odds ratio_ mede a força da associação entre dois eventos $A$ e $B$
+
+$$\text{odds ratio} = \frac{Odds(Y = 1 | X = 1)}{Odds(Y = 1 | X = 0)}$$
+
+- Visualizando mudança no _odds ratio_ para cada mudança $x$:
+
+```{python}
+#| code-fold: true
+fig, ax = plt.subplots(figsize=(5, 3))
+ax.plot(df['logit'], df['odds'])
+ax.set_xlabel('log(odds ratio)')
+ax.set_ylabel('odds ratio')
+ax.set_xlim(0, 5.1)
+ax.set_ylim(-5, 105)
+
+plt.tight_layout()
+plt.show()
+```
+
+## Avaliando o modelo
+
+- A regressão linear é ajustada com método dos mínimos quadrados
+- A regressão logística não tem solução fechada e é ajustado com **estimativa por máxima verossimilhança** -- ou _Maximum Likelihood Estimation_ (MLE)
+    - Encontra modelo que _log odds_ mais se aproximam da variável resposta
+
+## Avaliando o modelo com `statsmodels`
+
+```{python}
+y_numbers = [1 if yi == 'default' else 0 for yi in y]
+logit_reg_sm = sm.GLM(y_numbers, X.assign(const=1), family=sm.families.Binomial())
+logit_result = logit_reg_sm.fit()
+print(logit_result.summary())
+```
+
+## Avaliando outro modelo com fórmula e splines
+
+```{python}
+import statsmodels.formula.api as smf
+formula = ('outcome ~ bs(payment_inc_ratio, df=8) + purpose_ + ' +
+           'home_ + emp_len_ + bs(borrower_score, df=3)')
+model = smf.glm(formula=formula, data=loan_data, family=sm.families.Binomial())
+results = model.fit()
+print(results.summary())
+```
+
+
+## Análise de resíduos parciais {.smaller-code-fold}
+
+- Visualizando o efeito de uma variável nos resíduos
+
+```{python}
+#| code-fold: true
+
+from statsmodels.genmod.generalized_linear_model import GLMResults
+def partialResidualPlot(model, df, outcome, feature, fig, ax):
+    y_actual = [0 if s == 'default' else 1 for s in df[outcome]]
+    y_pred = model.predict(df)
+    org_params = model.params.copy()
+    zero_params = model.params.copy()
+    # set model parametes of other features to 0
+    for i, name in enumerate(zero_params.index):
+        if feature in name:
+            continue
+        zero_params[i] = 0.0
+    model.initialize(model.model, zero_params)
+    feature_prediction = model.predict(df)
+    ypartial = -np.log(1/feature_prediction - 1)
+    ypartial = ypartial - np.mean(ypartial)
+    model.initialize(model.model, org_params)
+    results = pd.DataFrame({
+        'feature': df[feature],
+        'residual': -2 * (y_actual - y_pred),
+        'ypartial': ypartial/ 2,
+    })
+    results = results.sort_values(by=['feature'])
+
+    ax.scatter(results.feature, results.residual, marker=".", s=72./fig.dpi)
+    ax.plot(results.feature, results.ypartial, color='black')
+    ax.set_xlabel(feature)
+    ax.set_ylabel(f'Residual + {feature} contribution')
+    return ax
+
+fig, ax = plt.subplots(figsize=(5, 5))
+partialResidualPlot(results, loan_data, 'outcome', 'payment_inc_ratio', fig, ax)
+ax.set_xlim(0, 25)
+ax.set_ylim(-2.5, 2.5)
+
+
+plt.tight_layout()
+plt.show()
+```
+
+## Avaliando modelos de classificação
+
+- Matriz de confusão
+
+:::: {.columns}
+:::{.column}
+
+```{python}
+# Confusion matrix
+pred = logit_reg.predict(X)
+pred_y = logit_reg.predict(X) == 'default'
+true_y = y == 'default'
+true_pos = true_y & pred_y
+true_neg = ~true_y & ~pred_y
+false_pos = ~true_y & pred_y
+false_neg = true_y & ~pred_y
+
+conf_mat = pd.DataFrame([[np.sum(true_pos), np.sum(false_neg)], [np.sum(false_pos), np.sum(true_neg)]],
+                       index=['Y = default', 'Y = paid off'],
+                       columns=['Yhat = default', 'Yhat = paid off'])
+print(conf_mat)
+```
+:::
+::: {.column}
+```{python}
+print(confusion_matrix(y, logit_reg.predict(X)))
+
+```
+
+:::
+::::
+
+## Avaliando modelos de classificação
+
+- Precision, recall and Specificity
+
+:::: {.columns}
+:::{.column}
+```{python}
+conf_mat = confusion_matrix(y, logit_reg.predict(X))
+print('Precision', conf_mat[0, 0] / sum(conf_mat[:, 0]))
+print('Recall', conf_mat[0, 0] / sum(conf_mat[0, :]))
+print('Specificity', conf_mat[1, 1] / sum(conf_mat[1, :]))
+```
+:::
+::: {.column}
+```{python}
+precision_recall_fscore_support(y, logit_reg.predict(X),
+                                labels=['default', 'paid off'])
+```
+:::
+::::
+
+## Avaliando modelos de classificação {.smaller-code-fold}
+
+- Curva ROC
+
+```{python}
+#| code-fold: true
+fpr, tpr, thresholds = roc_curve(y, logit_reg.predict_proba(X)[:, 0], 
+                                 pos_label='default')
+roc_df = pd.DataFrame({'recall': tpr, 'specificity': 1 - fpr})
+
+ax = roc_df.plot(x='specificity', y='recall', figsize=(4, 4), legend=False)
+ax.set_ylim(0, 1)
+ax.set_xlim(1, 0)
+ax.plot((1, 0), (0, 1))
+ax.set_xlabel('specificity')
+ax.set_ylabel('recall')
+
+
+plt.tight_layout()
+plt.show()
+```
+
+## Avaliando modelos de classificação {.smaller-code-fold}
+
+- AUC
+
+```{python}
+print(np.sum(roc_df.recall[:-1] * np.diff(1 - roc_df.specificity)))
+print(roc_auc_score([1 if yi == 'default' else 0 for yi in y], logit_reg.predict_proba(X)[:, 0]))
+```
+
+
+```{python}
+#| code-fold: true
+fpr, tpr, thresholds = roc_curve(y, logit_reg.predict_proba(X)[:,0], 
+                                 pos_label='default')
+roc_df = pd.DataFrame({'recall': tpr, 'specificity': 1 - fpr})
+
+ax = roc_df.plot(x='specificity', y='recall', figsize=(4, 4), legend=False)
+ax.set_ylim(0, 1)
+ax.set_xlim(1, 0)
+# ax.plot((1, 0), (0, 1))
+ax.set_xlabel('specificity')
+ax.set_ylabel('recall')
+ax.fill_between(roc_df.specificity, 0, roc_df.recall, alpha=0.3)
+
+
+plt.tight_layout()
+plt.show()
+```
