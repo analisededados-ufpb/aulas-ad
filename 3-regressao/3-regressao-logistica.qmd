@@ -294,20 +294,27 @@ print(confusion_matrix(y, logit_reg.predict(X)))
 :::
 ::::
 
-## Avaliando modelos de classificação
-
-- Precision, recall and Specificity
+## Avaliando modelos de classificação {.scrollable .smaller}
 
 :::: {.columns}
 :::{.column}
+- Precisão
+    - $\text{precision} = \frac{\sum{\text{TruePositive}}}{\sum{\text{TruePositive}} + \sum{\text{FalsePositive}}}$
+
+- Revocação / Sensibilidade
+    - $\text{recall} = \frac{\sum{\text{TruePositive}}}{\sum{\text{TruePositive}} + \sum{\text{FalseNegative}}}$
+
+- Especificidade
+    - $\text{specificity} = \frac{\sum{\text{TrueNegative}}}{\sum{\text{TruePositive}} + \sum{\text{FalsePositive}}}$
+:::
+::: {.column}
 ```{python}
 conf_mat = confusion_matrix(y, logit_reg.predict(X))
 print('Precision', conf_mat[0, 0] / sum(conf_mat[:, 0]))
 print('Recall', conf_mat[0, 0] / sum(conf_mat[0, :]))
 print('Specificity', conf_mat[1, 1] / sum(conf_mat[1, :]))
 ```
-:::
-::: {.column}
+
 ```{python}
 precision_recall_fscore_support(y, logit_reg.predict(X),
                                 labels=['default', 'paid off'])
@@ -317,7 +324,9 @@ precision_recall_fscore_support(y, logit_reg.predict(X),
 
 ## Avaliando modelos de classificação {.smaller-code-fold}
 
-- Curva ROC
+- Curva ROC: trade-off entre revocação e especificidade
+    - Linha tracejada representa classificação aleatória
+    - Desejável curva que suba muito rapidamente
 
 ```{python}
 #| code-fold: true
@@ -339,7 +348,8 @@ plt.show()
 
 ## Avaliando modelos de classificação {.smaller-code-fold}
 
-- AUC
+- AUC: área abaixo da curva ROC
+    - AUC maior indica classificador mais eficaz
 
 ```{python}
 print(np.sum(roc_df.recall[:-1] * np.diff(1 - roc_df.specificity)))
