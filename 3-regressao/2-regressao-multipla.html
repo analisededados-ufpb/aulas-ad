@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-html/tabby.min.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-0.9.653">
+
+  <meta name="author" content="Prof.&nbsp;Marcus Carvalho @ DCX / CCAE / UFPB">
+  <title>Aulas AD 1 - Análise de dados</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="../site_libs/revealjs/dist/theme/quarto.css" id="theme">
+  <link href="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-captioned.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-captioned) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-captioned.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-captioned .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-captioned .callout-caption  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-captioned.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-captioned.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-caption {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-caption {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-caption {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-captioned .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-captioned .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-captioned) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-caption {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-caption {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-caption {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-caption {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-caption {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="center">
+  <h1 class="title">Análise de dados</h1>
+  <p class="subtitle">Regressão linear múltipla</p>
+  <p class="author">Prof.&nbsp;Marcus Carvalho @ DCX / CCAE / UFPB</p>
+</section>
+
+<section id="regressão-linear-múltipla" class="slide level2">
+<h2>Regressão linear múltipla</h2>
+<ul>
+<li>Estima o valor de uma variável resposta <span class="math inline">\(y\)</span> em função de <span class="math inline">\(k\)</span> variáveis preditoras <span class="math inline">\((x_1, ..., x_k)\)</span> com base em uma relação linear:</li>
+</ul>
+<p><span class="math display">\[y = b_0 + b_1 x_1 + b_2 x_2 + ... + b_k x_k + e\]</span></p>
+<ul>
+<li>Onde:
+<ul>
+<li><span class="math inline">\((b_0, ..., b_k)\)</span> são os <span class="math inline">\(k+1\)</span> parâmetros da regressão</li>
+<li><span class="math inline">\(e\)</span> representa o erro do modelo</li>
+</ul></li>
+</ul>
+</section>
+<section id="exemplo-de-regressão-múltipla-preço-de-casas" class="slide level2">
+<h2>Exemplo de regressão múltipla: preço de casas</h2>
+<ul>
+<li>O governo precisa estimar o preço de casas para cobrar impostos</li>
+<li>Podemos estimar o preço de uma casa (<code>AdjSalePrice</code>) com base em outras variáveis: área (<code>SqFtTotLiving</code>), banheiros (<code>Bathrooms</code>), quartos (<code>Bedrooms</code>), nível (<code>BldgGrade</code>)</li>
+</ul>
+<div class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="2">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>AdjSalePrice</th>
+      <th>SqFtTotLiving</th>
+      <th>SqFtLot</th>
+      <th>Bathrooms</th>
+      <th>Bedrooms</th>
+      <th>BldgGrade</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>300805.0</td>
+      <td>2400</td>
+      <td>9373</td>
+      <td>3.00</td>
+      <td>6</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1076162.0</td>
+      <td>3764</td>
+      <td>20156</td>
+      <td>3.75</td>
+      <td>4</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>761805.0</td>
+      <td>2060</td>
+      <td>26036</td>
+      <td>1.75</td>
+      <td>4</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>442065.0</td>
+      <td>3200</td>
+      <td>8618</td>
+      <td>3.75</td>
+      <td>5</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>297065.0</td>
+      <td>1720</td>
+      <td>8620</td>
+      <td>1.75</td>
+      <td>4</td>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="exemplo-de-regressão-múltipla-preço-de-casas-1" class="slide level2">
+<h2>Exemplo de regressão múltipla: preço de casas</h2>
+<ul>
+<li>Aplicando e avaliando o modelo de regressão com <code>scikit-learn</code></li>
+</ul>
+<div class="columns">
+<div class="column">
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1"></a>predictors <span class="op">=</span> [<span class="st">'SqFtTotLiving'</span>, <span class="st">'SqFtLot'</span>, <span class="st">'Bathrooms'</span>,</span>
+<span id="cb1-2"><a href="#cb1-2"></a>              <span class="st">'Bedrooms'</span>, <span class="st">'BldgGrade'</span>]</span>
+<span id="cb1-3"><a href="#cb1-3"></a>outcome <span class="op">=</span> <span class="st">'AdjSalePrice'</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>house_lm <span class="op">=</span> LinearRegression()</span>
+<span id="cb1-6"><a href="#cb1-6"></a>house_lm.fit(house[predictors], house[outcome])</span>
+<span id="cb1-7"><a href="#cb1-7"></a></span>
+<span id="cb1-8"><a href="#cb1-8"></a><span class="bu">print</span>(<span class="ss">f'Intercept: </span><span class="sc">{</span>house_lm<span class="sc">.</span>intercept_<span class="sc">:.3f}</span><span class="ss">'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9"></a><span class="bu">print</span>(<span class="st">'Coefficients:'</span>)</span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="cf">for</span> name, coef <span class="kw">in</span> <span class="bu">zip</span>(predictors, house_lm.coef_):</span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="bu">print</span>(<span class="ss">f' </span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>coef<span class="sc">}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Intercept: -521871.368
+Coefficients:
+ SqFtTotLiving: 228.83060360240796
+ SqFtLot: -0.06046682065307607
+ Bathrooms: -19442.840398321056
+ Bedrooms: -47769.95518521438
+ BldgGrade: 106106.96307898083</code></pre>
+</div>
+</div>
+</div><div class="column">
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1"></a>fitted <span class="op">=</span> house_lm.predict(house[predictors])</span>
+<span id="cb3-2"><a href="#cb3-2"></a>RMSE <span class="op">=</span> np.sqrt(mean_squared_error(house[outcome], fitted))</span>
+<span id="cb3-3"><a href="#cb3-3"></a>r2 <span class="op">=</span> r2_score(house[outcome], fitted)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="bu">print</span>(<span class="ss">f'Root Mean Square Error (RMSE): </span><span class="sc">{</span>RMSE<span class="sc">:.0f}</span><span class="ss">'</span>)</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="bu">print</span>(<span class="ss">f'Coefficiente of determination (r2): </span><span class="sc">{</span>r2<span class="sc">:.4f}</span><span class="ss">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Root Mean Square Error (RMSE): 261220
+Coefficiente of determination (r2): 0.5406</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="exemplo-de-regressão-múltipla-preço-de-casas-2" class="slide level2">
+<h2>Exemplo de regressão múltipla: preço de casas</h2>
+<ul>
+<li>Avaliando o modelo de regressão linear com o <code>statsmodels</code></li>
+</ul>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1"></a>model <span class="op">=</span> sm.OLS(house[outcome], house[predictors].assign(const<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb5-2"><a href="#cb5-2"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           AdjSalePrice   R-squared:                       0.541
+Model:                            OLS   Adj. R-squared:                  0.540
+Method:                 Least Squares   F-statistic:                     5338.
+Date:                Fri, 28 Oct 2022   Prob (F-statistic):               0.00
+Time:                        11:14:47   Log-Likelihood:            -3.1517e+05
+No. Observations:               22687   AIC:                         6.304e+05
+Df Residuals:                   22681   BIC:                         6.304e+05
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P&gt;|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+SqFtTotLiving   228.8306      3.899     58.694      0.000     221.189     236.472
+SqFtLot          -0.0605      0.061     -0.988      0.323      -0.180       0.059
+Bathrooms     -1.944e+04   3625.388     -5.363      0.000   -2.65e+04   -1.23e+04
+Bedrooms      -4.777e+04   2489.732    -19.187      0.000   -5.27e+04   -4.29e+04
+BldgGrade      1.061e+05   2396.445     44.277      0.000    1.01e+05    1.11e+05
+const         -5.219e+05   1.57e+04    -33.342      0.000   -5.53e+05   -4.91e+05
+==============================================================================
+Omnibus:                    29676.557   Durbin-Watson:                   1.247
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):         19390738.346
+Skew:                           6.889   Prob(JB):                         0.00
+Kurtosis:                     145.559   Cond. No.                     2.86e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.86e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretando-resultados-da-regressão-múltipla" class="slide level2">
+<h2>Interpretando resultados da regressão múltipla</h2>
+<ul>
+<li>Os coeficientes das variáveis preditoras têm o mesmo significado da regressão simples
+<ul>
+<li>Indica quanto a variável resposta muda para cada unidade da variável preditora correspondente</li>
+</ul></li>
+<li><em>Root mean squared error</em>, raíz da média dos erros ao quadrado, é uma métrica útil para comparar a qualidade de diferentes modelos</li>
+</ul>
+<p><span class="math display">\[RMSE = \sqrt{\frac{\sum_{i=1}^{n}(y_i - \hat{y}_i)^2}{n}}\]</span></p>
+</section>
+<section id="interpretando-resultados-da-regressão-múltipla-1" class="slide level2">
+<h2>Interpretando resultados da regressão múltipla</h2>
+<ul>
+<li>Além do <code>R-squared</code> (<span class="math inline">\(R^2\)</span>), algumas ferramentas como o <code>statsmodels</code> também reportam outras métricas:
+<ul>
+<li><code>Adjusted R-squared</code> penaliza modelos com muitos preditores
+<ul>
+<li><code>AIC</code> e <code>BIC</code> são métricas que também penalizam a adição de variáveis</li>
+</ul></li>
+<li>O <em>Teste-t</em> é usado para medir a importância de cada preditor
+<ul>
+<li><em>p-valor</em> da estatística <code>t</code> (<code>P&gt;|t|</code>) indica significância estatística de preditor</li>
+<li>Quanto maior o <code>t</code> e menor seu <em>p-valor</em>, mais significativo é o preditor</li>
+</ul></li>
+<li>O <em>Teste-F</em> verifica se a regressão é significativa (<span class="math inline">\(SSR &gt; SSE\)</span>)</li>
+<li>No geral, p-valores <span class="math inline">\(&lt; 0.05\)</span> indicam significância estatística
+<ul>
+<li>Veremos sobre testes de hipótese e p-valor mais para frente</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="variáveis-preditoras-não-numéricas" class="slide level2">
+<h2>Variáveis preditoras não numéricas</h2>
+<ul>
+<li>Deve-se converter variáveis categóricas e <em>boolean</em> em númericas</li>
+</ul>
+<div class="smaller-table">
+<div class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="6">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PropertyType</th>
+      <th>NbrLivingUnits</th>
+      <th>SqFtFinBasement</th>
+      <th>YrBuilt</th>
+      <th>YrRenovated</th>
+      <th>NewConstruction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Multiplex</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1991</td>
+      <td>0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Single Family</td>
+      <td>1</td>
+      <td>1452</td>
+      <td>2005</td>
+      <td>0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Single Family</td>
+      <td>1</td>
+      <td>900</td>
+      <td>1947</td>
+      <td>0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Single Family</td>
+      <td>1</td>
+      <td>1640</td>
+      <td>1966</td>
+      <td>0</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Single Family</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1948</td>
+      <td>0</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Variáveis <em>dummy</em>: cada categoria vira uma coluna, com valor 0 ou 1</li>
+</ul>
+<div class="smaller-table">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1"></a>X <span class="op">=</span> pd.get_dummies(house[predictors_full], drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>X[<span class="st">'NewConstruction'</span>] <span class="op">=</span> [<span class="dv">1</span> <span class="cf">if</span> nc <span class="cf">else</span> <span class="dv">0</span> <span class="cf">for</span> nc <span class="kw">in</span> X[<span class="st">'NewConstruction'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-execution_count="8">
+<div class="cell-output cell-output-display" data-execution_count="8">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>NbrLivingUnits</th>
+      <th>SqFtFinBasement</th>
+      <th>YrBuilt</th>
+      <th>YrRenovated</th>
+      <th>NewConstruction</th>
+      <th>PropertyType_Single Family</th>
+      <th>PropertyType_Townhouse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>0</td>
+      <td>1991</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1</td>
+      <td>1452</td>
+      <td>2005</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>900</td>
+      <td>1947</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>1640</td>
+      <td>1966</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1948</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="variáveis-preditoras-não-numéricas-1" class="slide level2">
+<h2>Variáveis preditoras não numéricas</h2>
+<ul>
+<li>Variáveis categóricas ordinais podem ser transformadas diretamente em numéricas, mantendo a sua ordem
+<ul>
+<li>Por exemplo, a variável <code>BldgGrade</code> é uma categórica ordinal que representa o nível da casa e foi associada a um número inteiro</li>
+</ul></li>
+</ul>
+<div class="smaller-table">
+<div class="cell" data-execution_count="9">
+<div class="cell-output cell-output-display" data-execution_count="9">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>Cabin</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>Substandard</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5</td>
+      <td>Fair</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>10</td>
+      <td>Very good</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>12</td>
+      <td>Luxury</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>13</td>
+      <td>Mansion</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Deve-se ter cuidado porque o valor numérico da variável também representa sua intensidade</li>
+</ul>
+</section>
+<section id="avaliando-modelo-com-mais-variáveis" class="slide level2">
+<h2>Avaliando modelo com mais variáveis</h2>
+<ul>
+<li><span class="math inline">\(R^2\)</span> melhorou (era <span class="math inline">\(0.541\)</span>), mas nem sempre é o caso</li>
+</ul>
+<div class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1"></a>house_full <span class="op">=</span> sm.OLS(house[outcome], X.assign(const<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb8-2"><a href="#cb8-2"></a>results <span class="op">=</span> house_full.fit()</span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           AdjSalePrice   R-squared:                       0.595
+Model:                            OLS   Adj. R-squared:                  0.594
+Method:                 Least Squares   F-statistic:                     2771.
+Date:                Fri, 28 Oct 2022   Prob (F-statistic):               0.00
+Time:                        11:14:48   Log-Likelihood:            -3.1375e+05
+No. Observations:               22687   AIC:                         6.275e+05
+Df Residuals:                   22674   BIC:                         6.276e+05
+Df Model:                          12                                         
+Covariance Type:            nonrobust                                         
+==============================================================================================
+                                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------------
+SqFtTotLiving                198.6364      4.234     46.920      0.000     190.338     206.934
+SqFtLot                        0.0771      0.058      1.330      0.184      -0.037       0.191
+Bathrooms                   4.286e+04   3808.114     11.255      0.000    3.54e+04    5.03e+04
+Bedrooms                   -5.187e+04   2396.904    -21.638      0.000   -5.66e+04   -4.72e+04
+BldgGrade                   1.373e+05   2441.242     56.228      0.000    1.32e+05    1.42e+05
+NbrLivingUnits              5723.8438   1.76e+04      0.326      0.744   -2.87e+04    4.01e+04
+SqFtFinBasement                7.0611      4.627      1.526      0.127      -2.009      16.131
+YrBuilt                    -3574.2210     77.228    -46.282      0.000   -3725.593   -3422.849
+YrRenovated                   -2.5311      3.924     -0.645      0.519     -10.222       5.160
+NewConstruction            -2489.1122   5936.692     -0.419      0.675   -1.41e+04    9147.211
+PropertyType_Single Family  2.997e+04   2.61e+04      1.149      0.251   -2.12e+04    8.11e+04
+PropertyType_Townhouse      9.286e+04    2.7e+04      3.438      0.001    3.99e+04    1.46e+05
+const                       6.182e+06   1.55e+05     39.902      0.000    5.88e+06    6.49e+06
+==============================================================================
+Omnibus:                    31006.128   Durbin-Watson:                   1.393
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):         26251977.078
+Skew:                           7.427   Prob(JB):                         0.00
+Kurtosis:                     168.984   Cond. No.                     2.98e+06
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 2.98e+06. This might indicate that there are
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+</div>
+</section>
+<section id="correlação-entre-variáveis-preditoras" class="slide level2 scrollable">
+<h2>Correlação entre variáveis preditoras</h2>
+<ul>
+<li>Algo estranho no model: o coeficiente de <code>Bedrooms</code> foi negativo
+<ul>
+<li>Quanto mais quartos, menor o valor da casa?!</li>
+</ul></li>
+<li>Correlação entre preditores pode gerar resultados contraditórios</li>
+</ul>
+<div class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1"></a>X.corr()[<span class="st">'Bedrooms'</span>].sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>Bedrooms                      1.000000
+SqFtTotLiving                 0.600317
+Bathrooms                     0.537998
+BldgGrade                     0.368125
+SqFtFinBasement               0.312380
+PropertyType_Single Family    0.175518
+NbrLivingUnits                0.168103
+YrBuilt                       0.148334
+SqFtLot                       0.069091
+YrRenovated                   0.045970
+NewConstruction               0.011105
+PropertyType_Townhouse       -0.235182
+Name: Bedrooms, dtype: float64</code></pre>
+</div>
+</div>
+</section>
+<section id="correlação-entre-variáveis-preditoras-1" class="slide level2">
+<h2>Correlação entre variáveis preditoras</h2>
+<ul>
+<li>Removendo variáveis correlacionadas com <code>Bedrooms</code>
+<ul>
+<li>O coeficiente de <code>Bedrooms</code> passou a ser positivo</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1"></a>X2 <span class="op">=</span> X.<span class="bu">filter</span>([<span class="st">'Bedrooms'</span>, <span class="st">'BldgGrade'</span>, <span class="st">'PropertyType_Townhouse'</span>, <span class="st">'PropertyType_Single Family'</span>, <span class="st">'YrBuilt'</span>])</span>
+<span id="cb12-2"><a href="#cb12-2"></a>house_mcol <span class="op">=</span> sm.OLS(house[outcome], X2.assign(const<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb12-3"><a href="#cb12-3"></a>results <span class="op">=</span> house_mcol.fit()</span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           AdjSalePrice   R-squared:                       0.516
+Model:                            OLS   Adj. R-squared:                  0.516
+Method:                 Least Squares   F-statistic:                     4836.
+Date:                Fri, 28 Oct 2022   Prob (F-statistic):               0.00
+Time:                        11:14:48   Log-Likelihood:            -3.1576e+05
+No. Observations:               22687   AIC:                         6.315e+05
+Df Residuals:                   22681   BIC:                         6.316e+05
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+==============================================================================================
+                                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------------
+Bedrooms                    2.715e+04   2228.534     12.183      0.000    2.28e+04    3.15e+04
+BldgGrade                    2.49e+05   1785.425    139.461      0.000    2.45e+05    2.52e+05
+PropertyType_Townhouse     -4.736e+04    1.9e+04     -2.497      0.013   -8.45e+04   -1.02e+04
+PropertyType_Single Family  -1.99e+04   1.71e+04     -1.161      0.246   -5.35e+04    1.37e+04
+YrBuilt                    -3211.7449     69.197    -46.414      0.000   -3347.376   -3076.114
+const                       4.914e+06    1.3e+05     37.764      0.000    4.66e+06    5.17e+06
+==============================================================================
+Omnibus:                    31054.093   Durbin-Watson:                   1.319
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):         23187763.917
+Skew:                           7.504   Prob(JB):                         0.00
+Kurtosis:                     158.899   Cond. No.                     1.44e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.44e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+</div>
+</section>
+<section id="variáveis-com-pouca-significância-no-teste-t" class="slide level2 smaller-code-fold">
+<h2>Variáveis com pouca significância no teste-t</h2>
+<ul>
+<li>Removendo <code>PropertyType_Single Family</code> com p-valor <span class="math inline">\(&lt;0.05\)</span></li>
+</ul>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1"></a>X3 <span class="op">=</span> X2.drop(columns<span class="op">=</span>[<span class="st">'PropertyType_Single Family'</span>])</span>
+<span id="cb14-2"><a href="#cb14-2"></a>house_lm2 <span class="op">=</span> sm.OLS(house[outcome], X3.assign(const<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb14-3"><a href="#cb14-3"></a>results <span class="op">=</span> house_lm2.fit()</span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           AdjSalePrice   R-squared:                       0.516
+Model:                            OLS   Adj. R-squared:                  0.516
+Method:                 Least Squares   F-statistic:                     6045.
+Date:                Fri, 28 Oct 2022   Prob (F-statistic):               0.00
+Time:                        11:14:48   Log-Likelihood:            -3.1576e+05
+No. Observations:               22687   AIC:                         6.315e+05
+Df Residuals:                   22682   BIC:                         6.316e+05
+Df Model:                           4                                         
+Covariance Type:            nonrobust                                         
+==========================================================================================
+                             coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------------------
+Bedrooms                2.756e+04   2200.308     12.526      0.000    2.32e+04    3.19e+04
+BldgGrade               2.489e+05   1781.631    139.682      0.000    2.45e+05    2.52e+05
+PropertyType_Townhouse -2.708e+04   7379.696     -3.670      0.000   -4.15e+04   -1.26e+04
+YrBuilt                -3219.8804     68.842    -46.772      0.000   -3354.815   -3084.946
+const                    4.91e+06    1.3e+05     37.746      0.000    4.65e+06    5.16e+06
+==============================================================================
+Omnibus:                    31049.473   Durbin-Watson:                   1.319
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):         23170913.709
+Skew:                           7.501   Prob(JB):                         0.00
+Kurtosis:                     158.842   Cond. No.                     1.44e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.44e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+</div>
+</section>
+<section id="problema-da-multicolinearidade" class="slide level2">
+<h2>Problema da multicolinearidade</h2>
+<ul>
+<li>Quando duas variáveis preditoras são linearmente dependentes, dizemos que elas são colineares (forte correlação linear)
+<ul>
+<li>Elas deixam de ser independentes entre si e ambas trazem essencialmente a mesma informação</li>
+<li>Nenhuma pode contribuir significativamente para a variação de <span class="math inline">\(y\)</span> depois que a outra foi incluída</li>
+</ul></li>
+<li>A multicolinearidade afeta os resultados da regressão
+<ul>
+<li>Variáveis devem ser removidas até eliminar a multicolinearidade</li>
+</ul></li>
+</ul>
+</section>
+<section id="problema-da-multicolinearidade-1" class="slide level2 scrollable">
+<h2>Problema da multicolinearidade</h2>
+<ul>
+<li>Precisamos encontrar a correlação entre vários pares <span class="math inline">\(x_i\)</span>
+<ul>
+<li>Quando a correlação for alta devemos eliminar uma das variáveis do modelo e refazer os cálculos</li>
+<li>Se a significância da regressão aumentar, então concluímos que a correlação forte estava causando o problema</li>
+</ul></li>
+</ul>
+<div class="smaller-table">
+<div class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1"></a>X.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="14">
+
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SqFtTotLiving</th>
+      <th>SqFtLot</th>
+      <th>Bathrooms</th>
+      <th>Bedrooms</th>
+      <th>BldgGrade</th>
+      <th>NbrLivingUnits</th>
+      <th>SqFtFinBasement</th>
+      <th>YrBuilt</th>
+      <th>YrRenovated</th>
+      <th>NewConstruction</th>
+      <th>PropertyType_Single Family</th>
+      <th>PropertyType_Townhouse</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SqFtTotLiving</th>
+      <td>1.000000</td>
+      <td>0.195967</td>
+      <td>0.764155</td>
+      <td>0.600317</td>
+      <td>0.770499</td>
+      <td>0.059581</td>
+      <td>0.407234</td>
+      <td>0.311560</td>
+      <td>0.067191</td>
+      <td>0.113734</td>
+      <td>0.176935</td>
+      <td>-0.194445</td>
+    </tr>
+    <tr>
+      <th>SqFtLot</th>
+      <td>0.195967</td>
+      <td>1.000000</td>
+      <td>0.107439</td>
+      <td>0.069091</td>
+      <td>0.145508</td>
+      <td>-0.005113</td>
+      <td>0.035430</td>
+      <td>0.068400</td>
+      <td>0.006911</td>
+      <td>-0.067419</td>
+      <td>0.099319</td>
+      <td>-0.097781</td>
+    </tr>
+    <tr>
+      <th>Bathrooms</th>
+      <td>0.764155</td>
+      <td>0.107439</td>
+      <td>1.000000</td>
+      <td>0.537998</td>
+      <td>0.658738</td>
+      <td>0.111242</td>
+      <td>0.272772</td>
+      <td>0.468610</td>
+      <td>0.066480</td>
+      <td>0.197005</td>
+      <td>-0.066454</td>
+      <td>0.047977</td>
+    </tr>
+    <tr>
+      <th>Bedrooms</th>
+      <td>0.600317</td>
+      <td>0.069091</td>
+      <td>0.537998</td>
+      <td>1.000000</td>
+      <td>0.368125</td>
+      <td>0.168103</td>
+      <td>0.312380</td>
+      <td>0.148334</td>
+      <td>0.045970</td>
+      <td>0.011105</td>
+      <td>0.175518</td>
+      <td>-0.235182</td>
+    </tr>
+    <tr>
+      <th>BldgGrade</th>
+      <td>0.770499</td>
+      <td>0.145508</td>
+      <td>0.658738</td>
+      <td>0.368125</td>
+      <td>1.000000</td>
+      <td>-0.048098</td>
+      <td>0.137714</td>
+      <td>0.434524</td>
+      <td>0.025361</td>
+      <td>0.168542</td>
+      <td>0.000326</td>
+      <td>0.023983</td>
+    </tr>
+    <tr>
+      <th>NbrLivingUnits</th>
+      <td>0.059581</td>
+      <td>-0.005113</td>
+      <td>0.111242</td>
+      <td>0.168103</td>
+      <td>-0.048098</td>
+      <td>1.000000</td>
+      <td>0.066807</td>
+      <td>-0.109187</td>
+      <td>0.011369</td>
+      <td>-0.036865</td>
+      <td>-0.274530</td>
+      <td>-0.030503</td>
+    </tr>
+    <tr>
+      <th>SqFtFinBasement</th>
+      <td>0.407234</td>
+      <td>0.035430</td>
+      <td>0.272772</td>
+      <td>0.312380</td>
+      <td>0.137714</td>
+      <td>0.066807</td>
+      <td>1.000000</td>
+      <td>-0.210810</td>
+      <td>0.109495</td>
+      <td>-0.113499</td>
+      <td>0.082861</td>
+      <td>-0.104528</td>
+    </tr>
+    <tr>
+      <th>YrBuilt</th>
+      <td>0.311560</td>
+      <td>0.068400</td>
+      <td>0.468610</td>
+      <td>0.148334</td>
+      <td>0.434524</td>
+      <td>-0.109187</td>
+      <td>-0.210810</td>
+      <td>1.000000</td>
+      <td>-0.247338</td>
+      <td>0.386531</td>
+      <td>-0.232476</td>
+      <td>0.291983</td>
+    </tr>
+    <tr>
+      <th>YrRenovated</th>
+      <td>0.067191</td>
+      <td>0.006911</td>
+      <td>0.066480</td>
+      <td>0.045970</td>
+      <td>0.025361</td>
+      <td>0.011369</td>
+      <td>0.109495</td>
+      <td>-0.247338</td>
+      <td>1.000000</td>
+      <td>-0.075830</td>
+      <td>0.050243</td>
+      <td>-0.054187</td>
+    </tr>
+    <tr>
+      <th>NewConstruction</th>
+      <td>0.113734</td>
+      <td>-0.067419</td>
+      <td>0.197005</td>
+      <td>0.011105</td>
+      <td>0.168542</td>
+      <td>-0.036865</td>
+      <td>-0.113499</td>
+      <td>0.386531</td>
+      <td>-0.075830</td>
+      <td>1.000000</td>
+      <td>-0.261869</td>
+      <td>0.292238</td>
+    </tr>
+    <tr>
+      <th>PropertyType_Single Family</th>
+      <td>0.176935</td>
+      <td>0.099319</td>
+      <td>-0.066454</td>
+      <td>0.175518</td>
+      <td>0.000326</td>
+      <td>-0.274530</td>
+      <td>0.082861</td>
+      <td>-0.232476</td>
+      <td>0.050243</td>
+      <td>-0.261869</td>
+      <td>1.000000</td>
+      <td>-0.926657</td>
+    </tr>
+    <tr>
+      <th>PropertyType_Townhouse</th>
+      <td>-0.194445</td>
+      <td>-0.097781</td>
+      <td>0.047977</td>
+      <td>-0.235182</td>
+      <td>0.023983</td>
+      <td>-0.030503</td>
+      <td>-0.104528</td>
+      <td>0.291983</td>
+      <td>-0.054187</td>
+      <td>0.292238</td>
+      <td>-0.926657</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="problema-da-multicolinearidade-2" class="slide level2 scrollable">
+<h2>Problema da multicolinearidade</h2>
+<div class="smaller-code-fold">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> pearsonr</span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
+<span id="cb17-3"><a href="#cb17-3"></a></span>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="kw">def</span> corrfunc(x, y, ax<span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kws):</span>
+<span id="cb17-5"><a href="#cb17-5"></a>    <span class="co">"""Plot the correlation coefficient in the top left hand corner of a plot."""</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>    r, _ <span class="op">=</span> pearsonr(x, y)</span>
+<span id="cb17-7"><a href="#cb17-7"></a>    ax <span class="op">=</span> ax <span class="kw">or</span> plt.gca()</span>
+<span id="cb17-8"><a href="#cb17-8"></a>    ax.annotate(<span class="ss">f'ρ = </span><span class="sc">{</span>r<span class="sc">:.2f}</span><span class="ss">'</span>, xy<span class="op">=</span>(<span class="fl">.2</span>, <span class="fl">.99</span>), xycoords<span class="op">=</span>ax.transAxes)</span>
+<span id="cb17-9"><a href="#cb17-9"></a></span>
+<span id="cb17-10"><a href="#cb17-10"></a><span class="co">#g = sns.pairplot(X2, height=1.3)</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a><span class="co">#g.map_lower(corrfunc)</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a><span class="co">#plt.show()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="variável-de-confusão-confounding" class="slide level2 smaller-code-fold">
+<h2>Variável de confusão (<em>confounding</em>)</h2>
+<ul>
+<li>Uma variável importante que influencia a variável dependente (e algumas independentes) que não está no modelo
+<ul>
+<li>Exemplo: falta variável que represente a localização da casa, que pode influenciar no preço. Adicionando variável <code>ZipGroup</code> (5 regiões)</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1"></a>zip_groups <span class="op">=</span> pd.DataFrame([</span>
+<span id="cb18-2"><a href="#cb18-2"></a>    <span class="op">*</span>pd.DataFrame({</span>
+<span id="cb18-3"><a href="#cb18-3"></a>        <span class="st">'ZipCode'</span>: house[<span class="st">'ZipCode'</span>],</span>
+<span id="cb18-4"><a href="#cb18-4"></a>        <span class="st">'residual'</span> : house[outcome] <span class="op">-</span> house_lm.predict(house[predictors]),</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    })</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    .groupby([<span class="st">'ZipCode'</span>])</span>
+<span id="cb18-7"><a href="#cb18-7"></a>    .<span class="bu">apply</span>(<span class="kw">lambda</span> x: {</span>
+<span id="cb18-8"><a href="#cb18-8"></a>        <span class="st">'ZipCode'</span>: x.iloc[<span class="dv">0</span>,<span class="dv">0</span>],</span>
+<span id="cb18-9"><a href="#cb18-9"></a>        <span class="st">'count'</span>: <span class="bu">len</span>(x),</span>
+<span id="cb18-10"><a href="#cb18-10"></a>        <span class="st">'median_residual'</span>: x.residual.median()</span>
+<span id="cb18-11"><a href="#cb18-11"></a>    })</span>
+<span id="cb18-12"><a href="#cb18-12"></a>]).sort_values(<span class="st">'median_residual'</span>)</span>
+<span id="cb18-13"><a href="#cb18-13"></a>zip_groups[<span class="st">'cum_count'</span>] <span class="op">=</span> np.cumsum(zip_groups[<span class="st">'count'</span>])</span>
+<span id="cb18-14"><a href="#cb18-14"></a>zip_groups[<span class="st">'ZipGroup'</span>] <span class="op">=</span> pd.qcut(zip_groups[<span class="st">'cum_count'</span>], <span class="dv">5</span>, labels<span class="op">=</span><span class="va">False</span>, retbins<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb18-15"><a href="#cb18-15"></a>zip_groups.head()</span>
+<span id="cb18-16"><a href="#cb18-16"></a></span>
+<span id="cb18-17"><a href="#cb18-17"></a>to_join <span class="op">=</span> zip_groups[[<span class="st">'ZipCode'</span>, <span class="st">'ZipGroup'</span>]].set_index(<span class="st">'ZipCode'</span>)</span>
+<span id="cb18-18"><a href="#cb18-18"></a>house <span class="op">=</span> house.join(to_join, on<span class="op">=</span><span class="st">'ZipCode'</span>)</span>
+<span id="cb18-19"><a href="#cb18-19"></a>house[<span class="st">'ZipGroup'</span>] <span class="op">=</span> house[<span class="st">'ZipGroup'</span>].astype(<span class="st">'category'</span>)</span>
+<span id="cb18-20"><a href="#cb18-20"></a></span>
+<span id="cb18-21"><a href="#cb18-21"></a>predictors <span class="op">=</span> [<span class="st">'SqFtTotLiving'</span>, <span class="st">'SqFtLot'</span>, <span class="st">'Bathrooms'</span>, <span class="st">'Bedrooms'</span>,</span>
+<span id="cb18-22"><a href="#cb18-22"></a>              <span class="st">'BldgGrade'</span>, <span class="st">'PropertyType'</span>, <span class="st">'ZipGroup'</span>]</span>
+<span id="cb18-23"><a href="#cb18-23"></a>outcome <span class="op">=</span> <span class="st">'AdjSalePrice'</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a></span>
+<span id="cb18-25"><a href="#cb18-25"></a>X4 <span class="op">=</span> pd.get_dummies(house[predictors], drop_first<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb18-26"><a href="#cb18-26"></a></span>
+<span id="cb18-27"><a href="#cb18-27"></a>house_lm4 <span class="op">=</span> sm.OLS(house[outcome], X4.assign(const<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb18-28"><a href="#cb18-28"></a>results <span class="op">=</span> house_lm4.fit()</span>
+<span id="cb18-29"><a href="#cb18-29"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           AdjSalePrice   R-squared:                       0.638
+Model:                            OLS   Adj. R-squared:                  0.637
+Method:                 Least Squares   F-statistic:                     3626.
+Date:                Fri, 28 Oct 2022   Prob (F-statistic):               0.00
+Time:                        11:14:48   Log-Likelihood:            -3.1248e+05
+No. Observations:               22687   AIC:                         6.250e+05
+Df Residuals:                   22675   BIC:                         6.251e+05
+Df Model:                          11                                         
+Covariance Type:            nonrobust                                         
+==============================================================================================
+                                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------------
+SqFtTotLiving                210.6127      3.679     57.249      0.000     203.402     217.824
+SqFtLot                        0.4550      0.055      8.288      0.000       0.347       0.563
+Bathrooms                   5928.4256   3406.349      1.740      0.082    -748.253    1.26e+04
+Bedrooms                   -4.168e+04   2260.875    -18.437      0.000   -4.61e+04   -3.73e+04
+BldgGrade                   9.854e+04   2198.695     44.818      0.000    9.42e+04    1.03e+05
+PropertyType_Single Family  1.932e+04   1.49e+04      1.300      0.194   -9813.581    4.85e+04
+PropertyType_Townhouse      -7.82e+04   1.62e+04     -4.839      0.000    -1.1e+05   -4.65e+04
+ZipGroup_1                  5.332e+04   5141.118     10.371      0.000    4.32e+04    6.34e+04
+ZipGroup_2                  1.163e+05   4835.157     24.043      0.000    1.07e+05    1.26e+05
+ZipGroup_3                  1.784e+05   4968.852     35.896      0.000    1.69e+05    1.88e+05
+ZipGroup_4                  3.384e+05   4724.478     71.629      0.000    3.29e+05    3.48e+05
+const                      -6.666e+05   2.04e+04    -32.739      0.000   -7.07e+05   -6.27e+05
+==============================================================================
+Omnibus:                    33232.769   Durbin-Watson:                   1.466
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):         39575049.715
+Skew:                           8.440   Prob(JB):                         0.00
+Kurtosis:                     206.913   Cond. No.                     5.50e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 5.5e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+</div>
+</section>
+<section id="interação-entre-variáveis" class="slide level2 smaller-code-fold">
+<h2>Interação entre variáveis</h2>
+<ul>
+<li>Podemos considerar a interação entre variáveis no modelo
+<ul>
+<li>Combinando variáveis <code>ZipGroup</code> (região) e <code>SqFtTotLiving</code> (área)</li>
+<li>O metro quadrado custa mais em algumas áreas do que em outras</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1"></a>model <span class="op">=</span> smf.ols(formula<span class="op">=</span><span class="st">'AdjSalePrice ~  SqFtTotLiving*ZipGroup + SqFtLot + '</span> <span class="op">+</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>     <span class="st">'Bathrooms + Bedrooms + BldgGrade + PropertyType'</span>, data<span class="op">=</span>house)</span>
+<span id="cb20-3"><a href="#cb20-3"></a>results <span class="op">=</span> model.fit()</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="bu">print</span>(results.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           AdjSalePrice   R-squared:                       0.682
+Model:                            OLS   Adj. R-squared:                  0.682
+Method:                 Least Squares   F-statistic:                     3247.
+Date:                Fri, 28 Oct 2022   Prob (F-statistic):               0.00
+Time:                        11:14:48   Log-Likelihood:            -3.1098e+05
+No. Observations:               22687   AIC:                         6.220e+05
+Df Residuals:                   22671   BIC:                         6.221e+05
+Df Model:                          15                                         
+Covariance Type:            nonrobust                                         
+=================================================================================================
+                                    coef    std err          t      P&gt;|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------------------
+Intercept                     -4.853e+05   2.05e+04    -23.701      0.000   -5.25e+05   -4.45e+05
+ZipGroup[T.1]                 -1.113e+04   1.34e+04     -0.830      0.407   -3.74e+04    1.52e+04
+ZipGroup[T.2]                  2.032e+04   1.18e+04      1.717      0.086   -2877.441    4.35e+04
+ZipGroup[T.3]                   2.05e+04   1.21e+04      1.697      0.090   -3180.870    4.42e+04
+ZipGroup[T.4]                 -1.499e+05   1.13e+04    -13.285      0.000   -1.72e+05   -1.28e+05
+PropertyType[T.Single Family]  1.357e+04   1.39e+04      0.975      0.330   -1.37e+04    4.09e+04
+PropertyType[T.Townhouse]     -5.884e+04   1.51e+04     -3.888      0.000   -8.85e+04   -2.92e+04
+SqFtTotLiving                   114.7650      4.863     23.600      0.000     105.233     124.297
+SqFtTotLiving:ZipGroup[T.1]      32.6043      5.712      5.708      0.000      21.409      43.799
+SqFtTotLiving:ZipGroup[T.2]      41.7822      5.187      8.056      0.000      31.616      51.948
+SqFtTotLiving:ZipGroup[T.3]      69.3415      5.619     12.341      0.000      58.329      80.354
+SqFtTotLiving:ZipGroup[T.4]     226.6836      4.820     47.032      0.000     217.237     236.131
+SqFtLot                           0.6869      0.052     13.296      0.000       0.586       0.788
+Bathrooms                     -3619.4533   3202.296     -1.130      0.258   -9896.174    2657.267
+Bedrooms                       -4.18e+04   2120.279    -19.715      0.000    -4.6e+04   -3.76e+04
+BldgGrade                      1.047e+05   2069.472     50.592      0.000    1.01e+05    1.09e+05
+==============================================================================
+Omnibus:                    30927.394   Durbin-Watson:                   1.581
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):         34361794.502
+Skew:                           7.279   Prob(JB):                         0.00
+Kurtosis:                     193.101   Cond. No.                     5.80e+05
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 5.8e+05. This might indicate that there are
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+</div>
+</section>
+<section id="análise-dos-resíduos-outliers" class="slide level2 smaller-code-fold">
+<h2>Análise dos resíduos: Outliers</h2>
+<ul>
+<li>Podemos analisar os resíduos da regressão para mais diagnósticos
+<ul>
+<li>Analisando para um <code>ZipCode</code> específico:</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1"></a>house_98105 <span class="op">=</span> house.loc[house[<span class="st">'ZipCode'</span>] <span class="op">==</span> <span class="dv">98105</span>, ]</span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a>predictors <span class="op">=</span> [<span class="st">'SqFtTotLiving'</span>, <span class="st">'SqFtLot'</span>, <span class="st">'Bathrooms'</span>, <span class="st">'Bedrooms'</span>,</span>
+<span id="cb22-4"><a href="#cb22-4"></a>              <span class="st">'BldgGrade'</span>]</span>
+<span id="cb22-5"><a href="#cb22-5"></a>outcome <span class="op">=</span> <span class="st">'AdjSalePrice'</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a></span>
+<span id="cb22-7"><a href="#cb22-7"></a>house_outlier <span class="op">=</span> sm.OLS(house_98105[outcome], house_98105[predictors].assign(const<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb22-8"><a href="#cb22-8"></a>result_98105 <span class="op">=</span> house_outlier.fit()</span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="bu">print</span>(result_98105.summary())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           AdjSalePrice   R-squared:                       0.795
+Model:                            OLS   Adj. R-squared:                  0.792
+Method:                 Least Squares   F-statistic:                     238.7
+Date:                Fri, 28 Oct 2022   Prob (F-statistic):          1.69e-103
+Time:                        11:14:48   Log-Likelihood:                -4226.0
+No. Observations:                 313   AIC:                             8464.
+Df Residuals:                     307   BIC:                             8486.
+Df Model:                           5                                         
+Covariance Type:            nonrobust                                         
+=================================================================================
+                    coef    std err          t      P&gt;|t|      [0.025      0.975]
+---------------------------------------------------------------------------------
+SqFtTotLiving   209.6023     24.408      8.587      0.000     161.574     257.631
+SqFtLot          38.9333      5.330      7.305      0.000      28.445      49.421
+Bathrooms      2282.2641      2e+04      0.114      0.909    -3.7e+04    4.16e+04
+Bedrooms      -2.632e+04   1.29e+04     -2.043      0.042   -5.17e+04    -973.867
+BldgGrade        1.3e+05   1.52e+04      8.533      0.000       1e+05     1.6e+05
+const         -7.725e+05   9.83e+04     -7.861      0.000   -9.66e+05   -5.79e+05
+==============================================================================
+Omnibus:                       82.127   Durbin-Watson:                   1.508
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              586.561
+Skew:                           0.859   Prob(JB):                    4.26e-128
+Kurtosis:                       9.483   Cond. No.                     5.63e+04
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 5.63e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.</code></pre>
+</div>
+</div>
+</section>
+<section id="análise-dos-resíduos-outliers-1" class="slide level2 smaller-code-fold">
+<h2>Análise dos resíduos: Outliers</h2>
+<ul>
+<li>Para identificar <em>outliers</em> , podemos analisar estatísticas do resíduo padrão (resíduo dividido pelo erro padrão)</li>
+</ul>
+<div class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1"></a>influence <span class="op">=</span> OLSInfluence(result_98105)</span>
+<span id="cb24-2"><a href="#cb24-2"></a>sresiduals <span class="op">=</span> influence.resid_studentized_internal</span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="bu">print</span>(<span class="ss">f"Maior erro padrão (superestimado): </span><span class="sc">{</span>sresiduals<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss">. Erro absoluto: </span><span class="sc">{</span>result_98105<span class="sc">.</span>resid<span class="sc">.</span>loc[sresiduals.idxmin()]<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Maior erro padrão (superestimado): -4.326731804078561. Erro absoluto: -757753.6192115824</code></pre>
+</div>
+</div>
+<ul>
+<li>A maior superestimativa foi de 4 erros padrões
+<ul>
+<li>Analisando o <em>outlier</em>, aparenta ser um erro no registro dos dados</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1"></a>outlier <span class="op">=</span> house_98105.loc[sresiduals.idxmin(), :]</span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="bu">print</span>(<span class="st">'AdjSalePrice'</span>, outlier[outcome])</span>
+<span id="cb26-3"><a href="#cb26-3"></a><span class="bu">print</span>(outlier[predictors])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>AdjSalePrice 119748.0
+SqFtTotLiving    2900
+SqFtLot          7276
+Bathrooms         3.0
+Bedrooms            6
+BldgGrade           7
+Name: 24333, dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="propriedades-desejáveis-dos-resíduos" class="slide level2 smaller-code-fold">
+<h2>Propriedades desejáveis dos resíduos</h2>
+<ul>
+<li><strong>Homocedasticidade</strong>: a variância dos resíduos deve se manter constante ao longo dos valores estimados
+<ul>
+<li>Visualização da <em>estimativa x resíduo</em> indica que variância dos resíduos é maior para valores de casas muito baratas ou muito caras</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="21">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb28-2"><a href="#cb28-2"></a>sns.regplot(x<span class="op">=</span>result_98105.fittedvalues, y<span class="op">=</span>np.<span class="bu">abs</span>(result_98105.resid), </span>
+<span id="cb28-3"><a href="#cb28-3"></a>            scatter_kws<span class="op">=</span>{<span class="st">'alpha'</span>: <span class="fl">0.25</span>},</span>
+<span id="cb28-4"><a href="#cb28-4"></a>            line_kws<span class="op">=</span>{<span class="st">'color'</span>: <span class="st">'C1'</span>},</span>
+<span id="cb28-5"><a href="#cb28-5"></a>            lowess<span class="op">=</span><span class="va">True</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb28-6"><a href="#cb28-6"></a>ax.set_xlabel(<span class="st">'predicted'</span>)</span>
+<span id="cb28-7"><a href="#cb28-7"></a>ax.set_ylabel(<span class="st">'abs(residual)'</span>)</span>
+<span id="cb28-8"><a href="#cb28-8"></a></span>
+<span id="cb28-9"><a href="#cb28-9"></a>plt.tight_layout()</span>
+<span id="cb28-10"><a href="#cb28-10"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img data-src="2-regressao-multipla_files/figure-revealjs/cell-22-output-1.png" width="566" height="374"></p>
+</div>
+</div>
+</section>
+<section id="propriedades-desejáveis-dos-resíduos-1" class="slide level2 smaller-code-fold">
+<h2>Propriedades desejáveis dos resíduos</h2>
+<ul>
+<li><strong>Normalidade</strong>: idealmente, resíduos devem seguir distribuição normal</li>
+<li>Podemos visualizar o histograma do erro padrão dos resíduos
+<ul>
+<li>Aparenta ter cauda maior do que a normal, com leve viés à direita</li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb29-2"><a href="#cb29-2"></a>pd.Series(influence.resid_studentized_internal).hist(ax<span class="op">=</span>ax)</span>
+<span id="cb29-3"><a href="#cb29-3"></a>ax.set_xlabel(<span class="st">'std. residual'</span>)</span>
+<span id="cb29-4"><a href="#cb29-4"></a>ax.set_ylabel(<span class="st">'Frequency'</span>)</span>
+<span id="cb29-5"><a href="#cb29-5"></a></span>
+<span id="cb29-6"><a href="#cb29-6"></a></span>
+<span id="cb29-7"><a href="#cb29-7"></a>plt.tight_layout()</span>
+<span id="cb29-8"><a href="#cb29-8"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<p><img data-src="2-regressao-multipla_files/figure-revealjs/cell-23-output-1.png" width="566" height="374"></p>
+</div>
+</div>
+</section>
+<section id="partial-residual-plot" class="slide level2 scrollable">
+<h2>Partial residual plot</h2>
+<ul>
+<li>Analisa visualmente a estimativa em relação a cada preditor
+<ul>
+<li>Plota o preditor no eixo <span class="math inline">\(x\)</span> e o resíduo parcial no eixo <span class="math inline">\(y\)</span>
+<ul>
+<li>Relação do preço com <code>SqFtTotLiving</code> parece ser não linear</li>
+</ul></li>
+</ul></li>
+</ul>
+<div class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1"></a>fig <span class="op">=</span> sm.graphics.plot_ccpr_grid(result_98105, fig<span class="op">=</span>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">12</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<p><img data-src="2-regressao-multipla_files/figure-revealjs/cell-24-output-1.png" width="947" height="1134"></p>
+</div>
+</div>
+
+<div class="footer footer-default">
+
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="../site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../site_libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="../site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="../site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="../site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="../site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="../site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleChalkboard(event)\"><kbd>b</kbd> Toggle Chalkboard</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleNotesCanvas(event)\"><kbd>c</kbd> Toggle Notes Canvas</a></li>\n<li class=\"slide-tool-item\" data-item=\"6\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.downloadDrawings(event)\"><kbd>d</kbd> Download Drawings</a></li>\n<li class=\"slide-tool-item\" data-item=\"7\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'chalkboard': {"buttons":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealChalkboard, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        target: function(trigger) {
+          return trigger.previousElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        setTimeout(function() {
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'quarto-reveal',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          let href = ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+        tippyHover(ref, function() {
+          var popup = window.document.createElement('div');
+          cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    });
+    </script>
+    
+
+</body></html>
