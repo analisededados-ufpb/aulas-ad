@@ -1,4 +1,6 @@
+dmba
 pandas
 seaborn
+statsmodels
 tabulate
 wquantiles
