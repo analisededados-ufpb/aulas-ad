@@ -22,6 +22,8 @@ import seaborn as sns
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import r2_score, mean_squared_error
 import statsmodels.api as sm
+import statsmodels.formula.api as smf
+from statsmodels.stats.outliers_influence import OLSInfluence
 
 DATA_DIR = Path().resolve().parent / 'dados'
 HOUSE_CSV = DATA_DIR / 'house_sales.csv'
@@ -142,10 +144,26 @@ X.drop(columns=predictors).head()
 ```
 :::
 
+## Variáveis preditoras não numéricas
+
+- Variáveis categóricas ordinais podem ser transformadas diretamente em numéricas, mantendo a sua ordem
+    - Por exemplo, a variável `BldgGrade` é uma categórica ordinal que representa o nível da casa e foi associada a um número inteiro
+
+::: {.smaller-table}
+```{python}
+#| echo: false
+pd.DataFrame({
+    "Value": [1, 2, 5, 10, 12, 13],
+    "Description": ["Cabin", "Substandard", "Fair", "Very good", "Luxury", "Mansion"]
+})
+```
+:::
+
+- Deve-se ter cuidado porque o valor numérico da variável também representa sua intensidade
+
 ## Avaliando modelo com mais variáveis
 
 - $R^2$ melhorou (era $0.541$), mas nem sempre é o caso
-    - Pode-se ir removendo variáveis pouco significativas e re-avaliar
 
 ```{python}
 house_full = sm.OLS(house[outcome], X.assign(const=1))
@@ -153,40 +171,66 @@ results = house_full.fit()
 print(results.summary())
 ```
 
-## Modelo ajustado
+## Correlação entre variáveis preditoras {.scrollable}
 
-- Removendo variáveis com pouca significância
+- Algo estranho no model: o coeficiente de `Bedrooms` foi negativo
+    - Quanto mais quartos, menor o valor da casa?!
+
+- Correlação entre preditores pode gerar resultados contraditórios
 
 ```{python}
-#| echo: false
-X2 = X.drop(columns=['NbrLivingUnits','YrRenovated', 'NewConstruction',
-                     'SqFtLot', 'SqFtFinBasement', 'PropertyType_Single Family'])
-house_lm2 = sm.OLS(house[outcome], X2.assign(const=1))
+X.corr()['Bedrooms'].sort_values(ascending=False)
+```
+
+## Correlação entre variáveis preditoras
+
+- Removendo variáveis correlacionadas com `Bedrooms`
+    - O coeficiente de `Bedrooms` passou a ser positivo
+
+```{python}
+X2 = X.filter(['Bedrooms', 'BldgGrade', 'PropertyType_Townhouse', 'PropertyType_Single Family', 'YrBuilt'])
+house_mcol = sm.OLS(house[outcome], X2.assign(const=1))
+results = house_mcol.fit()
+print(results.summary())
+```
+
+## Variáveis com pouca significância no teste-t {.smaller-code-fold}
+
+- Removendo `PropertyType_Single Family` com p-valor $<0.05$
+
+```{python}
+#| code-fold: true
+X3 = X2.drop(columns=['PropertyType_Single Family'])
+house_lm2 = sm.OLS(house[outcome], X3.assign(const=1))
 results = house_lm2.fit()
 print(results.summary())
 ```
 
-
 ## Problema da multicolinearidade
 
-- Quando duas variáveis preditores são linearmente dependentes, dizemos que elas são colineares
-- A correlação linear é medida pelas suas correlações
-- Se a correlação não é zero
+- Quando duas variáveis preditoras são linearmente dependentes, dizemos que elas são colineares (forte correlação linear)
+    - Elas deixam de ser independentes entre si e ambas trazem essencialmente a mesma informação
+    - Nenhuma pode contribuir significativamente para a variação de $y$ depois que a outra foi incluída
+- A multicolinearidade afeta os resultados da regressão
+    - Variáveis devem ser removidas até eliminar a multicolinearidade
 
-- Indício: $R^2$ é alto, a regressão é significativa, mas nenhum dos coeficientes da regressão é estatisticamente significativo segundo o teste-t
-    - Resultados contraditórios de testes de significância
+## Problema da multicolinearidade {.scrollable}
 
-## Problema da multicolinearidade
+- Precisamos encontrar a correlação entre vários pares $x_i$
+    - Quando a correlação for alta devemos eliminar uma das variáveis do modelo e refazer os cálculos
+    - Se a significância da regressão aumentar, então concluímos que a correlação forte estava causando o problema
 
-- Quando duas variáveis preditoras estão correlacionadas elas deixam de ser independentes entre si e ambas trazem essencialmente a mesma informação
-    - Nenhuma pode contribuir significativamente para a variação de y depois que a outra foi incluída
-- Juntas, elas constribuem muito; se ambas forem removidas do modelo, a qualidade do modelo seria pior!
-
-
-## Correlação entre variáveis {.scrollable}
-
+::: {.smaller-table}
 ```{python}
-#| echo: false
+X.corr()
+```
+:::
+
+## Problema da multicolinearidade {.scrollable}
+
+::: {.smaller-code-fold}
+```{python}
+#| code-fold: true
 
 from scipy.stats import pearsonr
 import matplotlib.pyplot as plt 
@@ -197,20 +241,9 @@ def corrfunc(x, y, ax=None, **kws):
     ax = ax or plt.gca()
     ax.annotate(f'ρ = {r:.2f}', xy=(.2, .99), xycoords=ax.transAxes)
 
-g = sns.pairplot(X2, height=1.3)
-g.map_lower(corrfunc)
-plt.show()
-```
-
-## Problema da multicolinearidade
-
-- Precisamos encontrar a correlação entre vários pares $x_i$
-- Quando a correlação for alta devemos eliminar uma das variáveis do modelo e refazer os cálculos
-- Se a significância da regressão aumentar, então concluímos que a correlação forte estava causando o problema
-
-::: {.smaller-table}
-```{python}
-X2.corr()
+#g = sns.pairplot(X2, height=1.3)
+#g.map_lower(corrfunc)
+#plt.show()
 ```
 :::
 
@@ -226,8 +259,139 @@ print(results.summary())
 
 ## Seleção das variáveis
 
-- Teoria forte: use o seu conhecimento sobre o que está sendo estudado
+- Uma variável importante que influencia a variável dependente (e algumas independentes) que não está no modelo
+    - Exemplo: falta variável que represente a localização da casa, que pode influenciar no preço. Adicionando variável `ZipGroup` (5 regiões)
 
-- Erro de medição: você confia na amostra que vai usar para gerar o modelo de regressão?
+```{python}
+#| code-fold: true
 
-- Erro de especificação: incluir variáveis irrelevantes ou omitir variáveis relevantes
+zip_groups = pd.DataFrame([
+    *pd.DataFrame({
+        'ZipCode': house['ZipCode'],
+        'residual' : house[outcome] - house_lm.predict(house[predictors]),
+    })
+    .groupby(['ZipCode'])
+    .apply(lambda x: {
+        'ZipCode': x.iloc[0,0],
+        'count': len(x),
+        'median_residual': x.residual.median()
+    })
+]).sort_values('median_residual')
+zip_groups['cum_count'] = np.cumsum(zip_groups['count'])
+zip_groups['ZipGroup'] = pd.qcut(zip_groups['cum_count'], 5, labels=False, retbins=False)
+zip_groups.head()
+
+to_join = zip_groups[['ZipCode', 'ZipGroup']].set_index('ZipCode')
+house = house.join(to_join, on='ZipCode')
+house['ZipGroup'] = house['ZipGroup'].astype('category')
+
+predictors = ['SqFtTotLiving', 'SqFtLot', 'Bathrooms', 'Bedrooms',
+              'BldgGrade', 'PropertyType', 'ZipGroup']
+outcome = 'AdjSalePrice'
+
+X4 = pd.get_dummies(house[predictors], drop_first=True)
+
+house_lm4 = sm.OLS(house[outcome], X4.assign(const=1))
+results = house_lm4.fit()
+print(results.summary())
+```
+
+## Interação entre variáveis {.smaller-code-fold}
+
+- Podemos considerar a interação entre variáveis no modelo
+    - Combinando variáveis `ZipGroup` (região) e `SqFtTotLiving` (área)
+    - O metro quadrado custa mais em algumas áreas do que em outras
+
+
+```{python}
+#| code-fold: true
+
+model = smf.ols(formula='AdjSalePrice ~  SqFtTotLiving*ZipGroup + SqFtLot + ' +
+     'Bathrooms + Bedrooms + BldgGrade + PropertyType', data=house)
+results = model.fit()
+print(results.summary())
+```
+
+## Análise dos resíduos: Outliers {.smaller-code-fold}
+
+- Podemos analisar os resíduos da regressão para mais diagnósticos
+    - Analisando para um `ZipCode` específico:
+
+```{python}
+#| code-fold: true
+house_98105 = house.loc[house['ZipCode'] == 98105, ]
+
+predictors = ['SqFtTotLiving', 'SqFtLot', 'Bathrooms', 'Bedrooms',
+              'BldgGrade']
+outcome = 'AdjSalePrice'
+
+house_outlier = sm.OLS(house_98105[outcome], house_98105[predictors].assign(const=1))
+result_98105 = house_outlier.fit()
+print(result_98105.summary())
+```
+
+## Análise dos resíduos: Outliers {.smaller-code-fold}
+
+- Para identificar _outliers_ , podemos analisar estatísticas do resíduo padrão (resíduo dividido pelo erro padrão)
+
+```{python}
+influence = OLSInfluence(result_98105)
+sresiduals = influence.resid_studentized_internal
+print(f"Maior erro padrão (superestimado): {sresiduals.min()}. Erro absoluto: {result_98105.resid.loc[sresiduals.idxmin()]}")
+```
+
+- A maior superestimativa foi de 4 erros padrões
+    - Analisando o _outlier_, aparenta ser um erro no registro dos dados
+
+```{python}
+outlier = house_98105.loc[sresiduals.idxmin(), :]
+print('AdjSalePrice', outlier[outcome])
+print(outlier[predictors])
+```
+
+## Propriedades desejáveis dos resíduos {.smaller-code-fold}
+
+- **Homocedasticidade**: a variância dos resíduos deve se manter constante ao longo dos valores estimados
+    - Visualização da _estimativa x resíduo_ indica que variância dos resíduos é maior para valores de casas muito baratas ou muito caras
+
+```{python}
+#| code-fold: true
+fig, ax = plt.subplots(figsize=(6, 4))
+sns.regplot(x=result_98105.fittedvalues, y=np.abs(result_98105.resid), 
+            scatter_kws={'alpha': 0.25},
+            line_kws={'color': 'C1'},
+            lowess=True, ax=ax)
+ax.set_xlabel('predicted')
+ax.set_ylabel('abs(residual)')
+
+plt.tight_layout()
+plt.show()
+```
+
+## Propriedades desejáveis dos resíduos {.smaller-code-fold}
+
+- **Normalidade**: idealmente, resíduos devem seguir distribuição normal
+- Podemos visualizar o histograma do erro padrão dos resíduos
+    - Aparenta ter cauda maior do que a normal, com leve viés à direita
+
+```{python}
+#| code-fold: true
+fig, ax = plt.subplots(figsize=(6, 4))
+pd.Series(influence.resid_studentized_internal).hist(ax=ax)
+ax.set_xlabel('std. residual')
+ax.set_ylabel('Frequency')
+
+
+plt.tight_layout()
+plt.show()
+```
+
+## Partial residual plot {.scrollable}
+
+- Analisa visualmente a estimativa em relação a cada preditor
+    - Plota o preditor no eixo $x$ e o resíduo parcial no eixo $y$
+        - Relação do preço com `SqFtTotLiving` parece ser não linear
+
+```{python}
+fig = sm.graphics.plot_ccpr_grid(result_98105, fig=plt.figure(figsize=(10, 12)))
+```
