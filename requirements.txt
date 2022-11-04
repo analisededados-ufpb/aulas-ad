@@ -1,5 +1,6 @@
 pandas
 seaborn
+sklearn
 statsmodels
 tabulate
 wquantiles

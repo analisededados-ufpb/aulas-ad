@@ -214,6 +214,16 @@ X2.corr()
 ```
 :::
 
+## Removendo correlações fortes
+
+```{python}
+#| echo: false
+X3 = X2.drop(columns=['SqFtTotLiving'])
+house_lm3 = sm.OLS(house[outcome], X3.assign(const=1))
+results = house_lm3.fit()
+print(results.summary())
+```
+
 ## Seleção das variáveis
 
 - Teoria forte: use o seu conhecimento sobre o que está sendo estudado
