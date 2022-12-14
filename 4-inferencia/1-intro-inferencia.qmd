@@ -1,0 +1,421 @@
+---
+title: "Análise de dados"
+subtitle: "Introdução à inferência estatística"
+author: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+format:
+    revealjs:
+        slide-number: true
+        chalkboard: true
+        incremental: false
+        theme: [simple, ../custom.scss]
+        echo: true
+---
+
+## Probabilidade e inferência estatística
+
+- A teoria da **probabilidade** descreve as propriedades que uma amostra deve ter com base nas propridades da população
+
+- Por outro lado, a **inferência** tenta deduzir como deve ser a população analisando a amostra
+    - Inferência estatística quantifica o grau de (in)certeza da inferência
+
+![Fonte: Skienna - The Data Science Design Manual](figs/probability_inferential_statistics.png){width=100%}
+
+## Fluxo da inferência estatística
+
+- O fluxo clássico da inferência estatística segue 4 etapas:
+    - Formulação de hipótese -- ex: remédio A é melhor do que remédio B
+    - Design de experimentos -- para testar hipótese e tentar obter resultados conclusivos
+    - Coleta de dados
+    - Inferência / conclusões
+
+![](figs/inference_pipeline.png)
+
+
+## Teste A/B
+
+- Experimento com dois grupos para determinar qual é superior
+    - É comum um dos grupos ser o padrão existente (ex: tratamento atual)
+- Muito usado em testes de design UI e marketing. Exemplos:
+    - Testar 2 títulos de notícias para ver qual dá mais cliques
+    - Testar 2 tratamentos para ver qual é mais eficaz para uma doença
+- Os sujeitos (ex: usuários web) são divididos em 2 grupos de forma aleatória para avaliar se a diferença entre os grupos:
+    - É efeito dos diferentes tratamentos
+    - É apenas da aleatoriedade dos sujeitos em cada grupo
+
+## Teste A/B
+
+- Deve-se ter atenção à **estatística do teste** ou métrica usada para comparar os grupos
+
+- É comum usar métrica binária (ex: clicou ou não, comprou ou não)
+    - Exemplo de teste em site de e-commerce (conversão = compra)
+
+| Resultado     | Preço A | Preço B |
+|---------------|---------|---------|
+| Conversão     | 200     | 182     | 
+| Não conversão | 23.539  | 22.406  |
+
+- Métricas contínuas são apresentadas de outra forma. Exemplo:
+    - Lucro por visualização de página com preço A: média = 3,87; SD = 51.10
+    - Lucro por visualização de página com preço B: média = 4,11; SD = 62,98
+
+
+## Testes de hipótese
+
+- Objetivo: indicar se um efeito observado é significante ou se é apenas devido à aleatoriedade dos grupos
+
+- Exemplo de hipótese: outro preço B de produto dará maior lucro
+
+- **Hipótese nula**: assume-se que os tratamentos são equivalentes e que a diferença é apenas pelo acaso, sem significância estatística
+    - Aplicamos o teste para tentar **rejeitar** a hipótese nula, ou seja, mostrar que a diferença dos grupos não é só pela aleatoriedade
+
+- **Hipótese alternativa**: é o complemento da hipótese nula -- assume que há diferença real entre os grupos
+    - Ao rejeitar a hipótese nula, aceitamos a hipótese alternativa de que a diferença é significativa
+
+
+## Resampling
+
+- _Resampling_ em estatística significa repetidamente obter valores de amostras dos dados observados, com o objetivo de avaliar a variação aleatória de uma estatística
+
+- Existem dois dipos principais de procedimentos:
+    - **Bootstrap**: usado para avaliar a confiança de uma estimativa
+    - **Teste de permutação**: usados para testar hipóteses, tipicamente envolvendo dois ou mais grupos
+
+## Teste de permutação
+
+- Permuta signfica mudar a ordem de um conjunto de valores
+
+- Teste de permutação envolve combinar os resultados de dois grupos A e B (ou mais), com a hipótese nula de que os grupos não são diferentes, para depois dividir aleatoriamente em grupos e ver quanto eles diferem
+
+## Teste de permutação - Etapas
+
+1. Combinar resultados de diferentes grupos em uma única base
+2. Misturar os dados e aleatoriamente distribuir (sem repetição) uma amostra do mesmo tamanho como grupo A
+3. Com os dados restantes, aleatoriamente distribuir (sem repetição) um amostra do mesmo tamanho do grupo B
+4. Repetir para os grupos restantes (C, D, etc), se houverem
+5. Calcular as estatísticas de interesse para cada grupo de amostra
+6. Repetir os passos anteriores _R_ vezes para obter uma distribuição de permutação da estatística do teste
+
+## Teste de permutação - Avaliação
+
+- Se a diferença observada entre os grupos estiver dentro da distribuição da permutação, ela pode ter sido apenas pelo acaso
+
+- Se ela estiver fora da maior parte da distribuição da permutação, concluimos que a diferença é estatisticamente significativa e não é apenas atribuída ao acaso
+
+## Exemplo: tempo de sessão em website
+
+:::: {.columns}
+:::{.column}
+- Página B fica mais tempo no site
+
+```{python}
+#| code-fold: true
+
+import matplotlib.pylab as plt
+import pandas as pd
+from pathlib import Path
+import numpy as np
+import random
+import statsmodels.api as sm
+from scipy import stats
+
+DATA = Path().resolve().parent / 'dados'
+WEB_PAGE_DATA_CSV = DATA / 'web_page_data.csv'
+
+session_times = pd.read_csv(WEB_PAGE_DATA_CSV)
+session_times.Time = 100 * session_times.Time
+
+ax = session_times.boxplot(by='Page', column='Time',
+                        figsize=(4, 4))
+ax.set_xlabel('')
+ax.set_ylabel('Time (in seconds)')
+plt.suptitle('')
+
+plt.tight_layout()
+plt.show()
+```
+:::
+::: {.column}
+
+- Diferença média entre o tempo das sessões de B - A
+
+```{python}
+
+mean_a = session_times[session_times.Page == 'Page A'].Time.mean()
+mean_b = session_times[session_times.Page == 'Page B'].Time.mean()
+print(mean_b - mean_a)
+```
+:::
+::::
+
+- A diferença é significativa?
+
+## Exemplo: tempo de sessão em website
+
+- Distribuição da diferença média das permutações
+
+:::: {.columns}
+:::{.column}
+```{python}
+#| code-fold: true
+def perm_fun(x, nA, nB):
+    n = nA + nB
+    idx_B = set(random.sample(range(n), nB))
+    idx_A = set(range(n)) - idx_B
+    return x.loc[list(idx_B)].mean() - x.loc[list(idx_A)].mean()
+    
+nA = session_times[session_times.Page == 'Page A'].shape[0]
+nB = session_times[session_times.Page == 'Page B'].shape[0]
+print(perm_fun(session_times.Time, nA, nB))
+```
+
+```{python}
+#| code-fold: true
+random.seed(1)
+perm_diffs = [perm_fun(session_times.Time, nA, nB) for _ in range(1000)]
+
+perm_diffs = np.array(perm_diffs)
+print(np.mean(perm_diffs > mean_b - mean_a))
+```
+
+- A diferença observada está dentro da chance de acaso (12,1%), então não é significativa
+
+:::
+::: {.column}
+```{python}
+#| code-fold: true
+
+fig, ax = plt.subplots(figsize=(5, 5))
+ax.hist(perm_diffs, bins=11, rwidth=0.9)
+ax.axvline(x = mean_b - mean_a, color='black', lw=2)
+ax.text(50, 190, 'Observed\ndifference', bbox={'facecolor':'white'})
+ax.set_xlabel('Session time differences (in seconds)')
+ax.set_ylabel('Frequency')
+
+plt.tight_layout()
+plt.show()
+```
+:::
+::::
+
+## Testes de permutação
+
+- Procedimentos heurísticos úteis para explorar a variação aleatória
+    - Relativamente fácil de implementar e interpretar
+    - Alternativa às estatísticas baseadas em fórmulas para avaliar incerteza
+
+- Abordagem genérica que pode ser aplicada em vários contextos
+    - Não possui muita restrição quanto aos tipos de dados, tamanhos de amostras diferentes, distribuições dos dados
+    - Se aplica a várias métricas de interesse
+
+## Significância estatística
+
+- Forma de estatísticos medirem se um experimento gera um resultado mais forte do que o que seria gerado pelo acaso
+    - Se o resultado superar a chance de variação aleatória, considera-se que ele é estatisticamente significativo
+
+- Voltando ao teste no site de e-commerce
+
+| Resultado     | Preço A | Preço B |
+|---------------|---------|---------|
+| Conversão     | 200     | 182     | 
+| Não conversão | 23.539  | 22.406  |
+| % Conversão   | 0,8425% | 0,8057% |
+
+- Esta diferença de quase 5% é estatisticamente significante?
+    - Podemos testar com a abordagem de *resampling*
+
+## Significância estatística - Exemplo Resampling
+
+- Pergunta: _Se os dois preços possuem a mesma taxa de conversão, a variação aleatória poderia gerar uma diferença tão grande quanto 5%_?
+    1. Coloque em uma caixa 382 cartões rotulados com 1 (conversão) e 45.945 com 0 (não conversão)
+    2. Sorteie uma amostra de tamanho 23.739 (_n_ do preço A)
+    3. Registre os 22.588 restantes (_n_ do preço B)
+    4. Calcule a proporção de 1s em cada grupo e a diferença entre os grupos
+    5. Repita os passos 2--4
+    6. Quão frequente foi a diferença >= 0,0368?
+
+## Significância estatística - Exemplo Resampling
+
+- Histograma das diferenças da taxa de conversão com permutação
+
+:::: {.columns .smaller-code-fold}
+:::{.column}
+```{python}
+#| code-fold: true
+
+random.seed(1)
+obs_pct_diff = 100 * (200 / 23739 - 182 / 22588)
+
+conversion = [0] * 45945
+conversion.extend([1] * 382)
+conversion = pd.Series(conversion)
+
+perm_diffs = [100 * perm_fun(conversion, 23739, 22588) 
+              for _ in range(1000)]
+
+fig, ax = plt.subplots(figsize=(5, 5))
+ax.hist(perm_diffs, bins=11, rwidth=0.9)
+ax.axvline(x=obs_pct_diff, color='black', lw=2)
+ax.text(0.06, 200, 'Observed\ndifference', bbox={'facecolor':'white'})
+ax.set_xlabel('Conversion rate (percent)')
+ax.set_ylabel('Frequency')
+
+plt.tight_layout()
+plt.show()
+```
+:::
+::: {.column}
+```{python}
+#| code-fold: true
+
+print(f'Observed difference: {obs_pct_diff:.4f}%')
+```
+
+- Observa-se com 1000 amostras com _resampling_ que a diferença observada de 0,0368% está dentro da variação gerada pela aleatoriedade
+:::
+::::
+
+## p-Valor e significância estatística
+
+- Olhar apenas para o gráfico não é a melhor forma...
+    - O _p-valor_ pode ser útil para medir a significância estatística
+
+- **p-valor**: indica a frequência com que o modelo aleatório produz um resultado mais extremo do que o observado no teste
+    - Dado um modelo aleatório, qual a probabilidade do resultado dele ser tão extremo como o resultado do teste?
+
+
+```{python}
+print(np.mean([diff > obs_pct_diff for diff in perm_diffs]))
+```
+
+- O _p-valor_ foi 0,308 no exemplo da taxa de conversão
+    - Ou seja, espera-se um valor $\ge$ ao observado $\approx 30\%$ do tempo
+
+## p-Valor e significância estatística
+
+- Não precisamos de teste de permutação para calcular o _p-valor_ neste caso
+    - A distribuição binomial pode ser usada para calcular a probabilidade
+
+- No Python, podemos usar o método `stats.chi2_contingency`:
+
+```{python}
+survivors = np.array([[200, 23739 - 200], [182, 22588 - 182]])
+chi2, p_value, df, _ = stats.chi2_contingency(survivors)
+
+print(f'p-value for single sided test: {p_value / 2:.4f}')
+```
+
+- O p-valor neste caso deu 0.3498, valor próximo do obtido no teste de permutação
+
+## p-Valor e significância estatística
+
+- É comum usar um limiar para o p-valor (chamado de nível de significância $\alpha$) para determinar se o resultado do teste é significante
+    - Um valor típico é $\alpha$ = 5%, ou seja, um p-valor menor que 5% indica diferença significativa no resultado, com pouca chance de ser ao acaso
+
+- Cuidado em tirar conclusões fortes só com base no p-valor
+    - Significância estatística pode não ter significância prática
+    - Amostras grandes tendem a gerar significância estatística, mas na prática a diferença pode ser muito pequena para ser útil
+    - Em ciência de dados o p-valor pode ser usado apenas como mais uma informação para ajudar na tomada de decisões
+
+## Erros Tipo 1 e Tipo 2
+
+- Existem dois tipos de erro ao avaliar significância estatística:
+    - **Tipo 1**: conclui que efeito é real, quando ele é apenas aleatório ($\alpha$)
+    - **Tipo 2**: conclui que efeito não é real, quando ele é de fato real ($\beta$)
+
+- Testes de significância tentam minimizar o erro Tipo 1
+
+![](figs/inference_errors.png){width=100%}
+
+## Teste-T
+
+- O Teste-T (**t-test**) é um teste de hipótese muito popular
+    - O nome vem da distribução t-Student, criada para aproximar a distruição da média amostral
+
+- Todo teste de significância gera uma uma **estatística do teste** para medir o efeito que você está interessado
+    - Ela ajuda a determinar se o efeito observado está dentro do esperado pela aleatoriedade
+
+- O **t-test** é muito usado para comparar duas amostras (como testes A/B) para dados numéricos
+
+## Teste-T - Exemplo do tempo de sessão
+
+- A função `scipy.stats.ttest_ind` pode ser usada em Python
+    - Hipótese alternativa: tempo de sessão da página A $<$ o da página B
+
+```{python}
+#| code-fold: true
+
+res = stats.ttest_ind(session_times[session_times.Page == 'Page A'].Time, 
+                      session_times[session_times.Page == 'Page B'].Time,
+                      equal_var=False)
+print(f'p-value for single sided test: {res.pvalue / 2:.4f}')
+
+tstat, pvalue, df = sm.stats.ttest_ind(
+    session_times[session_times.Page == 'Page A'].Time, 
+    session_times[session_times.Page == 'Page B'].Time,
+    usevar='unequal', alternative='smaller')
+print(f'p-value: {pvalue:.4f}')
+```
+
+- O p-valor do *t-test* foi 0,1408
+    - Próximo do p-valor 0,121 do teste de permutação
+
+- Testes de hipótese baseados em fórmula possuem mais restrições do que os testes de permutação
+    - Deve-se ter mais preocupação com a distribuição dos dados, tipo dos dados, tamnho das amostras, variâncias, etc.
+
+## Poder estatístico e tamanho da amostra
+
+- Quantas medições você deve fazer para ter resultado significativo ao testar um website?
+
+- Uma forma de cálculo estatístico para o tamanho da amostra: _O teste de hipótese é suficiente para revelar uma diferença significativa entre os tratamentos A e B?_
+    - Se a diferença real for grande, ela será revelada mais facilmente
+    - Quanto menor a diferença real, maior a amostra para detectá-la
+
+- **Poder** estatístico é a probabilidade de detectar um _tamanho de efeito_ específico, com características específicas da amostra (tamanho e variabilidade)
+
+## Poder estatístico e tamanho da amostra
+
+- Estimando o tamanho da amostra com base no poder estatístico
+
+- Exemplo: o percentual de clicks em um anúncio web atualmente é de 1,1% dos acessos a um site. Pretende-se aumentar 10% para que alcance 1,21% com um novo anúncio
+- Testando primeiro com 300 acessos, temos:
+    - Ad 1: 3 clicks; Ad 2: 5 clicks
+
+- Os testes de hipótese apontariam que esta combinação de tamanho de amostra (n = 300) e tamanho de efeito (10%) está dentro da aleatoriedade, sendo muito pequena para que o teste apresente diferença significativa
+
+## Poder estatístico e tamanho da amostra
+
+- Aumentando o tamanho da amostra para 2000 e exigindo uma melhora de 50%:
+    - Ad 1: 19 clicks; Ad 2: 34 clicks
+
+- Testes de hipótese ainda não identificariam diferença significativa, pois o efeito desejado foi muito grande 
+
+- Para calcular poder estatístico ou tamanho da amostra precisamos: 
+    - Tamanho da amostra
+    - Tamanho do efeito que você quer identificar
+    - Nível de significância $\alpha$ do teste
+    - Poder estatístico
+
+- Especifique 3 deles que o quarto pode ser calculado
+
+## Calculando poder estatístico
+
+```{python}
+effect_size = sm.stats.proportion_effectsize(0.0121, 0.011)
+analysis = sm.stats.TTestIndPower()
+result = analysis.solve_power(effect_size=effect_size, 
+                              alpha=0.05, power=0.8, alternative='larger')
+print('Sample Size: %.3f' % result)
+```
+
+- Se quisermos um poder de 80%, precisamos de 120.000 medições
+    - Probabilidade de 80% de obter o efeito desejado
+
+```{python}
+effect_size = sm.stats.proportion_effectsize(0.0165, 0.011)
+analysis = sm.stats.TTestIndPower()
+result = analysis.solve_power(effect_size=effect_size, 
+                              alpha=0.05, power=0.8, alternative='larger')
+print('Sample Size: %.3f' % result)
+```
+
+- Se quisermos um aumento de 50% nos clicks (`p1 = 0.0165`), precisamos de 5.500 medições

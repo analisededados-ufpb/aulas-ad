@@ -24,6 +24,13 @@ Material da disciplina de Análise de Dados I
 - [2.3 Análise de correlação](2-eda/3-correlacao.qmd) (Slides)
 - [Laboratório 2: Análise Exploratória de Dados](https://github.com/analisededados-ufpb/lab-eda-imdb) (GitHub)
 
+## 3 Regressão
+
+- [3.1 Regressão linear simples](3-regressao/1-intro-regressao.qmd) (Slides)
+- [3.2 Regressão linear múltipla](3-regressao/2-regressao-multipla.qmd) (Slides)
+- [3.3 Regressão logística](3-regressao/3-regressao-logistica.qmd) (Slides)
+- [Laboratório 3: Regressão](https://github.com/analisededados-ufpb/lab-regressao-eleicoes) (GitHub)
+
 # Referências
 
 - Bruce, P. et al. Estatística Prática para Cientistas de Dados. O’Reilly, 2020. Código e datasets: [https://github.com/gedeck/practical-statistics-for-data-scientists](https://github.com/gedeck/practical-statistics-for-data-scientists)

@@ -1,0 +1,22 @@
+---
+title: "Análise de dados"
+subtitle: "Testes de hipótese: Teste T"
+author: "Prof. Marcus Carvalho @ DCX / CCAE / UFPB"
+format:
+    revealjs:
+        slide-number: true
+        chalkboard: true
+        incremental: false
+        theme: [simple, ../custom.scss]
+        echo: true
+---
+
+## Teste T
+
+- O Teste T (**t-test**) é um teste de hipótese muito popular
+    - O nome vem da distribução t-Student, criada para aproximar a distruição da média amostral
+
+- Todo teste de significância gera uma uma *estatística do teste** para medir o efeito que você está interessado
+    - Ela ajuda a determinar se o efeito observado está dentro do esperado pela aleatoriedade
+
+    
