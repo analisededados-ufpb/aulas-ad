@@ -1,6 +1,7 @@
 dmba
 pandas
 seaborn
+scipy
 statsmodels
 tabulate
 wquantiles
