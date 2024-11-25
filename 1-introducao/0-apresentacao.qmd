@@ -24,17 +24,17 @@ format:
     - Análise exploratória
 
 ## Conteúdo - Unidade 2
-        
-- Inferência estatística
-    - Significância estatística e amostragem
-    - Intervalos de confiança
-    - Testes de hipótese
-    - Testes de permutação e p-valor
 
 - Regressão
     - Regressão linear simples
     - Regressão linear multivariada
     - Regressão logística
+
+- Inferência estatística
+    - Significância estatística e amostragem
+    - Intervalos de confiança
+    - Testes de hipótese
+    - Testes de permutação e p-valor
 
 ## Conteúdo - Unidade 3
 
@@ -62,13 +62,13 @@ format:
     
 ## Referências básicas
 
-- Python for Data Analysis. McKinney. 3 ed, 2022 ([online](https://wesmckinney.com/book/))
+- Practical Statistics for Data Scientists. Bruce. 2 ed, 2020 (pdf)
+
+- Python for Data Analysis. McKinney. 3 ed, 2022 ([online](https://wesmckinney.com/book/); físico em português disponível na biblioteca do CCAE)
 
 - The Data Science Design Manual. Skienna. 2017 (pdf, [slides](http://www3.cs.stonybrook.edu/~skiena/data-manual/lectures/))
 
 - Python Data Science Handbook. VanderPlas. 2022 ([online](https://jakevdp.github.io/PythonDataScienceHandbook/))
-
-- Practical Statistics for Data Scientists. Bruce. 2 ed, 2020 (pdf)
 
 - R for Data Science. Wickham. 2017 ([online](http://r4ds.had.co.nz/))
 
